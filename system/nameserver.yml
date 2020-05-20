@@ -1,0 +1,21 @@
+version: 0.0.1
+nameserver_ping:
+  type: script
+  description: "Ping nameservers by IP and resolved name"
+  run: |
+    ping -c 5 -W 60 128.55.146.10
+    ping -c 5 -W 60 128.55.199.10
+    ping -c 5 -W 60 ns3.nersc.gov
+    ping -c 5 -W 60 ns4.nersc.gov
+
+searchdomain_check:
+ type: script
+ description: "Check equality for search domain"
+ run: |
+   domain=`cat /etc/resolv.conf | grep -E "^(search nersc.gov)$"`
+   echo $domain
+ status:
+   regex:
+     stream: stdout
+     exp: "^(search nersc.gov)$"
+

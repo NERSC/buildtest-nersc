@@ -1,0 +1,11 @@
+version: 0.0.1
+partition_check:
+  type: script
+  shell: python
+  run: |
+    import subprocess
+    slurm_cmd = "sinfo -a -h -O partitionname"
+    cmd = subprocess.run(slurm_cmd,shell=True, capture_output=True,text=True)
+    partition = cmd.stdout.split()
+    print ("Partitions Detected:",partition)
+    assert ['system', 'debug_hsw', 'debug_knl', 'jupyter', 'regular_hsw', 'regular_knl', 'regularx_hsw', 'regularx_knl', 'resv', 'resv_shared', 'benchmark', 'realtime_shared', 'realtime', 'shared', 'interactive', 'genepool', 'genepool_shared', 'genepool_resv', 'genepool_resv_shared'] == partition

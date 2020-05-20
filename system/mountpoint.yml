@@ -1,0 +1,41 @@
+version: 0.0.1
+mount_check:
+  type: script
+  description: Check mount points enabled in Cori.
+  run: |
+    mountpoint /global/cscratch1
+    mountpoint /var/mmfs
+    mountpoint /global/dna
+    mountpoint /global/projecta
+    mountpoint /global/cfs
+    mountpoint /global/common
+    mountpoint /global/syscom
+    mountpoint /global/u1
+    mountpoint /global/u2
+    mountpoint /global/projectb
+    mountpoint /global/seqfs
+    mountpoint /cvmfs
+    mountpoint /cvmfs/uboone.opensciencegrid.org
+    mountpoint /cvmfs/star.sdcc.bnl.gov
+    mountpoint /cvmfs/alice.cern.ch
+    mountpoint /cvmfs/icecube.opensciencegrid.org
+    mountpoint /cvmfs/gm2.opensciencegrid.org
+    mountpoint /cvmfs/cvmfs-config.cern.ch
+    mountpoint /cvmfs/config-osg.opensciencegrid.org
+    mountpoint /cvmfs/atlas-condb.cern.ch
+    mountpoint /cvmfs/atlas-nightlies.cern.ch
+    mountpoint /cvmfs/atlas.cern.ch
+    mountpoint /cvmfs/larsoft.opensciencegrid.org
+    mountpoint /cvmfs/ams.cern.ch
+    mountpoint /cvmfs/fermilab.opensciencegrid.org
+    mountpoint /cvmfs/dune.opensciencegrid.org
+    mountpoint /cvmfs/spt.opensciencegrid.org
+    mountpoint /cvmfs/oasis.opensciencegrid.org
+    mountpoint /cvmfs/grid.cern.ch
+    mountpoint /cvmfs/sft.cern.ch
+    mountpoint /cvmfs/nova-development.opensciencegrid.org
+    mountpoint /cvmfs/nova.opensciencegrid.org
+    mountpoint /cvmfs/sw.lsst.eu
+    mountpoint /cvmfs/lz.opensciencegrid.org
+    mountpoint /cvmfs/cms.cern.ch
+    mountpoint /global/project/projectdirs

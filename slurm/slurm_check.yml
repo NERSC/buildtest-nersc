@@ -1,0 +1,8 @@
+version: 0.0.1
+sinfo_version:
+  type: script
+  run: sinfo --version
+  status:
+    regex:
+      stream: stdout
+      exp: "^(slurm 19.05.6)$"
