@@ -1,0 +1,30 @@
+version: 0.0.1
+
+help:
+  type: script
+  run: sqs --help
+
+summary:
+  type: script
+  run: sqs --summary
+
+jobs_by_partitions:
+  type: script
+  run: sqs -a -p interactive,debug
+
+
+show_running_jobs:
+  type: script
+  run: sqs -r -a
+
+show_nonrunning_jobs:
+  type: script
+  run: sqs -a -nr
+
+show_jobs_qos:
+  type: script
+  run: sqs -a -q regular,premium
+
+display_partition_info:
+  type: script
+  run: sqs --info
