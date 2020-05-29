@@ -1,0 +1,29 @@
+version: 0.0.1
+
+show_accounts:
+  type: script
+  run: sacctmgr list accounts
+
+show_users:
+  type: script
+  run: |
+    sacctmgr list users
+    sacctmgr list users $USER
+
+show_qos:
+  type: script
+  run: |
+    sacctmgr list qos
+    sacctmgr list qos normal,premium format=Name,Priority,MaxWall
+
+show_associations:
+  type: script
+  run: sacctmgr list association account=xray format=Cluster,Account,User,Share
+
+show_tres:
+  type: script
+  run: sacctmgr list tres
+
+
+
+

@@ -1,0 +1,38 @@
+version: 0.0.1
+
+nodes_state_down:
+  type: script
+  run: sinfo -t DOWN
+
+nodes_state_reboot:
+  type: script
+  run: sinfo -t REBOOT
+
+nodes_state_allocated:
+  type: script
+  run: sinfo -t ALLOCATED
+
+nodes_state_completing:
+  type: script
+  run: sinfo -t COMPLETING
+
+nodes_state_idle:
+  type: script
+  run: sinfo -t IDLE
+
+node_down_fail_list_reason:
+  type: script
+  run: sinfo -R
+
+dead_nodes:
+  type: script
+  run: sinfo --dead
+
+get_partitions:
+  type: script
+  run: sinfo -a -h -O partitionname
+
+drain_nodes_interactive_partition:
+  type: script
+  run: sinfo -t drained -p interactive
+
