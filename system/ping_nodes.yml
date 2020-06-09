@@ -1,5 +1,6 @@
-version: 0.0.1
+version: "1.0"
 login_nodes:
+  executor: local.bash
   description: Confirm all Cori Login Nodes are accessible via ping
   type: script
   run: |
@@ -28,6 +29,7 @@ login_nodes:
     ping -c 1 -W 20 cori23
 
 data_transfer_nodes:
+  executor: local.bash
   description: Confirm all Cori Data Transfer Nodes are accessible via ping
   type: script
   run: |

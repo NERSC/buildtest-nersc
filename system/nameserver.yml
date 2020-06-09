@@ -1,5 +1,6 @@
-version: 0.0.1
+version: "1.0"
 nameserver_ping:
+  executor: local.bash
   type: script
   description: "Ping nameservers by IP and resolved name"
   run: |
@@ -9,6 +10,7 @@ nameserver_ping:
     ping -c 5 -W 60 ns4.nersc.gov
 
 searchdomain_check:
+ executor: local.bash
  type: script
  description: "Check equality for search domain"
  run: |

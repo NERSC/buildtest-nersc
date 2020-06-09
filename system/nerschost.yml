@@ -1,6 +1,7 @@
-version: 0.0.1
+version: "1.0"
 
 nerschost:
+  executor: local.python
   type: script
   shell: python
   description: check file exists /etc/profile.d/nerschost and alias nersc_host and environment NERSC_HOST
