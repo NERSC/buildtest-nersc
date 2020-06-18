@@ -1,6 +1,7 @@
-version: 0.0.1
+version: "1.0"
 partition_check:
   type: script
+  executor: local.python
   shell: python
   run: |
     import subprocess

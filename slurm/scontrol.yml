@@ -1,9 +1,11 @@
-version: 0.0.1
+version: "1.0"
 slurm_config:
+  executor: local.bash
   type: script
   run: scontrol show config
 
 show_node_config:
+  executor: local.bash
   type: script
   run: |
     scontrol show node nid10241
@@ -11,6 +13,7 @@ show_node_config:
     scontrol show node nid1024[0,3,6]
 
 show_partition:
+  executor: local.bash
   type: script
   run: |
     scontrol show partition

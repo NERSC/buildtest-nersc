@@ -1,22 +1,27 @@
-version: 0.0.1
+version: "1.0"
 
 current_user_queue:
+  executor: local.bash
   type: script
   run: squeue -u $USER
 
 pending_jobs_shared_partition:
+  executor: local.bash
   type: script
   run: squeue -p shared -t PENDING
 
 running_jobs_user_camelo:
+  executor: local.bash
   type: script
   run: squeue -u camelo -t RUNNING
 
 view_jobs_account_nstaff:
+  executor: local.bash
   type: script
   run: squeue -A nstaff
 
 sort_job_priority_shared_partition:
+  executor: local.bash
   type: script
   run: squeue --sort=P,U -p shared -t PENDING -O JobID,Partition,UserName,State,NumTasks,Priority,Reason
 
