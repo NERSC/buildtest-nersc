@@ -6,12 +6,14 @@ iris_user_query:
     iris
     iris user $USER 
     iris user $USER --json 
+
 iris_qos_gpu:
   executor: local.bash
   type: script
   run: |
     iris qos gpu --format name,uid,email
     iris qos gpu --format name,uid,email --csv
+
 iris_project:
   executor: local.bash
   type: script

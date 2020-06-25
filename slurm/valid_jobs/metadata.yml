@@ -1,0 +1,17 @@
+version: "1.0"
+slurm_metadata:
+  description: Get metadata from compute node when submitting job
+  type: script
+  executor: slurm.debug
+  sbatch:
+    - "-t 00:05"
+    - "-C haswell"
+    - "-N 1"
+  run: | 
+    export SLURM_JOB_NAME="firstjob"
+    echo "jobname:" $SLURM_JOB_NAME
+    echo "slurmdb host:" $SLURMD_NODENAME
+    echo "pid:" $SLURM_TASK_PID
+    echo "submit host:" $SLURM_SUBMIT_HOST
+    echo "nodeid:" $SLURM_NODEID
+    echo "partition:" $SLURM_JOB_PARTITION

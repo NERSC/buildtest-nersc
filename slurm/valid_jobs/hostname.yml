@@ -1,0 +1,24 @@
+version: "1.0"
+knl_hostname:
+  description: run hostname on KNL computenode
+  type: script
+  executor: slurm.debug
+  sbatch: 
+    - "-t 01:00"
+    - "-C knl"
+    - "-N 1"
+  run: hostname
+  status:
+    returncode: 0
+
+haswell_hostname:
+  description: run hostname on KNL computenode
+  type: script
+  executor: slurm.debug
+  sbatch: 
+    - "-t 01:00"
+    - "-C haswell"
+    - "-N 1"
+  run: hostname
+  status:
+    returncode: 0
