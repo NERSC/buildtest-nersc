@@ -166,7 +166,35 @@ name                 state                returncode           starttime        
 jobstats             PASS                 0                    2020/06/25 05:46:31  2020/06/25 05:46:43  011.25 jobstats_2020-06-25-05-46 /tmp/github.com/buildtesters/buildtest-cori/slurmutils/jobstats.yml
 ```
 
+# Contributing Guide
 
+To contribute back you will want to make sure your buildspec is validated before you contribute back, this could be 
+done by running test manually ``buildtest build`` or see if buildspec is valid via ``buildtest buildspec find``.
+
+buildtest relies on json schema to validate buildspecs and you will need to understand the json schema to understand how
+to write valid tests. To get all schemas run the following
+```
+$ buildtest schema
+script-v1.0.schema.json
+compiler-v1.0.schema.json
+global.schema.json
+settings.schema.json
+```
+
+The schemas ``script``, ``compiler``, ``global`` are of interest when writing buildspec to view the json content for script 
+schema you can run ``buildtest schema -n script-v1.0.schema.json --json``.
+
+To view all examples for script schema you can run ``buildtest schema -n script-v1.0.schema.json --examples`` which will show
+all invalid/valid tests. buildtest will validate each example before it shows content which will be help understand how to write
+tests and see all the edge cases.
+
+Check out the [contributing guide](https://buildtest.readthedocs.io/en/devel/contributing.html) for buildtest if you want to contribute back
+to framework
+
+# References
+
+- buildtest documentation: https://buildtest.readthedocs.io/en/devel/
+- buildtest schema docs: https://buildtesters.github.io/schemas/
 
 
 
