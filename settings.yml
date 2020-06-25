@@ -11,6 +11,12 @@ executors:
     python:
       description: submit jobs on local machine using python shell
       shell: python
+  slurm:
+    debug:
+      description: interactive haswell qos
+      launcher: sbatch
+      options: ["-q debug"]
+
 config:
   editor: vi
   paths:
