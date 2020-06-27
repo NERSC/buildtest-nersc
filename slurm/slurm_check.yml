@@ -1,10 +1,11 @@
 version: "1.0"
-sinfo_version:
-  executor: local.bash
-  type: script
-  run: sinfo --version
-  status:
-    regex:
-      stream: stdout
-      exp: "^(slurm 19.05.6)$"
-    returncode: 0
+buildspecs:
+  sinfo_version:
+    executor: local.bash
+    type: script
+    run: sinfo --version
+    status:
+      regex:
+        stream: stdout
+        exp: "^(slurm 19.05.6)$"
+      returncode: 0

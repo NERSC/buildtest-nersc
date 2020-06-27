@@ -1,9 +1,10 @@
 version: "1.0"
-filesystem_access:
-  executor: local.bash
-  type: script
-  run: |
-    ls $SCRATCH
-    ls $CSRATCH
-    ls $CFS
-    ls $HOME
+buildspecs:
+  filesystem_access:
+    executor: local.bash
+    type: script
+    run: |
+      ls $SCRATCH
+      ls $CSRATCH
+      ls $CFS
+      ls $HOME

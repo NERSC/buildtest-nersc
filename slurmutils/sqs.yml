@@ -1,37 +1,36 @@
 version: "1.0"
+buildspecs:
+  sqs_help:
+    type: script
+    executor: local.bash
+    run: sqs --help
 
-help:
-  type: script
-  executor: local.bash
-  run: sqs --help
+  summary:
+    type: script
+    executor: local.bash
+    run: sqs --summary
 
-summary:
-  type: script
-  executor: local.bash
-  run: sqs --summary
+  jobs_by_partitions:
+    type: script
+    executor: local.bash
+    run: sqs -a -p interactive,debug
 
-jobs_by_partitions:
-  type: script
-  executor: local.bash
-  run: sqs -a -p interactive,debug
+  show_running_jobs:
+    type: script
+    executor: local.bash
+    run: sqs -r -a
 
+  show_nonrunning_jobs:
+    type: script
+    executor: local.bash
+    run: sqs -a -nr
 
-show_running_jobs:
-  type: script
-  executor: local.bash
-  run: sqs -r -a
+  show_jobs_qos:
+    type: script
+    executor: local.bash
+    run: sqs -a -q regular,premium
 
-show_nonrunning_jobs:
-  type: script
-  executor: local.bash
-  run: sqs -a -nr
-
-show_jobs_qos:
-  type: script
-  executor: local.bash
-  run: sqs -a -q regular,premium
-
-display_partition_info:
-  type: script
-  executor: local.bash
-  run: sqs --info
+  display_partition_info:
+    type: script
+    executor: local.bash
+    run: sqs --info

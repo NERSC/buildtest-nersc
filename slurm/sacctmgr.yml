@@ -1,33 +1,33 @@
 version: "1.0"
+buildspecs:
+  show_accounts:
+    executor: local.bash
+    type: script
+    run: sacctmgr list accounts
 
-show_accounts:
-  executor: local.bash
-  type: script
-  run: sacctmgr list accounts
+  show_users:
+    executor: local.bash
+    type: script
+    run: |
+      sacctmgr list users
+      sacctmgr list users $USER
 
-show_users:
-  executor: local.bash
-  type: script
-  run: |
-    sacctmgr list users
-    sacctmgr list users $USER
+  show_qos:
+    executor: local.bash
+    type: script
+    run: |
+      sacctmgr list qos
+      sacctmgr list qos normal,premium format=Name,Priority,MaxWall
 
-show_qos:
-  executor: local.bash
-  type: script
-  run: |
-    sacctmgr list qos
-    sacctmgr list qos normal,premium format=Name,Priority,MaxWall
+  show_associations:
+    executor: local.bash
+    type: script
+    run: sacctmgr list association account=xray format=Cluster,Account,User,Share
 
-show_associations:
-  executor: local.bash
-  type: script
-  run: sacctmgr list association account=xray format=Cluster,Account,User,Share
-
-show_tres:
-  executor: local.bash
-  type: script
-  run: sacctmgr list tres
+  show_tres:
+    executor: local.bash
+    type: script
+    run: sacctmgr list tres
 
 
 

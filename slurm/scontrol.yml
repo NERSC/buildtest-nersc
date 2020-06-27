@@ -1,23 +1,24 @@
 version: "1.0"
-slurm_config:
-  executor: local.bash
-  type: script
-  run: scontrol show config
+buildspecs:
+  slurm_config:
+    executor: local.bash
+    type: script
+    run: scontrol show config
 
-show_node_config:
-  executor: local.bash
-  type: script
-  run: |
-    scontrol show node nid10241
-    scontrol show node nid1024[0-9]
-    scontrol show node nid1024[0,3,6]
+  show_node_config:
+    executor: local.bash
+    type: script
+    run: |
+      scontrol show node nid10241
+      scontrol show node nid1024[0-9]
+      scontrol show node nid1024[0,3,6]
 
-show_partition:
-  executor: local.bash
-  type: script
-  run: |
-    scontrol show partition
-    scontrol show partition genepool_resv
+  show_partition:
+    executor: local.bash
+    type: script
+    run: |
+      scontrol show partition
+      scontrol show partition genepool_resv
 
 
   
