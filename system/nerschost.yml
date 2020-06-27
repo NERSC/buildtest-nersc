@@ -1,14 +1,14 @@
 version: "1.0"
-
-nerschost:
-  executor: local.python
-  type: script
-  shell: python
-  description: check file exists /etc/profile.d/nerschost and alias nersc_host and environment NERSC_HOST
-  run: |
-    import os
-    assert '/etc/profile.d/nerschost.sh'
-    assert '/etc/profile.d/nerschost.csh'
-    assert os.getenv("NERSC_HOST")
-    print(os.getenv("NERSC_HOST"))
-    os.system("nersc_host")
+buildspecs:
+  nerschost:
+    executor: local.python
+    type: script
+    shell: python
+    description: check file exists /etc/profile.d/nerschost and alias nersc_host and environment NERSC_HOST
+    run: |
+      import os
+      assert '/etc/profile.d/nerschost.sh'
+      assert '/etc/profile.d/nerschost.csh'
+      assert os.getenv("NERSC_HOST")
+      print(os.getenv("NERSC_HOST"))
+      os.system("nersc_host")

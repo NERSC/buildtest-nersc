@@ -1,0 +1,10 @@
+version: "1.0"
+buildspecs:
+  hostname:
+    type: script
+    executor: slurm.haswell
+    sbatch:
+      - "-t 120"
+      - "-N 1"
+      - "-C haswell"
+    run: hostname

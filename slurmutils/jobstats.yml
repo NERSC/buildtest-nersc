@@ -1,10 +1,11 @@
 version: "1.0"
-jobstats:
-  type: script
-  executor: local.bash
-  description: run jobstats program
-  run: |
-    jobstats
-    jobstats -j
-    jobstats -u root
+buildspecs:
+  jobstats:
+    type: script
+    executor: local.bash
+    description: run jobstats program
+    run: |
+      jobstats
+      jobstats -j
+      jobstats -u root
 

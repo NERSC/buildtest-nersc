@@ -1,26 +1,27 @@
 version: "1.0"
-iris_user_query:
-  executor: local.bash
-  type: script
-  run: |
-    iris
-    iris user $USER 
-    iris user $USER --json 
+buildspecs:
+  iris_user_query:
+    executor: local.bash
+    type: script
+    run: |
+      iris
+      iris user $USER
+      iris user $USER --json
 
-iris_qos_gpu:
-  executor: local.bash
-  type: script
-  run: |
-    iris qos gpu --format name,uid,email
-    iris qos gpu --format name,uid,email --csv
+  iris_qos_gpu:
+    executor: local.bash
+    type: script
+    run: |
+      iris qos gpu --format name,uid,email
+      iris qos gpu --format name,uid,email --csv
 
-iris_project:
-  executor: local.bash
-  type: script
-  run: | 
-    iris project nstaff
-    iris project nstaff --users
-    iris project nstaff --json
-    iris project nstaff --csv
-    iris project nstaff --users --format name,email,usage
+  iris_project:
+    executor: local.bash
+    type: script
+    run: |
+      iris project nstaff
+      iris project nstaff --users
+      iris project nstaff --json
+      iris project nstaff --csv
+      iris project nstaff --users --format name,email,usage
 
