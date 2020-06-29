@@ -1,0 +1,24 @@
+version: "1.0"
+buildspecs:
+  slurm_cluster_cori:
+    type: script
+    executor: local.bash
+    run: sacctmgr list cluster -P -n format=cluster cori
+
+  slurm_cluster_escori:
+    type: script
+    executor: local.bash
+    run: sacctmgr list cluster -P -n format=cluster escori
+
+  slurm_controller_ip_check:
+    type: script
+    executor: local.bash
+    run: |
+      nslookup 128.55.144.163
+      nslookup 128.55.144.220
+      nslookup corictl01-144.nersc.gov
+      nslookup corique01-144.nersc.gov
+      ping -c 1 -W 20 128.55.144.163
+      ping -c 1 -W 20 128.55.144.220
+      ping -c 1 -W 20 corictl01-144.nersc.gov
+      ping -c 1 -W 20 corique01-144.nersc.gov
