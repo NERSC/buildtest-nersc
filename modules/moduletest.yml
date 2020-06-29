@@ -1,0 +1,8 @@
+version: "1.0"
+buildspecs:
+  moduleloadtest:
+    description: Run module load test of entire software stack
+    type: script
+    executor: local.bash
+    run: |
+      python moduleloadtest.py  

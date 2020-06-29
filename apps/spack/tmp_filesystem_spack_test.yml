@@ -1,0 +1,28 @@
+version: "1.0"
+buildspecs:
+  tmp_spack_test:
+    description: Spack sanity test on /tmp filesystem by cloning spack and concretize trilinos into spack environment. 
+    type: script
+    executor: slurm.debug
+    sbatch:
+      - "-J tmp_spack"
+      - "-N 1"
+      - "-C haswell"
+      - "-t 00:30:00"
+    run: |
+      cd /tmp
+      git clone -b develop https://github.com/spack/spack.git
+      cd spack
+      export SPACK_ROOT=`pwd`
+      source $SPACK_ROOT/share/spack/setup-env.sh
+      which spack
+      rm -rf ~/.spack/
+      spack --version
+      spack --help
+      spack compiler find
+      spack compiler list
+      spack env create stack
+      spack env activate stack
+      spack add trilinos
+      spack find
+      spack concretize -f

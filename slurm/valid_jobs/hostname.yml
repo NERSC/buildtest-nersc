@@ -9,8 +9,6 @@ buildspecs:
       - "-C knl"
       - "-N 1"
     run: hostname
-    status:
-      returncode: 0
 
   haswell_hostname:
     description: run hostname on KNL computenode
@@ -21,5 +19,3 @@ buildspecs:
       - "-C haswell"
       - "-N 1"
     run: hostname
-    status:
-      returncode: 0
