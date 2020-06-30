@@ -5,7 +5,7 @@ buildspecs:
     type: script
     executor: slurm.debug
     sbatch:
-      - "-t 01:00"
+      - "-t 5"
       - "-C knl"
       - "-N 1"
     run: hostname
@@ -15,7 +15,16 @@ buildspecs:
     type: script
     executor: slurm.debug
     sbatch:
-      - "-t 01:00"
+      - "-t 5"
+      - "-C haswell"
+      - "-N 1"
+    run: hostname
+  regular_qos:
+    description: run hostname through regular qos
+    type: script
+    executor: slurm.regular
+    sbatch:
+      - "-t 5"
       - "-C haswell"
       - "-N 1"
     run: hostname
