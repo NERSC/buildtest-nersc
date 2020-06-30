@@ -13,10 +13,20 @@ executors:
       shell: python
   slurm:
     debug:
-      description: interactive haswell qos
+      description: debug qos
       launcher: sbatch
       options: ["-q debug"]
-
+      pollinterval: 20
+    regular:
+      description: regular qos
+      launcher: sbatch
+      options: ["-q regular"]
+      pollinterval: 20
+    bigmem:
+      description: interactive qos
+        launcher: sbatch
+        options: ["-q bigmem -M escori"]
+        pollinterval: 20
 config:
   editor: vi
   paths:
