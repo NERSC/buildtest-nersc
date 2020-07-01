@@ -20,9 +20,18 @@ buildspecs:
       - "-N 1"
     run: hostname
   regular_qos:
-    description: run hostname through regular qos
+    description: run hostname through shared qos
     type: script
-    executor: slurm.regular
+    executor: slurm.shared
+    sbatch:
+      - "-t 5"
+      - "-C haswell"
+      - "-N 1"
+    run: hostname
+  bigmem_qos:
+    description: run hostname through bigmem qos
+    type: script
+    executor: slurm.bigmem
     sbatch:
       - "-t 5"
       - "-C haswell"

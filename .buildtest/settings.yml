@@ -13,20 +13,21 @@ executors:
       shell: python
   slurm:
     debug:
-      description: debug qos
+      description: jobs for debug qos
       launcher: sbatch
-      options: ["-q debug"]
+      qos: debug
       pollinterval: 20
-    regular:
-      description: regular qos
+    shared:
+      description: jobs for shared qos
       launcher: sbatch
-      options: ["-q regular"]
+      qos: shared
       pollinterval: 20
     bigmem:
-      description: interactive qos
-        launcher: sbatch
-        options: ["-q bigmem -M escori"]
-        pollinterval: 20
+      description: bigmem jobs
+      launcher: sbatch
+      cluster: escori
+      qos: bigmem
+      pollinterval: 20
 config:
   editor: vi
   paths:
