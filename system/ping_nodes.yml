@@ -17,17 +17,6 @@ buildspecs:
       ping -c 1 -W 20 cori10
       ping -c 1 -W 20 cori11
       ping -c 1 -W 20 cori12
-      ping -c 1 -W 20 cori13
-      ping -c 1 -W 20 cori14
-      ping -c 1 -W 20 cori15
-      ping -c 1 -W 20 cori16
-      ping -c 1 -W 20 cori17
-      ping -c 1 -W 20 cori18
-      ping -c 1 -W 20 cori19
-      ping -c 1 -W 20 cori20
-      ping -c 1 -W 20 cori21
-      ping -c 1 -W 20 cori22
-      ping -c 1 -W 20 cori23
 
   data_transfer_nodes:
     executor: local.bash

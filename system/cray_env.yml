@@ -1,7 +1,7 @@
 version: "1.0"
 buildspecs:
   cray_check:
-    executor: local.bash
+    executor: local.python
     type: script
     shell: python
     run: |
