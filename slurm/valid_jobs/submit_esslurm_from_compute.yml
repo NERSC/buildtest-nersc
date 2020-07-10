@@ -1,0 +1,20 @@
+version: "1.0"
+buildspecs:
+  submit_esslurm_from_xc:
+    type: script
+    executor: local.bash
+    run: |
+      output="result.out"
+
+      module load esslurm
+      sbatch --wait -o ${output} -q xfer -t 1 --wrap 'echo "OK"'
+      module unload esslurm
+      if [ -f ${output} ]; then
+        cat ${output}
+        rm ${output}
+      fi
+    status:
+      regex:
+        stream: stdout
+        exp: OK
+

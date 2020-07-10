@@ -1,0 +1,7 @@
+version: "1.0"
+buildspecs:
+  wall_timeout:
+    type: script
+    executor: slurm.debug
+    sbatch: [ "-t 1", "-C haswell", "-n 1"]
+    run: sleep 120  

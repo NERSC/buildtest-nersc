@@ -28,6 +28,11 @@ executors:
       cluster: escori
       qos: bigmem
       pollinterval: 20
+    xfer:
+      description: xfer qos jobs
+      launcher: sbatch
+      qos: xfer
+      pollinterval: 20
 config:
   editor: vi
   paths:

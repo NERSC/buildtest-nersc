@@ -1,0 +1,6 @@
+version: "1.0"
+buildspecs:
+  shifter_pull:
+    type: script
+    executor: local.bash
+    run: shifterimg pull ubuntu:latest

@@ -1,0 +1,7 @@
+version: "1.0"
+buildspecs:
+  myquota:
+    type: script
+    executor: local.bash
+    description: Run myquota program.
+    run: myquota
