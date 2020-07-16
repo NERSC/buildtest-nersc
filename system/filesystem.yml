@@ -8,3 +8,4 @@ buildspecs:
       ls $CSRATCH
       ls $CFS
       ls $HOME
+    tags: ["filesystem"]

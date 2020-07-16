@@ -1,0 +1,43 @@
+2020-07-15 17:49:02,249 [main.py:22 -  main() ] - [INFO] Starting buildtest log
+2020-07-15 17:49:02,249 [system.py:28 - __init__() ] - [DEBUG] Starting System Compatibility Check
+2020-07-15 17:49:02,272 [system.py:52 - init_system() ] - [DEBUG] Operating System: SLES 15 n/a
+2020-07-15 17:49:02,272 [system.py:53 - init_system() ] - [DEBUG] Python Path: /global/u1/s/siddiq90/.local/share/virtualenvs/buildtest-ORwlW7i5/bin/python
+2020-07-15 17:49:03,670 [system.py:63 - check_lmod() ] - [DEBUG] LMOD_DIR: False
+2020-07-15 17:49:03,670 [system.py:38 - __init__() ] - [DEBUG] Finished System Compatibility Check
+2020-07-15 17:49:03,679 [utils.py:40 - load_schema() ] - [DEBUG] Successfully loaded schema file: /global/homes/s/siddiq90/.buildtest/settings.yml
+2020-07-15 17:49:03,684 [utils.py:40 - load_schema() ] - [DEBUG] Successfully loaded schema file: /global/homes/s/siddiq90/.buildtest/settings.yml
+2020-07-15 17:49:03,684 [utils.py:40 - load_schema() ] - [DEBUG] Successfully loaded schema file: /global/u1/s/siddiq90/buildtest/buildtest/settings/settings.schema.json
+2020-07-15 17:49:03,684 [config.py:71 - check_settings() ] - [DEBUG] Loading default settings schema: /global/u1/s/siddiq90/buildtest/buildtest/settings/settings.schema.json
+2020-07-15 17:49:03,684 [config.py:73 - check_settings() ] - [DEBUG] Validating user schema with schema: /global/u1/s/siddiq90/buildtest/buildtest/settings/settings.schema.json
+2020-07-15 17:49:03,687 [config.py:75 - check_settings() ] - [DEBUG] Validation was successful
+2020-07-15 17:49:04,363 [build.py:70 - discover_buildspecs() ] - [DEBUG] BuildSpec: os_release.yml is a file
+2020-07-15 17:49:04,363 [build.py:89 - discover_buildspecs() ] - [INFO] Found the following config files: ['/global/u1/s/siddiq90/buildtest-cori/system/os_release.yml']
+2020-07-15 17:49:04,363 [build.py:209 - func_build_subcmd() ] - [DEBUG] Based on input argument: --buildspec ['os_release.yml'] buildtest discovered the following Buildspecs: ['/global/u1/s/siddiq90/buildtest-cori/system/os_release.yml']
+2020-07-15 17:49:04,364 [base.py:65 - __init__() ] - [DEBUG] buildtest found the available schema: {'script': {'1.0': 'script-v1.0.schema.json', 'latest': 'script-v1.0.schema.json'}, 'compiler': {'1.0': 'compiler-v1.0.schema.json', 'latest': 'compiler-v1.0.schema.json'}} in schema library
+2020-07-15 17:49:04,366 [utils.py:40 - load_schema() ] - [DEBUG] Successfully loaded schema file: /global/u1/s/siddiq90/buildtest/buildtest/buildsystem/schemas/global.schema.json
+2020-07-15 17:49:04,366 [base.py:108 - _validate_global() ] - [DEBUG] Validating /global/u1/s/siddiq90/buildtest-cori/system/os_release.yml with schema: /global/u1/s/siddiq90/buildtest/buildtest/buildsystem/schemas/global.schema.json
+2020-07-15 17:49:04,368 [base.py:113 - _validate_global() ] - [DEBUG] Validation was successful
+2020-07-15 17:49:04,368 [utils.py:40 - load_schema() ] - [DEBUG] Successfully loaded schema file: /global/u1/s/siddiq90/buildtest/buildtest/buildsystem/schemas/script/script-v1.0.schema.json
+2020-07-15 17:49:04,447 [base.py:299 - __init__() ] - [DEBUG] Processing Buildspec: /global/u1/s/siddiq90/buildtest-cori/system/os_release.yml
+2020-07-15 17:49:04,447 [base.py:300 - __init__() ] - [DEBUG] Processing Buildspec section: os_release
+2020-07-15 17:49:04,448 [base.py:329 - __init__() ] - [DEBUG] Shell Details: 
+2020-07-15 17:49:04,448 [base.py:330 - __init__() ] - [DEBUG] Shell Name: bash
+2020-07-15 17:49:04,448 [base.py:331 - __init__() ] - [DEBUG] Shell Opts: 
+2020-07-15 17:49:04,448 [base.py:332 - __init__() ] - [DEBUG] Shell Path: /bin/bash
+2020-07-15 17:49:04,448 [base.py:333 - __init__() ] - [DEBUG] Shell Shebang: #!/bin/bash
+2020-07-15 17:49:04,448 [base.py:335 - __init__() ] - [DEBUG] Shebang used for test: #!/bin/bash
+2020-07-15 17:49:04,448 [base.py:369 - get_test_extension() ] - [DEBUG] Setting test extension to 'sh'
+2020-07-15 17:49:04,449 [base.py:488 - _write_test() ] - [INFO] Opening Test File for Writing: /global/u1/s/siddiq90/cache/tests/os_release/os_release.sh
+2020-07-15 17:49:04,449 [base.py:498 - _write_test() ] - [DEBUG] Applying permission 755 to /global/u1/s/siddiq90/cache/tests/os_release/os_release.sh so that test can be executed
+2020-07-15 17:49:04,449 [base.py:42 - __init__() ] - [DEBUG] Getting Executors from buildtest settings
+2020-07-15 17:49:04,450 [base.py:357 -   run() ] - [DEBUG] Changing to directory /global/u1/s/siddiq90/cache/tests/os_release
+2020-07-15 17:49:04,450 [base.py:367 -   run() ] - [DEBUG] Running Test via command: /bin/bash  /global/u1/s/siddiq90/cache/tests/os_release/os_release.sh
+2020-07-15 17:49:04,486 [base.py:257 - write_testresults() ] - [DEBUG] Writing run output to file: /global/u1/s/siddiq90/cache/tests/os_release/run/os_release_2020-07-15-17-49.out
+2020-07-15 17:49:04,488 [base.py:261 - write_testresults() ] - [DEBUG] Writing run error to file: /global/u1/s/siddiq90/cache/tests/os_release/run/os_release_2020-07-15-17-49.err
+2020-07-15 17:49:04,488 [base.py:384 -   run() ] - [DEBUG] Return code: 0 for test: /global/u1/s/siddiq90/cache/tests/os_release/os_release.sh
+2020-07-15 17:49:04,488 [base.py:257 - write_testresults() ] - [DEBUG] Writing run output to file: /global/u1/s/siddiq90/cache/tests/os_release/run/os_release_2020-07-15-17-49.out
+2020-07-15 17:49:04,489 [base.py:261 - write_testresults() ] - [DEBUG] Writing run error to file: /global/u1/s/siddiq90/cache/tests/os_release/run/os_release_2020-07-15-17-49.err
+2020-07-15 17:49:04,489 [base.py:294 - check_test_state() ] - [DEBUG] Conducting Regular Expression check
+2020-07-15 17:49:04,489 [base.py:221 - check_regex() ] - [DEBUG] Detected regex stream 'stdout' so reading output file: /global/u1/s/siddiq90/cache/tests/os_release/run/os_release_2020-07-15-17-49.out
+2020-07-15 17:49:04,490 [base.py:231 - check_regex() ] - [DEBUG] Applying re.search with exp: SUSE Linux Enterprise Server 14
+2020-07-15 17:49:04,490 [base.py:301 - check_test_state() ] - [INFO] ReturnCode Match: True Regex Match: False 

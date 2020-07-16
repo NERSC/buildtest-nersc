@@ -3,6 +3,7 @@ buildspecs:
   gpfs_clustername:
     type: script
     executor: local.bash
+    tags: ["gpfs"]
     run: |
       module load gpfs
       mmlsconfig clusterName
@@ -19,6 +20,7 @@ buildspecs:
   gpfs_check:
     type:  script
     executor: local.bash
+    tags: ["gpfs"]
     run: |
       module load gpfs
       mmlsconfig

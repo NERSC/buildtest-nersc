@@ -4,6 +4,7 @@ buildspecs:
     executor: local.python
     type: script
     shell: python
+    tags: ["system", "configuration"]
     description: check file exists /etc/profile.d/nerschost and alias nersc_host and environment NERSC_HOST
     run: |
       import os

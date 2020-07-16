@@ -4,6 +4,7 @@ buildspecs:
     description: Spack sanity test on /tmp filesystem by cloning spack and concretize trilinos into spack environment. 
     type: script
     executor: slurm.debug
+    tags: ["spack", "slurm"]
     sbatch:
       - "-J tmp_spack"
       - "-N 1"
