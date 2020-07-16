@@ -1,0 +1,21 @@
+version: "1.0"
+buildspecs:
+  bash_alias:
+    type: script
+    shebang: "#!/bin/bash -l"
+    executor: local.bash
+    run: |
+      shopt -s expand_aliases
+      alias
+      alias o
+      alias ..
+      alias ...
+      alias rd
+      alias egrep
+      alias grep
+      alias md
+      aliash rehash
+      alias beep
+      alias you
+      alias unmount
+
