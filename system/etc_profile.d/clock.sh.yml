@@ -1,0 +1,9 @@
+version: "1.0"
+buildspecs:
+  clock:
+    type: script
+    shell: python
+    executor: local.python
+    run: |
+      import os
+      assert os.getenv("TZ") == "US/Pacific"

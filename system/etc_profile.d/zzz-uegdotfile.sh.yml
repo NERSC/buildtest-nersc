@@ -1,0 +1,19 @@
+version: "1.0"
+buildspecs:
+  zzz_uegdotfile_sh:
+    description: check alias and commands from /etc/zzz-uegdotfile.sh
+    type: script
+    executor: local.python
+    shell: python
+    run: |
+      import os
+
+      assert os.getenv("INTEL_LICENSE_FILE") == "28518@crayintel.licenses.nersc.gov:28518@intel.licenses.nersc.gov"
+      assert os.getenv("CFS") == "/global/cfs/cdirs"
+      assert os.getenv("CSCRATCH") == os.path.join("/global/cscratch1/sd/",os.getenv("USER"))
+      assert os.getenv("MAN_POSIXLY_CORRECT") == "1"
+      assert os.getenv("LIBGL_ALWAYS_INDIRECT") == "1"
+      assert os.getenv("MPICH_MPIIO_DVS_MAXNODES") == "28"
+      assert os.getenv("DVS_MAXNODES") == "1__"
+      assert os.getenv("TMPDIR") == "/tmp"
+      assert os.getenv("HUGETLB_VERBOSE") == "0"
