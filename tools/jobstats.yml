@@ -4,6 +4,7 @@ buildspecs:
     type: script
     executor: local.bash
     description: run jobstats program
+    tags: ["system", "tool", "slurm"]
     run: |
       jobstats
       jobstats -j

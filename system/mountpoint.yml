@@ -4,6 +4,7 @@ buildspecs:
     executor: local.bash
     type: script
     description: Check mount points enabled in Cori.
+    tags: ["system"]
     run: |
       mountpoint /global/cscratch1
       mountpoint /var/mmfs

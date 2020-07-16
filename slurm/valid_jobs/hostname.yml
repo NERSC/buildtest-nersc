@@ -8,6 +8,7 @@ buildspecs:
       - "-t 5"
       - "-C knl"
       - "-N 1"
+    tags: ["slurm"]
     run: hostname
 
   debug_qos_haswell_hostname:
@@ -18,6 +19,7 @@ buildspecs:
       - "-t 5"
       - "-C haswell"
       - "-N 1"
+    tags: ["slurm"]
     run: hostname
 
   shared_qos_hostname:
@@ -28,6 +30,7 @@ buildspecs:
       - "-t 5"
       - "-C haswell"
       - "-N 1"
+    tags: ["slurm"]
     run: hostname
 
   bigmem_qos_hostname:
@@ -38,6 +41,7 @@ buildspecs:
       - "-t 5"
       - "-C haswell"
       - "-N 1"
+    tags: ["slurm"]
     run: hostname
 
   xfer_qos_hostname:
@@ -48,3 +52,4 @@ buildspecs:
       - "-t 5"
       - "-N 1"
     run: hostname
+    tags: ["slurm"]

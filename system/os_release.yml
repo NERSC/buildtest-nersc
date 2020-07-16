@@ -3,7 +3,8 @@ buildspecs:
   os_release:
     type: script
     executor: local.bash
-    run: lsb_release -d 
+    run: lsb_release -d
+    tags: ["system"]
     status:
       regex:
         exp: "SUSE Linux Enterprise Server 15"

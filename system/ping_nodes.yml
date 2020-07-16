@@ -3,6 +3,7 @@ buildspecs:
   login_nodes:
     executor: local.bash
     description: Confirm all Cori Login Nodes are accessible via ping
+    tags: ["system", "network"]
     type: script
     run: |
       ping -c 1 -W 20 cori01
@@ -22,6 +23,7 @@ buildspecs:
     executor: local.bash
     description: Confirm all Cori Data Transfer Nodes are accessible via ping
     type: script
+    tags: ["system", "network"]
     run: |
       ping -c 1 -W 20 dtn01
       ping -c 1 -W 20 dtn02

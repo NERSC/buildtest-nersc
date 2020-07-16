@@ -3,6 +3,7 @@ buildspecs:
   iris_user_query:
     executor: local.bash
     type: script
+    tags: ["system", "tool"]
     run: |
       iris
       iris user $USER
@@ -11,13 +12,14 @@ buildspecs:
   iris_qos_gpu:
     executor: local.bash
     type: script
-    run: |
-      iris qos gpu --format name,uid,email
-      iris qos gpu --format name,uid,email --csv
+    tags: ["system", "tool"]
+    run: iris qos gpu --format name,uid,email
+
 
   iris_project:
     executor: local.bash
     type: script
+    tags: ["system", "tool"]
     run: |
       iris project nstaff
       iris project nstaff --users

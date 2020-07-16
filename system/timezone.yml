@@ -4,6 +4,7 @@ buildspecs:
     executor: local.bash
     type: script
     description: Make sure timezone is set to US/Pacific
+    tags: ["system"]
     run: timedatectl | grep "Time zone" |  awk '{print $3'}
     status:
       regex:

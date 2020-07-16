@@ -3,4 +3,5 @@ buildspecs:
   shifter_pull:
     type: script
     executor: local.bash
+    tags: ["system", "containers"]
     run: shifterimg pull ubuntu:latest

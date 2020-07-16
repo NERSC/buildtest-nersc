@@ -16,6 +16,7 @@ executors:
       description: jobs for debug qos
       launcher: sbatch
       qos: debug
+      cluster: cori
       pollinterval: 20
     shared:
       description: jobs for shared qos

@@ -1,7 +1,6 @@
 import os
 import re
 import subprocess
-import sys
 from lmod.module import Module
 
 modules = subprocess.getoutput("module av -t")
