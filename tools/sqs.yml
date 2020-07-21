@@ -6,12 +6,6 @@ buildspecs:
     tags: ["system", "tool", "slurm"]
     run: sqs --help
 
-  summary:
-    type: script
-    executor: local.bash
-    tags: ["system", "tool", "slurm"]
-    run: sqs --summary
-
   jobs_by_partitions:
     type: script
     executor: local.bash

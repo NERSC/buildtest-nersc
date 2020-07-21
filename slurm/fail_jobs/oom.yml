@@ -1,0 +1,13 @@
+version: "1.0"
+buildspecs:
+  out_of_memory:
+    type: compiler
+    executor: slurm.debug
+    sbatch: ["-M 500M", "-N 1", "-C knl"]
+    build:
+      name: gnu
+      source: src/oom.c
+    status:
+      slurm_job_state_codes: "OUT_OF_MEMORY"
+
+
