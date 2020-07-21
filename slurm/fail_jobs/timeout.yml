@@ -3,5 +3,7 @@ buildspecs:
   wall_timeout:
     type: script
     executor: slurm.debug
-    sbatch: [ "-t 1", "-C haswell", "-n 1"]
-    run: sleep 120  
+    sbatch: [ "-t '00:00:15'", "-C haswell", "-n 1"]
+    run: sleep 60
+    status:
+      slurm_job_state_codes: "TIMEOUT"  

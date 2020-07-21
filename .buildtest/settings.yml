@@ -1,4 +1,9 @@
 executors:
+
+  defaults:
+    pollinterval: 15
+    launcher: sbatch
+
   local:
     bash:
       description: submit jobs on local machine using bash shell
@@ -11,29 +16,26 @@ executors:
     python:
       description: submit jobs on local machine using python shell
       shell: python
+
   slurm:
     debug:
       description: jobs for debug qos
-      launcher: sbatch
       qos: debug
       cluster: cori
-      pollinterval: 20
+
     shared:
       description: jobs for shared qos
-      launcher: sbatch
       qos: shared
-      pollinterval: 20
+
     bigmem:
       description: bigmem jobs
-      launcher: sbatch
       cluster: escori
       qos: bigmem
-      pollinterval: 20
+
     xfer:
       description: xfer qos jobs
-      launcher: sbatch
       qos: xfer
-      pollinterval: 20
+
 config:
   editor: vi
   paths:
