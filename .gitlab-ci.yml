@@ -1,7 +1,3 @@
-variables:
-  BUILDTEST_REPO: "https://github.com/buildtesters/buildtest"
-  BUILDTEST_REPO_BRANCH: "devel"
-  
 stages:
   - build
 
@@ -13,7 +9,7 @@ validate_tests:
   script:
     - pwd
     - module load python
-    - git clone {BUILDTEST_REPO} -b {BUILDTEST_REPO_BRANCH}
+    - git clone -b devel https://github.com/buildtesters/buildtest
     - pipenv shell
     - python setup.py install
     - buildtest --help
