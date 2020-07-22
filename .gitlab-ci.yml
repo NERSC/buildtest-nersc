@@ -8,7 +8,7 @@ stages:
 validate_tests:
   stage: build
   tags:
-    - cori01
+    - cori06
   
   script:
     - pwd
