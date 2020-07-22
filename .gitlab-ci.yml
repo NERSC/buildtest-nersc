@@ -1,0 +1,20 @@
+variables:
+  BUILDTEST_REPO: https://github.com/buildtesters/buildtest
+  BUILDTEST_REPO_BRANCH: devel
+  
+stages:
+  - build
+
+validate_tests:
+  stage: build
+  tags:
+    - cori01
+  
+  script:
+    - pwd
+    - module load python
+    - git clone {BUILDTEST_REPO} -b {BUILDTEST_REPO_BRANCH}
+    - pipenv shell
+    - python setup.py install
+    - buildtest --help
+  
