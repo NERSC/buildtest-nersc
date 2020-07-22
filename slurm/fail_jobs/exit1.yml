@@ -3,7 +3,7 @@ buildspecs:
   wall_timeout:
     type: script
     executor: slurm.debug
-    sbatch: [ "-t '00:00:05'", "-C haswell", "-n 1"]
-    run: sleep 45
+    sbatch: [ "-t 2", "-C haswell", "-n 1"]
+    run: exit 1
     status:
       slurm_job_state_codes: "FAILED"  

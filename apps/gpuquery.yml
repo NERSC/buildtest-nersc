@@ -1,0 +1,11 @@
+version: "1.0"
+buildspecs:
+  nvidiasmi:
+    description: run nvidia-smi command on a single GPU node.
+    type: script
+    executor: slurm.gpu
+    tags: ["gpu"]
+    sbatch: ["-G 1", "-t 5", "-N 1"]
+    run: srun nvidia-smi
+maintainers:
+  - "Shahzeb Siddiqui <@shahzebsiddiqui>"

@@ -1,7 +1,7 @@
 executors:
 
   defaults:
-    pollinterval: 15
+    pollinterval: 10
     launcher: sbatch
 
   local:
@@ -35,6 +35,11 @@ executors:
     xfer:
       description: xfer qos jobs
       qos: xfer
+    
+    gpu:
+      description: submit jobs to GPU partition
+      options: ["-C gpu"]
+      cluster: escori
 
 config:
   editor: vi

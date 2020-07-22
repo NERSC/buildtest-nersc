@@ -1,0 +1,36 @@
+version: "1.0"
+buildspecs:
+  vecadd_openacc_gnu:
+    type: compiler
+    description: Vector Addition example with GNU compiler
+    executor: slurm.gpu
+    sbatch: ["-G 1", "-t 5", "-N 1"]
+    module:
+      - "module load cuda"
+      - "module load gcc/8.1.1-openacc-gcc-8-branch-20190215"
+    build:
+      name: gnu
+      source: src/vecAdd.c
+      cflags: -fopenacc
+      ldflags: -lm
+    run:
+      launcher: srun
+    status:
+      slurm_job_state_codes: COMPLETED
+
+  vecadd_hpcsdk_gnu:
+    type: compiler
+    description: Vector Addition example with hpcsdk (pgi) compiler
+    executor: slurm.gpu
+    sbatch: ["-G 1", "-t 5", "-N 1"]
+    module:
+      - "module load hpcsdk"
+      - "module load cuda"
+    build:
+      name: pgi
+      cc: nvc
+      source: src/vecAdd.c
+      cflags: -acc
+      ldflags: -lm
+    run:
+      launcher: srun
