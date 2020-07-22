@@ -1,6 +1,6 @@
 variables:
-  BUILDTEST_REPO: https://github.com/buildtesters/buildtest
-  BUILDTEST_REPO_BRANCH: devel
+  BUILDTEST_REPO: "https://github.com/buildtesters/buildtest"
+  BUILDTEST_REPO_BRANCH: "devel"
   
 stages:
   - build
@@ -17,4 +17,7 @@ validate_tests:
     - pipenv shell
     - python setup.py install
     - buildtest --help
+    - buildtest repo list
+    - buildtest repo add https://github.com/buildtesters/buildtest-cori
+    - buildtest buildspec find
   
