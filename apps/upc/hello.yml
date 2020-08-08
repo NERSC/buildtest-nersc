@@ -1,0 +1,16 @@
+version: "1.0"
+buildspecs:
+  upc_hello:
+    type: compiler
+    executor: slurm.debug
+    sbatch: ["-t 01:00", "-C knl", "-N 1"]
+    module:
+      - "module swap craype-haswell craype-mic-knl"
+      - "module load upcxx/2020.3.0"
+    build:
+      source: src/hello_upcxx.cpp
+      name: gnu
+      cxx: upcxx
+      cxxflags: "-g --network=aries"
+    run:
+      launcher: upcxx-run -N 1 -n 8
