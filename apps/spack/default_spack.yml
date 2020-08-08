@@ -1,0 +1,14 @@
+version: "1.0"
+buildspecs:
+  spack_default_module:
+    type: script
+    description: "Test default spack module to see if some basic commands work"
+    executor: local.bash
+    run: |
+      module load spack
+      spack --version
+      spack arch
+      spack find
+      spack compiler list
+      spack spec python
+      spack info openmpi
