@@ -1,0 +1,18 @@
+version: "1.0"
+buildspecs:
+  laplace_mpi:
+    type: compiler
+    description: Laplace MPI code in C
+    sbatch: ["-C knl", "-N 1", "-n 16"]
+    executor: slurm.debug
+    tags: ["mpi"]
+    module:
+      - "module load PrgEnv-intel"
+    build:
+      name: intel
+      source: src/laplace_mpi.c
+      cc: cc
+      cflags: -O3
+    run:
+      launcher: srun -n 4
+

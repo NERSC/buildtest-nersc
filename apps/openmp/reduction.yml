@@ -1,0 +1,18 @@
+version: "1.0"
+buildspecs:
+  reduction:
+    type: compiler
+    executor: slurm.debug
+    sbatch: ["-N 1", "--ntasks-per-node 32", "-C haswell", "-t 1"]
+    module:
+      - "module load PrgEnv-gnu"
+    env:
+      OMP_NUM_THREADS: 32
+      OMP_PROC_BIND: spread
+      OMP_PLACES: cores
+    build:
+      source: src/reduction.c
+      name: gnu
+      cflags: -fopenmp
+    tags: [openmp]
+

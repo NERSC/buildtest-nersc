@@ -1,0 +1,15 @@
+version: "1.0"
+buildspecs:
+  bupc_hello:
+    type: compiler
+    executor: slurm.debug
+    sbatch: ["-t 10", "-C haswell", "-n 8", "-N 2"]
+    module:
+      - "module load bupc/2020.4.0"
+    build:
+      source: src/bupc-hello.c
+      name: gnu
+      cc: upcc
+      cflags: -g --network=aries
+    run:
+      launcher: upcrun -N 2 -n 8
