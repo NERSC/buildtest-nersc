@@ -3,7 +3,7 @@ buildspecs:
   laplace_mpi:
     type: compiler
     description: Laplace MPI code in C
-    sbatch: ["-C knl", "-N 1", "-n 16"]
+    sbatch: ["-C knl", "-N 1", "-n 4"]
     executor: slurm.debug
     tags: ["mpi"]
     module:
@@ -11,7 +11,6 @@ buildspecs:
     build:
       name: intel
       source: src/laplace_mpi.c
-      cc: cc
       cflags: -O3
     run:
       launcher: srun -n 4

@@ -17,4 +17,4 @@ buildspecs:
     run:
       launcher: srun
 maintainers:
-  - @shahzebsiddiqui
+  - "@shahzebsiddiqui"
