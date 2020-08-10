@@ -3,6 +3,7 @@ buildspecs:
   gpfs_clustername:
     type: script
     executor: local.bash
+    description: Get GPFS cluster name via mmlsconfig and check it is set to CORI.nersc.gov
     tags: ["gpfs"]
     run: |
       module load gpfs
@@ -15,11 +16,14 @@ buildspecs:
   ping_gpfs:
     type:  script
     executor: local.bash
+    description: ping gpfs cluster CORI.nersc.gov
+    tags: ["gpfs"]
     run: ping -c 4 -W 10 CORI.nersc.gov
 
   gpfs_check:
     type:  script
     executor: local.bash
+    description: query gpfs details
     tags: ["gpfs"]
     run: |
       module load gpfs

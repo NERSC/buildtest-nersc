@@ -45,3 +45,5 @@ config:
   editor: vi
   paths:
     prefix: $HOME/cache/
+    buildspec_root:
+      - $HOME/buildtest-cori

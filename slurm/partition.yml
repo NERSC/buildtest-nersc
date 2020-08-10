@@ -3,6 +3,7 @@ buildspecs:
   partition_check:
     type: script
     executor: local.python
+    description: query slurm partitions and check if list match expected partitions
     shell: python
     run: |
       import subprocess

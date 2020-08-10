@@ -4,6 +4,8 @@ buildspecs:
     executor: local.bash
     type: script
     run: sinfo --version
+    description: Check slurm version
+    tags: [slurm]
     status:
       regex:
         stream: stdout

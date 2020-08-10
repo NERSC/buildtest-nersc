@@ -2,10 +2,10 @@ version: "1.0"
 buildspecs:
   filesystem_access:
     executor: local.bash
+    description: Access $SCRATCH, $CFS and $HOME
     type: script
     run: |
       ls $SCRATCH
-      ls $CSRATCH
       ls $CFS
       ls $HOME
     tags: ["filesystem"]

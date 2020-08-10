@@ -2,6 +2,7 @@ version: "1.0"
 buildspecs:
   iris_user_query:
     executor: local.bash
+    description: query user information using iris
     type: script
     tags: ["system", "tool"]
     run: |
@@ -12,6 +13,7 @@ buildspecs:
   iris_qos_gpu:
     executor: local.bash
     type: script
+    description: use iris to query qos 'gpu'
     tags: ["system", "tool"]
     run: iris qos gpu --format name,uid,email
 
@@ -19,6 +21,7 @@ buildspecs:
   iris_project:
     executor: local.bash
     type: script
+    description: query project nstaff
     tags: ["system", "tool"]
     run: |
       iris project nstaff
