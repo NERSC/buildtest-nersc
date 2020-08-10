@@ -3,5 +3,6 @@ buildspecs:
   shifter_pull:
     type: script
     executor: local.bash
+    description: Check if shifterimg pull can download a container
     tags: ["system", "containers"]
     run: shifterimg pull ubuntu:latest

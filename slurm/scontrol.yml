@@ -3,11 +3,15 @@ buildspecs:
   slurm_config:
     executor: local.bash
     type: script
+    description: run scontrol show config
+    tags: [slurm]
     run: scontrol show config
 
   show_node_config:
     executor: local.bash
     type: script
+    tags: [slurm]
+    description: run scontrol show node
     run: |
       scontrol show node nid10241
       scontrol show node nid1024[0-9]
@@ -16,6 +20,8 @@ buildspecs:
   show_partition:
     executor: local.bash
     type: script
+    tags: [slurm]
+    description: run scontrol show partition
     run: |
       scontrol show partition
       scontrol show partition genepool_resv

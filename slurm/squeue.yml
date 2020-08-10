@@ -3,26 +3,35 @@ buildspecs:
   current_user_queue:
     executor: local.bash
     type: script
+    description: show all current pending jobs for current user (squeue -u $USER)
+    tags: [slurm]
     run: squeue -u $USER
 
   pending_jobs_shared_partition:
     executor: local.bash
     type: script
+    description: show pending jobs on shared partition
+    tags: [slurm]
     run: squeue -p shared -t PENDING
 
-  running_jobs_user_camelo:
+  running_jobs_for_user:
     executor: local.bash
     type: script
+    description: show running jobs for specific user
+    tags: [slurm]
     run: squeue -u camelo -t RUNNING
 
-  view_jobs_account_nstaff:
+  view_jobs_for_account:
     executor: local.bash
     type: script
+    description: show jobs for account nstaff
+    tags: [slurm]
     run: squeue -A nstaff
 
   sort_job_priority_shared_partition:
     executor: local.bash
     type: script
+    description: Sort job priority on PENDING jobs in 'shared' partition and use output format to filter columns
     run: squeue --sort=P,U -p shared -t PENDING -O JobID,Partition,UserName,State,NumTasks,Priority,Reason
 
 
