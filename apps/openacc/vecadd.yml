@@ -18,4 +18,4 @@ buildspecs:
     status:
       slurm_job_state_codes: COMPLETED
 maintainers:
-  - @shahzebsiddiqui
+  - "@shahzebsiddiqui"
