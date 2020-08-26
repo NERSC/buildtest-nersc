@@ -17,6 +17,14 @@ executors:
       description: submit jobs on local machine using python shell
       shell: python
 
+    e4s:
+      description: "E4S testsuite locally"
+      shell: bash
+      before_script: |
+        set -a
+        source /global/common/software/spackecp/luke-wyatt-testing/spack/share/spack/setup-env.sh
+        source $HOME/buildtest-cori/e4s/setup.sh
+
   slurm:
     debug:
       description: jobs for debug qos
@@ -43,15 +51,17 @@ executors:
 
     e4s:
       description: "E4S runner"
-      queue: debug
+      qos: debug
       cluster: cori
+      options: 
+        - "-C haswell"
       before_script: |
+        set -a
         source /global/common/software/spackecp/luke-wyatt-testing/spack/share/spack/setup-env.sh
         source $HOME/buildtest-cori/e4s/setup.sh
 
 config:
   editor: vi
   paths:
-    prefix: $HOME/cache/
     buildspec_root:
       - $HOME/buildtest-cori
