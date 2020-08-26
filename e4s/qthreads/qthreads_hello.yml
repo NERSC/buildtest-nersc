@@ -2,12 +2,10 @@ version: "1.0"
 buildspecs:
   hello_world_qthreads:
     type: compiler
-    executor: local.bash
+    executor: slurm.e4s
+    sbatch: ["-N 1", "-C knl"]
     description: Hello World example using qthreads
-    pre_build: |
-      source /global/common/software/spackecp/luke-wyatt-testing/spack/share/spack/setup-env.sh
-      source $HOME/buildtest-cori/e4s/setup.sh
-      spackLoadUnique qthreads 
+    pre_build: spackLoadUnique qthreads 
     build:
       name: gnu
       source: hello_world_multi.c

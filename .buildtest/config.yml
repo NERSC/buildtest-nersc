@@ -41,6 +41,14 @@ executors:
       options: ["-C gpu"]
       cluster: escori
 
+    e4s:
+      description: "E4S runner"
+      queue: debug
+      cluster: cori
+      before_script: |
+        source /global/common/software/spackecp/luke-wyatt-testing/spack/share/spack/setup-env.sh
+        source $HOME/buildtest-cori/e4s/setup.sh
+
 config:
   editor: vi
   paths:
