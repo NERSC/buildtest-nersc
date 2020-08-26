@@ -2,15 +2,26 @@ version: "1.0"
 buildspecs:
   hello_world_qthreads:
     type: compiler
-    executor: slurm.e4s
-    sbatch: ["-N 1", "-C knl"]
+    executor: local.e4s
     description: Hello World example using qthreads
     pre_build: spackLoadUnique qthreads 
     build:
-      name: gnu
+      name: intel
       source: hello_world_multi.c
       cflags: -L${QTHREADS_ROOT}/lib -I${QTHREADS_ROOT}/include
       ldflags: -lqthread
+
+  hello_world_qthreads_batch:
+    type: compiler
+    executor: slurm.e4s
+    description: Hello World example using qthreads
+    pre_build: spackLoadUnique qthreads 
+    build:
+      name: intel
+      source: hello_world_multi.c
+      cflags: -L${QTHREADS_ROOT}/lib -I${QTHREADS_ROOT}/include
+    run:
+      launcher: srun
 
   
 
