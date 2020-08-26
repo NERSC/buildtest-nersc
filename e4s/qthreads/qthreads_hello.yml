@@ -1,0 +1,18 @@
+version: "1.0"
+buildspecs:
+  hello_world_qthreads:
+    type: compiler
+    executor: local.bash
+    description: Hello World example using qthreads
+    pre_build: |
+      source /global/common/software/spackecp/luke-wyatt-testing/spack/share/spack/setup-env.sh
+      source $HOME/buildtest-cori/e4s/setup.sh
+      spackLoadUnique qthreads 
+    build:
+      name: gnu
+      source: hello_world_multi.c
+      cflags: -L${QTHREADS_ROOT}/lib -I${QTHREADS_ROOT}/include
+      ldflags: -lqthread
+
+  
+
