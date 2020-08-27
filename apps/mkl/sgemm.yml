@@ -1,0 +1,25 @@
+version: "1.0"
+buildspecs:
+  sgemm_intel:
+    executor: local.bash
+    type: compiler
+    description: sgemm test with intel
+    tags: [mkl]
+    build:
+      name: cray
+      cflags: -mkl
+      source: src/mkl_sgemm.c
+    module:
+      - "module load intel"
+
+  sgemm_gcc:
+    executor: local.bash
+    type: compiler
+    description: sgemm test with gcc module
+    tags: [mkl]
+    build:
+      name: cray
+      cflags: -mkl
+      source: src/mkl_sgemm.c
+    module:
+      - "module load gcc"
