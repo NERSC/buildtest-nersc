@@ -1,0 +1,16 @@
+version: "1.0"
+buildspecs:
+  hdf5_h5:
+    type: compiler
+    executor: local.e4s    
+    tags: ["e4s"]
+    pre_build: spackLoadUnique hdf5+fortran
+    build:
+      source: ph5example.c
+      name: gnu
+      cc: h5pcc
+   run:
+     launcher: mpirun -np 8
+
+
+

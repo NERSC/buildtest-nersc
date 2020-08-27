@@ -4,7 +4,8 @@ buildspecs:
     type: compiler
     executor: local.e4s
     description: Hello World example using qthreads
-    pre_build: spackLoadUnique qthreads 
+    tags: ["e4s"]
+    pre_build: spackLoadUnique qthreads     
     build:
       name: intel
       source: hello_world_multi.c
@@ -15,6 +16,7 @@ buildspecs:
     type: compiler
     executor: slurm.e4s
     description: Hello World example using qthreads
+    tags: ["e4s"]
     pre_build: spackLoadUnique qthreads 
     build:
       name: intel
