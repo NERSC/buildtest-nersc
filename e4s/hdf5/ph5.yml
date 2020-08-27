@@ -9,8 +9,6 @@ buildspecs:
       source: ph5example.c
       name: gnu
       cc: h5pcc
-   run:
-     launcher: mpirun -np 8
 
 
 
