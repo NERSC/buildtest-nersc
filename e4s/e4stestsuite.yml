@@ -1,0 +1,12 @@
+version: "1.0"
+buildspecs:
+  e4s_qthreads:
+    type: script
+    executor: local.bash
+    tags: [e4s]
+    run: |
+      git clone https://github.com/E4S-Project/testsuite.git
+      cd testsuite
+      source /global/common/software/spackecp/luke-wyatt-testing/spack/share/spack/setup-env.sh
+      source setup.sh
+      ./test-all.sh ./validation_tests/qthreads
