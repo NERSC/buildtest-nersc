@@ -21,9 +21,11 @@ executors:
       description: "E4S testsuite locally"
       shell: bash
       before_script: |
-        set -a
+        cd $SCRATCH
+        git clone https://github.com/E4S-Project/testsuite.git
+        cd testsuite
         source /global/common/software/spackecp/luke-wyatt-testing/spack/share/spack/setup-env.sh
-        source $HOME/buildtest-cori/e4s/setup.sh
+        source setup.sh
 
   slurm:
     debug:
@@ -63,5 +65,5 @@ executors:
 config:
   editor: vi
   paths:
-    buildspec_root:
+    buildspec_roots:
       - $HOME/buildtest-cori
