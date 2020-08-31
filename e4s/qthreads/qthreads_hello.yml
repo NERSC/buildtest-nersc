@@ -17,6 +17,7 @@ buildspecs:
     executor: slurm.e4s
     description: Hello World example using qthreads
     tags: ["e4s"]
+    sbatch: ["-N 1", "-t 10"]
     pre_build: spackLoadUnique qthreads 
     build:
       name: intel
