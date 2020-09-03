@@ -1,0 +1,14 @@
+version: "1.0"
+buildspecs:
+  kernel_version:
+    type: script
+    executor: local.bash
+    description: check and match kernel version
+    run: uname -r 
+    tags: [system,configuration]
+    status:
+      regex:
+        stream: stdout
+        exp: "^4.12.14-150.52-default$"
+maintainers:
+  - "@shahzebsiddiqui"
