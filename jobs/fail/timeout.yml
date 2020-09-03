@@ -4,6 +4,8 @@ buildspecs:
     type: script
     executor: slurm.debug
     sbatch: [ "-t '00:00:05'", "-C haswell", "-n 1"]
-    run: sleep 45
+    description: "This job sleeps simulates job timeout, this job sleeps for 300sec but reserves 5 sec walltime"
+    tags: ["jobs", "fail"]
+    run: sleep 300
     status:
-      slurm_job_state_codes: "FAILED"  
+      slurm_job_state_codes: "TIMEOUT"  

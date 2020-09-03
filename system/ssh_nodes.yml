@@ -1,0 +1,44 @@
+version: "1.0"
+buildspecs:
+  ssh_login_nodes:
+    type: script
+    executor: local.bash
+    tags: [system, network]
+    description: "test ssh connection to login nodes"
+    run: |
+      ssh -q cori01 hostname
+      ssh -q cori02 hostname
+      ssh -q cori03 hostname
+      ssh -q cori04 hostname
+      ssh -q cori05 hostname
+      ssh -q cori06 hostname
+      ssh -q cori07 hostname
+      ssh -q cori08 hostname
+      ssh -q cori09 hostname
+      ssh -q cori10 hostname
+      ssh -q cori11 hostname
+      ssh -q cori12 hostname
+
+  ssh_data_transfer_nodes:
+    type: script
+    executor: local.bash
+    tags: [system, network]
+    description: "test ssh connection to data transfer nodes"
+    run: |
+      ssh -q dtn01 hostname
+      ssh -q dtn02 hostname
+      ssh -q dtn03 hostname
+      ssh -q dtn04 hostname
+      ssh -q dtn05 hostname
+      ssh -q dtn06 hostname
+
+  ssh_gerty:
+    type: script
+    executor: local.bash
+    description: "test ssh connection to gerty"
+    tags: [system, network]
+    run: ssh -q gerty01 hostname
+
+
+
+

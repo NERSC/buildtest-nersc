@@ -1,9 +1,11 @@
 version: "1.0"
 buildspecs:
-  wall_timeout:
+  exit1:
     type: script
     executor: slurm.debug
-    sbatch: [ "-t 2", "-C haswell", "-n 1"]
+    description: "Run a job that is expected to raise exitcode 1" 
+    sbatch: [ "-t 1", "-C haswell", "-n 1"]
+    tags: ["jobs", "fail"]
     run: exit 1
     status:
       slurm_job_state_codes: "FAILED"  

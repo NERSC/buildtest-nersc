@@ -5,6 +5,7 @@ buildspecs:
     description: Vector Addition example with GNU compiler
     executor: slurm.gpu
     sbatch: ["-G 1", "-t 5", "-N 1"]
+    tags: ["gpu", "openacc","jobs"]
     module:
       - "module load cuda"
       - "module load gcc/8.1.1-openacc-gcc-8-branch-20190215"

@@ -3,6 +3,7 @@ buildspecs:
   zzz_uegdotfile_sh:
     description: check alias and commands from /etc/zzz-uegdotfile.sh
     type: script
+    tags: [configuration]
     executor: local.python
     shell: python
     run: |

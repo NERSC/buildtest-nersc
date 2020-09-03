@@ -3,6 +3,8 @@ buildspecs:
   bash_alias:
     type: script
     shebang: "#!/bin/bash -l"
+    description: "Check predefined alias set in /etc/profile.d script"
+    tags: [configuration]
     executor: local.bash
     run: |
       shopt -s expand_aliases
