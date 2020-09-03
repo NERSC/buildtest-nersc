@@ -31,12 +31,6 @@ buildspecs:
       ping -c 1 -W 20 dtn04
       ping -c 1 -W 20 dtn05
       ping -c 1 -W 20 dtn06
-      ping -c 1 -W 20 dtn07
-      ping -c 1 -W 20 dtn08
-      ping -c 1 -W 20 dtn09
-      ping -c 1 -W 20 dtn10
-      ping -c 1 -W 20 dtn11
-      ping -c 1 -W 20 dtn12
 
   uptime_login_nodes:
     executor: local.bash

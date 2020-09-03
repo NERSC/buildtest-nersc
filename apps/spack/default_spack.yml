@@ -4,6 +4,7 @@ buildspecs:
     type: script
     description: "Test default spack module to see if some basic commands work"
     executor: local.bash
+    tags: ["spack"]
     run: |
       module load spack
       spack --version

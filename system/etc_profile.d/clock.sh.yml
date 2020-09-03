@@ -3,6 +3,8 @@ buildspecs:
   clock:
     type: script
     shell: python
+    description: Check TZ is set to US/Pacific in /etc/profile.d script
+    tags: [python, configuration]
     executor: local.python
     run: |
       import os

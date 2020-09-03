@@ -4,6 +4,7 @@ buildspecs:
     executor: local.bash
     type: script
     description: "STREAM Microbenchmark C test on uniprocessor"
+    tags: ["benchmark"]
     run: |
       wget https://www.cs.virginia.edu/stream/FTP/Code/stream.c
       gcc -O2 stream.c -o stream
@@ -13,6 +14,7 @@ buildspecs:
     executor: local.bash
     type: script
     description: "STREAM Microbenchmark C Test with OpenMP"
+    tags: ["benchmark"]
     run: |
       wget https://www.cs.virginia.edu/stream/FTP/Code/stream.c
       gcc -fopenmp -D_OPENMP -O2 stream.c -o stream
