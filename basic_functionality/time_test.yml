@@ -1,0 +1,18 @@
+version: "1.0"
+buildspecs:
+  time_test: 
+    type: script
+    executor: local.sh
+    description: "does /usr/bin/time work?"
+    tags: [misc, checkout, reframe]
+    run: |
+      hostname
+      which time
+      /usr/bin/time sleep 5
+    status:
+      regex:
+        stream: stderr
+        exp: user
+
+maintainers:    
+  - "@shahzebsiddiqui
