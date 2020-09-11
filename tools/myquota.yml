@@ -3,6 +3,18 @@ buildspecs:
   myquota:
     type: script
     executor: local.bash
-    description: Run myquota program.
-    tags: ["system", "storage", "tool"]
-    run: myquota
+    description: Run myquota --check which returns any quota violation. 
+    tags: ["system", "storage", "tool", "checkout", "reframe"]
+    run: myquota --check
+
+  myquota_numbers:
+    type: script
+    executor: local.bash
+    description: Run myquota -H which shows quota in human readable format
+    tags: ["system", "storage", "tool", "checkout", "reframe"]
+    run: myquota -H
+
+maintainers:
+  - "@shahzebsiddiqui"
+
+
