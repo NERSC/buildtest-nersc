@@ -51,6 +51,10 @@ executors:
       options: ["-C gpu"]
       cluster: escori
 
+    premium:
+      description: submit jobs to premium queue
+      qos: premium
+
     e4s:
       description: "E4S runner"
       qos: debug

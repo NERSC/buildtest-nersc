@@ -56,7 +56,7 @@ buildspecs:
     tags: [slurm]
     run: sinfo -a -h -O partitionname
 
-  drain_nodes_interactive_partition:
+  drain_nodes_partitions:
     executor: local.bash
     type: script
     description: Get all nodes in drained state from partition interactive

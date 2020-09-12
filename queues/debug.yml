@@ -1,0 +1,24 @@
+version: "1.0"
+buildspecs:
+  debug_qos_knl_hostname:
+    description: run hostname on KNL computenode
+    type: script
+    executor: slurm.debug
+    sbatch:
+      - "-t 5"
+      - "-C knl"
+      - "-N 1"
+    tags: ["queues","reframe"]
+    run: hostname
+
+  debug_qos_haswell_hostname:
+    description: run hostname on KNL computenode
+    type: script
+    executor: slurm.debug
+    sbatch:
+      - "-t 5"
+      - "-C haswell"
+      - "-N 1"
+    tags: ["queues","reframe"]
+    run: hostname
+

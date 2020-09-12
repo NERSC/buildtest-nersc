@@ -1,0 +1,23 @@
+version: "1.0"
+buildspecs:
+  premium_qos_haswell_hostname:
+    description: run hostname through premium qos on Haswell
+    type: script
+    executor: slurm.premium
+    sbatch:
+      - "-t 5"
+      - "-N 1"
+      - "-C haswell"
+    run: hostname
+    tags: ["queues","reframe"]
+
+  premium_qos_knl_hostname:
+    description: run hostname through premium qos on KNL
+    type: script
+    executor: slurm.premium
+    sbatch:
+      - "-t 5"
+      - "-N 1"
+      - "-C knl"
+    run: hostname
+    tags: ["queues","reframe"]

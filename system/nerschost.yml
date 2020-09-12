@@ -5,7 +5,7 @@ buildspecs:
     type: script
     shell: python
     tags: ["system", "configuration"]
-    description: check file exists /etc/profile.d/nerschost and alias nersc_host and environment NERSC_HOST
+    description: check file exists /etc/profile.d/nerschost and alias nersc_host
     run: |
       import os
       assert '/etc/profile.d/nerschost.sh'

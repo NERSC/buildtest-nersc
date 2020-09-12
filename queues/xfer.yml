@@ -1,0 +1,11 @@
+version: "1.0"
+buildspecs:
+  xfer_qos_hostname:
+    description: run hostname through bigmem qos
+    type: script
+    executor: slurm.xfer
+    sbatch:
+      - "-t 5"
+      - "-N 1"
+    run: hostname
+    tags: ["queues"]

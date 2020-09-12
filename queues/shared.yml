@@ -1,0 +1,23 @@
+version: "1.0"
+buildspecs:
+  shared_qos_haswell_hostname:
+    description: run hostname through shared qos on Haswell
+    type: script
+    executor: slurm.shared
+    sbatch:
+      - "-t 5"
+      - "-C haswell"
+      - "-N 1"
+    tags: ["queues","reframe"]
+    run: hostname
+
+  shared_qos_knl_hostname:
+    description: run hostname through shared qos on KNL
+    type: script
+    executor: slurm.shared
+    sbatch:
+      - "-t 5"
+      - "-C knl"
+      - "-N 1"
+    tags: ["queues","reframe"]
+    run: hostname
