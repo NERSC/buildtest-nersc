@@ -28,10 +28,10 @@ buildspecs:
     tags: [slurm]
     run: squeue -A nstaff
 
-  sort_job_priority_shared_partition:
+  sort_job_priority_partition:
     executor: local.bash
     type: script
-    description: Sort job priority on PENDING jobs in 'shared' partition and use output format to filter columns
+    description: Sort job priority on PENDING jobs in 'shared' partition
     run: squeue --sort=P,U -p shared -t PENDING -O JobID,Partition,UserName,State,NumTasks,Priority,Reason
 
 

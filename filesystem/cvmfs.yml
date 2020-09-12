@@ -1,0 +1,15 @@
+version: "1.0"
+buildspecs:
+  cvmfs_test:
+    type: script
+    executor: local.bash
+    description: Is cvmfs mounted
+    tags: [filesystem, cvmfs, checkout, reframe]
+    run: |
+      NUM=$(ls /cvmfs/sw.lsst.eu/ | grep -c "")
+      echo PASS num lsst dirs: $NUM
+    status:
+      regex:
+        stream: stdout
+        exp: "2$"
+

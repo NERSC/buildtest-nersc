@@ -1,7 +1,7 @@
 version: "1.0"
 buildspecs:
   tmp_spack_test:
-    description: Spack sanity test on /tmp filesystem by cloning spack and concretize trilinos into spack environment. 
+    description: Spack sanity test on /tmp filesystem by concretize trilinos. 
     type: script
     executor: slurm.debug
     tags: ["spack", "slurm"]
