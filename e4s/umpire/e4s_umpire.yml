@@ -1,0 +1,8 @@
+version: "1.0"
+buildspecs:
+  e4s_umpire:
+    type: script
+    executor: local.e4s
+    description: Run umpire test from E4S TestSuite
+    tags: [e4s]
+    run: $SCRATCH/testsuite/test-all.sh $SCRATCH/testsuite/validation_tests/umpire
