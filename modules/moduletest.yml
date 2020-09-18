@@ -1,8 +1,58 @@
 version: "1.0"
 buildspecs:
-  moduleloadtest:
-    description: Run module load test of entire software stack
+  moduletest_opt_modulefiles:
+    description: Run module load test for tree /opt/modulefiles 
     type: script
     executor: local.bash
-    run: |
-      python moduleloadtest.py  
+    tags: [modules]
+    run: MODULEPATH=/opt/modulefiles python moduletest.py
+    status:
+      regex:
+        stream: stdout
+        exp: "PASS RATE: 100.000"
+
+  moduletest_cray_modulefiles:
+    description: Run module load test for tree /opt/cray/modulefiles 
+    type: script
+    executor: local.bash
+    tags: [modules]
+    run: MODULEPATH=/opt/cray/modulefiles python moduletest.py
+    status:
+      regex:
+        stream: stdout
+        exp: "PASS RATE: 100.000"
+
+
+  moduletest_cray_ari_modulefiles:
+    description: Run module load test for tree /opt/cray/ari/modulefiles
+    type: script
+    executor: local.bash
+    tags: [modules]
+    run: MODULEPATH=/opt/cray/ari/modulefiles python moduletest.py
+    status:
+      regex:
+        stream: stdout
+        exp: "PASS RATE: 100.000"
+
+
+  moduletest_craype_modulefiles:
+    description: Run module load test for tree /opt/cray/pe/modulefiles
+    type: script
+    executor: local.bash
+    tags: [modules]
+    run: MODULEPATH=/opt/cray/pe/modulefiles python moduletest.py
+    status:
+      regex:
+        stream: stdout
+        exp: "PASS RATE: 100.000"
+
+  moduletest_ftg_modulefiles:
+    description: Run module load test for tree /usr/common/ftg/modulefiles
+    type: script
+    executor: local.bash
+    tags: [modules]
+    run: MODULEPATH=/usr/common/ftg/modulefiles python moduletest.py
+    status:
+      regex:
+        stream: stdout
+        exp: "PASS RATE: 100.000"
