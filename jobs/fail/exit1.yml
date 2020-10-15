@@ -8,4 +8,4 @@ buildspecs:
     tags: ["jobs", "fail"]
     run: exit 1
     status:
-      slurm_job_state_codes: "FAILED"  
+      slurm_job_state: "FAILED"  

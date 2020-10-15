@@ -8,6 +8,6 @@ buildspecs:
       name: gnu
       source: src/oom.c
     status:
-      slurm_job_state_codes: "OUT_OF_MEMORY"
+      slurm_job_state: "OUT_OF_MEMORY"
 
 

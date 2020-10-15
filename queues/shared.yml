@@ -11,13 +11,3 @@ buildspecs:
     tags: ["queues","reframe"]
     run: hostname
 
-  shared_qos_knl_hostname:
-    description: run hostname through shared qos on KNL
-    type: script
-    executor: slurm.shared
-    sbatch:
-      - "-t 5"
-      - "-C knl"
-      - "-N 1"
-    tags: ["queues","reframe"]
-    run: hostname
