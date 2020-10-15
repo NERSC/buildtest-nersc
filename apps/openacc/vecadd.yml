@@ -17,6 +17,6 @@ buildspecs:
     run:
       launcher: srun
     status:
-      slurm_job_state_codes: COMPLETED
+      slurm_job_state: COMPLETED
 maintainers:
   - "@shahzebsiddiqui"

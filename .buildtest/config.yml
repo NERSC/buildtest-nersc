@@ -3,6 +3,7 @@ executors:
   defaults:
     pollinterval: 10
     launcher: sbatch
+    max_pend_time: 90
 
   local:
     bash:
@@ -36,20 +37,24 @@ executors:
     shared:
       description: jobs for shared qos
       qos: shared
+      max_pend_time: 180
 
     bigmem:
       description: bigmem jobs
       cluster: escori
       qos: bigmem
+      max_pend_time: 300
 
     xfer:
       description: xfer qos jobs
       qos: xfer
-    
+      cluster: escori
+
     gpu:
       description: submit jobs to GPU partition
       options: ["-C gpu"]
       cluster: escori
+      max_pend_time: 300
 
     premium:
       description: submit jobs to premium queue

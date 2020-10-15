@@ -8,4 +8,4 @@ buildspecs:
     tags: ["jobs", "fail"]
     run: sleep 300
     status:
-      slurm_job_state_codes: "TIMEOUT"  
+      slurm_job_state: "TIMEOUT"  
