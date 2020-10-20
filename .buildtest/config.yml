@@ -1,9 +1,13 @@
+editor: vi
+buildspec_roots:
+  - $HOME/buildtest-cori
 executors:
 
   defaults:
     pollinterval: 10
     launcher: sbatch
     max_pend_time: 90
+    account: nstaff
 
   local:
     bash:
@@ -37,7 +41,7 @@ executors:
     shared:
       description: jobs for shared qos
       qos: shared
-      max_pend_time: 180
+      max_pend_time: 10
 
     bigmem:
       description: bigmem jobs
@@ -70,9 +74,3 @@ executors:
         set -a
         source /global/common/software/spackecp/luke-wyatt-testing/spack/share/spack/setup-env.sh
         source $HOME/buildtest-cori/e4s/setup.sh
-
-config:
-  editor: vi
-  paths:
-    buildspec_roots:
-      - $HOME/buildtest-cori
