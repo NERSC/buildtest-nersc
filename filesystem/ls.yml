@@ -1,0 +1,24 @@
+# https://gitlab.nersc.gov/nersc/consulting/reframe-at-nersc/reframe-nersc-tests/-/tree/main/filesystem_health/ls
+version: "1.0"
+buildspecs:
+  filesystem_benchmark_ls:
+    type: script
+    executor: local.bash
+    description: time ls with nwchem for various filesystems
+    tags: [filesystem, reframe, benchmarks, hourly]
+    vars:
+      dirs: "(/global/cfs/cdirs/nstaff/ /global/common/software/nstaff/ $SCRATCH )"
+    run: |
+      for filesystem in "${dirs[@]}"
+      do
+        cd $filesystem
+        mkdir -p scratch
+        cd scratch
+        wget https://portal.nersc.gov/project/mpccc/lgerhard/nwchem-5.0.tar      
+        tar xvf nwchem-5.0.tar
+        time -p ls -lR nwchem-5.0
+        cd $filesystem
+        rm -rf scratch
+      done
+
+

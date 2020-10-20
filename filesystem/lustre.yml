@@ -1,0 +1,22 @@
+version: "1.0"
+buildspecs:
+  lustre_osts:
+    description: List all lustre OSTs
+    type: script
+    executor: local.bash
+    tags: [filesystem, lustre]
+    run: lfs osts
+
+  lustre_mdts:
+    description: List all lustre MDTs
+    type: script
+    executor: local.bash
+    tags: [filesystem, lustre]
+    run: lfs mdts
+
+  lustre_nstaff_quota:
+    description: Show quota for group nstaff
+    type: script
+    executor: local.bash
+    tags: [filesystem, lustre]
+    run: lfs quota -g nstaff $SCRATCH
