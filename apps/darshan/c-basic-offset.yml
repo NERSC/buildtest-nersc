@@ -1,0 +1,28 @@
+version: "1.0"
+buildspecs:
+  mpi_c_basic_offset:
+    type: compiler
+    executor: slurm.debug
+    description: "MPI test to calculate PI and use darshan-parser to view logfile"
+    tags: [darshan, e4s]
+    batch:
+      timelimit: "10"
+      nodecount: "1"
+    sbatch: ["-C haswell"]
+    env:
+      DARSHAN_LOGFILE: "$HOME/mpi_c_basic_offset.darshan"
+    pre_build: |
+      source /global/common/software/spackecp/luke-wyatt-testing/spack/share/spack/setup-env.sh
+      spack load darshan-runtime
+      spack load darshan-util
+    build:
+      name: cray
+      source: cpi.c
+      ldflags: -ldarshan
+    run:
+      launcher: srun
+    post_run: |
+      darshan-parser $DARSHAN_LOGFILE
+      rm $DARSHAN_LOGFILE
+maintainers:
+  - "Shahzeb Siddiqui <@shahzebsiddiqui>"
