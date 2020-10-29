@@ -19,7 +19,7 @@ cp .buildtest/config.yml $HOME/.buildtest/config.yml
 ```
 
 Assuming you have [installed buildtest](https://buildtest.readthedocs.io/en/devel/installing_buildtest.html) you 
-can view and validate your configuration view commands
+can view and validate your configuration via:
 
 ```
 buildtest config validate
@@ -28,7 +28,8 @@ buildtest config view
 
 First time around you should discover all buildspecs this can be done via ``buildtest buildspec find``. Please consider checking 
 [**buildspecs_roots**](https://buildtest.readthedocs.io/en/devel/configuring_buildtest.html#buildspec-roots) in your configuration
-to root of buildtest-cori repo so you can discover Cori test. If you are able to get this far you should see a lot more tests
+to root of buildtest-cori repo so you can discover Cori test. If you are able to get this far you should see a lot more tests.
+The ``--clear`` will force rebuild your buildspec cache.
 
 ```
 
@@ -290,10 +291,12 @@ $ buildtest report
 # Contributing Guide
 
 To contribute back you will want to make sure your buildspec is validated before you contribute back, this could be 
-done by running test manually ``buildtest build`` or see if buildspec is valid via ``buildtest buildspec find``.
+done by running test manually ``buildtest build`` or see if buildspec is valid via ``buildtest buildspec find``. It 
+would be good to run your test and make sure it is working as expected, you can view test detail using ``buildtest inspect <ID>`` 
+or see [Test Inspection](https://buildtest.readthedocs.io/en/devel/getting_started.html#test-inspection) section. 
 
 buildtest relies on json schema to validate buildspecs and you will need to understand the json schema to understand how
-to write valid tests. To get all schemas run the following
+to write valid tests. To get all schemas run the following:
 ```
 $ buildtest schema
 global.schema.json
@@ -309,6 +312,8 @@ schema you can run ``buildtest schema -n script-v1.0.schema.json --json``.
 To view all examples for script schema you can run ``buildtest schema -n script-v1.0.schema.json --examples`` which will show
 all invalid/valid tests. buildtest will validate each example before it shows content which will be help understand how to write
 tests and see all the edge cases.
+
+Alternately you can see all published schemas and examples on https://buildtest.readthedocs.io/en/devel/buildspecs/schema_examples.html
 
 Check out the [contributing guide](https://buildtest.readthedocs.io/en/devel/contributing.html) for buildtest if you want to contribute back
 to framework
