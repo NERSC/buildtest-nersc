@@ -1,20 +1,88 @@
 # buildtest-cori
 
-This repository contains tests for Cori at NERSC. To get started you can either clone this repo via git
+This repo is [Cori](https://docs.nersc.gov/) Testsuite with buildtest. 
 
+
+
+## Setup
+
+To get started clone this repo.
 ```
 git clone https://github.com/buildtesters/buildtest-cori
 ```
 
-Alternately you can clone via buildtest as follows:
+Next copy your site configuration to the following location
 
 ```
-buildtest repo add https://github.com/buildtesters/buildtest-cori
-``` 
+cd buildtest-cori
+cp .buildtest/config.yml $HOME/.buildtest/config.yml
+```
 
-Next copy site configuration file ``settings.yml`` to buildtest location ``$HOME/.buildtest/settings.yml``
+Assuming you have [installed buildtest](https://buildtest.readthedocs.io/en/devel/installing_buildtest.html) you 
+can view and validate your configuration view commands
 
-If you cloned tests via ``buildtest repo add`` buildtest will add all repository to search path. 
+```
+buildtest config validate
+buildtest config view
+```
+
+First time around you should discover all buildspecs this can be done via ``buildtest buildspec find``. Please consider checking 
+[**buildspecs_roots**](https://buildtest.readthedocs.io/en/devel/configuring_buildtest.html#buildspec-roots) in your configuration
+to root of buildtest-cori repo so you can discover Cori test. If you are able to get this far you should see a lot more tests
+
+```
+
+(buildtest) siddiq90@cori06:~/buildtest-cori/jobs> buildtest buildspec find --clear
+Clearing cache file: /global/u1/s/siddiq90/buildtest/var/buildspec-cache.json
+Found 123 buildspecs
+Validated 15/123 buildspecs
+Validated 20/123 buildspecs
+Validated 25/123 buildspecs
+Validated 30/123 buildspecs
+Validated 35/123 buildspecs
+Validated 40/123 buildspecs
+Validated 45/123 buildspecs
+Validated 50/123 buildspecs
+Validated 55/123 buildspecs
+Validated 60/123 buildspecs
+Validated 65/123 buildspecs
+Validated 70/123 buildspecs
+Validated 75/123 buildspecs
+Validated 80/123 buildspecs
+Validated 85/123 buildspecs
+Validated 90/123 buildspecs
+Validated 95/123 buildspecs
+Validated 100/123 buildspecs
+Validated 105/123 buildspecs
+Validated 110/123 buildspecs
+Validated 115/123 buildspecs
+Validated 120/123 buildspecs
+Validated 123/123 buildspecs
+
+Detected 4 invalid buildspecs 
+
+Writing invalid buildspecs to file: /global/u1/s/siddiq90/buildtest/var/buildspec.error 
+
+
+
++---------------------------------+----------+---------------+------------------------------------------------------+----------------------------------------------------------------------------------+
+| Name                            | Type     | Executor      | Tags                                                 | Description                                                                      |
++=================================+==========+===============+======================================================+==================================================================================+
+| csh_shell                       | script   | local.csh     | ['tutorials']                                        | csh shell example                                                                |
++---------------------------------+----------+---------------+------------------------------------------------------+----------------------------------------------------------------------------------+
+| python_hello                    | script   | local.bash    | python                                               | Hello World python                                                               |
++---------------------------------+----------+---------------+------------------------------------------------------+----------------------------------------------------------------------------------+
+| selinux_disable                 | script   | local.bash    | ['tutorials']                                        | Check if SELinux is Disabled                                                     |
++---------------------------------+----------+---------------+------------------------------------------------------+----------------------------------------------------------------------------------+
+| systemd_default_target          | script   | local.bash    | ['tutorials']                                        | check if default target is multi-user.target                                     |
++---------------------------------+----------+---------------+------------------------------------------------------+----------------------------------------------------------------------------------+
+| circle_area                     | script   | local.python  | ['tutorials', 'python']                              | Calculate circle of area given a radius                                          |
++---------------------------------+----------+---------------+------------------------------------------------------+----------------------------------------------------------------------------------+
+| hello_world                     | script   | local.bash    | tutorials                                            | hello world example                                                              |
++---------------------------------+----------+---------------+------------------------------------------------------+--------------------------------------------
+
+...
+```
 
 # Building Tests
 
@@ -23,20 +91,7 @@ If you cloned tests via ``buildtest repo add`` buildtest will add all repository
 To build tests use ``buildtest build`` command for example we build all tests in ``system`` directory as follows
 
 ```
-buildtest build -b /tmp/github.com/buildtesters/buildtest-cori/system/
-```
-
-Same test could be achieved by specifying relative path based on search paths 
-
-```
-buildtest build -b system
-```
-
-Alternately, you can cd into any directory and specify a relative file path
-
-```
-$ cd /tmp/github.com/buildtesters/buildtest-cori/
-$ buildtest build -b system/cray_env.yml 
+buildtest build -b system/
 ```
 
 You can specify multiple buildspecs either files or directory via ``-b`` option
@@ -61,109 +116,175 @@ buildtest build -b slurm -x slurm
 buildtest build -b slurm/sinfo.yml -x slurm/sinfo.yml
 ```
 
-
-# Finding all buildspecs
-
-To find and validate all buildspecs run ``buildtest buildspec find`` and this will show a list of available buildspecs that
-buildtest found and are validated with each schema. 
+buildtest can run tests via tags which can be useful when grouping tests, to see a list of available tags you 
+can run the following
 
 ```
-$ buildtest buildspec find
-
-
-
-Detected 1 invalid buildspecs
-Writing invalid buildspecs to file: /global/u1/s/siddiq90/buildtest/buildspec.error 
-
-
-
-Name                      Type                      Buildspec                
-________________________________________________________________________________
-login_nodes               script                    /tmp/github.com/buildtesters/buildtest-cori/system/ping_nodes.yml
-data_transfer_nodes       script                    /tmp/github.com/buildtesters/buildtest-cori/system/ping_nodes.yml
-nerschost                 script                    /tmp/github.com/buildtesters/buildtest-cori/system/nerschost.yml
-nameserver_ping           script                    /tmp/github.com/buildtesters/buildtest-cori/system/nameserver.yml
-searchdomain_check        script                    /tmp/github.com/buildtesters/buildtest-cori/system/nameserver.yml
-mount_check               script                    /tmp/github.com/buildtesters/buildtest-cori/system/mountpoint.yml
-filesystem_access         script                    /tmp/github.com/buildtesters/buildtest-cori/system/filesystem.yml
-cray_check                script                    /tmp/github.com/buildtesters/buildtest-cori/system/cray_env.yml
-help                      script                    /tmp/github.com/buildtesters/buildtest-cori/slurmutils/sqs.yml
-summary                   script                    /tmp/github.com/buildtesters/buildtest-cori/slurmutils/sqs.yml
-jobs_by_partitions        script                    /tmp/github.com/buildtesters/buildtest-cori/slurmutils/sqs.yml
-show_running_jobs         script                    /tmp/github.com/buildtesters/buildtest-cori/slurmutils/sqs.yml
-show_nonrunning_jobs      script                    /tmp/github.com/buildtesters/buildtest-cori/slurmutils/sqs.yml
-show_jobs_qos             script                    /tmp/github.com/buildtesters/buildtest-cori/slurmutils/sqs.yml
-display_partition_info    script                    /tmp/github.com/buildtesters/buildtest-cori/slurmutils/sqs.yml
-jobstats                  script                    /tmp/github.com/buildtesters/buildtest-cori/slurmutils/jobstats.yml
-current_user_queue        script                    /tmp/github.com/buildtesters/buildtest-cori/slurm/squeue.yml
-pending_jobs_shared_partition script                    /tmp/github.com/buildtesters/buildtest-cori/slurm/squeue.yml
-running_jobs_user_camelo  script                    /tmp/github.com/buildtesters/buildtest-cori/slurm/squeue.yml
-view_jobs_account_nstaff  script                    /tmp/github.com/buildtesters/buildtest-cori/slurm/squeue.yml
-sort_job_priority_shared_partition script                    /tmp/github.com/buildtesters/buildtest-cori/slurm/squeue.yml
-sinfo_version             script                    /tmp/github.com/buildtesters/buildtest-cori/slurm/slurm_check.yml
-nodes_state_down          script                    /tmp/github.com/buildtesters/buildtest-cori/slurm/sinfo.yml
-nodes_state_reboot        script                    /tmp/github.com/buildtesters/buildtest-cori/slurm/sinfo.yml
-nodes_state_allocated     script                    /tmp/github.com/buildtesters/buildtest-cori/slurm/sinfo.yml
-nodes_state_completing    script                    /tmp/github.com/buildtesters/buildtest-cori/slurm/sinfo.yml
-nodes_state_idle          script                    /tmp/github.com/buildtesters/buildtest-cori/slurm/sinfo.yml
-node_down_fail_list_reason script                    /tmp/github.com/buildtesters/buildtest-cori/slurm/sinfo.yml
-dead_nodes                script                    /tmp/github.com/buildtesters/buildtest-cori/slurm/sinfo.yml
-get_partitions            script                    /tmp/github.com/buildtesters/buildtest-cori/slurm/sinfo.yml
-drain_nodes_interactive_partition script                    /tmp/github.com/buildtesters/buildtest-cori/slurm/sinfo.yml
-slurm_config              script                    /tmp/github.com/buildtesters/buildtest-cori/slurm/scontrol.yml
-show_node_config          script                    /tmp/github.com/buildtesters/buildtest-cori/slurm/scontrol.yml
-show_partition            script                    /tmp/github.com/buildtesters/buildtest-cori/slurm/scontrol.yml
-show_accounts             script                    /tmp/github.com/buildtesters/buildtest-cori/slurm/sacctmgr.yml
-show_users                script                    /tmp/github.com/buildtesters/buildtest-cori/slurm/sacctmgr.yml
-show_qos                  script                    /tmp/github.com/buildtesters/buildtest-cori/slurm/sacctmgr.yml
-show_associations         script                    /tmp/github.com/buildtesters/buildtest-cori/slurm/sacctmgr.yml
-show_tres                 script                    /tmp/github.com/buildtesters/buildtest-cori/slurm/sacctmgr.yml
-partition_check           script                    /tmp/github.com/buildtesters/buildtest-cori/slurm/partition.yml
-slurm_metadata            script                    /tmp/github.com/buildtesters/buildtest-cori/slurm/valid_jobs/metadata.yml
-knl_hostname              script                    /tmp/github.com/buildtesters/buildtest-cori/slurm/valid_jobs/hostname.yml
-haswell_hostname          script                    /tmp/github.com/buildtesters/buildtest-cori/slurm/valid_jobs/hostname.yml
-iris_user_query           script                    /tmp/github.com/buildtesters/buildtest-cori/nersctools/iris.yml
-iris_qos_gpu              script                    /tmp/github.com/buildtesters/buildtest-cori/nersctools/iris.yml
-iris_project              script                    /tmp/github.com/buildtesters/buildtest-cori/nersctools/iris.yml
+$ buildtest buildspec find --tags
++---------------+
+| Tags          |
++===============+
+| hourly        |
++---------------+
+| pass          |
++---------------+
+| slurm         |
++---------------+
+| tool          |
++---------------+
+| benchmark     |
++---------------+
+| benchmarks    |
++---------------+
+| containers    |
++---------------+
+| python        |
++---------------+
+| petsc         |
++---------------+
+| cray          |
++---------------+
+| network       |
++---------------+
+| openmp        |
++---------------+
+| reframe       |
++---------------+
+| configuration |
++---------------+
+| checkout      |
++---------------+
+| gpu           |
++---------------+
+| storage       |
++---------------+
+| jobs          |
++---------------+
+| gpfs          |
++---------------+
+| spack         |
++---------------+
+| lustre        |
++---------------+
+| darshan       |
++---------------+
+| lsf           |
++---------------+
+| datawarp      |
++---------------+
+| ping          |
++---------------+
+| e4s           |
++---------------+
+| tools         |
++---------------+
+| system        |
++---------------+
+| misc          |
++---------------+
+| compile       |
++---------------+
+| fail          |
++---------------+
+| ssh           |
++---------------+
+| queues        |
++---------------+
+| esslurm       |
++---------------+
+| mkl           |
++---------------+
+| cvmfs         |
++---------------+
+| filesystem    |
++---------------+
+| modules       |
++---------------+
+| mpi           |
++---------------+
+| tutorials     |
++---------------+
+| openacc       |
++---------------+
 ```
 
-# Edit and View (Buildspecs)
-
-You can use your editor (vi, vim, nano, emacs) to edit any file but if you want buildtest to validate your file interactively you
-may find that ``buildtest buildspec edit`` to be useful.
-
-Specify the name of buildspec you want based on output of ``buildtest buildspec find``. For example we can edit ``login_nodes`` which 
-will open buildspec /tmp/github.com/buildtesters/buildtest-cori/system/ping_nodes.yml. This can be achieved by running:
+For instance if you want to run all ``lustre`` tests you can use ``buildtest build --tags`` option. 
 
 ```
-buildtest buildspec edit login_nodes
+   $ buildtest build --tags lustre
+
+   +-------------------------------+
+   | Stage: Discovering Buildspecs |
+   +-------------------------------+ 
+
+
+   Discovered Buildspecs:
+
+   /global/u1/s/siddiq90/buildtest-cori/filesystem/lustre.yml
+
+   +---------------------------+
+   | Stage: Parsing Buildspecs |
+   +---------------------------+ 
+
+    schemafile              | validstate   | buildspec
+   -------------------------+--------------+------------------------------------------------------------
+    script-v1.0.schema.json | True         | /global/u1/s/siddiq90/buildtest-cori/filesystem/lustre.yml
+
+   +----------------------+
+   | Stage: Building Test |
+   +----------------------+ 
+
+    name                | id       | type   | executor   | tags                     | testpath
+   ---------------------+----------+--------+------------+--------------------------+-----------------------------------------------------------------------------------------------------
+    lustre_osts         | b487c36d | script | local.bash | ['filesystem', 'lustre'] | /global/u1/s/siddiq90/buildtest/var/tests/local.bash/lustre/lustre_osts/1/stage/generate.sh
+    lustre_mdts         | 03259756 | script | local.bash | ['filesystem', 'lustre'] | /global/u1/s/siddiq90/buildtest/var/tests/local.bash/lustre/lustre_mdts/1/stage/generate.sh
+    lustre_nstaff_quota | ad748ead | script | local.bash | ['filesystem', 'lustre'] | /global/u1/s/siddiq90/buildtest/var/tests/local.bash/lustre/lustre_nstaff_quota/1/stage/generate.sh
+
+   +----------------------+
+   | Stage: Running Test  |
+   +----------------------+ 
+
+    name                | id       | executor   | status   |   returncode | testpath
+   ---------------------+----------+------------+----------+--------------+-----------------------------------------------------------------------------------------------------
+    lustre_osts         | b487c36d | local.bash | PASS     |            0 | /global/u1/s/siddiq90/buildtest/var/tests/local.bash/lustre/lustre_osts/1/stage/generate.sh
+    lustre_mdts         | 03259756 | local.bash | PASS     |            0 | /global/u1/s/siddiq90/buildtest/var/tests/local.bash/lustre/lustre_mdts/1/stage/generate.sh
+    lustre_nstaff_quota | ad748ead | local.bash | PASS     |            0 | /global/u1/s/siddiq90/buildtest/var/tests/local.bash/lustre/lustre_nstaff_quota/1/stage/generate.sh
+
+   +----------------------+
+   | Stage: Test Summary  |
+   +----------------------+ 
+
+   Executed 3 tests
+   Passed Tests: 3/3 Percentage: 100.000%
+   Failed Tests: 0/3 Percentage: 0.000%
+
+
 ```
-
-When you invoke buildtest buildspec edit it will keep file open in a while loop until file
-is valid for example we make some changes and save file and see the following warning. The user
-can press a key and it will open file for editing until file is valid. You can bypass this by sending 
-a control signal if you don't want to be stuck in endless loop.
-
-```
-$ buildtest buildspec edit login_nodes
-version 1.1 is not known for type {'1.0': 'script-v1.0.schema.json', 'latest': 'script-v1.0.schema.json'}. Try using latest.
-Press any key to continue
-```
-
-Since multiple tests can be defined in one YAML file you can pick any test name that belongs to the buildspec file path.
-
-To view a buildspec use the ``buildtest buildspec view <name>`` to show content of the file. 
-
-**Note: we show full content of buildspec and not each test so if multiple tests are found it will show all tests**
-
 # Test Report 
 
 You can run ``buildtest report`` to get report of all tests. Here is a preview output
 
 ```
 $ buildtest report
-name                 state                returncode           starttime            endtime              runtime              buildid              buildspec           
-jobstats             PASS                 0                    2020/06/25 05:46:31  2020/06/25 05:46:43  011.25 jobstats_2020-06-25-05-46 /tmp/github.com/buildtesters/buildtest-cori/slurmutils/jobstats.yml
++---------------------------------+----------+---------+--------------+---------------------+---------------------+------------+--------------------------------------+------------------------------------------------------------------------------+
+| name                            | id       | state   |   returncode | starttime           | endtime             |    runtime | tags                                 | buildspec                                                                    |
++=================================+==========+=========+==============+=====================+=====================+============+======================================+==============================================================================+
+| xfer_qos_hostname               | a0b0f578 | PASS    |            0 | 2020-10-14T17:11:17 | 2020-10-14T17:11:18 |  0         | queues                               | /global/u1/s/siddiq90/buildtest-cori/queues/xfer.yml                         |
++---------------------------------+----------+---------+--------------+---------------------+---------------------+------------+--------------------------------------+------------------------------------------------------------------------------+
+| xfer_qos_hostname               | d0043be3 | PASS    |            0 | 2020-10-16T14:21:50 | 2020-10-16T14:21:51 |  0         | queues                               | /global/u1/s/siddiq90/buildtest-cori/queues/xfer.yml                         |
++---------------------------------+----------+---------+--------------+---------------------+---------------------+------------+--------------------------------------+------------------------------------------------------------------------------+
+| debug_qos_knl_hostname          | e8c32e83 | PASS    |            0 | 2020-10-14T17:11:17 | 2020-10-14T17:11:20 |  0         | queues reframe                       | /global/u1/s/siddiq90/buildtest-cori/queues/debug.yml                        |
++---------------------------------+----------+---------+--------------+---------------------+---------------------+------------+--------------------------------------+------------------------------------------------------------------------------+
+| debug_qos_knl_hostname          | 4b84492d | PASS    |            0 | 2020-10-21T14:34:22 | 2020-10-21T14:34:29 |  0         | queues reframe                       | /global/u1/s/siddiq90/buildtest-cori/queues/debug.yml                        |
++---------------------------------+----------+---------+--------------+---------------------+---------------------+------------+--------------------------------------+------------------------------------------------------------------------------+
+| debug_qos_haswell_hostname      | fe76218c | PASS    |            0 | 2020-10-14T17:11:17 | 2020-10-14T17:11:20 |  0         | queues reframe                       | /global/u1/s/siddiq90/buildtest-cori/queues/debug.yml                        |
++---------------------------------+----------+---------+--------------+---------------------+---------------------+------------+--------------------------------------+------------------------------------------------------------------------------+
+| premium_qos_haswell_hostname    | 7a67ae00 | PASS    |            0 | 2020-10-14T17:11:23 | 2020-10-14T17:11:27 |  0         | queues reframe                       | /global/u1/s/siddiq90/buildtest-cori/queues/premium.yml                      |
++---------------------------------+----------+---------+--------------+---------------------+---------------------+------------+--------------------------------------+------------------------------------------------------------------------------+
+| premium_qos_knl_hostname        | ef64cd6f | PASS    |            0 | 2020-10-14T17:11:23 | 2020-10-14T17:11:27 |  0         | queues reframe                       | /global/u1/s/siddiq90/buildtest-cori/queues/premium.yml                      |
++---------------------------------+----------+---------+--------------+---------------------+---------------------+------------+--------------------------------------+------------------------------------------------------------------------------+
+| bigmem_qos_hostname             | 03efbce4 | PASS    |            0 | 2020-10-14T17:11:20 | 2020-10-14T17:11:21 |  0         | queues reframe                       | /global/u1/s/siddiq90/buildtest-cori/queues/bigmem.yml                       |
++---------------------------------+----------+---------+--------------+---------------------+---------------------+------------+--------------------------------------+------------------------------------------------------------------------------+
 ```
 
 # Contributing Guide
@@ -175,10 +296,11 @@ buildtest relies on json schema to validate buildspecs and you will need to unde
 to write valid tests. To get all schemas run the following
 ```
 $ buildtest schema
-script-v1.0.schema.json
-compiler-v1.0.schema.json
 global.schema.json
+definitions.schema.json
 settings.schema.json
+compiler-v1.0.schema.json
+script-v1.0.schema.json
 ```
 
 The schemas ``script``, ``compiler``, ``global`` are of interest when writing buildspec to view the json content for script 
@@ -194,7 +316,9 @@ to framework
 # References
 
 - buildtest documentation: https://buildtest.readthedocs.io/en/devel/
-- buildtest schema docs: https://buildtesters.github.io/schemas/
+- buildtest schema docs: https://buildtesters.github.io/buildtest/
+- Getting Started: https://buildtest.readthedocs.io/en/devel/getting_started.html
+- Writing Buildspecs: https://buildtest.readthedocs.io/en/devel/writing_buildspecs.html
 
 
 
