@@ -3,6 +3,7 @@ buildspecs:
   submit_esslurm_from_xc:
     type: script
     executor: local.bash
+    tags: [jobs]
     run: |
       output="result.out"
 

@@ -4,6 +4,7 @@ buildspecs:
     description: Get metadata from compute node when submitting job
     type: script
     executor: slurm.debug
+    tags: [jobs]
     sbatch:
       - "-t 00:05"
       - "-C haswell"

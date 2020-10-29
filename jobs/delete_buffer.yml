@@ -1,0 +1,18 @@
+version: "1.0"
+buildspecs:
+  delete_burst_buffer:
+    type: script
+    executor: slurm.debug
+    batch: 
+      nodecount: "1"
+      timelimit: "5"
+      cpucount: "1"
+    sbatch: ["-C knl"]
+    description: Delete a burst buffer
+    tags: [jobs]
+    BB: 
+      - destroy_persistent name=databuffer 
+    run: |
+      cd $DW_PERSISTENT_STRIPED_databuffer/
+      pwd
+      ls -l 
