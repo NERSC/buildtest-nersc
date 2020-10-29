@@ -1,0 +1,20 @@
+version: "1.0"
+buildspecs:
+  stage_in_out_burst_buffer:
+    type: script
+    executor: slurm.debug
+    tags: [datawarp, jobs]
+    description: Stage data in & out of Burst Buffer
+    batch:
+      timelimit: "10"
+      nodecount: "1"
+      cpucount: "4"
+    sbatch: ["-C knl"]
+    DW:
+      - jobdw capacity=1GB access_mode=striped type=scratch
+      - stage_in source=$SCRATCH/petsc destination=$DW_JOB_STRIPED/petsc type=directory
+    run: |
+      cd $SCRATCH
+      git clone https://gitlab.com/petsc/petsc
+      srun time -p ls -R $DW_JOB_STRIPED/petsc
+      rm -rf $SCRATCH/petsc

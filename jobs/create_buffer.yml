@@ -1,0 +1,21 @@
+version: "1.0"
+buildspecs:
+  create_burst_buffer:
+    type: script
+    executor: slurm.debug
+    batch: 
+      nodecount: "1"
+      timelimit: "5"
+      cpucount: "1"
+    sbatch: ["-C knl"]
+    description: Create a burst buffer
+    tags: [jobs]
+    BB: 
+      - create_persistent name=databuffer capacity=10GB access_mode=striped type=scratch
+    DW: 
+      - persistentdw name=databuffer
+    run: |
+      cd $DW_PERSISTENT_STRIPED_databuffer
+      pwd
+      dd if=/dev/urandom of=random.txt bs=1G count=5 iflag=fullblock
+      ls -lh $DW_PERSISTENT_STRIPED_databuffer/
