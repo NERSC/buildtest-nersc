@@ -30,3 +30,5 @@ buildspecs:
       iris project nstaff --csv
       iris project nstaff --users --format name,email,usage
 
+maintainers:
+  - "Shahzeb Siddiqui <@shahzebsiddiqui>"

@@ -31,3 +31,6 @@ buildspecs:
       mmlscluster
       mmlsmgr
       mmlsmount all
+
+maintainers:
+  - "Shahzeb Siddiqui <@shahzebsiddiqui>"

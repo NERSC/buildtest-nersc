@@ -13,3 +13,7 @@ buildspecs:
       assert os.getenv("NERSC_HOST")
       print(os.getenv("NERSC_HOST"))
       os.system("nersc_host")
+
+maintainers:
+  - "Shahzeb Siddiqui <@shahzebsiddiqui>"
+

@@ -10,3 +10,5 @@ buildspecs:
       jobstats -j
       jobstats -u root
 
+maintainers:
+  - "Shahzeb Siddiqui <@shahzebsiddiqui>"
