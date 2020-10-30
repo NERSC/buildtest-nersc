@@ -29,3 +29,6 @@ buildspecs:
     executor: local.bash
     tags: ["system", "tool", "slurm"]
     run: sqs -a -q regular,premium
+
+maintainers:
+  - "Shahzeb Siddiqui <@shahzebsiddiqui>"

@@ -24,3 +24,6 @@ buildspecs:
        stream: stdout
        exp: "^(search nersc.gov)$"
 
+maintainers:
+  - "Shahzeb Siddiqui <@shahzebsiddiqui>"
+

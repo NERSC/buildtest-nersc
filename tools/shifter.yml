@@ -14,3 +14,6 @@ buildspecs:
     tags: ["containers"]
     sbatch: [-N 1, -C haswell, --image=docker:ubuntu:latest]
     run: srun -n 32 shifter hostname
+
+maintainers:
+  - "Shahzeb Siddiqui <@shahzebsiddiqui>"

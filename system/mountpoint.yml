@@ -42,3 +42,6 @@ buildspecs:
       mountpoint /cvmfs/lz.opensciencegrid.org
       mountpoint /cvmfs/cms.cern.ch
       mountpoint /global/project/projectdirs
+
+maintainers:
+  - "Shahzeb Siddiqui <@shahzebsiddiqui>"

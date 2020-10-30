@@ -10,5 +10,6 @@ buildspecs:
       regex:
         stream: stdout
         exp: "^4.12.14-150.52-default$"
+
 maintainers:
-  - "@shahzebsiddiqui"
+  - "Shahzeb Siddiqui <@shahzebsiddiqui>"
