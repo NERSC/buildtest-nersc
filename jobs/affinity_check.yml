@@ -1,0 +1,23 @@
+version: "1.0"
+buildspecs:
+  check_mpi_intel_cori:
+    type: script
+    executor: slurm.debug
+    description: MPI Affinity Check
+    tags: [mpi, openmp]
+    batch:
+      nodecount: "1"
+      timelimit: "20:00"
+    sbatch: 
+      - "-C haswell"
+    run: |
+      srun -n 8 -c 8 --cpu-bind=cores check-mpi.intel.cori
+
+      export OMP_NUM_THREADS=4
+      export OMP_PLACES=threads
+      export OMP_PROC_BIND=true
+      srun -n 8 -c 8 --cpu-bind=cores check-hybrid.gnu.cori | sort -k 4
+
+      export OMP_PLACES=cores
+      export OMP_PROC_BIND=spread
+      srun -n 4 -c 16 --cpu-bind=cores check-hybrid.intel.cori |sort -k 4,6
