@@ -1,0 +1,56 @@
+version: "1.0"
+buildspecs:
+  max_nodes_regular_knl:
+    type: script
+    description: regular queue has max node limit of 9489 on KNL partition
+    executor: local.sh
+    tags: [jobs, fail]
+    run: sbatch -q shared -t 10 -N 9490 -C knl --wrap="hostname"
+    status:
+      regex:
+        stream: stderr
+        exp: "(Batch job submission failed)"
+
+  max_nodes_debug_knl:
+    type: script
+    description: max node limit for debug queue is 512 on KNL partition
+    executor: local.sh
+    tags: [jobs, fail]
+    run: sbatch -q debug -t 10 -N 513 -C knl --wrap="hostname"
+    status:
+      regex:
+        stream: stderr
+        exp: "(Batch job submission failed)"
+
+  max_nodes_premium_knl:
+    type: script
+    description: max node limit for premium queue is 9489 on KNL partition
+    executor: local.sh
+    tags: [jobs, fail]
+    run: sbatch -q premium -t 10 -N 9490 -C knl  --wrap="hostname"
+    status:
+      regex:
+        stream: stderr
+        exp: "(Batch job submission failed)"
+
+  max_nodes_low_knl:
+    type: script
+    description: max node limit for low queue is 9489 on KNL partition
+    executor: local.sh
+    tags: [jobs, fail]
+    run: sbatch -q xfer -t 10 -N 9490 -C knl  --wrap="hostname"
+    status:
+      regex:
+        stream: stderr
+        exp: "(Batch job submission failed)"
+
+  max_nodes_flex_knl:
+    type: script
+    description: max node limit for flex queue is 256 on KNL partition
+    executor: local.sh
+    tags: [jobs, fail]
+    run: sbatch -q bigmem -t 10 -N 257 -C KNL  --wrap="hostname"
+    status:
+      regex:
+        stream: stderr
+        exp: "(Batch job submission failed)"

@@ -1,0 +1,31 @@
+version: "1.0"
+buildspecs:
+  debug_submit_limit_test:
+    type: script
+    executor: local.bash
+    description: Test Submit Limit for Debug Queue beyond 5 jobs. 
+    tags: [jobs,fail]
+    run: |
+      for ((i=1; i<= 6; i++));
+      do
+        sbatch -N 1 -q debug -t 10 -C knl --wrap="sleep 30"
+      done
+    status:
+      regex:
+        stream: stderr
+        exp: "sbatch: error: QOSMaxSubmitJobPerUserLimit"
+
+  premium_submit_limit_test:
+    type: script
+    executor: local.bash
+    description: Test Submit Limit for Premium Queue beyond 5 jobs. 
+    tags: [jobs,fail]
+    run: |
+      for ((i=1; i<= 6; i++));
+      do
+        sbatch -N 1 -q premium -t 10 -C knl --wrap="sleep 30"
+      done
+    status:
+      regex:
+        stream: stderr
+        exp: "sbatch: error: QOSMaxSubmitJobPerUserLimit"
