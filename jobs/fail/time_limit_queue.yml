@@ -1,0 +1,72 @@
+version: "1.0"
+buildspecs:
+
+  time_limit_debug:
+    type: script
+    description: Test max time limit for debug queue is 30min
+    executor: local.sh
+    tags: [jobs, fail]
+    run: |
+      jobid=$(sbatch --parsable -N 1 -t 30 -q debug -C knl --wrap="hostname")
+      if [ ! -n $jobid ]; then
+          exit 1
+      fi 
+      sbatch -N 1 -t 31 -q debug -C knl --wrap="hostname"      
+    status:
+      regex: 
+        stream: stderr
+        exp: "(Batch job submission failed)"      
+
+
+  time_limit_regular:
+    type: script
+    description: Test max time limit for regular queue is 48hrs
+    executor: local.sh
+    tags: [jobs, fail]
+    run: |
+      jobid=$(sbatch --parsable -N 1 -t "48:00:00" -q regular -C knl --wrap="hostname")
+      if [ ! -n $jobid ]; then
+          exit 1
+      fi
+
+      sbatch -N 1 -t "48:00:01" -q regular -C knl --wrap="hostname"      
+    status:
+      regex: 
+        stream: stderr
+        exp: "(Batch job submission failed)"
+
+
+  time_limit_premium:
+    type: script
+    description: Test max time limit for premium queue is 48hrs
+    executor: local.sh
+    tags: [jobs, fail]
+    run: |
+ 
+      jobid=$(sbatch --parsable -N 1 -t "48:00:00" -q premium -C knl --wrap="hostname")
+      if [ ! -n $jobid ]; then
+          exit 1
+      fi
+
+      sbatch -N 1 -t "48:00:01" -q premium -C knl --wrap="hostname"      
+    status:
+      regex: 
+        stream: stderr
+        exp: "(Batch job submission failed)"
+
+  time_limit_bigmem:
+    type: script
+    description: Test max time limit for bigmem queue is 72hrs
+    executor: local.sh
+    tags: [jobs, fail]
+    run: |
+      jobid=$(sbatch --parsable -N 1 -t "72:00:00" -q bigmem --clusters=escori -C haswell --wrap="hostname")
+      if [ ! -n $jobid ]; then
+          exit 1
+      fi
+
+      sbatch -N 1 -t "72:00:01" -q bigmem --clusters=escori -C haswell --wrap="hostname"      
+    status:
+      regex: 
+        stream: stderr
+        exp: "(Batch job submission failed)"

@@ -1,0 +1,68 @@
+version: "1.0"
+buildspecs:
+
+  max_nodes_shared_regular:
+    type: script
+    description: shared queue has max node limit of 1932 on Haswell partition
+    executor: local.sh
+    tags: [jobs, fail]
+    run: sbatch -q shared -t 10 -N 1933 -C haswell --wrap="hostname"
+    status:
+      regex:
+        stream: stderr
+        exp: "(Batch job submission failed)"
+
+  max_nodes_shared_haswell:
+    type: script
+    description: shared queue has max node limit of 0.5 on Haswell partition
+    executor: local.sh
+    tags: [jobs, fail]
+    run: sbatch -q shared -t 10 -N 2 -C haswell --wrap="hostname"
+    status:
+      regex:
+        stream: stderr
+        exp: "(Batch job submission failed)"
+
+  max_nodes_debug_haswell:
+    type: script
+    description: max node limit for debug queue is 64 on Haswell partition
+    executor: local.sh
+    tags: [jobs, fail]
+    run: sbatch -q debug -t 10 -N 65 -C haswell --wrap="hostname"
+    status:
+      regex:
+        stream: stderr
+        exp: "(Batch job submission failed)"
+
+  max_nodes_premium_haswell:
+    type: script
+    description: max node limit for premium queue is 1772 on Haswell partition
+    executor: local.sh
+    tags: [jobs, fail]
+    run: sbatch -q premium -t 10 -N 1773 -C haswell  --wrap="hostname"
+    status:
+      regex:
+        stream: stderr
+        exp: "(Batch job submission failed)"
+
+  max_nodes_xfer_haswell:
+    type: script
+    description: max node limit for xfer queue is 1 on Haswell partition
+    executor: local.sh
+    tags: [jobs, fail]
+    run: sbatch -q xfer -t 10 -N 2 -M escori -C haswell  --wrap="hostname"
+    status:
+      regex:
+        stream: stderr
+        exp: "(Batch job submission failed)"
+
+  max_nodes_bigmem_haswell:
+    type: script
+    description: max node limit for bigmem queue is 1 on Haswell partition
+    executor: local.sh
+    tags: [jobs, fail]
+    run: sbatch -q bigmem -t 10 -N 2 -M escori -C haswell  --wrap="hostname"
+    status:
+      regex:
+        stream: stderr
+        exp: "(Batch job submission failed)"
