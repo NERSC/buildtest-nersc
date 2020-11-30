@@ -1,4 +1,4 @@
-editor: vi
+load_default_buildspecs: False
 buildspec_roots:
 - $HOME/buildtest-cori
 moduletool: environment-modules
@@ -24,13 +24,11 @@ executors:
     e4s:
       description: E4S testsuite locally
       shell: bash
-      before_script: 'source /global/common/software/spackecp/luke-wyatt-testing/spack/share/spack/setup-env.sh
-
+      before_script: |
+        source /global/common/software/spackecp/e4s-20.10/spack/share/spack/setup-env.sh
         cd $SCRATCH/testsuite
-
         source setup.sh
 
-        '
   slurm:
     debug:
       description: jobs for debug qos
@@ -68,15 +66,11 @@ executors:
       - -C knl
       - -t 10
       - -n 4
-      before_script: '
-
-        source /global/common/software/spackecp/luke-wyatt-testing/spack/share/spack/setup-env.sh
-
+      before_script: |
+        source /global/common/software/spackecp/e4s-20.10/spack/share/spack/setup-env.sh
         cd $SCRATCH/testsuite
-
         source setup.sh
 
-        '
 compilers:
   find:
     gcc:
