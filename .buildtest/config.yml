@@ -1,6 +1,4 @@
 load_default_buildspecs: False
-buildspec_roots:
-- $HOME/buildtest-cori
 moduletool: environment-modules
 executors:
   defaults:
