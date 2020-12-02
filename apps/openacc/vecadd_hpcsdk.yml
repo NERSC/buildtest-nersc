@@ -7,8 +7,7 @@ buildspecs:
     sbatch: ["-G 1", "-t 5", "-N 1"]
     tags: ["gpu", "openacc"]
     module:
-      - "module load hpcsdk"
-      - "module load cuda"
+      load: [hpcsdk, cuda]
     build:
       name: pgi
       cc: nvc
