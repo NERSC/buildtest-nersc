@@ -5,7 +5,7 @@ buildspecs:
     executor: slurm.debug
     description: Hybrid MPI+OpenMP Hello World in Fortran 
     module:
-      - "module swap intel intel/19.0.3.199"
+      load: [intel/19.0.3.199]
     sbatch:
       - "-C knl"
       - "-N 1"

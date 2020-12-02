@@ -28,33 +28,93 @@ executors:
         source setup.sh
 
   slurm:
-    debug:
-      description: jobs for debug qos
+    haswell_debug:
       qos: debug
       cluster: cori
-      max_pend_time: 500
-    shared:
-      description: jobs for shared qos
+      options: ["-C haswell"]
+      description: debug queue on Haswell partition
+
+
+    haswell_shared:
       qos: shared
-      max_pend_time: 10
+      cluster: cori
+      options: ["-C haswell"]
+      description: shared queue on Haswell partition
+
+    haswell_regular:
+      qos: normal
+      cluster: cori
+      options: ["-C haswell"]
+      description: normal queue on Haswell partition
+    
+    haswell_premium:
+      qos: premium
+      cluster: cori
+      options: ["-C haswell"]
+      description: premium queue on Haswell partition
+
+    haswell_flex:
+      description: overrun queue on KNL partition
+      qos: overrun
+      cluster: cori
+      options: ["-C knl", "--time-min=01:00:00"]
+
     bigmem:
       description: bigmem jobs
       cluster: escori
       qos: bigmem
       max_pend_time: 300
+
     xfer:
       description: xfer qos jobs
       qos: xfer
       cluster: escori
+      options: ["-C haswell"]
+
+    knl_debug: 
+      qos: debug
+      cluster: cori
+      options: ["-C knl,quad,cache"]
+      description: debug queue on KNL partition
+
+
+    knl_regular: 
+      qos: normal
+      cluster: cori
+      options: ["-C knl,quad,cache"]
+      description: normal queue on KNL partition
+
+    knl_premium: 
+      qos: premium
+      cluster: cori
+      options: ["-C knl,quad,cache"]
+      description: premium queue on KNL partition
+
+    knl_low: 
+      qos: low
+      cluster: cori
+      options: ["-C knl,quad,cache"]
+      description: low queue on KNL partition
+
+    knl_flex:
+      description: flex queue on KNL partition
+      qos: flex
+      cluster: cori
+      options: ["-C knl", "--time-min=01:00:00"]
+
+    knl_overrun:
+      description: overrun queue on KNL partition
+      qos: overrun
+      cluster: cori
+      options: ["-C knl", "--time-min=01:00:00"]
+
     gpu:
       description: submit jobs to GPU partition
       options:
       - -C gpu
       cluster: escori
       max_pend_time: 300
-    premium:
-      description: submit jobs to premium queue
-      qos: premium
+
     e4s:
       description: E4S runner
       cluster: cori
