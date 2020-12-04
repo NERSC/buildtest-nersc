@@ -1,0 +1,12 @@
+version: "1.0"
+buildspecs:
+  e4s_flit:
+    type: script
+    executor: slurm.e4s
+    description: Run flit test from E4S Testsuite
+    tags: [e4s]
+    run: $SCRATCH/testsuite/test-all.sh $SCRATCH/testsuite/validation_tests/flit
+    status:
+      regex:
+        stream: stderr
+        exp: "Success"

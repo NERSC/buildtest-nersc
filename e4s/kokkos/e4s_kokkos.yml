@@ -1,0 +1,23 @@
+version: "1.0"
+buildspecs:
+  e4s_kokkos:
+    type: script
+    executor: slurm.e4s
+    description: Run kokkos test from E4S Testsuite
+    tags: [e4s]
+    run: $SCRATCH/testsuite/test-all.sh $SCRATCH/testsuite/validation_tests/kokkos
+    status:
+      regex:
+        stream: stderr
+        exp: "Success"
+
+    e4s_kokkoskernels:
+      type: script
+      executor: slurm.e4s
+      description: Run kokkos kernels test from E4S Testsuite
+      tags: [e4s]
+      run: $SCRATCH/testsuite/test-all.sh $SCRATCH/testsuite/validation_tests/kokkos-kernels
+      status:
+        regex:
+          stream: stderr
+          exp: "Success"
