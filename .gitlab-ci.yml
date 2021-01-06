@@ -12,6 +12,7 @@ validate_tests:
   script:
     - whoami && ls -l 
     - echo $CI_PIPELINE_SOURCE
+    - echo $CI_PROJECT_DIR
     - module load python
     - cd $CI_PROJECT_DIR
     - git clone -b devel https://github.com/buildtesters/buildtest    
