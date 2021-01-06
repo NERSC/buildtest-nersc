@@ -6,11 +6,14 @@ validate_tests:
   tags:
     - cori-login
   rules:
-    - if: '$CI_PIPELINE_SOURCE == "web" || $CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_PIPELINE_SOURCE == "web" || $CI_PIPELINE_SOURCE == "merge_request_event" || $CI_PIPELINE_SOURCE == "external_merge_request_event" || $CI_PIPELINE_SOURCE == "push"'
+    - if: '$CI_COMMIT_BRANCH == "devel"'
       when: always
   script:
     - whoami && ls -l 
+    - echo $CI_PIPELINE_SOURCE
     - module load python
+    - cd $CI_PROJECT_DIR
     - git clone -b devel https://github.com/buildtesters/buildtest    
     - cd buildtest 
     - . setup.sh
