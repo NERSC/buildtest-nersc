@@ -1,0 +1,21 @@
+version: "1.0"
+buildspecs:
+  hello_fortran:
+    type: compiler
+    executor: local.bash
+    description: hello world program in Fortran compiled with gnu compiler
+    tags: [compile]
+    source: src/hello.f90
+    compilers:
+      name: ["^(gcc/)(6.1.0|6.3.0)$", "^(pgi/)(20.1|20.4)$"]
+      defaults:
+        gcc:
+          fflags: -Wall
+        pgi:
+          fflags: -m64
+      config:
+        pgi/20.1:
+          fc: pgf90
+
+maintainers:
+  - "Shahzeb Siddiqui <@shahzebmsiddiqui>"

@@ -3,15 +3,20 @@ buildspecs:
   laplace_mpi:
     type: compiler
     description: Laplace MPI code in C
-    sbatch: ["-C knl", "-N 1", "-n 4"]
-    executor: slurm.debug
+    executor: slurm.knl_debug
     tags: ["mpi"]
-    module:
-      load: [PrgEnv-intel, intel/19.1.2.254]
-    build:
-      name: intel
-      source: src/laplace_mpi.c
-      cflags: -O3
-    run:
-      launcher: srun -n 4
-
+    source: src/laplace_mpi.c
+    compilers:
+      name: ["^(intel/19.1.2.254)$"]
+      default:
+        all:
+          sbatch: ["-N 1", "-n 4"]
+          run: srun -n 4 $_EXEC
+        intel:
+          cc: mpiicc
+          cflags: -O3
+      config:
+        intel/19.1.2.254:
+          module:
+            load: [impi/2020]
+            swap: [intel, intel/19.1.2.254]

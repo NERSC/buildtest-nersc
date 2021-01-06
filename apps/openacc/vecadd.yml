@@ -4,18 +4,20 @@ buildspecs:
     type: compiler
     description: Vector Addition example with GNU compiler
     executor: slurm.gpu
-    sbatch: ["-G 1", "-t 5", "-N 1"]
     tags: ["gpu", "openacc","jobs"]
-    module:
-      load: [cuda, gcc/8.1.1-openacc-gcc-8-branch-20190215]
-    build:
-      name: gnu
-      source: src/vecAdd.c
-      cflags: -fopenacc
-      ldflags: -lm
-    run:
-      launcher: srun
-    status:
-      slurm_job_state: COMPLETED
+    source: src/vecAdd.c
+    compilers:
+      name: ["^(gcc/8.1.1-openacc-gcc-8-branch-20190215)$"]
+      default:
+        gcc:
+          sbatch: ["-G 1", "-t 5", "-N 1"]
+          run: srun $_EXEC
+      config:
+        gcc/8.1.1-openacc-gcc-8-branch-20190215:
+          cflags: -fopenacc
+          ldflags: -lm
+          module:
+            load: [cuda, gcc/8.1.1-openacc-gcc-8-branch-20190215]
+
 maintainers:
   - "@shahzebsiddiqui"
