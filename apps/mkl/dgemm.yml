@@ -5,22 +5,22 @@ buildspecs:
     type: compiler
     description: dgemm test with intel
     tags: [mkl]
-    build:
-      name: cray
-      cflags: -mkl
-      source: src/mkl_dgemm.c
-    module:
-      - "module load intel"
+    source: src/mkl_dgemm.c
+    compilers: 
+      name: ["^(intel)"]
+      default:
+        intel:
+          cflags: -mkl
+
 
   dgemm_test2:
     executor: local.bash
     type: compiler
     description: dgemm test with gcc
     tags: [mkl]
-    build:
-      name: cray
-      cflags: -mkl
-      source: src/mkl_dgemm.c
-    module:
-      - "module load gcc"
-
+    source: src/mkl_dgemm.c
+    compilers:
+      name: ["^(intel)"]
+      default:
+        intel:
+          cflags: -mkl
