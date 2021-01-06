@@ -4,16 +4,18 @@ stages:
 validate_tests:
   stage: build
   tags:
-    - cori06
-  
+    - cori-login
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "web" || $CI_PIPELINE_SOURCE == "merge_request_event"'
+      when: always
   script:
-    - pwd
+    - whoami && ls -l 
     - module load python
-    - git clone -b devel https://github.com/buildtesters/buildtest
-    - pipenv shell
-    - python setup.py install
+    - git clone -b devel https://github.com/buildtesters/buildtest    
+    - cd buildtest 
+    - . setup.sh
     - buildtest --help
-    - buildtest repo list
-    - buildtest repo add https://github.com/buildtesters/buildtest-cori
-    - buildtest buildspec find
-  
+    - cd $CI_PROJECT_DIR/buildtest-cori
+    - cp .buildtest/config.yml $HOME/.buildtest/config.yml
+    - buildtest config validate    
+    - buildtest buildspec find --rebuild --root $CI_PROJET_DIR/buildtest-cori
