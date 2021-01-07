@@ -21,6 +21,7 @@ validate_tests:
     - . setup.sh
     - buildtest --help
     - cd $CI_PROJECT_DIR/
+    - mkdir -p $HOME/.buildtest
     - cp .buildtest/config.yml $HOME/.buildtest/config.yml
     - buildtest config validate    
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR
