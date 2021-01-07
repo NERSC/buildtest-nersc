@@ -14,8 +14,8 @@ validate_tests:
     - echo $CI_PIPELINE_SOURCE
     - echo $CI_PROJECT_DIR
     - module load python
-    - cd $CI_PROJECT_DIR
     - cd /tmp
+    - rm -rf buildtest
     - git clone -b devel https://github.com/buildtesters/buildtest    
     - cd buildtest 
     - . setup.sh
@@ -25,3 +25,4 @@ validate_tests:
     - cp .buildtest/config.yml $HOME/.buildtest/config.yml
     - buildtest config validate    
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR
+    - buildtest build --tags network --tags system
