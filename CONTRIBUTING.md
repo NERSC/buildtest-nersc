@@ -162,9 +162,10 @@ git checkout <feature-branch>
 git merge devel
 ```
 
-!!! note
+!!! note:
 
-   Running above command will sync your feature branch with ``devel`` but you may have some file conflicts depending on files changed during PR. You will need to resolve them manually before pushing your changes
+   Running above command will sync your feature branch with ``devel`` but you may have some file conflicts depending on files changed during PR.
+   You will need to resolve them manually before pushing your changes
 
 Instead of merge from ``devel`` you can rebase your commits interactively when syncing with ``devel``. This can be done by running:
 
