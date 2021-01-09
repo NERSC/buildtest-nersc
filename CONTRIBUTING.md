@@ -133,7 +133,7 @@ Often times, you may start a feature branch and your PR get's out of sync with
 ``devel`` branch which may lead to conflicts, this is a result of merging incoming
 PRs that may cause upstream `HEAD` to change over time which can cause merge conflicts.
 This may be confusing at first, but don't worry we are here to help. For more details
-about merge conflicts click `here <https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/about-merge-conflicts>`_.
+about merge conflicts click [here](https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/about-merge-conflicts).
 
 Syncing your feature branch with devel is out of scope for this documentation,
 however you can use the steps below as a *guide* when you run into this issue.
@@ -162,7 +162,8 @@ git checkout <feature-branch>
 git merge devel
 ```
 
-!!! note:
+!!! note
+
    Running above command will sync your feature branch with ``devel`` but you may have some file conflicts depending on files changed during PR. You will need to resolve them manually before pushing your changes
 
 Instead of merge from ``devel`` you can rebase your commits interactively when syncing with ``devel``. This can be done by running:
