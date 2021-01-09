@@ -4,16 +4,30 @@ stages:
 validate_tests:
   stage: build
   tags:
-    - cori06
-  
+    - cori-login
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "web" || $CI_PIPELINE_SOURCE == "external_pull_request_event" || $CI_PIPELINE_SOURCE == "push"'
+      when: manual
   script:
-    - pwd
+    - whoami && ls -l 
+    - env | grep CI_*
+    - echo $CI_MERGE_REQUEST_TARGET_BRANCH_NAME
+    - echo $CI_PIPELINE_SOURCE
+    - echo $CI_PROJECT_DIR
+    - echo $CI_COMMIT_BRANCH
     - module load python
-    - git clone -b devel https://github.com/buildtesters/buildtest
-    - pipenv shell
-    - python setup.py install
+    - conda create -n buildtest python=3.8
+    - source activate buildtest
+    - cd /tmp
+    - rm -rf buildtest
+    - git clone -b devel https://github.com/buildtesters/buildtest    
+    - cd buildtest 
+    - . setup.sh
     - buildtest --help
-    - buildtest repo list
-    - buildtest repo add https://github.com/buildtesters/buildtest-cori
-    - buildtest buildspec find
-  
+    - mkdir -p $HOME/.buildtest
+    - cd $CI_PROJECT_DIR/
+    - cp .buildtest/config.yml $HOME/.buildtest/config.yml
+    - buildtest config validate    
+    - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR
+    - source deactivate 
+    - conda env remove -n buildtest -y
