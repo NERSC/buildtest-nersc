@@ -6,10 +6,11 @@ validate_tests:
   tags:
     - cori-login
   rules:
-    - if: '$CI_PIPELINE_SOURCE == "web" || $CI_PIPELINE_SOURCE == "external_merge_request_event" || $CI_PIPELINE_SOURCE == "push" ||  $CI_COMMIT_BRANCH == "devel"'
+    - if: '($CI_PIPELINE_SOURCE == "web" || $CI_PIPELINE_SOURCE == "external_merge_request_event" || $CI_PIPELINE_SOURCE == "push") && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "devel"'
       when: manual
   script:
     - whoami && ls -l 
+    - env | grep CI_*
     - echo $CI_PIPELINE_SOURCE
     - echo $CI_PROJECT_DIR
     - echo $CI_COMMIT_BRANCH
