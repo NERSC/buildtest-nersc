@@ -6,23 +6,26 @@ validate_tests:
   tags:
     - cori-login
   rules:
-    - if: '$CI_PIPELINE_SOURCE == "web" || $CI_PIPELINE_SOURCE == "merge_request_event" || $CI_PIPELINE_SOURCE == "external_merge_request_event" || $CI_PIPELINE_SOURCE == "push"'
-    - if: '$CI_COMMIT_BRANCH == "devel"'
-      when: always
+    - if: '$CI_PIPELINE_SOURCE == "web" || $CI_PIPELINE_SOURCE == "external_merge_request_event" || $CI_PIPELINE_SOURCE == "push" ||  '$CI_COMMIT_BRANCH == "devel"''
+      when: manual
   script:
     - whoami && ls -l 
     - echo $CI_PIPELINE_SOURCE
     - echo $CI_PROJECT_DIR
+    - echo $CI_COMMIT_BRANCH
     - module load python
+    - conda create -n buildtest python=3.8
+    - source activate buildtest
     - cd /tmp
     - rm -rf buildtest
     - git clone -b devel https://github.com/buildtesters/buildtest    
     - cd buildtest 
     - . setup.sh
     - buildtest --help
-    - cd $CI_PROJECT_DIR/
     - mkdir -p $HOME/.buildtest
+    - cd $CI_PROJECT_DIR/
     - cp .buildtest/config.yml $HOME/.buildtest/config.yml
     - buildtest config validate    
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR
-    - buildtest build --tags network --tags system
+    - source deactivate 
+    - conda env remove -n buildtest -y
