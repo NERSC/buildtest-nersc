@@ -6,7 +6,7 @@ validate_tests:
   tags:
     - cori-login
   rules:
-    - if: ($CI_PIPELINE_SOURCE == "web" || $CI_PIPELINE_SOURCE == "external_merge_request_event" || $CI_PIPELINE_SOURCE == "push") && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "devel"
+    - if: ($CI_PIPELINE_SOURCE == "web" || $CI_PIPELINE_SOURCE == "external_pull_request_event" || $CI_PIPELINE_SOURCE == "push") && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "devel"
       when: manual
   script:
     - whoami && ls -l 
