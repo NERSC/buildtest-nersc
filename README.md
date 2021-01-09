@@ -307,7 +307,7 @@ tests and see all the edge cases.
 
 Alternately you can see all published schemas and examples on https://buildtest.readthedocs.io/en/devel/buildspecs/schema_examples.html
 
-If you want to contribute your tests, please send a pull request to `devel` branch.
+If you want to contribute your tests, please send [CONTRIBUTING.md](https://github.com/buildtesters/buildtest-cori/blob/master/CONTRIBUTING.md)
 
 
 # References
