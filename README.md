@@ -1,6 +1,6 @@
 # buildtest-cori
 
-This repo is [Cori](https://docs.nersc.gov/) Testsuite with buildtest. 
+This repository is [Cori](https://docs.nersc.gov/) Testsuite with buildtest. A mirror of this repository is located at https://gitlab.nersc.gov/nersc/consulting/buildtest-cori used for running CI checks. 
 
 
 
@@ -29,11 +29,11 @@ buildtest config view
 First time around you should discover all buildspecs this can be done via ``buildtest buildspec find``. Please consider checking 
 [**buildspecs_roots**](https://buildtest.readthedocs.io/en/devel/configuring_buildtest.html#buildspec-roots) in your configuration
 to root of buildtest-cori repo so you can discover Cori test. If you are able to get this far you should see a lot more tests.
-The ``--clear`` will force rebuild your buildspec cache.
+The ``--rebuild`` will force rebuild your buildspec cache.
 
 ```
 
-(buildtest) siddiq90@cori06:~/buildtest-cori/jobs> buildtest buildspec find --clear
+(buildtest) siddiq90@cori06:~/buildtest-cori/jobs> buildtest buildspec find --rebuild
 Clearing cache file: /global/u1/s/siddiq90/buildtest/var/buildspec-cache.json
 Found 123 buildspecs
 Validated 15/123 buildspecs
@@ -107,14 +107,6 @@ you want to run multiple tests grouped in directory but exclude a few.
 
 ```
 buildtest build -b slurm -x slurm/sinfo.yml
-```
-
-If you find no buildspecs due to discovery (``-b``) and exclusion you can run into no buildspecs found, this 
-would happen if you do the inverse operation for example
-
-```
-buildtest build -b slurm -x slurm
-buildtest build -b slurm/sinfo.yml -x slurm/sinfo.yml
 ```
 
 buildtest can run tests via tags which can be useful when grouping tests, to see a list of available tags you 
@@ -315,8 +307,8 @@ tests and see all the edge cases.
 
 Alternately you can see all published schemas and examples on https://buildtest.readthedocs.io/en/devel/buildspecs/schema_examples.html
 
-Check out the [contributing guide](https://buildtest.readthedocs.io/en/devel/contributing.html) for buildtest if you want to contribute back
-to framework
+If you want to contribute your tests, please send a pull request to `devel` branch.
+
 
 # References
 
@@ -324,6 +316,6 @@ to framework
 - buildtest schema docs: https://buildtesters.github.io/buildtest/
 - Getting Started: https://buildtest.readthedocs.io/en/devel/getting_started.html
 - Writing Buildspecs: https://buildtest.readthedocs.io/en/devel/writing_buildspecs.html
-
+- Contributing Guide: https://buildtest.readthedocs.io/en/devel/contributing.html
 
 
