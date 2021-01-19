@@ -4,6 +4,7 @@ buildspecs:
     type: script
     executor: local.python
     description: query slurm partitions and check if list match expected partitions
+    tags: [slurm]
     shell: python
     run: |
       import subprocess

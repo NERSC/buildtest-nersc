@@ -8,7 +8,7 @@ buildspecs:
       timelimit: "5"
       cpucount: "1"
     description: Create a burst buffer
-    tags: [jobs]
+    tags: [jobs, cray]
     BB: 
       - create_persistent name=databuffer capacity=10GB access_mode=striped type=scratch
     DW: 
