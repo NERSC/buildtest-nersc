@@ -30,6 +30,7 @@ buildspecs:
 
   sort_job_priority_partition:
     executor: local.bash
+    tags: [slurm]
     type: script
     description: Sort job priority on PENDING jobs in 'shared' partition
     run: squeue --sort=P,U -p shared -t PENDING -O JobID,Partition,UserName,State,NumTasks,Priority,Reason

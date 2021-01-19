@@ -3,7 +3,7 @@ buildspecs:
   burst_buffer_example:
     type: script
     executor: slurm.haswell_debug
-    tags: [datawarp, jobs]
+    tags: [cray, jobs]
     description: request 1GB burst buffer striped access and write content to buffer
     batch:
       nodecount: "1"
