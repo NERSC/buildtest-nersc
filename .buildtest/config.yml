@@ -22,11 +22,13 @@ executors:
     e4s:
       description: E4S testsuite locally
       shell: bash
-      before_script: |
-        source /global/common/software/spackecp/e4s-20.10/spack/share/spack/setup-env.sh
+      before_script: 'source /global/common/software/spackecp/e4s-20.10/spack/share/spack/setup-env.sh
+
         cd $SCRATCH/testsuite
+
         source setup.sh
 
+        '
   slurm:
     haswell_debug:
       qos: debug
@@ -136,6 +138,7 @@ compilers:
     cray: ^(PrgEnv-cray)
     intel: ^(intel|PrgEnv-intel)
     pgi: ^(pgi)
+    cuda: ^(cuda\/)
   compiler:
     gcc:
       builtin_gcc:
@@ -472,4 +475,69 @@ compilers:
         module:
           load:
           - pgi/20.4
+          purge: false
+    cuda:
+      cuda/9.2.148:
+        cc: nvcc
+        cxx: nvcc
+        fc: None
+        module:
+          load:
+          - cuda/9.2.148
+          purge: false
+      cuda/10.0.130:
+        cc: nvcc
+        cxx: nvcc
+        fc: None
+        module:
+          load:
+          - cuda/10.0.130
+          purge: false
+      cuda/10.1.105:
+        cc: nvcc
+        cxx: nvcc
+        fc: None
+        module:
+          load:
+          - cuda/10.1.105
+          purge: false
+      cuda/10.1.168:
+        cc: nvcc
+        cxx: nvcc
+        fc: None
+        module:
+          load:
+          - cuda/10.1.168
+          purge: false
+      cuda/10.1.243:
+        cc: nvcc
+        cxx: nvcc
+        fc: None
+        module:
+          load:
+          - cuda/10.1.243
+          purge: false
+      cuda/10.2.89:
+        cc: nvcc
+        cxx: nvcc
+        fc: None
+        module:
+          load:
+          - cuda/10.2.89
+          purge: false
+      cuda/11.0.2:
+        cc: nvcc
+        cxx: nvcc
+        fc: None
+        module:
+          load:
+          - cuda/11.0.2
+          purge: false
+      cuda/shifter:
+        cc: nvcc
+        cxx: nvcc
+        fc: None
+        module:
+          load:
+          - cuda/shifter
           purge: false
