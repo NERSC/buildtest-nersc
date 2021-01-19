@@ -5,9 +5,7 @@ buildspecs:
     executor: local.bash
     description: Get GPFS cluster name via mmlsconfig and check it is set to CORI.nersc.gov
     tags: ["gpfs"]
-    run: |
-      module load gpfs
-      mmlsconfig clusterName
+    run: /usr/lpp/mmfs/bin/mmlsconfig clusterName
     status:
       regex:
         stream: stdout
@@ -26,11 +24,10 @@ buildspecs:
     description: query gpfs details
     tags: ["gpfs"]
     run: |
-      module load gpfs
-      mmlsconfig
-      mmlscluster
-      mmlsmgr
-      mmlsmount all
+      /usr/lpp/mmfs/bin/mmlsconfig
+      /usr/lpp/mmfs/bin/mmlscluster
+      /usr/lpp/mmfs/bin/mmlsmgr
+      /usr/lpp/mmfs/bin/mmlsmount all
 
 maintainers:
   - "Shahzeb Siddiqui <@shahzebsiddiqui>"

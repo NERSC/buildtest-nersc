@@ -2,8 +2,8 @@ version: "1.0"
 buildspecs:
   wall_timeout:
     type: script
-    executor: slurm.debug
-    sbatch: [ "-t '00:00:05'", "-C haswell", "-n 1"]
+    executor: slurm.haswell_debug
+    sbatch: [ "-t '00:00:05'", "-n 1"]
     description: "This job simulates job timeout by sleeping for 300sec while requesting 5sec"
     tags: ["jobs", "fail"]
     run: sleep 300
