@@ -4,7 +4,7 @@ stages:
 validate_tests:
   stage: build
   tags:
-    - cori-login
+    - cori20-siddiq90
   rules:
     - if: '$CI_PIPELINE_SOURCE == "web" || $CI_PIPELINE_SOURCE == "external_pull_request_event" || $CI_PIPELINE_SOURCE == "push"'
       when: manual

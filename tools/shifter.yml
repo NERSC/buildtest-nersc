@@ -9,10 +9,10 @@ buildspecs:
 
   shifter_job:
     type: script
-    executor: slurm.debug
+    executor: slurm.haswell_debug
     description: Run shifter in a slurm job and run 32 instance of shifter image to echo hostname
     tags: ["containers"]
-    sbatch: [-N 1, -C haswell, --image=docker:ubuntu:latest]
+    sbatch: [-N 1, --image=docker:ubuntu:latest]
     run: srun -n 32 shifter hostname
 
 maintainers:

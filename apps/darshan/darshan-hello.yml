@@ -2,27 +2,30 @@ version: "1.0"
 buildspecs:
   darshan_cpi_example:
     type: compiler
-    executor: slurm.debug
+    executor: slurm.e4s
     description: "MPI test to calculate PI and use darshan-parser to view logfile"
     tags: [e4s]
-    batch:
-      timelimit: "10"
-      nodecount: "1"
-    sbatch: ["-C haswell"]
-    env:
-      DARSHAN_LOGFILE: "$HOME/mpi_c_basic_offset.darshan"
-    pre_build: |
-      source /global/common/software/spackecp/luke-wyatt-testing/spack/share/spack/setup-env.sh
-      spack load darshan-runtime
-      spack load darshan-util
-    build:
-      name: cray
-      source: cpi.c
-      ldflags: -ldarshan
-    run:
-      launcher: srun
-    post_run: |
-      darshan-parser $DARSHAN_LOGFILE
-      rm $DARSHAN_LOGFILE
+    source: cpi.c
+    compilers:
+      name: ["^(intel/19.1.2.254)$"]
+      default:
+        intel:
+          ldflags: -ldarshan
+          batch:
+            timelimit: "10"
+            nodecount: "1"
+          env: 
+            DARSHAN_LOGFILE: "$HOME/mpi_c_basic_offset.darshan"
+          pre_build: |
+            spack load darshan-runtime
+            spack load darshan-util
+          run: srun $_EXEC
+          post_run: |
+            darshan-parser $DARSHAN_LOGFILE
+            rm $DARSHAN_LOGFILE
+      config:
+        intel/19.1.2.254:
+          module:
+            swap: [intel, intel/19.1.2.254]
 maintainers:
   - "Shahzeb Siddiqui <@shahzebsiddiqui>"

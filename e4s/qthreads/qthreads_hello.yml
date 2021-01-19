@@ -5,26 +5,15 @@ buildspecs:
     executor: local.e4s
     description: Hello World example using qthreads
     tags: ["e4s"]
-    pre_build: spackLoadUnique qthreads     
-    build:
-      name: intel
-      source: hello_world_multi.c
-      cflags: -L${QTHREADS_ROOT}/lib -I${QTHREADS_ROOT}/include
-      ldflags: -lqthread
-
-  hello_world_qthreads_batch:
-    type: compiler
-    executor: slurm.e4s
-    description: Hello World example using qthreads
-    tags: ["e4s"]
-    sbatch: ["-N 1", "-t 10"]
-    pre_build: spackLoadUnique qthreads 
-    build:
-      name: intel
-      source: hello_world_multi.c
-      cflags: -L${QTHREADS_ROOT}/lib -I${QTHREADS_ROOT}/include
-    run:
-      launcher: srun
-
-  
-
+    source: hello_world_multi.c
+    compilers:
+      name: ["^(intel/19.1.2.254)$"]
+      default:
+        intel:
+          cflags: -L${QTHREADS_ROOT}/lib -I${QTHREADS_ROOT}/include
+          ldflags: -lqthread
+          pre_build: spackLoadUnique qthreads
+      config:
+        intel/19.1.2.254:
+          module:
+            swap: [intel, intel/19.1.2.254]
