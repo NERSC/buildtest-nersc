@@ -1,3 +1,19 @@
+.setup-buildtest: &setup-buildtest
+  - module load python
+  - conda create -n buildtest python=3.8
+  - source activate buildtest
+  - cd /tmp
+  - rm -rf buildtest
+  - git clone -b devel https://github.com/buildtesters/buildtest    
+  - cd buildtest 
+  - . setup.sh
+  - buildtest --help
+  - mkdir -p $HOME/.buildtest
+  
+.cleanup-buildtest: &cleanup-buildtest
+  - rm -rf /tmp/buildtest
+  - conda env remove -n buildtest
+  
 stages:
   - build
   - test
@@ -8,53 +24,40 @@ validate_tests:
   rules:
     - if: '$CI_PIPELINE_SOURCE == "web" || $CI_PIPELINE_SOURCE == "external_pull_request_event" || $CI_PIPELINE_SOURCE == "push"'
       when: manual
+  before_script:
+    - *setup-buildtest
   script:
     - whoami && ls -l 
     - env | grep CI_*
     - echo $CI_MERGE_REQUEST_TARGET_BRANCH_NAME
     - echo $CI_PIPELINE_SOURCE
     - echo $CI_PROJECT_DIR
-    - echo $CI_COMMIT_BRANCH
-    - module load python
-    - conda create -n buildtest python=3.8
-    - source activate buildtest
-    - cd /tmp
-    - rm -rf buildtest
-    - git clone -b devel https://github.com/buildtesters/buildtest    
-    - cd buildtest 
-    - . setup.sh
-    - buildtest --help
-    - mkdir -p $HOME/.buildtest
+    - echo $CI_COMMIT_BRANCH    
     - cd $CI_PROJECT_DIR/
     - cp .buildtest/config.yml $HOME/.buildtest/config.yml
     - buildtest config validate    
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR
     - source deactivate 
-    - conda env remove -n buildtest -y
+  
+  after_script:
+    - *cleanup-buildtest
 
 scheduled_system_check:
   stage: test
   only:
     - schedules
   tags: [cori20-siddiq90]
+  before_script:
+    - *setup-buildtest
   script:
     - whoami && ls -l 
     - git log --oneline -1
     - echo $CI_PIPELINE_SOURCE
-    - echo $CI_PROJECT_DIR
-    - module load python
-    - conda create -n buildtest python=3.8
-    - source activate buildtest
-    - cd /tmp
-    - rm -rf buildtest
-    - git clone -b devel https://github.com/buildtesters/buildtest    
-    - cd buildtest 
-    - . setup.sh
-    - mkdir -p $HOME/.buildtest
-    - cd $CI_PROJECT_DIR
+    - echo $CI_PROJECT_DIR   
     - cp .buildtest/config.yml $HOME/.buildtest/config.yml
     - buildtest config validate
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR
-    - buildtest build --tags slurm --tags configuration 
+    - buildtest build --tags slurm --tags configuration --tags system
     - source deactivate 
-    - conda env remote -n buildtest -y
+  after_script:
+    - *cleanup-buildtest
