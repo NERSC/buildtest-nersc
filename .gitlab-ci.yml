@@ -54,6 +54,7 @@ scheduled_system_check:
     - cd $CI_PROJECT_DIR
     - cp .buildtest/config.yml $HOME/.buildtest/config.yml
     - buildtest config validate
+    - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR
     - buildtest build --tags slurm --tags configuration 
     - source deactivate 
     - conda env remote -n buildtest -y
