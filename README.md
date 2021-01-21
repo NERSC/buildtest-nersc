@@ -1,17 +1,26 @@
 # buildtest-cori
 
-This repository is [Cori](https://docs.nersc.gov/) Testsuite with buildtest. A mirror of this repository is located at https://gitlab.nersc.gov/nersc/consulting/buildtest-cori used for running CI checks. 
+This repository is [Cori](https://docs.nersc.gov/) Testsuite with buildtest. A mirror of this repository is located at https://gitlab.nersc.gov/nersc/consulting/buildtest-cori used for running gitlab CI specified in file [.gitlab-ci.yml](https://github.com/buildtesters/buildtest-cori/blob/devel/.gitlab-ci.yml).
+
+
 
 
 
 ## Setup
 
-To get started clone this repo.
+To get started clone this repo on Cori as follows:
+
 ```
 git clone https://github.com/buildtesters/buildtest-cori
 ```
 
-Next copy your site configuration to the following location
+buildtest configuration file is read at `$HOME/.buildtest` if you don't have a directory please run
+
+```
+mkdir $HOME/.buildtest
+```
+
+Next, navigate to `buildtest-cori` directory and copy your site configuration to the following location
 
 ```
 cd buildtest-cori
@@ -26,64 +35,23 @@ buildtest config validate
 buildtest config view
 ```
 
-First time around you should discover all buildspecs this can be done via ``buildtest buildspec find``. Please consider checking 
-[**buildspecs_roots**](https://buildtest.readthedocs.io/en/devel/configuring_buildtest.html#buildspec-roots) in your configuration
-to root of buildtest-cori repo so you can discover Cori test. If you are able to get this far you should see a lot more tests.
-The ``--rebuild`` will force rebuild your buildspec cache.
+Please make sure you are using tip of `devel` with buildtest when writing tests. You should sync your local `devel` with upstream
+fork, for more details see https://buildtest.readthedocs.io/en/devel/contributing/setup.html
+
+First time around you should discover all buildspecs this can be done via ``buildtest buildspec find``.  The command below will find
+and validate all buildspecs in the buildtest-cori repo and load them in buildspec cache.
 
 ```
-
-(buildtest) siddiq90@cori06:~/buildtest-cori/jobs> buildtest buildspec find --rebuild
-Clearing cache file: /global/u1/s/siddiq90/buildtest/var/buildspec-cache.json
-Found 123 buildspecs
-Validated 15/123 buildspecs
-Validated 20/123 buildspecs
-Validated 25/123 buildspecs
-Validated 30/123 buildspecs
-Validated 35/123 buildspecs
-Validated 40/123 buildspecs
-Validated 45/123 buildspecs
-Validated 50/123 buildspecs
-Validated 55/123 buildspecs
-Validated 60/123 buildspecs
-Validated 65/123 buildspecs
-Validated 70/123 buildspecs
-Validated 75/123 buildspecs
-Validated 80/123 buildspecs
-Validated 85/123 buildspecs
-Validated 90/123 buildspecs
-Validated 95/123 buildspecs
-Validated 100/123 buildspecs
-Validated 105/123 buildspecs
-Validated 110/123 buildspecs
-Validated 115/123 buildspecs
-Validated 120/123 buildspecs
-Validated 123/123 buildspecs
-
-Detected 4 invalid buildspecs 
-
-Writing invalid buildspecs to file: /global/u1/s/siddiq90/buildtest/var/buildspec.error 
-
-
-
-+---------------------------------+----------+---------------+------------------------------------------------------+----------------------------------------------------------------------------------+
-| Name                            | Type     | Executor      | Tags                                                 | Description                                                                      |
-+=================================+==========+===============+======================================================+==================================================================================+
-| csh_shell                       | script   | local.csh     | ['tutorials']                                        | csh shell example                                                                |
-+---------------------------------+----------+---------------+------------------------------------------------------+----------------------------------------------------------------------------------+
-| python_hello                    | script   | local.bash    | python                                               | Hello World python                                                               |
-+---------------------------------+----------+---------------+------------------------------------------------------+----------------------------------------------------------------------------------+
-| selinux_disable                 | script   | local.bash    | ['tutorials']                                        | Check if SELinux is Disabled                                                     |
-+---------------------------------+----------+---------------+------------------------------------------------------+----------------------------------------------------------------------------------+
-| systemd_default_target          | script   | local.bash    | ['tutorials']                                        | check if default target is multi-user.target                                     |
-+---------------------------------+----------+---------------+------------------------------------------------------+----------------------------------------------------------------------------------+
-| circle_area                     | script   | local.python  | ['tutorials', 'python']                              | Calculate circle of area given a radius                                          |
-+---------------------------------+----------+---------------+------------------------------------------------------+----------------------------------------------------------------------------------+
-| hello_world                     | script   | local.bash    | tutorials                                            | hello world example                                                              |
-+---------------------------------+----------+---------------+------------------------------------------------------+--------------------------------------------
-
-...
+$ buildtest buildspec find --root /path/to/buildtest-cori
 ```
+
+The [**buildspecs_roots**](https://buildtest.readthedocs.io/en/devel/configuring_buildtest.html#buildspec-roots) property can be used to
+define location where to search for buildspecs, this property is ommitted since you may clone this in arbitrary location. The ``--root`` option
+is equivalent to specifying list of directories in `buildspecs_root` property defined in configuration file.
+
+The buildspecs are loaded in buildspec cache file (JSON) that is used by `buildtest buildspec find` for querying cache. Subsequent runs will
+read from cache.  For more details see [buildspec interface](https://buildtest.readthedocs.io/en/devel/getting_started.html#buildspecs-interface)
+
 
 # Building Tests
 
@@ -110,7 +78,7 @@ buildtest build -b slurm -x slurm/sinfo.yml
 ```
 
 buildtest can run tests via tags which can be useful when grouping tests, to see a list of available tags you 
-can run the following
+can run the following:
 
 ```
 $ buildtest buildspec find --tags
