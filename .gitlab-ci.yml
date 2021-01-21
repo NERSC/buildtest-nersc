@@ -54,6 +54,7 @@ scheduled_system_check:
     - git log --oneline -1
     - echo $CI_PIPELINE_SOURCE
     - echo $CI_PROJECT_DIR   
+    - cd $CI_PROJECT_DIR
     - cp .buildtest/config.yml $HOME/.buildtest/config.yml
     - buildtest config validate
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR
