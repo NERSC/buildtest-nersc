@@ -2,7 +2,7 @@
   - module load python
   - conda create -n buildtest python=3.8
   - source activate buildtest
-  - cd /tmp
+  - cd $SCRATCH
   - rm -rf buildtest
   - git clone -b devel https://github.com/buildtesters/buildtest    
   - cd buildtest 
@@ -11,7 +11,7 @@
   - mkdir -p $HOME/.buildtest
   
 .cleanup-buildtest: &cleanup-buildtest
-  - rm -rf /tmp/buildtest
+  - rm -rf $SCRATCH/buildtest
   - conda env remove -n buildtest
   
 stages:
