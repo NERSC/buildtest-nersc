@@ -45,7 +45,10 @@ validate_tests:
 scheduled_system_check:
   stage: test
   only:
-    - schedules
+    refs:
+      - schedules
+    variables:
+      - $DAILYCHECK == "True"
   tags: [cori20-siddiq90]
   before_script:
     - *setup-buildtest
@@ -58,7 +61,33 @@ scheduled_system_check:
     - cp .buildtest/config.yml $HOME/.buildtest/config.yml
     - buildtest config validate
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR
-    - buildtest build --tags slurm --tags configuration --tags system
+    - buildtest build --tags slurm --tags configuration --tags system -ft slurm -ft configuration -ft system
+    - buildtest report --filter state=FAIL
+    - source deactivate 
+  after_script:
+    - *cleanup-buildtest
+
+e4s_tests:
+  stage: test
+  only:
+    refs:
+      - schedules
+    variables:
+      - $E4S == "True"
+  tags: [cori20-siddiq90]
+  before_script:
+    - *setup-buildtest
+  script:
+    - whoami && ls -l 
+    - git log --oneline -1
+    - echo $CI_PIPELINE_SOURCE
+    - echo $CI_PROJECT_DIR   
+    - cd $CI_PROJECT_DIR
+    - cp .buildtest/config.yml $HOME/.buildtest/config.yml
+    - buildtest config validate
+    - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR
+    - buildtest build --tags e4s
+    - buildtest report --filter state=FAIL
     - source deactivate 
   after_script:
     - *cleanup-buildtest
