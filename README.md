@@ -53,7 +53,7 @@ The buildspecs are loaded in buildspec cache file (JSON) that is used by `buildt
 read from cache.  For more details see [buildspec interface](https://buildtest.readthedocs.io/en/devel/getting_started.html#buildspecs-interface)
 
 
-# Building Tests
+## Building Tests
 
 **Note: All tests are written in YAML using .yml extension**
    
@@ -221,7 +221,8 @@ For instance if you want to run all ``lustre`` tests you can use ``buildtest bui
 
 
 ```
-# Test Report 
+
+## Test Report 
 
 You can run ``buildtest report`` to get report of all tests. Here is a preview output
 
@@ -248,7 +249,34 @@ $ buildtest report
 +---------------------------------+----------+---------+--------------+---------------------+---------------------+------------+--------------------------------------+------------------------------------------------------------------------------+
 ```
 
-# Contributing Guide
+## CI Setup
+
+Tests are run on schedule basis with one schedule corresponding to one gitlab job in `.gitlab-ci.yml`. The scheduled pipelines are configured in 
+https://gitlab.nersc.gov/nersc/consulting/buildtest-cori/-/pipeline_schedules. Each schedule has a variable defined to control which pipeline 
+is run. In the `.gitlab-ci.yml` we make use of conditional rules using [only](https://docs.gitlab.com/ee/ci/yaml/#onlyexcept-basic). For example the daily
+system test has variable defined `DAILYCHECK` set to `True` and the gitlab job is defined as follows:
+
+
+```
+scheduled_system_check:
+  stage: test
+  only:
+    refs:
+      - schedules
+    variables:
+      - $DAILYCHECK == "True"
+```
+
+The scheduled jobs are run at different intervals (1x/day, 1x/week, etc...) at different times of day to avoid overloading the system. The gitlab jobs
+will run jobs based on tags, alternately some tests may be defined by running all tests in a directory (`buildtest build -b apps`). If you want to add a new
+scheduled job, please define a [New Schedule](https://gitlab.nersc.gov/nersc/consulting/buildtest-cori/-/pipeline_schedules/new) with an appropriate time. The `target branch` should be `devel` and define a unique variable used to distinguish scheduled jobs. Next, create a job in `.gitlab-ci.yml` that references the scheduled job based on the variable name.
+
+
+The `validate_tests` gitlab job is responsible for validating buildspecs, please review this job when contributing tests. The buildspec must pass validation
+in order for buildtest to build and run the test. 
+
+
+## Contributing Guide
 
 To contribute back you will want to make sure your buildspec is validated before you contribute back, this could be 
 done by running test manually ``buildtest build`` or see if buildspec is valid via ``buildtest buildspec find``. It 
@@ -278,7 +306,7 @@ Alternately you can see all published schemas and examples on https://buildtest.
 If you want to contribute your tests, please send [CONTRIBUTING.md](https://github.com/buildtesters/buildtest-cori/blob/master/CONTRIBUTING.md)
 
 
-# References
+## References
 
 - buildtest documentation: https://buildtest.readthedocs.io/en/devel/
 - buildtest schema docs: https://buildtesters.github.io/buildtest/
