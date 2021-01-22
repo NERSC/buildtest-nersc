@@ -66,14 +66,12 @@ git checkout devel
 git push origin devel
 ```
 
-Repeat this same operation with ``master`` branch if you want to sync with
-upstream repo
 
 Feature Branch
 ------------------
 
 Please make sure to create a new branch when adding and new feature. Do not
-push to ``master`` or ``devel`` branch on your fork or upstream.
+push to ``devel`` branch on your fork or upstream.
 
 Create a new branch from ``devel`` as follows:
 
@@ -92,25 +90,12 @@ git push origin featureX
 Once the branch is created in your fork, you can issue a Pull Request to ``devel``
 branch for ``upstream`` repo (https://github.com/buildtesters/buildtest-cori)
 
-General Tips
--------------
-
-1. It's good practice to link PR to an issue during commit message. Such as
-stating ``Fix #132`` for fixing issue 132.
-
-2. If you have an issue, ask your question in slack before reporting issue. If
-your issue is not resolved check any open issues for resolution before creating
-a new issue.
-
-3. There should not be any branches other than ``master`` or ``devel``. Feature
-branches should be pushed to your fork and not upstream repo. 
 
 Contributing Tests
 -------------------
 
-All incoming PRs for tests are pushed to ``devel`` branch which uses HEAD of devel branch from buildtest repo (https://github.com/buildtesters/buildtest).
-The ``master`` branch for buildtest-cori is using latest version of buildtest, whenever there is a new release on buildtest (https://github.com/buildtesters/buildtest/releases) the 
-``master`` branch for buildtest-cori can be synced with latest version. 
+All incoming PRs for tests are pushed to ``devel`` branch which uses HEAD of `devel` branch from buildtest repo (https://github.com/buildtesters/buildtest).
+
 
 Please make sure you sync your buildtest with `devel` when you contribute tests and buildspec. Please refer to buildtest [contributing guide](https://buildtest.readthedocs.io/en/devel/contributing.html) for more details.
 
@@ -119,11 +104,9 @@ Application tests are stored in [apps](https://github.com/buildtesters/buildtest
 appropriate directories or create a new directory. Tests from [E4S Testsuite](https://github.com/E4S-Project/testsuite) are located in [e4s](https://github.com/buildtesters/buildtest-cori/tree/devel/e4s) directory. This should be used for 
 testing E4S stack on Cori. 
 
-If you are adding a buildspec in your PR, please add a test description using ``description`` field. Please add test with appropriate tagname using ``tags`` field. For instance all
-e4s tests are set to ``e4s`` tag name. This allows all e4s tests to be run via ``buildtest build --tags e4s``. 
+If you are adding a buildspec in your PR, please add a test description using ``description`` field. Please add test with appropriate tagname using ``tags`` field. For instance all e4s tests are set to ``e4s`` tag name. This allows all e4s tests to be run via ``buildtest build --tags e4s``. 
 
-Please add yourself to ``maintainers`` field which helps contact individual when test fails. When you contribute your test and buildspec please test this locally. The buildspec must be 
-valid, this can be done by building the test via ``buildtest build -b /path/to/test.yml``. 
+Please add yourself to ``maintainers`` field which helps contact individual when test fails. When you contribute your test and buildspec please test this locally. The buildspec must be valid, this can be done by building the test via ``buildtest build -b /path/to/test.yml``. 
 
 
 Resolving PR Merge Conflicts
