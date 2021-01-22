@@ -275,6 +275,10 @@ scheduled job, please define a [New Schedule](https://gitlab.nersc.gov/nersc/con
 The `validate_tests` gitlab job is responsible for validating buildspecs, please review this job when contributing tests. The buildspec must pass validation
 in order for buildtest to build and run the test. 
 
+## Integrations
+
+buildtest-cori mirror repo has integration with Github and Slack. The integrations can be found at https://gitlab.nersc.gov/nersc/consulting/buildtest-cori/-/settings/integrations. The Github integration will push result back to upstream project: https://github.com/buildtesters/buildtest-cori. The CI checks are pushed to [buildtest slack](https://hpcbuildtest.slack.com/) at **#ci-checks** workspace. 
+
 
 ## Contributing Guide
 
