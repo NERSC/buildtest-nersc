@@ -3,12 +3,11 @@ buildspecs:
   tmp_spack_test:
     description: Spack sanity test on /tmp filesystem by concretize trilinos. 
     type: script
-    executor: slurm.debug
+    executor: slurm.haswell_debug
     tags: ["spack", "slurm"]
     sbatch:
       - "-J tmp_spack"
       - "-N 1"
-      - "-C haswell"
       - "-t 00:30:00"
     run: |
       cd /tmp

@@ -2,23 +2,24 @@ version: "1.0"
 buildspecs:
   likwid_pin_cores:
     type: compiler
-    executor: slurm.debug
+    executor: slurm.knl_debug
     description: Run code using likwid-perfctr and acquire performance counter for MEM group  
     tags: [tools]
-    batch:
-      nodecount: "1"
-      timelimit: "5"
-    sbatch: ["-C knl,quad,cache", "--perf=likwid" ]
-    module:
-      - module load PrgEnv-intel
-      - module load likwid
-    env:
-      OMP_NUM_THREADS: 4
-    build:
-      name: cray
-      source: xthi.c
-      cflags: -qopenmp
-    run:
-      launcher: srun -n 1 likwid-perfctr -C 0,8,16,24 -g MEM
+    source: xthi.c
+    compilers:
+      name: [^(intel/19.1.2.254)$]
+      default:
+        all:
+          sbatch: ["-N 1", "-t 5", "-C knl,quad,cache", "--perf=likwid"]
+          run: srun -n 1 likwid-perfctr -C 0,8,16,24 -g MEM $_EXEC
+        intel:
+          cflags: -qopenmp
+          env:
+            OMP_NUM_THREADS: 4
+      config:
+        intel/19.1.2.254:
+          module:
+            load: [likwid]
+                
 maintainers:
   - "Shahzeb Siddiqui <@shahzebsiddiqui>"
