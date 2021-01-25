@@ -2,12 +2,12 @@ version: "1.0"
 buildspecs:
   bupc_hello:
     type: compiler
-    executor: slurm.debug
+    executor: slurm.haswell_debug
     description: "bupc hello world example in C"
-    sbatch: ["-t 10", "-C haswell", "-n 8", "-N 2"]
+    sbatch: ["-t 10", "-n 8", "-N 2"]
     tags: ["compile"]
     module:
-      - "module load bupc/2020.4.0"
+      load: [bupc/2020.4.0]
     build:
       source: src/bupc-hello.c
       name: gnu

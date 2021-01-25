@@ -2,31 +2,25 @@ version: "1.0"
 buildspecs:
   hybrid_mpi_hello_fortran:
     type: compiler
-    executor: slurm.debug
+    executor: slurm.knl_debug
     description: Hybrid MPI+OpenMP Hello World in Fortran 
-    module:
-      load: [intel/19.0.3.199]
-    sbatch:
-      - "-C knl"
-      - "-N 1"
-      - "-n 8"
-      - "-t 20:00"
-    env:
-      OMP_NUM_THREADS: 2
-      OMP_PROC_BIND: spread
-      OMP_PLACES: threads
-      OMP_DISPLAY_AFFINITY: true
-      OMP_AFFINITY_FORMAT: '"host=%H, pid=%P, thread_num=%n, thread affinity=%A"'
-    build:
-      name: intel
-      fc: ftn
-      fflags: -qopenmp
-      source: src/hybrid-hello.f90
-    run:
-      launcher: srun -n 8 -c 32 --cpu-bind=cores
-
-    post_run: | 
-      export OMP_PLACES=cores
-      srun -n 8 -c 32 --cpu-bind=cores ./hybrid-hello.f90.exe |sort -k1,3
-
-
+    tags: [mpi]
+    source: src/hybrid-hello.f90
+    compilers:
+      name: ["^(intel/19.0.3.199)$"]
+      default:
+        intel:
+          cc: mpiifort
+          fflags: -qopenmp
+          sbatch: ["-N 1", "-n 8", "-t 20:00"]
+          env:
+            OMP_NUM_THREADS: 2
+            OMP_PROC_BIND: spread
+            OMP_PLACES: threads
+            OMP_DISPLAY_AFFINITY: true
+            OMP_AFFINITY_FORMAT: '"host=%H, pid=%P, thread_num=%n, thread affinity=%A"'
+          run: srun -n 8 -c 32 --cpu-bind=cores $_EXEC
+      config:
+        intel/19.0.3.199:
+          module:
+            load: [impi/2020, intel/19.0.3.199]        

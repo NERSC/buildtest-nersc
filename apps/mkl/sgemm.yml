@@ -3,23 +3,14 @@ buildspecs:
   sgemm_intel:
     executor: local.bash
     type: compiler
-    description: sgemm test with intel
+    description: sgemm test with intel compilers
     tags: [mkl]
-    build:
-      name: cray
-      cflags: -mkl
-      source: src/mkl_sgemm.c
-    module:
-      - "module load intel"
+    source: src/mkl_sgemm.c
+    compilers:
+      name: [^(intel)]
+      default:
+        intel:
+          cflag: -mkl
 
-  sgemm_gcc:
-    executor: local.bash
-    type: compiler
-    description: sgemm test with gcc module
-    tags: [mkl]
-    build:
-      name: cray
-      cflags: -mkl
-      source: src/mkl_sgemm.c
-    module:
-      - "module load gcc"
+
+
