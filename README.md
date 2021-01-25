@@ -275,9 +275,26 @@ scheduled job, please define a [New Schedule](https://gitlab.nersc.gov/nersc/con
 The `validate_tests` gitlab job is responsible for validating buildspecs, please review this job when contributing tests. The buildspec must pass validation
 in order for buildtest to build and run the test. 
 
+### Register Runner
+
+We have a custom runner to run pipelines via username `siddiq90` on Cori. This runner must be registered with gitlab in order for gitlab to submit jobs. The runner registration is done once, if runner is registered you can skip this section. 
+
+In order to register runner, please switch to user `siddiq90` and navigate to the following directory `$HOME/.config/systemd/user`.
+
+There will be a `gitlab-runner` program used for registering gitlab runners. To register a new runner interactively please run:
+
+```
+gitlab-runner register
+```
+
+This will ask you few prompt before runner is registered. For more details see [Registering Runners](https://docs.gitlab.com/runner/register/). 
+
+In the event Cori is down due to system outage, the runner will need to be started again, this can be done by running `gitlab-runner run`.
+
+
 ## Integrations
 
-buildtest-cori mirror repo has integration with Github and Slack. The integrations can be found at https://gitlab.nersc.gov/nersc/consulting/buildtest-cori/-/settings/integrations. The Github integration will push result back to upstream project: https://github.com/buildtesters/buildtest-cori. The CI checks are pushed to [buildtest slack](https://hpcbuildtest.slack.com/) at **#ci-checks** workspace. 
+buildtest-cori mirror repo has integration with Github and Slack. The integrations can be found at https://gitlab.nersc.gov/nersc/consulting/buildtest-cori/-/settings/integrations. The Github integration will push result back to upstream project: https://github.com/buildtesters/buildtest-cori. The CI checks are pushed to [NERSC Slack](https://nersc.slack.com) at **#buildtest** workspace. 
 
 
 ## Contributing Guide
