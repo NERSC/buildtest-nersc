@@ -13,3 +13,18 @@ buildspecs:
       spack compiler list
       spack spec python
       spack info openmpi
+
+  default_spack_version:
+    type: script
+    executor: local.bash
+    tags: ["spack"]
+    description: Default spack version should be 0.14.2
+    run: |
+      module load spack
+      spack --version
+    status:
+      regex:
+        stream: stdout
+        exp: "^(0.14.2)"
+
+

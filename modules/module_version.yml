@@ -1,0 +1,12 @@
+version: "1.0"
+buildspecs:
+  module_version:
+    type: script
+    executor: local.bash
+    description: check module version of startup module
+    tags: [module]
+    run: module --version
+    status:
+      regex:
+        stream: stderr
+        exp: "^(VERSION=3.2.11.4)"
