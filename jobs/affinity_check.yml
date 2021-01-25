@@ -2,14 +2,12 @@ version: "1.0"
 buildspecs:
   check_mpi_intel_cori:
     type: script
-    executor: slurm.debug
+    executor: slurm.haswell_debug
     description: MPI Affinity Check
     tags: [mpi, openmp]
     batch:
       nodecount: "1"
       timelimit: "20:00"
-    sbatch: 
-      - "-C haswell"
     run: |
       srun -n 8 -c 8 --cpu-bind=cores check-mpi.intel.cori
 

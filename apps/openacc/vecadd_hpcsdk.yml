@@ -8,8 +8,9 @@ buildspecs:
     tags: ["gpu", "openacc"]
     module:
       load: [hpcsdk, cuda]
-    build:
-      name: pgi
+    source: src/vecAdd.c
+    compilers:
+      name: []
       cc: nvc
       source: src/vecAdd.c
       cflags: -acc
