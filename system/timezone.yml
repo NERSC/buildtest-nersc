@@ -10,3 +10,6 @@ buildspecs:
       regex:
         stream: stdout
         exp: "US/Pacific"
+
+maintainers:
+  - "@shahzebsiddiqui"

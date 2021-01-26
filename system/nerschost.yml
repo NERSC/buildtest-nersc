@@ -4,7 +4,7 @@ buildspecs:
     executor: local.python
     type: script
     shell: python
-    tags: ["system", "configuration"]
+    tags: ["system"]
     description: check file exists /etc/profile.d/nerschost and alias nersc_host
     run: |
       import os
@@ -15,5 +15,5 @@ buildspecs:
       os.system("nersc_host")
 
 maintainers:
-  - "Shahzeb Siddiqui <@shahzebsiddiqui>"
+  - "@shahzebsiddiqui"
 
