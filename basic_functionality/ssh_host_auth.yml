@@ -3,7 +3,7 @@ buildspecs:
   ssh_host_auth:
     type: script
     executor: local.bash
-    tags: [ssh, checkout, reframe]
+    tags: [system, checkout, reframe]
     description: Test ssh host authentication
     run: ssh -q -o "BatchMode=yes" "$(cat /etc/clustername)" "echo 2>&1" && echo SSH_OK || echo SSH_NOK
     status:

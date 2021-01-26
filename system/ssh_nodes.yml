@@ -39,6 +39,7 @@ buildspecs:
     tags: [system, network]
     run: ssh -q gerty01 hostname
 
-
+maintainers:
+  - "@shahzebsiddiqui"
 
 

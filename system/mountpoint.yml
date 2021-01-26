@@ -44,4 +44,4 @@ buildspecs:
       mountpoint /global/project/projectdirs
 
 maintainers:
-  - "Shahzeb Siddiqui <@shahzebsiddiqui>"
+  - "@shahzebsiddiqui"
