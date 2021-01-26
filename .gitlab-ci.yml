@@ -61,7 +61,7 @@ scheduled_system_check:
     - cp .buildtest/config.yml $HOME/.buildtest/config.yml
     - buildtest config validate
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR
-    - buildtest build --tags slurm --tags configuration --tags system -ft slurm -ft configuration -ft system
+    - buildtest build --tags slurm --tags system -ft slurm -ft system
     - buildtest report --filter state=FAIL
     - source deactivate 
   after_script:

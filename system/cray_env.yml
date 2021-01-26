@@ -4,9 +4,12 @@ buildspecs:
     executor: local.python
     type: script
     shell: python
-    tags: ["system", "configuration", "cray"]
+    tags: ["system", "cray"]
     run: |
       import os
       assert os.getenv("CRAYPE_NETWORK_TARGET") == "aries"
       assert os.getenv("CRAYPE_VERSION") == "2.6.2"
       assert os.getenv("CRAY_CPU_TARGET") == "haswell"
+
+maintainers:
+  - "@shahzebsiddiqui"

@@ -48,3 +48,6 @@ buildspecs:
     type: script
     run: | 
       pdsh -w dtn[01-06] uptime
+
+maintainers:
+  - "@shahzebsiddiqui"

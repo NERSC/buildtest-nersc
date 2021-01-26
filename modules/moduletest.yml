@@ -56,3 +56,6 @@ buildspecs:
       regex:
         stream: stdout
         exp: "PASS RATE: 100.000"
+
+maintainers:
+  - "@shahzebsiddiqui"

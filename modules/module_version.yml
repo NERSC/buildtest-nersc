@@ -4,9 +4,12 @@ buildspecs:
     type: script
     executor: local.bash
     description: check module version of startup module
-    tags: [module]
+    tags: [system, module]
     run: module --version
     status:
       regex:
         stream: stderr
         exp: "^(VERSION=3.2.11.4)"
+
+maintainers:
+  - "@shahzebsiddiqui"
