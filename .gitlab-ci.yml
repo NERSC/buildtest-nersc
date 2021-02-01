@@ -46,7 +46,7 @@ validate_tests:
   
   artifacts:
     paths:
-      - $SCRATCH/buildtest/buildspec-cache.json
+      - $SCRATCH/buildtest/var/buildspec-cache.json
     expire_in: 2 week
 
 scheduled_system_check:
