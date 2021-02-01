@@ -39,6 +39,7 @@ validate_tests:
     - cp .buildtest/config.yml $HOME/.buildtest/config.yml
     - buildtest config validate    
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR
+    - cp $SCRATCH/buildtest/var/buildspec-cache.json $CI_PROJECT_DIR
     - source deactivate 
   
   after_script:
@@ -46,7 +47,7 @@ validate_tests:
   
   artifacts:
     paths:
-      - $SCRATCH/buildtest/var/buildspec-cache.json
+      - $CI_PROJECT_DIR/buildspec-cache.json
     expire_in: 2 week
 
 scheduled_system_check:
