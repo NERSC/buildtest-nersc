@@ -1,3 +1,6 @@
+variables:
+  SCHEDULER_PARAMETERS: "-N 1 -M escori -t 10"
+  
 .setup-buildtest: &setup-buildtest
   - module load python
   - conda create -n buildtest python=3.8
@@ -19,8 +22,7 @@ stages:
   - test
 validate_tests:
   stage: build
-  tags:
-    - cori20-siddiq90
+  tags: [cori]
   rules:
     - if: '$CI_PIPELINE_SOURCE == "web" || $CI_PIPELINE_SOURCE == "external_pull_request_event" || $CI_PIPELINE_SOURCE == "push"'
       when: manual
@@ -49,7 +51,7 @@ scheduled_system_check:
       - schedules
     variables:
       - $DAILYCHECK == "True"
-  tags: [cori20-siddiq90]
+  tags: [cori]
   before_script:
     - *setup-buildtest
   script:
@@ -74,7 +76,7 @@ e4s_tests:
       - schedules
     variables:
       - $E4S == "True"
-  tags: [cori20-siddiq90]
+  tags: [cori]
   before_script:
     - *setup-buildtest
   script:
