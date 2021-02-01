@@ -1,5 +1,5 @@
 variables:
-  SCHEDULER_PARAMETERS: "-N 1 -M escori -t 10"
+  SCHEDULER_PARAMETERS: "-N 1 -M escori -t 10 -q compile"
   
 .setup-buildtest: &setup-buildtest
   - module load python
