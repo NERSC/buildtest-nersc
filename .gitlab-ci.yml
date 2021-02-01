@@ -39,7 +39,8 @@ validate_tests:
     - cp .buildtest/config.yml $HOME/.buildtest/config.yml
     - buildtest config validate    
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR
-    - cp $SCRATCH/buildtest/var/buildspec-cache.json $CI_PROJECT_DIR
+    - mkdir -p $CI_PROJECT_DIR/.artifacts
+    - cp $SCRATCH/buildtest/var/{buildspec-cache.json,buildspec.error} $CI_PROJECT_DIR/.artifacts
     - source deactivate 
   
   after_script:
@@ -47,7 +48,7 @@ validate_tests:
   
   artifacts:
     paths:
-      - $CI_PROJECT_DIR/buildspec-cache.json
+      - $CI_PROJECT_DIR/.artifacts       
     expire_in: 2 week
 
 scheduled_system_check:
@@ -71,14 +72,16 @@ scheduled_system_check:
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR
     - buildtest build --tags slurm --tags system -ft slurm -ft system
     - buildtest report --filter state=FAIL
+    - mkdir $CI_PROJECT_DIR/.artifacts
+    - cp buildtest.log $CI_PROJECT_DIR/.artifacts
+    - cp $SCRATCH/buildtest/var/report.json $CI_PROJECT_DIR/.artifacts
     - source deactivate 
   after_script:
     - *cleanup-buildtest
   
   artifacts:
     paths:
-      - $CI_PROJECT_DIR/buildtest.log
-      - $SCRATCH/buildtest/var/report.json
+      - $CI_PROJECT_DIR/.artifacts      
     expire_in: 2 week
 
 e4s_tests:
@@ -102,12 +105,14 @@ e4s_tests:
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR
     - buildtest build --tags e4s
     - buildtest report --filter state=FAIL
+    - mkdir $CI_PROJECT_DIR/.artifacts
+    - cp buildtest.log $CI_PROJECT_DIR/.artifacts
+    - cp $SCRATCH/buildtest/var/report.json $CI_PROJECT_DIR/.artifacts
     - source deactivate 
   after_script:
     - *cleanup-buildtest
     
   artifacts:
     paths:
-      - $CI_PROJECT_DIR/buildtest.log
-      - $SCRATCH/buildtest/var/report.json
+      - $CI_PROJECT_DIR/.artifacts
     expire_in: 2 week
