@@ -43,6 +43,11 @@ validate_tests:
   
   after_script:
     - *cleanup-buildtest
+  
+  artifacts:
+    paths:
+      - $SCRATCH/buildtest/buildspec-cache.json
+    expire_in: 2 week
 
 scheduled_system_check:
   stage: test
@@ -68,6 +73,12 @@ scheduled_system_check:
     - source deactivate 
   after_script:
     - *cleanup-buildtest
+  
+  artifacts:
+    paths:
+      - $CI_PROJECT_DIR/buildtest.log
+      - $SCRATCH/buildtest/var/report.json
+    expire_in: 2 week
 
 e4s_tests:
   stage: test
@@ -93,3 +104,9 @@ e4s_tests:
     - source deactivate 
   after_script:
     - *cleanup-buildtest
+    
+  artifacts:
+    paths:
+      - $CI_PROJECT_DIR/buildtest.log
+      - $SCRATCH/buildtest/var/report.json
+    expire_in: 2 week
