@@ -42,7 +42,7 @@ First time around you should discover all buildspecs this can be done via ``buil
 and validate all buildspecs in the buildtest-cori repo and load them in buildspec cache.
 
 ```
-$ buildtest buildspec find --root /path/to/buildtest-cori
+$ buildtest buildspec find --root /path/to/buildtest-cori/buildspecs
 ```
 
 The [**buildspecs_roots**](https://buildtest.readthedocs.io/en/devel/configuring_buildtest.html#buildspec-roots) property can be used to
