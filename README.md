@@ -251,8 +251,10 @@ $ buildtest report
 
 ## CI Setup
 
+There is a github workflow [.mirror_to_cori.yml](https://github.com/buildtesters/buildtest-cori/blob/devel/.github/workflows/mirror_to_cori.yml) responsible for mirroring upstream project to https://software.nersc.gov/siddiq90/buildtest-cori.  We have setup a gitlab [secret](https://github.com/buildtesters/buildtest-cori/settings/secrets/actions) that contains gitlab personal access token created from https://software.nersc.gov/-/profile/personal_access_tokens. The Personal access token must have `read_api`, `read_repository`, `write_repository` scope.  
+
 Tests are run on schedule basis with one schedule corresponding to one gitlab job in `.gitlab-ci.yml`. The scheduled pipelines are configured in 
-https://gitlab.nersc.gov/nersc/consulting/buildtest-cori/-/pipeline_schedules. Each schedule has a variable defined to control which pipeline 
+https://software.nersc.gov/siddiq90/buildtest-cori/-/pipeline_schedules. Each schedule has a variable defined to control which pipeline 
 is run. In the `.gitlab-ci.yml` we make use of conditional rules using [only](https://docs.gitlab.com/ee/ci/yaml/#onlyexcept-basic). For example the daily
 system test has variable defined `DAILYCHECK` set to `True` and the gitlab job is defined as follows:
 
@@ -269,32 +271,15 @@ scheduled_system_check:
 
 The scheduled jobs are run at different intervals (1x/day, 1x/week, etc...) at different times of day to avoid overloading the system. The gitlab jobs
 will run jobs based on tags, alternately some tests may be defined by running all tests in a directory (`buildtest build -b apps`). If you want to add a new
-scheduled job, please define a [New Schedule](https://gitlab.nersc.gov/nersc/consulting/buildtest-cori/-/pipeline_schedules/new) with an appropriate time. The `target branch` should be `devel` and define a unique variable used to distinguish scheduled jobs. Next, create a job in `.gitlab-ci.yml` that references the scheduled job based on the variable name.
+scheduled job, please define a [New Schedule](https://software.nersc.gov/siddiq90/buildtest-cori/-/pipeline_schedules/new) with an appropriate time. The `target branch` should be `devel` and define a unique variable used to distinguish scheduled jobs. Next, create a job in `.gitlab-ci.yml` that references the scheduled job based on the variable name.
 
 
 The `validate_tests` gitlab job is responsible for validating buildspecs, please review this job when contributing tests. The buildspec must pass validation
 in order for buildtest to build and run the test. 
 
-### Register Runner
-
-We have a custom runner to run pipelines via username `siddiq90` on Cori. This runner must be registered with gitlab in order for gitlab to submit jobs. The runner registration is done once, if runner is registered you can skip this section. 
-
-In order to register runner, please switch to user `siddiq90` and navigate to the following directory `$HOME/.config/systemd/user`.
-
-There will be a `gitlab-runner` program used for registering gitlab runners. To register a new runner interactively please run:
-
-```
-gitlab-runner register
-```
-
-This will ask you few prompt before runner is registered. For more details see [Registering Runners](https://docs.gitlab.com/runner/register/). 
-
-In the event Cori is down due to system outage, the runner will need to be started again, this can be done by running `gitlab-runner run`.
-
-
 ## Integrations
 
-buildtest-cori mirror repo has integration with Github and Slack. The integrations can be found at https://gitlab.nersc.gov/nersc/consulting/buildtest-cori/-/settings/integrations. The Github integration will push result back to upstream project: https://github.com/buildtesters/buildtest-cori. The CI checks are pushed to [NERSC Slack](https://nersc.slack.com) at **#buildtest** workspace. 
+buildtest-cori mirror repo has integration with Github and Slack. The integrations can be found athttps://software.nersc.gov/siddiq90/buildtest-cori/-/settings/integrations. The Github integration will push result back to upstream project: https://github.com/buildtesters/buildtest-cori. The CI checks are pushed to [buildtest Slack](https://hpcbuildtest.slack.com) at **#cori-testsuite** workspace. 
 
 
 ## Contributing Guide
