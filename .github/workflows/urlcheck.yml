@@ -25,3 +25,6 @@ jobs:
 
         # How many times to retry a failed request (defaults to 1)
         retry_count: 5
+        
+        # A comma separated links to exclude during URL checks
+        exclude_urls: https://github.com/buildtesters/buildtest-cori/settings/secrets/actions  
