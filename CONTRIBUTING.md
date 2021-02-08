@@ -2,12 +2,14 @@ Getting Started
 ================
 
 Contribution is not easy, so we created this document to describe how to get you setup
-so you can contribute back and make everyone's life easier.
+so you can contribute back and make everyone's life easier. All contributions will be made via
+[pull request](https://github.com/buildtesters/buildtest-cori/pulls) which goes through code review 
+process. We have disabled push to main branch, therefore all changes must go through pull request.
 
 GitHub Account
 --------------
 
-If you don't have a GitHub account please [register](http://github.com/join) your account
+If you don't have a GitHub account please [register](http://github.com/join) your account.
 
 Fork the repo
 --------------
@@ -23,6 +25,8 @@ SSH key will help you pull and push to repository without requesting for passwor
 ```
 git clone git@github.com:YOUR\_GITHUB\_LOGIN/buildtest-cori.git
 ```
+
+All contributions will come from your fork, so please fork this repo.
 
 Adding Upstream Remote
 -----------------------
@@ -90,24 +94,34 @@ git push origin featureX
 Once the branch is created in your fork, you can issue a Pull Request to ``devel``
 branch for ``upstream`` repo (https://github.com/buildtesters/buildtest-cori)
 
+Default Branch
+---------------
+
+The default branch is `devel`. This branch is [protected branch](https://docs.github.com/en/github/administering-a-repository/about-protected-branches) 
+which prevents users from accidently deleting the branch. The branch settings are found in https://docs.github.com/en/github/administering-a-repository/about-protected-branches.
+
+Merge Options
+---------------
+
+The default preference for merging PRs is [Squash Merge](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-request-merges#squash-and-merge-your-pull-request-commits) which "squash" all commits into single commit, this avoids having unneccessary commits from PR in upstream
+commit history. 
 
 Contributing Tests
 -------------------
 
 All incoming PRs for tests are pushed to ``devel`` branch which uses HEAD of `devel` branch from buildtest repo (https://github.com/buildtesters/buildtest).
 
-
 Please make sure you sync your buildtest with `devel` when you contribute tests and buildspec. Please refer to buildtest [contributing guide](https://buildtest.readthedocs.io/en/devel/contributing.html) for more details.
 
-
-Application tests are stored in [apps](https://github.com/buildtesters/buildtest-cori/tree/devel/apps) directory. Tests are categorized by application, please consider adding test in one of the 
-appropriate directories or create a new directory. Tests from [E4S Testsuite](https://github.com/E4S-Project/testsuite) are located in [e4s](https://github.com/buildtesters/buildtest-cori/tree/devel/e4s) directory. This should be used for 
+Application tests are stored in [apps](https://github.com/buildtesters/buildtest-cori/tree/devel/buildspecs/apps) directory. Tests are categorized by application, please consider adding test in one of the 
+appropriate directories or create a new directory. Tests from [E4S Testsuite](https://github.com/E4S-Project/testsuite) are located in [e4s](https://github.com/buildtesters/buildtest-cori/tree/devel/buildspecs/e4s) directory. This should be used for 
 testing E4S stack on Cori. 
 
 If you are adding a buildspec in your PR, please add a test description using ``description`` field. Please add test with appropriate tagname using ``tags`` field. For instance all e4s tests are set to ``e4s`` tag name. This allows all e4s tests to be run via ``buildtest build --tags e4s``. 
 
 Please add yourself to ``maintainers`` field which helps contact individual when test fails. When you contribute your test and buildspec please test this locally. The buildspec must be valid, this can be done by building the test via ``buildtest build -b /path/to/test.yml``. 
 
+PRs must pass [CI checks](https://github.com/buildtesters/buildtest-cori/actions) before any PRs are merged. Please make sure you review the CI checks before you contact a reviewer. All PRs must be reviewed by a maintainer which requires approval before it can be merged. 
 
 Resolving PR Merge Conflicts
 -----------------------------
@@ -161,3 +175,11 @@ Once you have synced your branch push your changes and check if file conflicts a
 ```
  git push origin <feature-branch>
  ```
+
+Project Maintainers
+---------------------
+
+If you need elevated priviledge to project settings please contact one of the maintainers
+
+- Aditya Kavalur, [@adityakavalur](https://github.com/adityakavalur)
+- Shahzeb Siddiqui, [@shahzebsiddiqui](http://github.com/shahzebsiddiqui)
