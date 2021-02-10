@@ -4,7 +4,7 @@ buildspecs:
     description: Spack sanity test on /tmp filesystem by concretize trilinos. 
     type: script
     executor: slurm.haswell_debug
-    tags: ["spack", "slurm"]
+    tags: ["spack"]
     sbatch:
       - "-J tmp_spack"
       - "-N 1"
