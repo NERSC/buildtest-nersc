@@ -5,8 +5,4 @@ buildspecs:
     executor: slurm.e4s
     description: Run mfem test from E4S TestSuite
     tags: [e4s]
-    run: $SCRATCH/testsuite/test-all.sh $SCRATCH/testsuite/validation_tests/mfem
-    status:
-      regex:
-        stream: stderr
-        exp: "Success"
+    run: $SCRATCH/testsuite/test-all.sh $SCRATCH/testsuite/validation_tests/mfem --settings $SCRATCH/testsuite/settings.cori.sh
