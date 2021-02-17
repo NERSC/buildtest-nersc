@@ -15,7 +15,7 @@ variables:
   
 .cleanup-buildtest: &cleanup-buildtest
   - rm -rf $SCRATCH/buildtest
-  - conda env remove -n buildtest
+  - conda env remove -n buildtest -y
   
 stages:
   - build
@@ -31,11 +31,11 @@ validate_tests:
   script:
     - whoami    
     - cd $CI_PROJECT_DIR/
-    - cp $BUILDTEST_ROOT/buildtest/config.yml $HOME/.buildtest/config.yml
+    - cp $CI_PROJECT_DIR/.buildtest/config.yml $HOME/.buildtest/config.yml
     - buildtest config validate    
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
     - mkdir -p $CI_PROJECT_DIR/.artifacts
-    - cp $SCRATCH/buildtest/var/{buildspec-cache.json,buildspec.error} $CI_PROJECT_DIR/.artifacts
+    - cp $BUILDTEST_ROOT/var/{buildspec-cache.json,buildspec.error} $CI_PROJECT_DIR/.artifacts
     - source deactivate 
   
   after_script:
@@ -62,7 +62,7 @@ scheduled_system_check:
     - echo $CI_PIPELINE_SOURCE
     - echo $CI_PROJECT_DIR   
     - cd $CI_PROJECT_DIR
-    - cp $BUILDTEST_ROOT/buildtest/config.yml $HOME/.buildtest/config.yml
+    - cp $CI_PROJECT_DIR/.buildtest/config.yml $HOME/.buildtest/config.yml
     - buildtest config validate
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
     - buildtest build --tags slurm --tags system -ft slurm -ft system
@@ -94,7 +94,7 @@ e4s_tests:
     - git log --oneline -1
     - echo $CI_PROJECT_DIR   
     - cd $CI_PROJECT_DIR
-    - cp $BUILDTEST_ROOT/buildtest/config.yml $HOME/.buildtest/config.yml
+    - cp $CI_PROJECT_DIR/.buildtest/config.yml $HOME/.buildtest/config.yml
     - buildtest config validate
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
     - buildtest build --tags e4s
