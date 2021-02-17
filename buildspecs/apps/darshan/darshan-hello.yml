@@ -10,6 +10,7 @@ buildspecs:
       name: ["^(intel/19.1.2.254)$"]
       default:
         intel:
+          cc: cc
           ldflags: -ldarshan
           batch:
             timelimit: "10"
