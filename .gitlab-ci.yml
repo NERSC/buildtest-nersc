@@ -29,14 +29,9 @@ validate_tests:
   before_script:
     - *setup-buildtest
   script:
-    - whoami && ls -l 
-    - env | grep CI_*
-    - echo $CI_MERGE_REQUEST_TARGET_BRANCH_NAME
-    - echo $CI_PIPELINE_SOURCE
-    - echo $CI_PROJECT_DIR
-    - echo $CI_COMMIT_BRANCH    
+    - whoami    
     - cd $CI_PROJECT_DIR/
-    - cp .buildtest/config.yml $HOME/.buildtest/config.yml
+    - cp $BUILDTEST_ROOT/buildtest/config.yml $HOME/.buildtest/config.yml
     - buildtest config validate    
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
     - mkdir -p $CI_PROJECT_DIR/.artifacts
@@ -67,14 +62,14 @@ scheduled_system_check:
     - echo $CI_PIPELINE_SOURCE
     - echo $CI_PROJECT_DIR   
     - cd $CI_PROJECT_DIR
-    - cp .buildtest/config.yml $HOME/.buildtest/config.yml
+    - cp $BUILDTEST_ROOT/buildtest/config.yml $HOME/.buildtest/config.yml
     - buildtest config validate
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
     - buildtest build --tags slurm --tags system -ft slurm -ft system
     - buildtest report --filter state=FAIL
     - mkdir $CI_PROJECT_DIR/.artifacts
-    - cp buildtest.log $CI_PROJECT_DIR/.artifacts
-    - cp $SCRATCH/buildtest/var/report.json $CI_PROJECT_DIR/.artifacts
+    - cp $BUILDTEST_ROOT/buildtest.log $CI_PROJECT_DIR/.artifacts
+    - cp $BUILDTEST_ROOT/var/report.json $CI_PROJECT_DIR/.artifacts
     - source deactivate 
   after_script:
     - *cleanup-buildtest
@@ -97,17 +92,16 @@ e4s_tests:
   script:
     - whoami && ls -l 
     - git log --oneline -1
-    - echo $CI_PIPELINE_SOURCE
     - echo $CI_PROJECT_DIR   
     - cd $CI_PROJECT_DIR
-    - cp .buildtest/config.yml $HOME/.buildtest/config.yml
+    - cp $BUILDTEST_ROOT/buildtest/config.yml $HOME/.buildtest/config.yml
     - buildtest config validate
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
     - buildtest build --tags e4s
     - buildtest report --filter state=FAIL
     - mkdir $CI_PROJECT_DIR/.artifacts
-    - cp buildtest.log $CI_PROJECT_DIR/.artifacts
-    - cp $SCRATCH/buildtest/var/report.json $CI_PROJECT_DIR/.artifacts
+    - cp $BUILDTEST_ROOT/buildtest.log $CI_PROJECT_DIR/.artifacts
+    - cp $BUILDTEST_ROOT/var/report.json $CI_PROJECT_DIR/.artifacts
     - source deactivate 
   after_script:
     - *cleanup-buildtest
