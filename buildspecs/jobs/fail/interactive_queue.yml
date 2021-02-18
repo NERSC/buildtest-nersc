@@ -15,6 +15,7 @@ buildspecs:
     executor: local.bash
     shell: bash -e
     tags: [slurm, fail]
+    description: interactive queue job cannot exceed 4hr limit, A 04:00:01 job will fail 
     run: salloc -N 1 -t 04:00:01 -C haswell -q interactive 
     status:
       returncode: 1
