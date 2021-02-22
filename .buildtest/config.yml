@@ -2,7 +2,7 @@ load_default_buildspecs: false
 moduletool: environment-modules
 executors:
   defaults:
-    pollinterval: 10
+    pollinterval: 60
     launcher: sbatch
     max_pend_time: 90
   local:
@@ -70,6 +70,12 @@ executors:
       cluster: escori
       options:
       - -C haswell
+    compile:
+      description: compile qos jobs
+      qos: compile
+      cluster: escori
+      options:
+      - -N 1
     knl_debug:
       qos: debug
       cluster: cori
