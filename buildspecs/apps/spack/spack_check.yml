@@ -33,7 +33,6 @@ buildspecs:
     tags: ["spack", "e4s"]
     description: Check e4s/20.10 spack instance
     run: |
-      module use /global/common/software/spackecp/modfile
       module load e4s/20.10
       spack --version
     status:
