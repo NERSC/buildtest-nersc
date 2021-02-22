@@ -1,7 +1,7 @@
 version: "1.0"
 buildspecs:
   xfer_qos_hostname:
-    description: run hostname through bigmem qos
+    description: run hostname through xfer qos
     type: script
     executor: slurm.xfer
     sbatch:

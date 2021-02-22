@@ -1,0 +1,10 @@
+version: "1.0"
+buildspecs:
+  compile_qos_hostname:
+    description: run hostname through compile qos
+    type: script
+    executor: slurm.compile
+    sbatch:
+      - "-t 5"
+    run: hostname
+    tags: ["queues"]

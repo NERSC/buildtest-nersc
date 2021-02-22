@@ -29,3 +29,14 @@ buildspecs:
       regex:
         stream: stderr
         exp: "sbatch: error: QOSMaxSubmitJobPerUserLimit"
+  
+  compile_submit_limit_test:
+    type: script
+    executor: local.bash
+    description: Submitting 2 node job in compile queue will fail. 
+    tags: [jobs, fail]
+    run: sbatch -q compile -M escori -N 2 -t 40 --wrap="hostname"
+    status:
+      regex:
+        stream: stderr
+        exp: "sbatch: error: Batch job submission failed: Node count specification invalid" 
