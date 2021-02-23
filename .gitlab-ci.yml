@@ -5,8 +5,6 @@ variables:
   - module load python
   - conda create -n buildtest python=3.8
   - source activate buildtest
-  - cd $SCRATCH
-  - rm -rf buildtest
   - git clone -b devel https://github.com/buildtesters/buildtest    
   - cd buildtest 
   - . setup.sh
@@ -14,7 +12,6 @@ variables:
   - mkdir -p $HOME/.buildtest
   
 .cleanup-buildtest: &cleanup-buildtest
-  - rm -rf $SCRATCH/buildtest
   - conda env remove -n buildtest -y
   
 stages:
@@ -59,7 +56,6 @@ scheduled_system_check:
   script:
     - whoami && ls -l 
     - git log --oneline -1
-    - echo $CI_PIPELINE_SOURCE
     - echo $CI_PROJECT_DIR   
     - cd $CI_PROJECT_DIR
     - cp $CI_PROJECT_DIR/.buildtest/config.yml $HOME/.buildtest/config.yml
@@ -68,7 +64,7 @@ scheduled_system_check:
     - buildtest build --tags slurm --tags system -ft slurm -ft system
     - buildtest report --filter state=FAIL
     - mkdir $CI_PROJECT_DIR/.artifacts
-    - cp $BUILDTEST_ROOT/buildtest.log $CI_PROJECT_DIR/.artifacts
+      #- cp $BUILDTEST_ROOT/buildtest.log $CI_PROJECT_DIR/.artifacts
     - cp $BUILDTEST_ROOT/var/report.json $CI_PROJECT_DIR/.artifacts
     - source deactivate 
   after_script:
@@ -100,7 +96,7 @@ e4s_tests:
     - buildtest build --tags e4s
     - buildtest report --filter state=FAIL
     - mkdir $CI_PROJECT_DIR/.artifacts
-    - cp $BUILDTEST_ROOT/buildtest.log $CI_PROJECT_DIR/.artifacts
+      #- cp $BUILDTEST_ROOT/buildtest.log $CI_PROJECT_DIR/.artifacts
     - cp $BUILDTEST_ROOT/var/report.json $CI_PROJECT_DIR/.artifacts
     - source deactivate 
   after_script:

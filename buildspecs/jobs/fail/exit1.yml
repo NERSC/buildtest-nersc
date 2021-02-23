@@ -2,9 +2,9 @@ version: "1.0"
 buildspecs:
   exit1:
     type: script
-    executor: slurm.debug
+    executor: slurm.knl_debug
     description: "Run a job that is expected to raise exitcode 1" 
-    sbatch: [ "-t 1", "-C haswell", "-n 1"]
+    sbatch: [ "-t 1", "-n 1"]
     tags: ["jobs", "fail"]
     run: exit 1
     status:
