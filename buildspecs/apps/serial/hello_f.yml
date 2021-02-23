@@ -7,15 +7,11 @@ buildspecs:
     tags: [compile]
     source: src/hello.f90
     compilers:
-      name: ["^(gcc/)(6.1.0|6.3.0)$", "^(pgi/)(20.1|20.4)$"]
-      defaults:
+      name: ["^(gcc)"]
+      default:
         gcc:
-          fflags: -Wall
-        pgi:
-          fflags: -m64
-      config:
-        pgi/20.1:
-          fc: pgf90
+          fflags: -O1
+
 
 maintainers:
   - "Shahzeb Siddiqui <@shahzebmsiddiqui>"
