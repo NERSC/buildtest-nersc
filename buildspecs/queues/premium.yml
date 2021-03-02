@@ -3,7 +3,7 @@ buildspecs:
   premium_qos_haswell_hostname:
     description: run hostname through premium qos on Haswell
     type: script
-    executor: slurm.haswell_premium
+    executor: cori.slurm.haswell_premium
     sbatch:
       - "-t 5"
       - "-N 1"
@@ -13,7 +13,7 @@ buildspecs:
   premium_qos_knl_hostname:
     description: run hostname through premium qos on KNL
     type: script
-    executor: slurm.knl_premium
+    executor: cori.slurm.knl_premium
     sbatch:
       - "-t 5"
       - "-N 1"

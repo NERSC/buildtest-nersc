@@ -1,7 +1,7 @@
 version: "1.0"
 buildspecs:
   bash_alias:
-    type: script
+    type: cori.script
     shebang: "#!/bin/bash -l"
     description: "Check predefined alias set in /etc/profile.d script"
     tags: [configuration]

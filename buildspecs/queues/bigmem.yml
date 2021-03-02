@@ -3,7 +3,7 @@ buildspecs:
   bigmem_qos_hostname:
     description: run hostname through bigmem qos
     type: script
-    executor: slurm.bigmem
+    executor: cori.slurm.bigmem
     sbatch:
       - "-t 5"
       - "-C haswell"

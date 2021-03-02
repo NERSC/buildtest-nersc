@@ -2,7 +2,7 @@ version: "1.0"
 buildspecs:
   ssh_login_nodes:
     type: script
-    executor: local.bash
+    executor: cori.local.bash
     tags: [system, network]
     description: "test ssh connection to login nodes"
     run: |
@@ -21,7 +21,7 @@ buildspecs:
 
   ssh_data_transfer_nodes:
     type: script
-    executor: local.bash
+    executor: cori.local.bash
     tags: [system, network]
     description: "test ssh connection to data transfer nodes"
     run: |
@@ -34,7 +34,7 @@ buildspecs:
 
   ssh_gerty:
     type: script
-    executor: local.bash
+    executor: cori.local.bash
     description: "test ssh connection to gerty"
     tags: [system, network]
     run: ssh -q gerty01 hostname

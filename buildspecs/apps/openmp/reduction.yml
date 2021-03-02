@@ -2,7 +2,7 @@ version: "1.0"
 buildspecs:
   reduction:
     type: compiler
-    executor: local.bash
+    executor: cori.local.bash
     source: src/reduction.c
     tags: [openmp]
     compilers:
@@ -17,5 +17,3 @@ buildspecs:
           cflags: -qopenmp
         cray:
           cflags: -h omp      
-    tags: [openmp]
-

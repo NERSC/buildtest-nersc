@@ -1,7 +1,7 @@
 version: "1.0"
 buildspecs:
   sinfo_version:
-    executor: local.bash
+    executor: cori.local.bash
     type: script
     run: sinfo --version
     description: Check slurm version

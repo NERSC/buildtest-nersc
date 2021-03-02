@@ -1,7 +1,7 @@
 version: "1.0"
 buildspecs:
   cplusplus_hello:
-    executor: local.bash
+    executor: cori.local.bash
     type: compiler
     description: hello world program in C++ compiled with gnu and intel compiler
     tags: [compile]

@@ -1,7 +1,7 @@
 version: "1.0"
 buildspecs:
   get_timezone:
-    executor: local.bash
+    executor: cori.local.bash
     type: script
     description: Make sure timezone is set to US/Pacific
     tags: ["system"]

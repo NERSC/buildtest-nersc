@@ -1,7 +1,7 @@
 version: "1.0"
 buildspecs:
   dgemm_test1:
-    executor: local.bash
+    executor: cori.local.bash
     type: compiler
     description: dgemm test with intel
     tags: [mkl]
@@ -14,7 +14,7 @@ buildspecs:
 
 
   dgemm_test2:
-    executor: local.bash
+    executor: cori.local.bash
     type: compiler
     description: dgemm test with gcc
     tags: [mkl]

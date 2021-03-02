@@ -2,7 +2,7 @@ version: "1.0"
 buildspecs:
   stage_in_out_burst_buffer:
     type: script
-    executor: slurm.knl_debug
+    executor: cori.slurm.knl_debug
     tags: [datawarp, jobs]
     description: Stage in data to Burst Buffer
     batch:

@@ -3,7 +3,7 @@ buildspecs:
   spack_default_module:
     type: script
     description: "Test default spack module to see if some basic commands work"
-    executor: local.bash
+    executor: cori.local.bash
     tags: ["spack"]
     run: |
       module load spack
@@ -16,7 +16,7 @@ buildspecs:
 
   default_spack_version:
     type: script
-    executor: local.bash
+    executor: cori.local.bash
     tags: ["spack"]
     description: Default spack version should be 0.14.2
     run: |
@@ -29,7 +29,7 @@ buildspecs:
 
   e4s_20_10_spack:
     type: script
-    executor: local.bash
+    executor: cori.local.bash
     tags: ["spack", "e4s"]
     description: Check e4s/20.10 spack instance
     run: |

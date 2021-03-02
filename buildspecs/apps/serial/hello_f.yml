@@ -2,7 +2,7 @@ version: "1.0"
 buildspecs:
   hello_fortran:
     type: compiler
-    executor: local.bash
+    executor: cori.local.bash
     description: hello world program in Fortran compiled with gnu compiler
     tags: [compile]
     source: src/hello.f90

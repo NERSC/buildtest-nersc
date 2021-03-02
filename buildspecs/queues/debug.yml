@@ -3,7 +3,7 @@ buildspecs:
   debug_qos_knl_hostname:
     description: run hostname on KNL computenode
     type: script
-    executor: slurm.knl_debug
+    executor: cori.slurm.knl_debug
     sbatch:
       - "-t 5"
       - "-N 1"
@@ -13,7 +13,7 @@ buildspecs:
   debug_qos_haswell_hostname:
     description: run hostname on KNL computenode
     type: script
-    executor: slurm.haswell_debug
+    executor: cori.slurm.haswell_debug
     sbatch:
       - "-t 5"
       - "-N 1"

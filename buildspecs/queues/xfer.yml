@@ -3,7 +3,7 @@ buildspecs:
   xfer_qos_hostname:
     description: run hostname through xfer qos
     type: script
-    executor: slurm.xfer
+    executor: cori.slurm.xfer
     sbatch:
       - "-t 5"
       - "-N 1"

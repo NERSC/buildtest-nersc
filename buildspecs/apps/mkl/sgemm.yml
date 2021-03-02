@@ -1,7 +1,7 @@
 version: "1.0"
 buildspecs:
   sgemm_intel:
-    executor: local.bash
+    executor: cori.local.bash
     type: compiler
     description: sgemm test with intel compilers
     tags: [mkl]
@@ -11,6 +11,3 @@ buildspecs:
       default:
         intel:
           cflag: -mkl
-
-
-

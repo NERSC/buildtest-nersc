@@ -2,7 +2,7 @@ version: "1.0"
 buildspecs:
   likwid_pin_cores:
     type: compiler
-    executor: slurm.knl_debug
+    executor: cori.slurm.knl_debug
     description: Run code using likwid-perfctr and acquire performance counter for MEM group  
     tags: [tools]
     source: xthi.c

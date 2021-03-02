@@ -2,7 +2,7 @@ version: "1.0"
 buildspecs:
   create_burst_buffer:
     type: script
-    executor: slurm.knl_debug
+    executor: cori.slurm.knl_debug
     batch: 
       nodecount: "1"
       timelimit: "5"

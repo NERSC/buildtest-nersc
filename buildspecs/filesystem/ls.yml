@@ -3,7 +3,7 @@ version: "1.0"
 buildspecs:
   filesystem_benchmark_ls:
     type: script
-    executor: local.bash
+    executor: cori.local.bash
     description: time ls with nwchem for various filesystems
     tags: [filesystem, reframe, benchmark, hourly]
     vars:

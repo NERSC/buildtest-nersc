@@ -2,7 +2,7 @@ version: "1.0"
 buildspecs:
   burst_buffer_example:
     type: script
-    executor: slurm.haswell_debug
+    executor: cori.slurm.haswell_debug
     tags: [cray, jobs]
     description: request 1GB burst buffer striped access and write content to buffer
     batch:

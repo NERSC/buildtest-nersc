@@ -2,7 +2,7 @@ version: "1.0"
 buildspecs:
   jobstats:
     type: script
-    executor: local.bash
+    executor: cori.local.bash
     description: run jobstats program
     tags: ["system", "tool", "slurm"]
     run: |
