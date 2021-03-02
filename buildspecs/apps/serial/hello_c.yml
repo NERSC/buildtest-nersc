@@ -2,7 +2,7 @@ version: "1.0"
 buildspecs:
   c_hello:
     type: compiler
-    executor: local.bash
+    executor: cori.local.bash
     description: hello world program in C compiled with gcc and intel compiler
     tags: [compile]
     source: src/hello.c

@@ -3,7 +3,7 @@ buildspecs:
   slurm_metadata:
     description: Get metadata from compute node when submitting job
     type: script
-    executor: slurm.haswell_debug
+    executor: cori.slurm.haswell_debug
     tags: [jobs]
     sbatch:
       - "-t 00:05"

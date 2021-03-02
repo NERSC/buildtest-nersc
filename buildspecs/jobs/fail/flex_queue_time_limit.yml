@@ -2,7 +2,7 @@ version: "1.0"
 buildspecs:
   flex_queue_timemin_not_specified:
     type: script
-    executor: local.bash
+    executor: cori.local.bash
     description: --time-min flag is required for flex queue
     tags: [slurm, fail]
     shell: bash -e
@@ -12,7 +12,7 @@ buildspecs:
 
   flex_queue_timemin_2hrs_greater:    
     type: script
-    executor: local.bash
+    executor: cori.local.bash
     description: --time-min flag must be within 2hrs for flex queue
     tags: [slurm, fail]
     shell: bash -e
@@ -22,7 +22,7 @@ buildspecs:
 
   flex_queue_time_2hrs_greater:    
     type: script
-    executor: local.bash
+    executor: cori.local.bash
     description: --time must be greater than 2hrs, a 2hr job will fail on flex queue 
     tags: [slurm, fail]
     shell: bash -e
@@ -33,7 +33,7 @@ buildspecs:
 
   flex_queue_time_48hrs_greater:    
     type: script
-    executor: local.bash
+    executor: cori.local.bash
     description: --time must be 48hrs or less, a 48:00:01 job will fail on flex queue 
     tags: [slurm, fail]
     shell: bash -e

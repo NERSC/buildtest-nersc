@@ -2,7 +2,7 @@ version: "1.0"
 buildspecs:
   check_mpi_intel_cori:
     type: script
-    executor: slurm.haswell_debug
+    executor: cori.slurm.haswell_debug
     description: MPI Affinity Check
     tags: [mpi, openmp]
     batch:

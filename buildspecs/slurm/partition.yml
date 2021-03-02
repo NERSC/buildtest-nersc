@@ -2,7 +2,7 @@ version: "1.0"
 buildspecs:
   partition_check:
     type: script
-    executor: local.python
+    executor: cori.local.python
     description: query slurm partitions and check if list match expected partitions
     tags: [slurm]
     shell: python

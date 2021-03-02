@@ -1,7 +1,7 @@
 version: "1.0"
 buildspecs:
   nerschost:
-    executor: local.python
+    executor: cori.local.python
     type: script
     shell: python
     tags: ["system"]

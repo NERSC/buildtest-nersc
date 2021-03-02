@@ -2,7 +2,7 @@ version: "1.0"
 buildspecs:
   sacct_query_more_than_31_days:
     type: script
-    executor: local.sh
+    executor: cori.local.sh
     description: Querying more than 31 days from slurm accounting will result in error
     tags: [slurm]
     run: sacct -S 2021-01-01 -E 2021-02-02
@@ -13,7 +13,7 @@ buildspecs:
 
   sacct_query_31_days:
     type: script
-    executor: local.sh
+    executor: cori.local.sh
     description: Querying 31 days of slurm account record will work
     tags: [slurm]
     run: sacct -S 2021-01-01 -E 2021-02-01

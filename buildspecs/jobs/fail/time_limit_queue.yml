@@ -4,7 +4,7 @@ buildspecs:
   time_limit_debug:
     type: script
     description: Test max time limit for debug queue is 30min
-    executor: local.sh
+    executor: cori.local.sh
     tags: [jobs, fail]
     run: |
       jobid=$(sbatch --parsable -N 1 -t 30 -q debug -C knl --wrap="hostname")
@@ -21,7 +21,7 @@ buildspecs:
   time_limit_regular:
     type: script
     description: Test max time limit for regular queue is 48hrs
-    executor: local.sh
+    executor: cori.local.sh
     tags: [jobs, fail]
     run: |
       jobid=$(sbatch --parsable -N 1 -t "48:00:00" -q regular -C knl --wrap="hostname")
@@ -39,7 +39,7 @@ buildspecs:
   time_limit_premium:
     type: script
     description: Test max time limit for premium queue is 48hrs
-    executor: local.sh
+    executor: cori.local.sh
     tags: [jobs, fail]
     run: |
  
@@ -57,7 +57,7 @@ buildspecs:
   time_limit_bigmem:
     type: script
     description: Test max time limit for bigmem queue is 72hrs
-    executor: local.sh
+    executor: cori.local.sh
     tags: [jobs, fail]
     run: |
       jobid=$(sbatch --parsable -N 1 -t "72:00:00" -q bigmem --clusters=escori -C haswell --wrap="hostname")

@@ -3,7 +3,7 @@ buildspecs:
   laplace_mpi:
     type: compiler
     description: Laplace MPI code in C
-    executor: slurm.knl_debug
+    executor: cori.slurm.knl_debug
     tags: ["mpi"]
     source: src/laplace_mpi.c
     compilers:

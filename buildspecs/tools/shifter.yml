@@ -2,14 +2,14 @@ version: "1.0"
 buildspecs:
   shifter_pull:
     type: script
-    executor: local.bash
+    executor: cori.local.bash
     description: Check if shifterimg pull can download a container
     tags: ["system", "containers", "reframe"]
     run: shifterimg pull ubuntu:latest
 
   shifter_job:
     type: script
-    executor: slurm.haswell_debug
+    executor: cori.slurm.haswell_debug
     description: Run shifter in a slurm job and run 32 instance of shifter image to echo hostname
     tags: ["containers", "jobs"]
     sbatch: [-N 1, --image=docker:ubuntu:latest]

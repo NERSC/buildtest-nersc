@@ -2,7 +2,7 @@ version: "1.0"
 buildspecs:
   kernel_version:
     type: script
-    executor: local.bash
+    executor: cori.local.bash
     description: check and match kernel version
     run: uname -r 
     tags: [system,configuration]

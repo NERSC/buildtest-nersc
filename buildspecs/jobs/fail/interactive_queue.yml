@@ -2,7 +2,7 @@ version: "1.0"
 buildspecs:
   sbatch_with_interactive_queue:
     type: script
-    executor: local.bash
+    executor: cori.local.bash
     shell: bash -e
     description: interactive qos expects salloc not sbatch
     tags: [slurm, fail]
@@ -12,7 +12,7 @@ buildspecs:
 
   salloc_exceed_4hrs_limit:
     type: script
-    executor: local.bash
+    executor: cori.local.bash
     shell: bash -e
     tags: [slurm, fail]
     description: interactive queue job cannot exceed 4hr limit, A 04:00:01 job will fail 

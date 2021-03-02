@@ -2,7 +2,7 @@ version: "1.0"
 buildspecs:
   cvmfs_test:
     type: script
-    executor: local.bash
+    executor: cori.local.bash
     description: Is cvmfs mounted
     tags: [filesystem, cvmfs, checkout, reframe]
     run: |

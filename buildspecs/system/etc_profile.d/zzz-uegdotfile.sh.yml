@@ -4,7 +4,7 @@ buildspecs:
     description: check alias and commands from /etc/zzz-uegdotfile.sh
     type: script
     tags: [configuration]
-    executor: local.python
+    executor: cori.local.python
     shell: python
     run: |
       import os

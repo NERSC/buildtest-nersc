@@ -2,21 +2,21 @@ version: "1.0"
 buildspecs:
   myquota:
     type: script
-    executor: local.bash
+    executor: cori.local.bash
     description: Run myquota --check which returns any quota violation. 
     tags: ["system", "storage", "tool", "checkout", "reframe"]
     run: myquota --check
 
   myquota_numbers:
     type: script
-    executor: local.bash
+    executor: cori.local.bash
     description: Run myquota -H which shows quota in human readable format
     tags: ["system", "storage", "tool", "checkout", "reframe"]
     run: myquota -H
 
   myquota_scratch:
     type: script
-    executor: local.bash
+    executor: cori.local.bash
     description: Check quota for $SCRATCH
     tags: ["system", "storage", "tool"]
     run: |
