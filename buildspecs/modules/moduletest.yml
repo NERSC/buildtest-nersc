@@ -3,7 +3,7 @@ buildspecs:
   moduletest_opt_modulefiles:
     description: Run module load test for tree /opt/modulefiles 
     type: script
-    executor: local.bash
+    executor: cori.local.bash
     tags: [modules]
     run: MODULEPATH=/opt/modulefiles python moduletest.py
     status:
@@ -14,7 +14,7 @@ buildspecs:
   moduletest_cray_modulefiles:
     description: Run module load test for tree /opt/cray/modulefiles 
     type: script
-    executor: local.bash
+    executor: cori.local.bash
     tags: [modules]
     run: MODULEPATH=/opt/cray/modulefiles python moduletest.py
     status:
@@ -26,7 +26,7 @@ buildspecs:
   moduletest_cray_ari_modulefiles:
     description: Run module load test for tree /opt/cray/ari/modulefiles
     type: script
-    executor: local.bash
+    executor: cori.local.bash
     tags: [modules]
     run: MODULEPATH=/opt/cray/ari/modulefiles python moduletest.py
     status:
@@ -38,7 +38,7 @@ buildspecs:
   moduletest_craype_modulefiles:
     description: Run module load test for tree /opt/cray/pe/modulefiles
     type: script
-    executor: local.bash
+    executor: cori.local.bash
     tags: [modules]
     run: MODULEPATH=/opt/cray/pe/modulefiles python moduletest.py
     status:
@@ -49,7 +49,7 @@ buildspecs:
   moduletest_ftg_modulefiles:
     description: Run module load test for tree /usr/common/ftg/modulefiles
     type: script
-    executor: local.bash
+    executor: cori.local.bash
     tags: [modules]
     run: MODULEPATH=/usr/common/ftg/modulefiles python moduletest.py
     status:

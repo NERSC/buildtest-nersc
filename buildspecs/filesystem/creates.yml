@@ -3,7 +3,7 @@ version: "1.0"
 buildspecs:
   filesystem_benchmark_creates:
     description: "File System Health benchmark: Creates" 
-    executor: local.bash
+    executor: cori.local.bash
     type: script
     tags: [filesystem, reframe, benchmark, hourly]
     vars:

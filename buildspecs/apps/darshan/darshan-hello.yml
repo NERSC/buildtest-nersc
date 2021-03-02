@@ -2,7 +2,7 @@ version: "1.0"
 buildspecs:
   darshan_cpi_example:
     type: compiler
-    executor: slurm.e4s
+    executor: cori.slurm.e4s
     description: "MPI test to calculate PI and use darshan-parser to view logfile"
     tags: [e4s]
     source: cpi.c

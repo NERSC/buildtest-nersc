@@ -1,7 +1,7 @@
 version: "1.0"
 buildspecs:
   stream_uniprocess_c:
-    executor: local.bash
+    executor: cori.local.bash
     type: script
     description: "STREAM Microbenchmark C test on uniprocessor"
     tags: ["benchmark"]
@@ -11,7 +11,7 @@ buildspecs:
       ./stream
 
   stream_openmp_c:
-    executor: local.bash
+    executor: cori.local.bash
     type: script
     description: "STREAM Microbenchmark C Test with OpenMP"
     tags: ["benchmark"]

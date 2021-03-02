@@ -3,7 +3,7 @@ buildspecs:
   vecadd_openacc_gnu:
     type: compiler
     description: Vector Addition example with GNU compiler
-    executor: slurm.gpu
+    executor: cori.slurm.gpu
     tags: ["gpu", "openacc","jobs"]
     source: src/vecAdd.c
     compilers:

@@ -1,14 +1,14 @@
 version: "1.0"
 buildspecs:
   slurm_config:
-    executor: local.bash
+    executor: cori.local.bash
     type: script
     description: run scontrol show config
     tags: [slurm]
     run: scontrol show config
 
   show_node_config:
-    executor: local.bash
+    executor: cori.local.bash
     type: script
     tags: [slurm]
     description: run scontrol show node
@@ -18,7 +18,7 @@ buildspecs:
       scontrol show node nid1024[0,3,6]
 
   show_partition:
-    executor: local.bash
+    executor: cori.local.bash
     type: script
     tags: [slurm]
     description: run scontrol show partition

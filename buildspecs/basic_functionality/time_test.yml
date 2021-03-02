@@ -2,7 +2,7 @@ version: "1.0"
 buildspecs:
   time_test: 
     type: script
-    executor: local.sh
+    executor: cori.local.sh
     description: "does /usr/bin/time work?"
     tags: [misc, checkout, reframe]
     run: |

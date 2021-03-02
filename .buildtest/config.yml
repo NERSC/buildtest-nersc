@@ -1,547 +1,543 @@
-load_default_buildspecs: false
-moduletool: environment-modules
-executors:
-  defaults:
-    pollinterval: 60
-    launcher: sbatch
-    max_pend_time: 90
-  local:
-    bash:
-      description: submit jobs on local machine using bash shell
-      shell: bash
-    sh:
-      description: submit jobs on local machine using sh shell
-      shell: sh
-    csh:
-      description: submit jobs on local machine using csh shell
-      shell: csh
-    python:
-      description: submit jobs on local machine using python shell
-      shell: python
-    e4s:
-      description: E4S testsuite locally
-      shell: bash
-      before_script: 'source /global/common/software/spackecp/e4s-20.10/spack/share/spack/setup-env.sh
+system:
+  cori:
+    hostnames: [cori01, cori02, cori03, cori04, cori05, cori06, cori07, cori08, cori09, cori10, cori11, cori12 ]
+    load_default_buildspecs: false
+    moduletool: environment-modules
+    executors:
+      defaults:
+        pollinterval: 60
+        launcher: sbatch
+        max_pend_time: 90
+      local:
+        bash:
+          description: submit jobs on local machine using bash shell
+          shell: bash
+        sh:
+          description: submit jobs on local machine using sh shell
+          shell: sh
+        csh:
+          description: submit jobs on local machine using csh shell
+          shell: csh
+        python:
+          description: submit jobs on local machine using python shell
+          shell: python
+        e4s:
+          description: E4S testsuite locally
+          shell: bash
+          before_script: 'source /global/common/software/spackecp/e4s-20.10/spack/share/spack/setup-env.sh
 
-        cd $SCRATCH/testsuite
+            cd $SCRATCH/testsuite
 
-        source setup.sh
+            source setup.sh
 
-        '
-  slurm:
-    haswell_debug:
-      qos: debug
-      cluster: cori
-      options:
-      - -C haswell
-      description: debug queue on Haswell partition
-    haswell_shared:
-      qos: shared
-      cluster: cori
-      options:
-      - -C haswell
-      description: shared queue on Haswell partition
-    haswell_regular:
-      qos: normal
-      cluster: cori
-      options:
-      - -C haswell
-      description: normal queue on Haswell partition
-    haswell_premium:
-      qos: premium
-      cluster: cori
-      options:
-      - -C haswell
-      description: premium queue on Haswell partition
-    knl_flex:
-      description: overrun queue on KNL partition
-      qos: overrun
-      cluster: cori
-      options:
-      - -C knl
-    bigmem:
-      description: bigmem jobs
-      cluster: escori
-      qos: bigmem
-      max_pend_time: 300
-    xfer:
-      description: xfer qos jobs
-      qos: xfer
-      cluster: escori
-      options:
-      - -C haswell
-    compile:
-      description: compile qos jobs
-      qos: compile
-      cluster: escori
-      options:
-      - -N 1
-    knl_debug:
-      qos: debug
-      cluster: cori
-      options:
-      - -C knl,quad,cache
-      description: debug queue on KNL partition
-    knl_regular:
-      qos: normal
-      cluster: cori
-      options:
-      - -C knl,quad,cache
-      description: normal queue on KNL partition
-    knl_premium:
-      qos: premium
-      cluster: cori
-      options:
-      - -C knl,quad,cache
-      description: premium queue on KNL partition
-    knl_low:
-      qos: low
-      cluster: cori
-      options:
-      - -C knl,quad,cache
-      description: low queue on KNL partition
-    knl_flex:
-      description: flex queue on KNL partition
-      qos: flex
-      cluster: cori
-      options:
-      - -C knl
-      - --time-min=01:00:00
-    knl_overrun:
-      description: overrun queue on KNL partition
-      qos: overrun
-      cluster: cori
-      options:
-      - -C knl
-      - --time-min=01:00:00
-    gpu:
-      description: submit jobs to GPU partition
-      options:
-      - -C gpu
-      cluster: escori
-      max_pend_time: 300
-    e4s:
-      description: E4S runner
-      cluster: cori
-      max_pend_time: 20000
-      options:
-      - -q regular
-      - -C knl
-      - -t 10
-      - -n 4
-      before_script: 'source /global/common/software/spackecp/e4s-20.10/spack/share/spack/setup-env.sh
+            '
+      slurm:
+        haswell_debug:
+          qos: debug
+          cluster: cori
+          options:
+          - -C haswell
+          description: debug queue on Haswell partition
+        haswell_shared:
+          qos: shared
+          cluster: cori
+          options:
+          - -C haswell
+          description: shared queue on Haswell partition
+        haswell_regular:
+          qos: normal
+          cluster: cori
+          options:
+          - -C haswell
+          description: normal queue on Haswell partition
+        haswell_premium:
+          qos: premium
+          cluster: cori
+          options:
+          - -C haswell
+          description: premium queue on Haswell partition
+        knl_flex:
+          description: overrun queue on KNL partition
+          qos: overrun
+          cluster: cori
+          options:
+          - -C knl
+        bigmem:
+          description: bigmem jobs
+          cluster: escori
+          qos: bigmem
+          max_pend_time: 300
+        xfer:
+          description: xfer qos jobs
+          qos: xfer
+          cluster: escori
+          options:
+          - -C haswell
+        compile:
+          description: compile qos jobs
+          qos: compile
+          cluster: escori
+          options:
+          - -N 1
+        knl_debug:
+          qos: debug
+          cluster: cori
+          options:
+          - -C knl,quad,cache
+          description: debug queue on KNL partition
+        knl_regular:
+          qos: normal
+          cluster: cori
+          options:
+          - -C knl,quad,cache
+          description: normal queue on KNL partition
+        knl_premium:
+          qos: premium
+          cluster: cori
+          options:
+          - -C knl,quad,cache
+          description: premium queue on KNL partition
+        knl_low:
+          qos: low
+          cluster: cori
+          options:
+          - -C knl,quad,cache
+          description: low queue on KNL partition
+        knl_overrun:
+          description: overrun queue on KNL partition
+          qos: overrun
+          cluster: cori
+          options:
+          - -C knl
+          - --time-min=01:00:00
+        gpu:
+          description: submit jobs to GPU partition
+          options:
+          - -C gpu
+          cluster: escori
+          max_pend_time: 300
+        e4s:
+          description: E4S runner
+          cluster: cori
+          max_pend_time: 20000
+          options:
+          - -q regular
+          - -C knl
+          - -t 10
+          - -n 4
+          before_script: 'source /global/common/software/spackecp/e4s-20.10/spack/share/spack/setup-env.sh
 
-        cd $SCRATCH/testsuite
+            cd $SCRATCH/testsuite
 
-        source setup.sh
+            source setup.sh
 
-        '
-compilers:
-  find:
-    gcc: ^(gcc|PrgEnv-gnu)
-    cray: ^(PrgEnv-cray)
-    intel: ^(intel|PrgEnv-intel)
-    pgi: ^(pgi)
-    cuda: ^(cuda\/)
-  compiler:
-    gcc:
-      builtin_gcc:
-        cc: /usr/bin/gcc
-        cxx: /usr/bin/g++
-        fc: /usr/bin/gfortran
-      PrgEnv-gnu/6.0.5:
-        cc: gcc
-        cxx: g++
-        fc: gfortran
-        module:
-          load:
-          - PrgEnv-gnu/6.0.5
-          purge: false
-      PrgEnv-gnu/6.0.7:
-        cc: gcc
-        cxx: g++
-        fc: gfortran
-        module:
-          load:
-          - PrgEnv-gnu/6.0.7
-          purge: false
-      PrgEnv-gnu/6.0.9:
-        cc: gcc
-        cxx: g++
-        fc: gfortran
-        module:
-          load:
-          - PrgEnv-gnu/6.0.9
-          purge: false
-      gcc/6.1.0:
-        cc: gcc
-        cxx: g++
-        fc: gfortran
-        module:
-          load:
-          - gcc/6.1.0
-          purge: false
-      gcc/7.3.0:
-        cc: gcc
-        cxx: g++
-        fc: gfortran
-        module:
-          load:
-          - gcc/7.3.0
-          purge: false
-      gcc/8.1.0:
-        cc: gcc
-        cxx: g++
-        fc: gfortran
-        module:
-          load:
-          - gcc/8.1.0
-          purge: false
-      gcc/8.2.0:
-        cc: gcc
-        cxx: g++
-        fc: gfortran
-        module:
-          load:
-          - gcc/8.2.0
-          purge: false
-      gcc/8.3.0:
-        cc: gcc
-        cxx: g++
-        fc: gfortran
-        module:
-          load:
-          - gcc/8.3.0
-          purge: false
-      gcc/9.3.0:
-        cc: gcc
-        cxx: g++
-        fc: gfortran
-        module:
-          load:
-          - gcc/9.3.0
-          purge: false
-      gcc/10.1.0:
-        cc: gcc
-        cxx: g++
-        fc: gfortran
-        module:
-          load:
-          - gcc/10.1.0
-          purge: false
-      gcc/6.3.0:
-        cc: gcc
-        cxx: g++
-        fc: gfortran
-        module:
-          load:
-          - gcc/6.3.0
-          purge: false
-      gcc/8.1.1-openacc-gcc-8-branch-20190215:
-        cc: gcc
-        cxx: g++
-        fc: gfortran
-        module:
-          load:
-          - gcc/8.1.1-openacc-gcc-8-branch-20190215
-          purge: false
-    cray:
-      PrgEnv-cray/6.0.5:
-        cc: cc
-        cxx: CC
-        fc: ftn
-        module:
-          load:
-          - PrgEnv-cray/6.0.5
-          purge: false
-      PrgEnv-cray/6.0.7:
-        cc: cc
-        cxx: CC
-        fc: ftn
-        module:
-          load:
-          - PrgEnv-cray/6.0.7
-          purge: false
-      PrgEnv-cray/6.0.9:
-        cc: cc
-        cxx: CC
-        fc: ftn
-        module:
-          load:
-          - PrgEnv-cray/6.0.9
-          purge: false
-    intel:
-      PrgEnv-intel/6.0.5:
-        cc: icc
-        cxx: icpc
-        fc: ifort
-        module:
-          load:
-          - PrgEnv-intel/6.0.5
-          purge: false
-      PrgEnv-intel/6.0.7:
-        cc: icc
-        cxx: icpc
-        fc: ifort
-        module:
-          load:
-          - PrgEnv-intel/6.0.7
-          purge: false
-      PrgEnv-intel/6.0.9:
-        cc: icc
-        cxx: icpc
-        fc: ifort
-        module:
-          load:
-          - PrgEnv-intel/6.0.9
-          purge: false
-      intel/19.0.3.199:
-        cc: icc
-        cxx: icpc
-        fc: ifort
-        module:
-          load:
-          - intel/19.0.3.199
-          purge: false
-      intel/19.1.2.254:
-        cc: icc
-        cxx: icpc
-        fc: ifort
-        module:
-          load:
-          - intel/19.1.2.254
-          purge: false
-      intel/16.0.3.210:
-        cc: icc
-        cxx: icpc
-        fc: ifort
-        module:
-          load:
-          - intel/16.0.3.210
-          purge: false
-      intel/17.0.1.132:
-        cc: icc
-        cxx: icpc
-        fc: ifort
-        module:
-          load:
-          - intel/17.0.1.132
-          purge: false
-      intel/17.0.2.174:
-        cc: icc
-        cxx: icpc
-        fc: ifort
-        module:
-          load:
-          - intel/17.0.2.174
-          purge: false
-      intel/18.0.1.163:
-        cc: icc
-        cxx: icpc
-        fc: ifort
-        module:
-          load:
-          - intel/18.0.1.163
-          purge: false
-      intel/18.0.3.222:
-        cc: icc
-        cxx: icpc
-        fc: ifort
-        module:
-          load:
-          - intel/18.0.3.222
-          purge: false
-      intel/19.0.0.117:
-        cc: icc
-        cxx: icpc
-        fc: ifort
-        module:
-          load:
-          - intel/19.0.0.117
-          purge: false
-      intel/19.0.8.324:
-        cc: icc
-        cxx: icpc
-        fc: ifort
-        module:
-          load:
-          - intel/19.0.8.324
-          purge: false
-      intel/19.1.0.166:
-        cc: icc
-        cxx: icpc
-        fc: ifort
-        module:
-          load:
-          - intel/19.1.0.166
-          purge: false
-      intel/19.1.1.217:
-        cc: icc
-        cxx: icpc
-        fc: ifort
-        module:
-          load:
-          - intel/19.1.1.217
-          purge: false
-      intel/19.1.2.275:
-        cc: icc
-        cxx: icpc
-        fc: ifort
-        module:
-          load:
-          - intel/19.1.2.275
-          purge: false
-      intel/19.1.3.304:
-        cc: icc
-        cxx: icpc
-        fc: ifort
-        module:
-          load:
-          - intel/19.1.3.304
-          purge: false
-    pgi:
-      pgi/18.10:
-        cc: pgcc
-        cxx: pgc++
-        fc: pgfortran
-        module:
-          load:
-          - pgi/18.10
-          purge: false
-      pgi/19.1:
-        cc: pgcc
-        cxx: pgc++
-        fc: pgfortran
-        module:
-          load:
-          - pgi/19.1
-          purge: false
-      pgi/19.3:
-        cc: pgcc
-        cxx: pgc++
-        fc: pgfortran
-        module:
-          load:
-          - pgi/19.3
-          purge: false
-      pgi/19.4:
-        cc: pgcc
-        cxx: pgc++
-        fc: pgfortran
-        module:
-          load:
-          - pgi/19.4
-          purge: false
-      pgi/19.5:
-        cc: pgcc
-        cxx: pgc++
-        fc: pgfortran
-        module:
-          load:
-          - pgi/19.5
-          purge: false
-      pgi/19.7:
-        cc: pgcc
-        cxx: pgc++
-        fc: pgfortran
-        module:
-          load:
-          - pgi/19.7
-          purge: false
-      pgi/19.9:
-        cc: pgcc
-        cxx: pgc++
-        fc: pgfortran
-        module:
-          load:
-          - pgi/19.9
-          purge: false
-      pgi/19.10:
-        cc: pgcc
-        cxx: pgc++
-        fc: pgfortran
-        module:
-          load:
-          - pgi/19.10
-          purge: false
-      pgi/20.1:
-        cc: pgcc
-        cxx: pgc++
-        fc: pgfortran
-        module:
-          load:
-          - pgi/20.1
-          purge: false
-      pgi/20.4:
-        cc: pgcc
-        cxx: pgc++
-        fc: pgfortran
-        module:
-          load:
-          - pgi/20.4
-          purge: false
-    cuda:
-      cuda/9.2.148:
-        cc: nvcc
-        cxx: nvcc
-        fc: None
-        module:
-          load:
-          - cuda/9.2.148
-          purge: false
-      cuda/10.0.130:
-        cc: nvcc
-        cxx: nvcc
-        fc: None
-        module:
-          load:
-          - cuda/10.0.130
-          purge: false
-      cuda/10.1.105:
-        cc: nvcc
-        cxx: nvcc
-        fc: None
-        module:
-          load:
-          - cuda/10.1.105
-          purge: false
-      cuda/10.1.168:
-        cc: nvcc
-        cxx: nvcc
-        fc: None
-        module:
-          load:
-          - cuda/10.1.168
-          purge: false
-      cuda/10.1.243:
-        cc: nvcc
-        cxx: nvcc
-        fc: None
-        module:
-          load:
-          - cuda/10.1.243
-          purge: false
-      cuda/10.2.89:
-        cc: nvcc
-        cxx: nvcc
-        fc: None
-        module:
-          load:
-          - cuda/10.2.89
-          purge: false
-      cuda/11.0.2:
-        cc: nvcc
-        cxx: nvcc
-        fc: None
-        module:
-          load:
-          - cuda/11.0.2
-          purge: false
-      cuda/shifter:
-        cc: nvcc
-        cxx: nvcc
-        fc: None
-        module:
-          load:
-          - cuda/shifter
-          purge: false
+            '
+    compilers:
+      find:
+        gcc: ^(gcc|PrgEnv-gnu)
+        cray: ^(PrgEnv-cray)
+        intel: ^(intel|PrgEnv-intel)
+        pgi: ^(pgi)
+        cuda: ^(cuda\/)
+      compiler:
+        gcc:
+          builtin_gcc:
+            cc: /usr/bin/gcc
+            cxx: /usr/bin/g++
+            fc: /usr/bin/gfortran
+          PrgEnv-gnu/6.0.5:
+            cc: gcc
+            cxx: g++
+            fc: gfortran
+            module:
+              load:
+              - PrgEnv-gnu/6.0.5
+              purge: false
+          PrgEnv-gnu/6.0.7:
+            cc: gcc
+            cxx: g++
+            fc: gfortran
+            module:
+              load:
+              - PrgEnv-gnu/6.0.7
+              purge: false
+          PrgEnv-gnu/6.0.9:
+            cc: gcc
+            cxx: g++
+            fc: gfortran
+            module:
+              load:
+              - PrgEnv-gnu/6.0.9
+              purge: false
+          gcc/6.1.0:
+            cc: gcc
+            cxx: g++
+            fc: gfortran
+            module:
+              load:
+              - gcc/6.1.0
+              purge: false
+          gcc/7.3.0:
+            cc: gcc
+            cxx: g++
+            fc: gfortran
+            module:
+              load:
+              - gcc/7.3.0
+              purge: false
+          gcc/8.1.0:
+            cc: gcc
+            cxx: g++
+            fc: gfortran
+            module:
+              load:
+              - gcc/8.1.0
+              purge: false
+          gcc/8.2.0:
+            cc: gcc
+            cxx: g++
+            fc: gfortran
+            module:
+              load:
+              - gcc/8.2.0
+              purge: false
+          gcc/8.3.0:
+            cc: gcc
+            cxx: g++
+            fc: gfortran
+            module:
+              load:
+              - gcc/8.3.0
+              purge: false
+          gcc/9.3.0:
+            cc: gcc
+            cxx: g++
+            fc: gfortran
+            module:
+              load:
+              - gcc/9.3.0
+              purge: false
+          gcc/10.1.0:
+            cc: gcc
+            cxx: g++
+            fc: gfortran
+            module:
+              load:
+              - gcc/10.1.0
+              purge: false
+          gcc/6.3.0:
+            cc: gcc
+            cxx: g++
+            fc: gfortran
+            module:
+              load:
+              - gcc/6.3.0
+              purge: false
+          gcc/8.1.1-openacc-gcc-8-branch-20190215:
+            cc: gcc
+            cxx: g++
+            fc: gfortran
+            module:
+              load:
+              - gcc/8.1.1-openacc-gcc-8-branch-20190215
+              purge: false
+        cray:
+          PrgEnv-cray/6.0.5:
+            cc: cc
+            cxx: CC
+            fc: ftn
+            module:
+              load:
+              - PrgEnv-cray/6.0.5
+              purge: false
+          PrgEnv-cray/6.0.7:
+            cc: cc
+            cxx: CC
+            fc: ftn
+            module:
+              load:
+              - PrgEnv-cray/6.0.7
+              purge: false
+          PrgEnv-cray/6.0.9:
+            cc: cc
+            cxx: CC
+            fc: ftn
+            module:
+              load:
+              - PrgEnv-cray/6.0.9
+              purge: false
+        intel:
+          PrgEnv-intel/6.0.5:
+            cc: icc
+            cxx: icpc
+            fc: ifort
+            module:
+              load:
+              - PrgEnv-intel/6.0.5
+              purge: false
+          PrgEnv-intel/6.0.7:
+            cc: icc
+            cxx: icpc
+            fc: ifort
+            module:
+              load:
+              - PrgEnv-intel/6.0.7
+              purge: false
+          PrgEnv-intel/6.0.9:
+            cc: icc
+            cxx: icpc
+            fc: ifort
+            module:
+              load:
+              - PrgEnv-intel/6.0.9
+              purge: false
+          intel/19.0.3.199:
+            cc: icc
+            cxx: icpc
+            fc: ifort
+            module:
+              load:
+              - intel/19.0.3.199
+              purge: false
+          intel/19.1.2.254:
+            cc: icc
+            cxx: icpc
+            fc: ifort
+            module:
+              load:
+              - intel/19.1.2.254
+              purge: false
+          intel/16.0.3.210:
+            cc: icc
+            cxx: icpc
+            fc: ifort
+            module:
+              load:
+              - intel/16.0.3.210
+              purge: false
+          intel/17.0.1.132:
+            cc: icc
+            cxx: icpc
+            fc: ifort
+            module:
+              load:
+              - intel/17.0.1.132
+              purge: false
+          intel/17.0.2.174:
+            cc: icc
+            cxx: icpc
+            fc: ifort
+            module:
+              load:
+              - intel/17.0.2.174
+              purge: false
+          intel/18.0.1.163:
+            cc: icc
+            cxx: icpc
+            fc: ifort
+            module:
+              load:
+              - intel/18.0.1.163
+              purge: false
+          intel/18.0.3.222:
+            cc: icc
+            cxx: icpc
+            fc: ifort
+            module:
+              load:
+              - intel/18.0.3.222
+              purge: false
+          intel/19.0.0.117:
+            cc: icc
+            cxx: icpc
+            fc: ifort
+            module:
+              load:
+              - intel/19.0.0.117
+              purge: false
+          intel/19.0.8.324:
+            cc: icc
+            cxx: icpc
+            fc: ifort
+            module:
+              load:
+              - intel/19.0.8.324
+              purge: false
+          intel/19.1.0.166:
+            cc: icc
+            cxx: icpc
+            fc: ifort
+            module:
+              load:
+              - intel/19.1.0.166
+              purge: false
+          intel/19.1.1.217:
+            cc: icc
+            cxx: icpc
+            fc: ifort
+            module:
+              load:
+              - intel/19.1.1.217
+              purge: false
+          intel/19.1.2.275:
+            cc: icc
+            cxx: icpc
+            fc: ifort
+            module:
+              load:
+              - intel/19.1.2.275
+              purge: false
+          intel/19.1.3.304:
+            cc: icc
+            cxx: icpc
+            fc: ifort
+            module:
+              load:
+              - intel/19.1.3.304
+              purge: false
+        pgi:
+          pgi/18.10:
+            cc: pgcc
+            cxx: pgc++
+            fc: pgfortran
+            module:
+              load:
+              - pgi/18.10
+              purge: false
+          pgi/19.1:
+            cc: pgcc
+            cxx: pgc++
+            fc: pgfortran
+            module:
+              load:
+              - pgi/19.1
+              purge: false
+          pgi/19.3:
+            cc: pgcc
+            cxx: pgc++
+            fc: pgfortran
+            module:
+              load:
+              - pgi/19.3
+              purge: false
+          pgi/19.4:
+            cc: pgcc
+            cxx: pgc++
+            fc: pgfortran
+            module:
+              load:
+              - pgi/19.4
+              purge: false
+          pgi/19.5:
+            cc: pgcc
+            cxx: pgc++
+            fc: pgfortran
+            module:
+              load:
+              - pgi/19.5
+              purge: false
+          pgi/19.7:
+            cc: pgcc
+            cxx: pgc++
+            fc: pgfortran
+            module:
+              load:
+              - pgi/19.7
+              purge: false
+          pgi/19.9:
+            cc: pgcc
+            cxx: pgc++
+            fc: pgfortran
+            module:
+              load:
+              - pgi/19.9
+              purge: false
+          pgi/19.10:
+            cc: pgcc
+            cxx: pgc++
+            fc: pgfortran
+            module:
+              load:
+              - pgi/19.10
+              purge: false
+          pgi/20.1:
+            cc: pgcc
+            cxx: pgc++
+            fc: pgfortran
+            module:
+              load:
+              - pgi/20.1
+              purge: false
+          pgi/20.4:
+            cc: pgcc
+            cxx: pgc++
+            fc: pgfortran
+            module:
+              load:
+              - pgi/20.4
+              purge: false
+        cuda:
+          cuda/9.2.148:
+            cc: nvcc
+            cxx: nvcc
+            fc: None
+            module:
+              load:
+              - cuda/9.2.148
+              purge: false
+          cuda/10.0.130:
+            cc: nvcc
+            cxx: nvcc
+            fc: None
+            module:
+              load:
+              - cuda/10.0.130
+              purge: false
+          cuda/10.1.105:
+            cc: nvcc
+            cxx: nvcc
+            fc: None
+            module:
+              load:
+              - cuda/10.1.105
+              purge: false
+          cuda/10.1.168:
+            cc: nvcc
+            cxx: nvcc
+            fc: None
+            module:
+              load:
+              - cuda/10.1.168
+              purge: false
+          cuda/10.1.243:
+            cc: nvcc
+            cxx: nvcc
+            fc: None
+            module:
+              load:
+              - cuda/10.1.243
+              purge: false
+          cuda/10.2.89:
+            cc: nvcc
+            cxx: nvcc
+            fc: None
+            module:
+              load:
+              - cuda/10.2.89
+              purge: false
+          cuda/11.0.2:
+            cc: nvcc
+            cxx: nvcc
+            fc: None
+            module:
+              load:
+              - cuda/11.0.2
+              purge: false
+          cuda/shifter:
+            cc: nvcc
+            cxx: nvcc
+            fc: None
+            module:
+              load:
+              - cuda/shifter
+              purge: false

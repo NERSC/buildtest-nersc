@@ -3,7 +3,7 @@ buildspecs:
   tmp_spack_test:
     description: Spack sanity test on /tmp filesystem by concretize trilinos. 
     type: script
-    executor: slurm.haswell_debug
+    executor: cori.slurm.haswell_debug
     tags: ["spack"]
     sbatch:
       - "-J tmp_spack"

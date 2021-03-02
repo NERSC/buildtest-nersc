@@ -2,7 +2,7 @@ version: "1.0"
 buildspecs:
   out_of_memory:
     type: compiler
-    executor: slurm.knl_debug
+    executor: cori.slurm.knl_debug
     source: src/oom.c
     compilers:
       name: ["^(gcc\/7.3.0)"]

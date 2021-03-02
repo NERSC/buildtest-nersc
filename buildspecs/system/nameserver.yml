@@ -1,7 +1,7 @@
 version: "1.0"
 buildspecs:
   nameserver_ping:
-    executor: local.bash
+    executor: cori.local.bash
     type: script
     description: "Ping nameservers by IP and resolved name"
     tags: ["system", "network"]
@@ -12,7 +12,7 @@ buildspecs:
       ping -c 5 -W 60 ns4.nersc.gov
 
   searchdomain_check:
-   executor: local.bash
+   executor: cori.local.bash
    type: script
    description: "Check equality for search domain"
    tags: ["system", "network"]

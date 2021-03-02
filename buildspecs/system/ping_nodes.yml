@@ -1,7 +1,7 @@
 version: "1.0"
 buildspecs:
   login_nodes:
-    executor: local.bash
+    executor: cori.local.bash
     description: Confirm all Cori Login Nodes are accessible via ping
     tags: ["system", "network"]
     type: script
@@ -20,7 +20,7 @@ buildspecs:
       ping -c 1 -W 20 cori12
 
   data_transfer_nodes:
-    executor: local.bash
+    executor: cori.local.bash
     description: Confirm all Cori Data Transfer Nodes are accessible via ping
     type: script
     tags: ["system", "network"]
@@ -33,7 +33,7 @@ buildspecs:
       ping -c 1 -W 20 dtn06
 
   uptime_login_nodes:
-    executor: local.bash
+    executor: cori.local.bash
     description: Run uptime across all login nodes
     tags: ["system"]
     type: script
@@ -42,7 +42,7 @@ buildspecs:
 
 
   uptime_data_transfer_nodes:
-    executor: local.bash
+    executor: cori.local.bash
     description: Run uptime across all data transfer nodes
     tags: ["system"]
     type: script

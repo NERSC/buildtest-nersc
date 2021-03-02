@@ -2,7 +2,7 @@ version: "1.0"
 buildspecs:
   hybrid_mpi_hello_fortran:
     type: compiler
-    executor: slurm.knl_debug
+    executor: cori.slurm.knl_debug
     description: Hybrid MPI+OpenMP Hello World in Fortran 
     tags: [mpi]
     source: src/hybrid-hello.f90
