@@ -1,0 +1,12 @@
+version: "1.0"
+buildspecs:
+  auto_swap_same_modules:
+    type: script
+    executor: perlmutter.local.bash
+    description: Check if Lmod will autoswap same modules
+    tags: [module]
+    run: |
+      ml purge
+      ml gcc/10.2.0
+      ml gcc/8.1.0
+      ml gcc/9.3.0

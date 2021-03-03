@@ -1,6 +1,6 @@
 system:
   cori:
-    hostnames: [cori01, cori02, cori03, cori04, cori05, cori06, cori07, cori08, cori09, cori10, cori11, cori12 ]
+    hostnames: ["cori*"]
     load_default_buildspecs: false
     moduletool: environment-modules
     executors:
@@ -24,13 +24,10 @@ system:
         e4s:
           description: E4S testsuite locally
           shell: bash
-          before_script: 'source /global/common/software/spackecp/e4s-20.10/spack/share/spack/setup-env.sh
-
+          before_script:  |
+            source /global/common/software/spackecp/e4s-20.10/spack/share/spack/setup-env.sh
             cd $SCRATCH/testsuite
-
             source setup.sh
-
-            '
       slurm:
         haswell_debug:
           qos: debug
@@ -125,20 +122,17 @@ system:
           - -C knl
           - -t 10
           - -n 4
-          before_script: 'source /global/common/software/spackecp/e4s-20.10/spack/share/spack/setup-env.sh
-
+          before_script: |
+            source /global/common/software/spackecp/e4s-20.10/spack/share/spack/setup-env.sh
             cd $SCRATCH/testsuite
-
             source setup.sh
-
-            '
     compilers:
       find:
-        gcc: ^(gcc|PrgEnv-gnu)
-        cray: ^(PrgEnv-cray)
-        intel: ^(intel|PrgEnv-intel)
-        pgi: ^(pgi)
-        cuda: ^(cuda\/)
+        gcc: "^(gcc|PrgEnv-gnu)"
+        cray: "^(PrgEnv-cray)"
+        intel: "^(intel|PrgEnv-intel)"
+        pgi: "^(pgi)"
+        cuda: "^(cuda\/)"
       compiler:
         gcc:
           builtin_gcc:
@@ -541,3 +535,34 @@ system:
               load:
               - cuda/shifter
               purge: false
+  perlmutter:
+    hostnames: ["login*"]
+    load_default_buildspecs: False
+    moduletool: lmod
+    executors:
+      defaults:
+        pollinterval: 60
+        launcher: sbatch
+        max_pend_time: 90
+      local:
+        bash:
+          description: submit jobs on local machine using bash shell
+          shell: bash
+        sh:
+          description: submit jobs on local machine using sh shell
+          shell: sh
+        csh:
+          description: submit jobs on local machine using csh shell
+          shell: csh
+        python:
+          description: submit jobs on local machine using python shell
+          shell: python
+    compilers:
+      find:
+        gcc: "^(gcc)"
+      compiler:
+        gcc:
+          builtin_gcc:
+            cc: /usr/bin/gcc
+            cxx: /usr/bin/g++
+            fc: /usr/bin/gfortran
