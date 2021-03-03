@@ -1,0 +1,71 @@
+#!/bin/bash
+version: "1.0"
+buildspecs:
+  lmod_cmd:
+    type: script
+    executor: perlmutter.local.bash
+    description: check for $LMOD_CMD variable 
+    tags: [module]
+    shell: bash -e
+    run: |
+      echo $LMD_CMD
+      $LMOD_CMD --version
+
+  module_collection_list:
+    type: script
+    executor: perlmutter.local.bash
+    description: show module collection list
+    tags: [module]
+    shell: bash -e
+    run: module -t savelist
+
+  show_prgenv_collections:
+    type: script
+    executor: perlmutter.local.bash
+    description: show module collection name PrgEnv-[aocc|cray|gnu]
+    tags: [module]
+    shell: bash -e
+    run: |
+      module describe PrgEnv-aocc
+      module describe PrgEnv-cray
+      module describe PrgEnv-gnu
+
+  module_and_ml_check:
+    type: script
+    executor: perlmutter.local.bash
+    description: test module and ml command
+    tags: [module]
+    shell: bash -e
+    run: |
+      type module
+      type ml
+      module --version
+      ml --version
+
+  restore_prgenv_collections:
+    type: script
+    executor: perlmutter.local.bash
+    description: restore module collections PrgEnv-[cray|gnu|aocc]
+    tags: [module]
+    shell: bash -e
+    run: |
+      module restore PrgEnv-cray
+      module list
+      module restore PrgEnv-gnu
+      module list
+      module restore PrgEnv-aocc
+      module list
+
+  purge_restore:
+    type: script
+    executor: perlmutter.local.bash
+    description: test module purge and restore. 
+    tags: [module]
+    shell: bash -e
+    run: |
+      module purge
+      module restore
+    status:
+      regex:
+        stream: stderr
+        exp:  "The system default contains no modules"

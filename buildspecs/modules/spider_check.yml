@@ -1,0 +1,12 @@
+version: "1.0"
+buildspecs:
+  spider_check:
+    type: script
+    executor: perlmutter.local.bash
+    description: Check $LMOD_DIR/spider utility
+    tags: [module]
+    run: |
+      $LMOD_DIR/spider --version
+      $LMOD_DIR/spider -o spider-json $MODULEPATH | jq .
+      $LMOD_DIR/spider -o list $MODULEPATH
+      $LMOD_DIR/spider -o softwarePage $MODULEPATH
