@@ -2,7 +2,7 @@ version: "1.0"
 buildspecs:
   e4s_ninja:
     type: script
-    executor: slurm.e4s
+    executor: cori.slurm.e4s
     description: Run ninja test from E4S TestSuite
     tags: [e4s]
     run: $SCRATCH/testsuite/test-all.sh $SCRATCH/testsuite/validation_tests/ninja --settings $SCRATCH/testsuite/settings.cori.sh
