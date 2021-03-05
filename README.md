@@ -45,12 +45,8 @@ and validate all buildspecs in the buildtest-cori repo and load them in buildspe
 $ buildtest buildspec find --root /path/to/buildtest-cori/buildspecs
 ```
 
-The [**buildspecs_roots**](https://buildtest.readthedocs.io/en/devel/configuring_buildtest.html#buildspec-roots) property can be used to
-define location where to search for buildspecs, this property is ommitted since you may clone this in arbitrary location. The ``--root`` option
-is equivalent to specifying list of directories in `buildspecs_root` property defined in configuration file.
-
 The buildspecs are loaded in buildspec cache file (JSON) that is used by `buildtest buildspec find` for querying cache. Subsequent runs will
-read from cache.  For more details see [buildspec interface](https://buildtest.readthedocs.io/en/devel/getting_started.html#buildspecs-interface)
+read from cache.  For more details see [buildspec interface](https://buildtest.readthedocs.io/en/devel/gettingstarted/buildspecs_interface.html)
 
 
 ## Building Tests
@@ -271,7 +267,7 @@ scheduled_system_check:
 
 The scheduled jobs are run at different intervals (1x/day, 1x/week, etc...) at different times of day to avoid overloading the system. The gitlab jobs
 will run jobs based on tags, alternately some tests may be defined by running all tests in a directory (`buildtest build -b apps`). If you want to add a new
-scheduled job, please define a [New Schedule](https://software.nersc.gov/siddiq90/buildtest-cori/-/pipeline_schedules/new) with an appropriate time. The `target branch` should be `devel` and define a unique variable used to distinguish scheduled jobs. Next, create a job in `.gitlab-ci.yml` that references the scheduled job based on the variable name.
+scheduled job, please define a [new schedule](https://software.nersc.gov/siddiq90/buildtest-cori/-/pipeline_schedules/new) with an appropriate time. The `target branch` should be `devel` and define a unique variable used to distinguish scheduled jobs. Next, create a job in `.gitlab-ci.yml` that references the scheduled job based on the variable name.
 
 
 The `validate_tests` gitlab job is responsible for validating buildspecs, please review this job when contributing tests. The buildspec must pass validation
@@ -279,7 +275,7 @@ in order for buildtest to build and run the test.
 
 ## Integrations
 
-buildtest-cori mirror repo has integration with Github and Slack. The integrations can be found athttps://software.nersc.gov/siddiq90/buildtest-cori/-/settings/integrations. The Github integration will push result back to upstream project: https://github.com/buildtesters/buildtest-cori. The CI checks are pushed to [buildtest Slack](https://hpcbuildtest.slack.com) at **#cori-testsuite** workspace. 
+buildtest-cori mirror repo has integration with Github and Slack. The integrations can be found at https://software.nersc.gov/siddiq90/buildtest-cori/-/settings/integrations. The Github integration will push result back to upstream project: https://github.com/buildtesters/buildtest-cori. The CI checks are pushed to [buildtest Slack](https://hpcbuildtest.slack.com) at **#cori-testsuite** workspace. 
 
 
 ## Contributing Guide
