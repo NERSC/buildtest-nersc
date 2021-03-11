@@ -79,7 +79,7 @@ run_everything:
   stage: test
   tags: [cori]
   only: 
-    ref: 
+    refs: 
       - web
   when: manual
   before_script:
