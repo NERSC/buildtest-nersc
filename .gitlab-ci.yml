@@ -28,7 +28,7 @@ validate_tests:
   script:
     - whoami    
     - cd $CI_PROJECT_DIR/
-    - cp $CI_PROJECT_DIR/.buildtest/config.yml $HOME/.buildtest/config.yml
+    - cp $CI_PROJECT_DIR/config.yml $HOME/.buildtest/config.yml
     - buildtest config validate    
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
     - mkdir -p $CI_PROJECT_DIR/.artifacts
@@ -58,7 +58,7 @@ scheduled_system_check:
     - git log --oneline -1
     - echo $CI_PROJECT_DIR   
     - cd $CI_PROJECT_DIR
-    - cp $CI_PROJECT_DIR/.buildtest/config.yml $HOME/.buildtest/config.yml
+    - cp $CI_PROJECT_DIR/config.yml $HOME/.buildtest/config.yml
     - buildtest config validate
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
     - buildtest build --tags slurm --tags system -ft slurm -ft system
@@ -75,6 +75,32 @@ scheduled_system_check:
       - $CI_PROJECT_DIR/.artifacts      
     expire_in: 2 week
 
+run_everything:
+  stage: test
+  tags: [cori]
+  only: 
+    ref: 
+      - web
+  when: manual
+  before_script:
+  - *setup-buildtest
+  script:
+    - cd $CI_PROJECT_DIR
+    - cp $CI_PROJECT_DIR/config.yml $HOME/.buildtest/config.yml
+    - buildtest config validate
+    - buildtest build -b buildspecs
+    - buildtest report --filter state=FAIL
+    - mkdir $CI_PROJECT_DIR/.artifacts
+      #- cp $BUILDTEST_ROOT/buildtest.log $CI_PROJECT_DIR/.artifacts
+    - cp $BUILDTEST_ROOT/var/report.json $CI_PROJECT_DIR/.artifacts
+    - source deactivate 
+  after_script:
+    - *cleanup-buildtest
+    
+  artifacts:
+    paths:
+      - $CI_PROJECT_DIR/.artifacts
+
 e4s_tests:
   stage: test
   only:
@@ -90,7 +116,7 @@ e4s_tests:
     - git log --oneline -1
     - echo $CI_PROJECT_DIR   
     - cd $CI_PROJECT_DIR
-    - cp $CI_PROJECT_DIR/.buildtest/config.yml $HOME/.buildtest/config.yml
+    - cp $CI_PROJECT_DIR/config.yml $HOME/.buildtest/config.yml
     - buildtest config validate
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
     - buildtest build --tags e4s
@@ -106,3 +132,4 @@ e4s_tests:
     paths:
       - $CI_PROJECT_DIR/.artifacts
     expire_in: 2 week
+    

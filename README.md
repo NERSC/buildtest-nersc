@@ -22,7 +22,7 @@ Next, navigate to `buildtest-cori` directory and copy your site configuration to
 
 ```
 cd buildtest-cori
-cp .buildtest/config.yml $HOME/.buildtest/config.yml
+cp .config.yml $HOME/.buildtest/config.yml
 ```
 
 Assuming you have [installed buildtest](https://buildtest.readthedocs.io/en/devel/installing_buildtest.html) you 
@@ -303,7 +303,7 @@ tests and see all the edge cases.
 
 Alternately you can see all published schemas and examples on https://buildtest.readthedocs.io/en/devel/buildspecs/schema_examples.html
 
-If you want to contribute your tests, please send [CONTRIBUTING.md](https://github.com/buildtesters/buildtest-cori/blob/master/CONTRIBUTING.md)
+If you want to contribute your tests, please see [CONTRIBUTING.md](https://github.com/buildtesters/buildtest-cori/blob/devel/CONTRIBUTING.md)
 
 
 ## References
