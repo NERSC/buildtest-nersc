@@ -3,7 +3,7 @@ variables:
   
 .setup-buildtest: &setup-buildtest
   - module load python
-  - conda create -n buildtest python=3.8
+  - conda create -p $CI_PROJECT_DIR/.conda python=3.8
   - source activate buildtest
   - git clone -b devel https://github.com/buildtesters/buildtest    
   - cd buildtest 
@@ -12,7 +12,7 @@ variables:
   - mkdir -p $HOME/.buildtest
   
 .cleanup-buildtest: &cleanup-buildtest
-  - conda env remove -n buildtest -y
+  - conda env remove -p $CI_PROJECT_DIR/.conda  -y
   
 stages:
   - build
