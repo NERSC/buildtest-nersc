@@ -3,7 +3,7 @@ variables:
   
 .setup-buildtest: &setup-buildtest
   - module load python
-  - conda create -p $CI_PROJECT_DIR/.conda python=3.8
+  - conda create -p $CI_PROJECT_DIR/.conda python=3.8 -y
   - source activate buildtest
   - git clone -b devel https://github.com/buildtesters/buildtest    
   - cd buildtest 
