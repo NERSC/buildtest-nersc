@@ -1,0 +1,19 @@
+version: "1.0"
+buildspecs:
+  ssh_cori_from_gerty:
+    type: script
+    executor: gerty.local.bash
+    description: "test ssh connection to cori login nodes from gerty"
+    tags: [system, network]
+    run: ssh -q cori.nersc.gov hostname
+
+  ssh_to_gerty_nodes_from_gerty:
+    type: script
+    executor: gerty.local.bash
+    description: "test ssh connection to gert[01-03] from gerty"
+    tags: [system, network]
+    shell: bash -e
+    run: |
+      ssh -q gert01 hostname
+      ssh -q gert02 hostname
+      ssh -q gert03 hostname
