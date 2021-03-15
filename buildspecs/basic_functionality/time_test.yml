@@ -4,7 +4,7 @@ buildspecs:
     type: script
     executor: cori.local.sh
     description: "does /usr/bin/time work?"
-    tags: [misc, checkout, reframe]
+    tags: [daily, misc, checkout, reframe]
     run: |
       hostname
       which time

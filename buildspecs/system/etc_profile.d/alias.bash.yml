@@ -4,7 +4,7 @@ buildspecs:
     type: cori.script
     shebang: "#!/bin/bash -l"
     description: "Check predefined alias set in /etc/profile.d script"
-    tags: [configuration]
+    tags: [daily, system]
     executor: local.bash
     run: |
       shopt -s expand_aliases

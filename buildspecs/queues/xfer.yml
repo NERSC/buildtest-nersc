@@ -9,4 +9,4 @@ buildspecs:
       - "-N 1"
       - "-C haswell"
     run: hostname
-    tags: ["queues"]
+    tags: ["queues", "jobs"]

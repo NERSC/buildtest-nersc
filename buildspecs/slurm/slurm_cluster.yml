@@ -4,21 +4,21 @@ buildspecs:
     type: script
     executor: cori.local.bash
     description: Check slurm cluster cori
-    tags: [slurm]
+    tags: [daily, slurm]
     run: sacctmgr list cluster -P -n format=cluster cori
 
   slurm_cluster_escori:
     type: script
     executor: cori.local.bash
     description: Check slurm cluster escori
-    tags: [slurm]
+    tags: [daily, slurm]
     run: sacctmgr list cluster -P -n format=cluster escori
 
   slurm_controller_ip_check:
     type: script
     executor: cori.local.bash
     description: run nslookup and ping slurm controller for cluster 'cori' and 'escori'
-    tags: [slurm]
+    tags: [daily, slurm]
     run: |
       nslookup 128.55.144.163
       nslookup 128.55.144.220

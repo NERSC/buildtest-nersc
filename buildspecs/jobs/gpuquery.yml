@@ -4,7 +4,7 @@ buildspecs:
     description: run nvidia-smi command on a single GPU node.
     type: script
     executor: cori.slurm.gpu
-    tags: ["gpu"]
+    tags: ["gpu", "jobs"]
     sbatch: ["-G 1", "-t 5", "-N 1"]
     run: srun nvidia-smi
 maintainers:

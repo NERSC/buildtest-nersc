@@ -4,7 +4,7 @@ buildspecs:
     executor: cori.local.python
     type: script
     shell: python
-    tags: ["system"]
+    tags: ["daily", "system"]
     description: check file exists /etc/profile.d/nerschost and alias nersc_host
     run: |
       import os
