@@ -5,7 +5,7 @@ buildspecs:
     description: Check output of lsb_release -d
     executor: cori.local.bash
     run: lsb_release -d
-    tags: ["system"]
+    tags: ["daily", "system"]
     status:
       regex:
         exp: "SUSE Linux Enterprise Server 15"

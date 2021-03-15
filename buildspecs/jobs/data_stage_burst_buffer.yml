@@ -3,7 +3,7 @@ buildspecs:
   stage_in_out_burst_buffer:
     type: script
     executor: cori.slurm.knl_debug
-    tags: [datawarp, jobs]
+    tags: [jobs, cray]
     description: Stage in data to Burst Buffer
     batch:
       timelimit: "10"

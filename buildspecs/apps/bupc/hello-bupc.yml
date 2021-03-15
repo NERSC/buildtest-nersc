@@ -2,16 +2,19 @@ version: "1.0"
 buildspecs:
   bupc_hello:
     type: compiler
-    executor: slurm.haswell_debug
+    executor: cori.slurm.haswell_debug
     description: "bupc hello world example in C"
-    sbatch: ["-t 10", "-n 8", "-N 2"]
+    source: src/bupc-hello.c
     tags: ["compile"]
-    module:
-      load: [bupc/2020.4.0]
-    build:
-      source: src/bupc-hello.c
-      name: gnu
-      cc: upcc
-      cflags: -g --network=aries
-    run:
-      launcher: upcrun -N 2 -n 8
+    compilers:
+      name: ["builtin_gcc"]
+      default:
+        gcc:
+          cc: upcc
+          cflags: -g --network=aries
+          run: upcrun -N 2 -n 8 $_EXEC
+          sbatch: ["-t 10", "-n 8", "-N 2"]
+      config:
+        builtin_gcc:
+          module:
+            load: [bupc/2020.4.0]

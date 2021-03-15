@@ -4,7 +4,7 @@ buildspecs:
     type: script
     executor: cori.local.bash
     description: Test Submit Limit for Debug Queue beyond 5 jobs. 
-    tags: [jobs,fail]
+    tags: [slurm,fail]
     run: |
       for ((i=1; i<= 6; i++));
       do
@@ -19,7 +19,7 @@ buildspecs:
     type: script
     executor: cori.local.bash
     description: Test Submit Limit for Premium Queue beyond 5 jobs. 
-    tags: [jobs,fail]
+    tags: [slurm,fail]
     run: |
       for ((i=1; i<= 6; i++));
       do
@@ -34,7 +34,7 @@ buildspecs:
     type: script
     executor: cori.local.bash
     description: Submitting 2 node job in compile queue will fail. 
-    tags: [jobs, fail]
+    tags: [slurm, fail]
     run: sbatch -q compile -M escori -N 2 -t 40 --wrap="hostname"
     status:
       regex:

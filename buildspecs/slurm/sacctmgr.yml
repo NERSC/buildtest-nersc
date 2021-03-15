@@ -4,14 +4,14 @@ buildspecs:
     executor: cori.local.bash
     type: script
     description: run sacctmgr list accounts
-    tags: [slurm]
+    tags: [daily, slurm]
     run: sacctmgr list accounts
 
   show_users:
     executor: cori.local.bash
     type: script
     description: run sacctmgr list users
-    tags: [slurm]
+    tags: [daily, slurm]
     run: |
       sacctmgr list users
       sacctmgr list users $USER
@@ -20,7 +20,7 @@ buildspecs:
     executor: cori.local.bash
     type: script
     description: run sacctmgr list qos
-    tags: [slurm]
+    tags: [daily, slurm]
     run: |
       sacctmgr list qos
       sacctmgr list qos normal,premium format=Name,Priority,MaxWall
@@ -29,14 +29,14 @@ buildspecs:
     executor: cori.local.bash
     description: run sacctmgr list association
     type: script
-    tags: [slurm]
+    tags: [daily, slurm]
     run: sacctmgr list association account=xray format=Cluster,Account,User,Share
 
   show_tres:
     executor: cori.local.bash
     description: run sacctmgr list tres
     type: script
-    tags: [slurm]
+    tags: [daily, slurm]
     run: sacctmgr list tres
 
 

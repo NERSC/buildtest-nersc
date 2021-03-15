@@ -4,21 +4,21 @@ buildspecs:
     type: script
     executor: cori.local.bash
     description: Run myquota --check which returns any quota violation. 
-    tags: ["system", "storage", "tool", "checkout", "reframe"]
+    tags: ["daily", "system", "tool", "reframe"]
     run: myquota --check
 
   myquota_numbers:
     type: script
     executor: cori.local.bash
     description: Run myquota -H which shows quota in human readable format
-    tags: ["system", "storage", "tool", "checkout", "reframe"]
+    tags: ["daily", "system", "tool", "reframe"]
     run: myquota -H
 
   myquota_scratch:
     type: script
     executor: cori.local.bash
     description: Check quota for $SCRATCH
-    tags: ["system", "storage", "tool"]
+    tags: ["daily", "system", "tool"]
     run: |
       entry=$(myquota $SCRATCH | grep cscratch1 | wc -l)
       if [ "$entry" -ne "1" ]; then

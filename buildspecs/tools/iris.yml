@@ -4,7 +4,7 @@ buildspecs:
     executor: cori.local.bash
     description: query user information using iris
     type: script
-    tags: ["system", "tool"]
+    tags: ["daily", "system", "tool"]
     run: |
       iris
       iris user $USER
@@ -14,7 +14,7 @@ buildspecs:
     executor: cori.local.bash
     type: script
     description: use iris to query qos 'gpu'
-    tags: ["system", "tool"]
+    tags: ["daily", "system", "tool"]
     run: iris qos gpu --format name,uid,email
 
 
@@ -22,7 +22,7 @@ buildspecs:
     executor: cori.local.bash
     type: script
     description: query project nstaff
-    tags: ["system", "tool"]
+    tags: ["daily", "system", "tool"]
     run: |
       iris project nstaff
       iris project nstaff --users

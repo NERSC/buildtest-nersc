@@ -4,13 +4,13 @@ buildspecs:
     executor: cori.local.bash
     type: script
     description: run scontrol show config
-    tags: [slurm]
+    tags: [daily, slurm]
     run: scontrol show config
 
   show_node_config:
     executor: cori.local.bash
     type: script
-    tags: [slurm]
+    tags: [daily, slurm]
     description: run scontrol show node
     run: |
       scontrol show node nid10241
@@ -20,7 +20,7 @@ buildspecs:
   show_partition:
     executor: cori.local.bash
     type: script
-    tags: [slurm]
+    tags: [daily, slurm]
     description: run scontrol show partition
     run: |
       scontrol show partition

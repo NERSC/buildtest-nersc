@@ -3,31 +3,31 @@ buildspecs:
   sqs_help:
     type: script
     executor: cori.local.bash
-    tags: ["system", "tool", "slurm"]
+    tags: ["daily", "system", "tool", "slurm"]
     run: sqs --help
 
   jobs_by_partitions:
     type: script
     executor: cori.local.bash
-    tags: ["system", "tool", "slurm"]
+    tags: ["daily", "system", "tool", "slurm"]
     run: sqs -a -p interactive,debug
 
   show_running_jobs:
     type: script
     executor: cori.local.bash
-    tags: ["system", "tool", "slurm"]
+    tags: ["daily", "system", "tool", "slurm"]
     run: sqs -r -a
 
   show_nonrunning_jobs:
     type: script
     executor: cori.local.bash
-    tags: ["system", "tool", "slurm"]
+    tags: ["daily", "system", "tool", "slurm"]
     run: sqs -a -nr
 
   show_jobs_qos:
     type: script
     executor: cori.local.bash
-    tags: ["system", "tool", "slurm"]
+    tags: ["daily", "system", "tool", "slurm"]
     run: sqs -a -q regular,premium
 
 maintainers:

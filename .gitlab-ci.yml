@@ -61,7 +61,7 @@ scheduled_system_check:
     - cp $CI_PROJECT_DIR/config.yml $HOME/.buildtest/config.yml
     - buildtest config validate
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
-    - buildtest build --tags slurm --tags system -ft slurm -ft system
+    - buildtest build --tags daily -ft daily
     - buildtest report --filter state=FAIL
     - mkdir $CI_PROJECT_DIR/.artifacts
       #- cp $BUILDTEST_ROOT/buildtest.log $CI_PROJECT_DIR/.artifacts

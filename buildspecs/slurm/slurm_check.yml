@@ -5,7 +5,7 @@ buildspecs:
     type: script
     run: sinfo --version
     description: Check slurm version
-    tags: [slurm]
+    tags: [daily, slurm]
     status:
       regex:
         stream: stdout

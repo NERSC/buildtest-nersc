@@ -4,8 +4,9 @@ buildspecs:
     executor: cori.local.bash
     description: Access $SCRATCH, $CFS and $HOME
     type: script
+    tags: ["daily", "system"]
     run: |
       ls $SCRATCH
       ls $CFS
       ls $HOME
-    tags: ["filesystem"]
+

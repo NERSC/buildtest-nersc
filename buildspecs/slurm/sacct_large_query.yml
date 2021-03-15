@@ -4,7 +4,7 @@ buildspecs:
     type: script
     executor: cori.local.sh
     description: Querying more than 31 days from slurm accounting will result in error
-    tags: [slurm]
+    tags: [daily, slurm]
     run: sacct -S 2021-01-01 -E 2021-02-02
     status:
       regex: 
@@ -15,7 +15,7 @@ buildspecs:
     type: script
     executor: cori.local.sh
     description: Querying 31 days of slurm account record will work
-    tags: [slurm]
+    tags: [daily, slurm]
     run: sacct -S 2021-01-01 -E 2021-02-01
 
 

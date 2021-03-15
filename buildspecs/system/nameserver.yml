@@ -4,7 +4,7 @@ buildspecs:
     executor: cori.local.bash
     type: script
     description: "Ping nameservers by IP and resolved name"
-    tags: ["system", "network"]
+    tags: ["daily", "system", "network"]
     run: |
       ping -c 5 -W 60 128.55.146.10
       ping -c 5 -W 60 128.55.199.10
@@ -15,7 +15,7 @@ buildspecs:
    executor: cori.local.bash
    type: script
    description: "Check equality for search domain"
-   tags: ["system", "network"]
+   tags: ["daily", "system", "network"]
    run: |
      domain=`cat /etc/resolv.conf | grep -E "^(search nersc.gov)$"`
      echo $domain
