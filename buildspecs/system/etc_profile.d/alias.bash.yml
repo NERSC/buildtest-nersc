@@ -1,11 +1,11 @@
 version: "1.0"
 buildspecs:
   bash_alias:
-    type: cori.script
+    type: script
     shebang: "#!/bin/bash -l"
     description: "Check predefined alias set in /etc/profile.d script"
-    tags: [configuration]
-    executor: local.bash
+    tags: [daily, system]
+    executor: cori.local.bash
     run: |
       shopt -s expand_aliases
       alias

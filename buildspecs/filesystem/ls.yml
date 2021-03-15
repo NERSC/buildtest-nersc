@@ -5,7 +5,7 @@ buildspecs:
     type: script
     executor: cori.local.bash
     description: time ls with nwchem for various filesystems
-    tags: [filesystem, reframe, benchmark, hourly]
+    tags: [filesystem, reframe, benchmark]
     vars:
       dirs: "(/global/cfs/cdirs/nstaff/ /global/common/software/nstaff/ $SCRATCH )"
     run: |

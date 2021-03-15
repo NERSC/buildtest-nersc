@@ -4,7 +4,7 @@ buildspecs:
     type: script
     executor: cori.local.bash
     description: check module version of startup module
-    tags: [system, module]
+    tags: [daily, system, module]
     run: module --version
     status:
       regex:

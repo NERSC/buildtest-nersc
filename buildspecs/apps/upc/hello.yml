@@ -2,15 +2,19 @@ version: "1.0"
 buildspecs:
   upc_hello:
     type: compiler
-    executor: slurm.debug
-    sbatch: ["-t 01:00", "-C knl", "-N 1"]
-    module:
-      - "module swap craype-haswell craype-mic-knl"
-      - "module load upcxx/2020.3.0"
-    build:
-      source: src/hello_upcxx.cpp
-      name: gnu
-      cxx: upcxx
-      cxxflags: "-g --network=aries"
-    run:
-      launcher: upcxx-run -N 1 -n 8
+    executor: cori.slurm.knl_debug
+    description: Hello world in upc
+    source: src/hello_upcxx.cpp
+    tags: [compile]
+    compilers:
+      name: [builtin_gcc]
+      default:
+        gcc:
+          sbatch: ["-t 01:00", "-N 1"]
+          cxx: upcxx
+          cxxflags: "-g --network=aries"
+          run: upcxx-run -N 1 -n 8 $_EXEC
+      config:
+        builtin_gcc:
+          module:
+            load: [upcxx/2020.3.0]

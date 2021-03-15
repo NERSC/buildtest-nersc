@@ -9,7 +9,7 @@ buildspecs:
       cpucount: "1"
     sbatch: ["-C knl"]
     description: Delete a burst buffer
-    tags: [jobs]
+    tags: [jobs, cray]
     BB: 
       - destroy_persistent name=databuffer 
     run: |

@@ -3,7 +3,7 @@ buildspecs:
   ssh_login_nodes:
     type: script
     executor: cori.local.bash
-    tags: [system, network]
+    tags: [daily, system, network]
     description: "test ssh connection to login nodes"
     run: |
       ssh -q cori01 hostname
@@ -22,7 +22,7 @@ buildspecs:
   ssh_data_transfer_nodes:
     type: script
     executor: cori.local.bash
-    tags: [system, network]
+    tags: [daily, system, network]
     description: "test ssh connection to data transfer nodes"
     run: |
       ssh -q dtn01 hostname
@@ -36,14 +36,14 @@ buildspecs:
     type: script
     executor: cori.local.bash
     description: "test ssh connection to gerty"
-    tags: [system, network]
+    tags: [daily, system, network]
     run: ssh -q gerty hostname
 
   ssh_gert01_not_reachable:
     type: script
     executor: cori.local.bash
     description: "gert01 should not be reachable from cori login nodes"
-    tags: [system, network]
+    tags: [daily, system, network]
     shell: bash -e 
     run: ssh -q gert01 hostname
     status:
