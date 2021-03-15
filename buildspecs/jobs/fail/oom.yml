@@ -4,6 +4,7 @@ buildspecs:
     type: compiler
     executor: cori.slurm.knl_debug
     source: src/oom.c
+    tags: [slurm, fail]
     compilers:
       name: ["^(gcc\/7.3.0)"]
       default:

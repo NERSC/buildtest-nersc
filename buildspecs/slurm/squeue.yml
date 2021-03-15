@@ -4,33 +4,33 @@ buildspecs:
     executor: cori.local.bash
     type: script
     description: show all current pending jobs for current user (squeue -u $USER)
-    tags: [slurm]
+    tags: [daily, slurm]
     run: squeue -u $USER
 
   pending_jobs_shared_partition:
     executor: cori.local.bash
     type: script
     description: show pending jobs on shared partition
-    tags: [slurm]
+    tags: [daily, slurm]
     run: squeue -p shared -t PENDING
 
   running_jobs_for_user:
     executor: cori.local.bash
     type: script
     description: show running jobs for specific user
-    tags: [slurm]
+    tags: [daily, slurm]
     run: squeue -u camelo -t RUNNING
 
   view_jobs_for_account:
     executor: cori.local.bash
     type: script
     description: show jobs for account nstaff
-    tags: [slurm]
+    tags: [daily, slurm]
     run: squeue -A nstaff
 
   sort_job_priority_partition:
     executor: cori.local.bash
-    tags: [slurm]
+    tags: [daily, slurm]
     type: script
     description: Sort job priority on PENDING jobs in 'shared' partition
     run: squeue --sort=P,U -p shared -t PENDING -O JobID,Partition,UserName,State,NumTasks,Priority,Reason

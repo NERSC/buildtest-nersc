@@ -4,7 +4,7 @@ buildspecs:
     type: script
     executor: cori.local.bash
     description: Get GPFS cluster name via mmlsconfig and check it is set to CORI.nersc.gov
-    tags: ["system", "gpfs"]
+    tags: ["daily", "system", "gpfs"]
     run: /usr/lpp/mmfs/bin/mmlsconfig clusterName
     status:
       regex:
@@ -15,14 +15,14 @@ buildspecs:
     type:  script
     executor: cori.local.bash
     description: ping gpfs cluster CORI.nersc.gov
-    tags: ["system", "gpfs"]
+    tags: ["daily", "system", "gpfs"]
     run: ping -c 4 -W 10 CORI.nersc.gov
 
   gpfs_check:
     type:  script
     executor: cori.local.bash
     description: query gpfs details
-    tags: ["system", "gpfs"]
+    tags: ["daily", "system", "gpfs"]
     run: |
       /usr/lpp/mmfs/bin/mmlsconfig
       /usr/lpp/mmfs/bin/mmlscluster

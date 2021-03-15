@@ -4,7 +4,7 @@ buildspecs:
     type: script
     executor: cori.local.bash
     description: Is cvmfs mounted
-    tags: [filesystem, cvmfs, checkout, reframe]
+    tags: [daily, system, filesystem, cvmfs, reframe]
     run: |
       NUM=$(ls /cvmfs/sw.lsst.eu/ | grep -c "")
       echo PASS num lsst dirs: $NUM

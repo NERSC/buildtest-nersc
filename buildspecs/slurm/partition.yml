@@ -4,7 +4,7 @@ buildspecs:
     type: script
     executor: cori.local.python
     description: query slurm partitions and check if list match expected partitions
-    tags: [slurm]
+    tags: [daily, slurm]
     shell: python
     run: |
       import subprocess

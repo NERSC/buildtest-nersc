@@ -5,7 +5,7 @@ buildspecs:
     executor: cori.local.bash
     description: check and match kernel version
     run: uname -r 
-    tags: [system,configuration]
+    tags: [daily, system]
     status:
       regex:
         stream: stdout

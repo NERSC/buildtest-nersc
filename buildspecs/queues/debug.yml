@@ -7,7 +7,7 @@ buildspecs:
     sbatch:
       - "-t 5"
       - "-N 1"
-    tags: ["queues","reframe"]
+    tags: ["queues","jobs", "reframe"]
     run: hostname
 
   debug_qos_haswell_hostname:
@@ -17,6 +17,6 @@ buildspecs:
     sbatch:
       - "-t 5"
       - "-N 1"
-    tags: ["queues","reframe"]
+    tags: ["queues","jobs", "reframe"]
     run: hostname
 

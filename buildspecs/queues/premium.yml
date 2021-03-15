@@ -8,7 +8,7 @@ buildspecs:
       - "-t 5"
       - "-N 1"
     run: hostname
-    tags: ["queues","reframe"]
+    tags: ["queues","jobs", "reframe"]
 
   premium_qos_knl_hostname:
     description: run hostname through premium qos on KNL
@@ -18,4 +18,4 @@ buildspecs:
       - "-t 5"
       - "-N 1"
     run: hostname
-    tags: ["queues","reframe"]
+    tags: ["queues","jobs","reframe"]

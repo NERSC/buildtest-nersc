@@ -4,7 +4,7 @@ buildspecs:
   check_admin_comment_esslurm:
     type: script
     description: Check if a job has an admin comment after running for esslurm
-    tags: [esslurm, checkout, reframe]
+    tags: [daily, slurm, reframe]
     executor: cori.slurm.bigmem
     batch:
       nodecount: "1"
