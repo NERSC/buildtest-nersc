@@ -72,96 +72,9 @@ buildtest build -b slurm -x slurm/sinfo.yml
 ```
 
 buildtest can run tests via tags which can be useful when grouping tests, to see a list of available tags you 
-can run the following:
+can run: ``buildtest buildspec find --tags``
 
-```
-$ buildtest buildspec find --tags
-+---------------+
-| Tags          |
-+===============+
-| hourly        |
-+---------------+
-| pass          |
-+---------------+
-| slurm         |
-+---------------+
-| tool          |
-+---------------+
-| benchmark     |
-+---------------+
-| benchmarks    |
-+---------------+
-| containers    |
-+---------------+
-| python        |
-+---------------+
-| petsc         |
-+---------------+
-| cray          |
-+---------------+
-| network       |
-+---------------+
-| openmp        |
-+---------------+
-| reframe       |
-+---------------+
-| configuration |
-+---------------+
-| checkout      |
-+---------------+
-| gpu           |
-+---------------+
-| storage       |
-+---------------+
-| jobs          |
-+---------------+
-| gpfs          |
-+---------------+
-| spack         |
-+---------------+
-| lustre        |
-+---------------+
-| darshan       |
-+---------------+
-| lsf           |
-+---------------+
-| datawarp      |
-+---------------+
-| ping          |
-+---------------+
-| e4s           |
-+---------------+
-| tools         |
-+---------------+
-| system        |
-+---------------+
-| misc          |
-+---------------+
-| compile       |
-+---------------+
-| fail          |
-+---------------+
-| ssh           |
-+---------------+
-| queues        |
-+---------------+
-| esslurm       |
-+---------------+
-| mkl           |
-+---------------+
-| cvmfs         |
-+---------------+
-| filesystem    |
-+---------------+
-| modules       |
-+---------------+
-| mpi           |
-+---------------+
-| tutorials     |
-+---------------+
-| openacc       |
-+---------------+
-```
+
 
 For instance if you want to run all ``lustre`` tests you can use ``buildtest build --tags`` option. 
 
@@ -213,8 +126,20 @@ For instance if you want to run all ``lustre`` tests you can use ``buildtest bui
    Passed Tests: 3/3 Percentage: 100.000%
    Failed Tests: 0/3 Percentage: 0.000%
 
-
 ```
+
+## Tags Breakdown
+
+When you write buildspecs, please make sure you attach one or more `tags` to the test that way your test will get picked up during one of the CI checks. Shown
+below is a summary of tag description
+
+- **daily** - this tag is used for running daily system checks using gitlab CI. Tests should run relatively quick
+- **system** - this tag is used for classifying all system tests that may include: system configuration, servers, network, cray tests. This tag should be used 
+- **slurm** - this tag is used for slurm test that includes slurm utility check, slurm controller, etc... This tag **shouldn't** be used for job submission that is managed by **jobs** tag. The `slurm` tag tests should be short running test that use a Local Executor.
+- **jobs** - this tag is used for testing slurm policies by submitting jobs to scheduler. 
+- **compile** - this tag is used for compilation of application (OpenMP, MPI, OpenACC, CUDA, upc, bupc, etc...)
+- **module** - this tag is used for testing module system
+- **benchmark** - this tag is used for benchmark tests. This can be application benchmarks, mini-benchmarks, kernels, etc... 
 
 ## Test Report 
 
