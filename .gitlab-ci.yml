@@ -66,6 +66,9 @@ scheduled_system_check:
     - mkdir $CI_PROJECT_DIR/.artifacts
       #- cp $BUILDTEST_ROOT/buildtest.log $CI_PROJECT_DIR/.artifacts
     - cp $BUILDTEST_ROOT/var/report.json $CI_PROJECT_DIR/.artifacts
+    - cd $BUILDTEST_ROOT/var
+    - python $CI_PROJECT_DIR/buildtest_cdash.py
+    - ls -l Test.xml
     - source deactivate 
   after_script:
     - *cleanup-buildtest
