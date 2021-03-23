@@ -6,6 +6,7 @@ import json
 import os.path
 import re
 import socket
+import sys
 import time
 import xml.etree.cElementTree as ET
 import zlib
@@ -14,11 +15,18 @@ from datetime import datetime
 from urllib.request import urlopen, HTTPHandler, Request
 from urllib.parse import urlencode
 
+argc = len(sys.argv)
+
+if argc != 3:
+    sys.exit("Please specify two arguments: <system-name> <job-name>")
+
 cdash_url = 'https://my.cdash.org/submit.php?project=buildtest-cori'
 # TODO: make site_name and build_name more configurable.
 # For best CDash results, builds names should be consistent (ie not change every time). 
-site_name = socket.gethostname()
-build_name = 'buildtest-cori'
+
+site_name = sys.argv[1]
+hostname = socket.gethostname()
+build_name = sys.argv[2]
 
 input_datetime_format = '%Y/%m/%d %H:%M:%S'
 output_datetime_format = '%Y%m%d-%H%M'
@@ -27,7 +35,8 @@ build_starttime = None
 build_endtime = None
 
 tests = []
-with open('report.json') as json_file:
+report_file = os.path.join(os.getenv("BUILDTEST_ROOT"),"var","report.json")
+with open(report_file) as json_file:
     buildtest_data = json.load(json_file)
     for file_name in buildtest_data.keys():
       for test_name, tests_data in buildtest_data[file_name].items():
