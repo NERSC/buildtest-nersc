@@ -1,0 +1,19 @@
+version: "1.0"
+buildspecs:
+  bupc_pi:
+    type: compiler
+    executor: cori.slurm.haswell_debug
+    description: PI calculation using bupc
+    source: src/pi.c
+    tags: [compile]
+    compilers:
+      name: ["^(builtin_gcc)$"]
+      default:
+        gcc:
+          sbatch: ["-t 10", "-N 1"]
+          cc: upcc
+          run: upcrun -n 4 ./$_EXEC
+      config:
+        builtin_gcc:
+          module:
+            load: ["bupc"]
