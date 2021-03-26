@@ -141,32 +141,10 @@ below is a summary of tag description
 - **module** - this tag is used for testing module system
 - **benchmark** - this tag is used for benchmark tests. This can be application benchmarks, mini-benchmarks, kernels, etc... 
 
-## Test Report 
+## Querying Tests
 
-You can run ``buildtest report`` to get report of all tests. Here is a preview output
+You can use ``buildtest report`` and ``buildtest inspect`` to query tests. The commands differ slightly and data is represented differently. The ``buildtest report`` command will show output in tabular form and only show some of the metadata, if you want to access the entire test record use ``buildtest inspect`` command which displays the content in JSON format. For more details on querying tests see https://buildtest.readthedocs.io/en/devel/gettingstarted/query_test_report.html
 
-```
-$ buildtest report
-+---------------------------------+----------+---------+--------------+---------------------+---------------------+------------+--------------------------------------+------------------------------------------------------------------------------+
-| name                            | id       | state   |   returncode | starttime           | endtime             |    runtime | tags                                 | buildspec                                                                    |
-+=================================+==========+=========+==============+=====================+=====================+============+======================================+==============================================================================+
-| xfer_qos_hostname               | a0b0f578 | PASS    |            0 | 2020-10-14T17:11:17 | 2020-10-14T17:11:18 |  0         | queues                               | /global/u1/s/siddiq90/buildtest-cori/queues/xfer.yml                         |
-+---------------------------------+----------+---------+--------------+---------------------+---------------------+------------+--------------------------------------+------------------------------------------------------------------------------+
-| xfer_qos_hostname               | d0043be3 | PASS    |            0 | 2020-10-16T14:21:50 | 2020-10-16T14:21:51 |  0         | queues                               | /global/u1/s/siddiq90/buildtest-cori/queues/xfer.yml                         |
-+---------------------------------+----------+---------+--------------+---------------------+---------------------+------------+--------------------------------------+------------------------------------------------------------------------------+
-| debug_qos_knl_hostname          | e8c32e83 | PASS    |            0 | 2020-10-14T17:11:17 | 2020-10-14T17:11:20 |  0         | queues reframe                       | /global/u1/s/siddiq90/buildtest-cori/queues/debug.yml                        |
-+---------------------------------+----------+---------+--------------+---------------------+---------------------+------------+--------------------------------------+------------------------------------------------------------------------------+
-| debug_qos_knl_hostname          | 4b84492d | PASS    |            0 | 2020-10-21T14:34:22 | 2020-10-21T14:34:29 |  0         | queues reframe                       | /global/u1/s/siddiq90/buildtest-cori/queues/debug.yml                        |
-+---------------------------------+----------+---------+--------------+---------------------+---------------------+------------+--------------------------------------+------------------------------------------------------------------------------+
-| debug_qos_haswell_hostname      | fe76218c | PASS    |            0 | 2020-10-14T17:11:17 | 2020-10-14T17:11:20 |  0         | queues reframe                       | /global/u1/s/siddiq90/buildtest-cori/queues/debug.yml                        |
-+---------------------------------+----------+---------+--------------+---------------------+---------------------+------------+--------------------------------------+------------------------------------------------------------------------------+
-| premium_qos_haswell_hostname    | 7a67ae00 | PASS    |            0 | 2020-10-14T17:11:23 | 2020-10-14T17:11:27 |  0         | queues reframe                       | /global/u1/s/siddiq90/buildtest-cori/queues/premium.yml                      |
-+---------------------------------+----------+---------+--------------+---------------------+---------------------+------------+--------------------------------------+------------------------------------------------------------------------------+
-| premium_qos_knl_hostname        | ef64cd6f | PASS    |            0 | 2020-10-14T17:11:23 | 2020-10-14T17:11:27 |  0         | queues reframe                       | /global/u1/s/siddiq90/buildtest-cori/queues/premium.yml                      |
-+---------------------------------+----------+---------+--------------+---------------------+---------------------+------------+--------------------------------------+------------------------------------------------------------------------------+
-| bigmem_qos_hostname             | 03efbce4 | PASS    |            0 | 2020-10-14T17:11:20 | 2020-10-14T17:11:21 |  0         | queues reframe                       | /global/u1/s/siddiq90/buildtest-cori/queues/bigmem.yml                       |
-+---------------------------------+----------+---------+--------------+---------------------+---------------------+------------+--------------------------------------+------------------------------------------------------------------------------+
-```
 
 ## CI Setup
 
@@ -200,6 +178,9 @@ in order for buildtest to build and run the test.
 
 buildtest-cori mirror repo has integration with Github and Slack. The integrations can be found at https://software.nersc.gov/siddiq90/buildtest-cori/-/settings/integrations. The Github integration will push result back to upstream project: https://github.com/buildtesters/buildtest-cori. The CI checks are pushed to [buildtest Slack](https://hpcbuildtest.slack.com) at **#cori-testsuite** workspace. 
 
+## CDASH
+
+buildtest will push test results to [CDASH](https://www.kitware.com/cdash/project/about.html) server at https://my.cdash.org/index.php?project=buildtest-cori using the script [buildtest_cdash.py](https://github.com/buildtesters/buildtest-cori/blob/devel/buildtest_cdash.py). This script is run in gitlab pipeline after job completion where it processes the file **$BUILDTEST_ROOT/var/report.json**. If you want to debug the script you just need to run the script `python buildtest_cdash.py` as is. The file **$BUILDTEST_ROOT/var/report.json** is created upon building a test (`buildtest build`).
 
 ## Contributing Guide
 
