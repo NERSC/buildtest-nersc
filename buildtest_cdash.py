@@ -22,7 +22,7 @@ if argc != 3:
 
 cdash_url = 'https://my.cdash.org/submit.php?project=buildtest-cori'
 # TODO: make site_name and build_name more configurable.
-# For best CDash results, builds names should be consistent (ie not change every time). 
+# For best CDash results, builds names should be consistent (ie not change every time).
 
 site_name = sys.argv[1]
 hostname = socket.gethostname()
@@ -57,7 +57,10 @@ with open(report_file) as json_file:
         test['command'] = test_data['command']
         test['path'] = test_data['testpath']
         test['output'] = test_data['output']
+        test['output'] += test_data['error']
         test['runtime'] = test_data['runtime']
+        test['returncode'] = test_data['returncode']
+        test['full_id'] = test_data['full_id']
 
         # extra stuff to capture as measurements
         full_id = test_data['full_id']
@@ -104,13 +107,23 @@ for test in tests:
   runtime_measurement = ET.SubElement(results_element, 'NamedMeasurement', type='numeric/double', name='Execution Time')
   ET.SubElement(runtime_measurement, 'Value').text = str(test['runtime'])
 
+  returncode_measurement = ET.SubElement(results_element, 'NamedMeasurement', type='numeric/double', name='Exit Value')
+  ET.SubElement(returncode_measurement, 'Value').text = str(test['returncode'])
+
+  testid_measurement = ET.SubElement(results_element, 'NamedMeasurement', type='text/string', name='Test ID')
+  ET.SubElement(testid_measurement, 'Value').text = test['full_id']
+
   output_measurement = ET.SubElement(results_element, 'Measurement')
 
   base64_zlib_output = base64.b64encode(zlib.compress(bytes(''.join(test['output']), 'ascii'))).decode('ascii')
   ET.SubElement(output_measurement, 'Value', encoding='base64', compression='gzip').text = base64_zlib_output
 
-  # TODO: report these as NamedMeasurements?
-  #full_id = test_data['full_id']
+  gitlab_job_url = os.getenv('CI_JOB_URL')
+  if gitlab_job_url is not None:
+    gitlab_link_measurement = ET.SubElement(results_element, 'NamedMeasurement', type='text/link', name='View GitLab CI results')
+    ET.SubElement(gitlab_link_measurement, 'Value').text = gitlab_job_url
+
+  # TODO: report as NamedMeasurements?
   #executor = test_data['executor']
   # tags sound like labels
   #tags = test_data['tags']
