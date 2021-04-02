@@ -47,20 +47,30 @@ with open(report_file) as json_file:
 
         state = test_data['state']
         if state == 'PASS':
-          test['status'] = 'passed';
+          test['status'] = 'passed'
         elif state == 'FAIL':
-          test['status'] = 'failed';
+          test['status'] = 'failed'
         else:
           print('Unrecognized state {0} for test {1}; marking it as failed'.format(state, test_name))
-          test['status'] = 'failed';
+          test['status'] = 'failed'
 
         test['command'] = test_data['command']
         test['path'] = test_data['testpath']
+        test['test_content'] = test_data['test_content']
         test['output'] = test_data['output']
         test['output'] += test_data['error']
         test['runtime'] = test_data['runtime']
         test['returncode'] = test_data['returncode']
         test['full_id'] = test_data['full_id']
+        test['user'] = test_data['user']
+        test['hostname'] = test_data['hostname']
+        test["schemafile"] = test_data['schemafile']
+
+        test['tags'] = test_data['tags']
+        test['executor'] = test_data['executor']
+        test['compiler'] = test_data['compiler']
+        test['starttime'] = test_data['starttime']
+        test['endtime'] = test_data['endtime']
 
         # extra stuff to capture as measurements
         full_id = test_data['full_id']
@@ -107,11 +117,38 @@ for test in tests:
   runtime_measurement = ET.SubElement(results_element, 'NamedMeasurement', type='numeric/double', name='Execution Time')
   ET.SubElement(runtime_measurement, 'Value').text = str(test['runtime'])
 
-  returncode_measurement = ET.SubElement(results_element, 'NamedMeasurement', type='numeric/double', name='Exit Value')
-  ET.SubElement(returncode_measurement, 'Value').text = str(test['returncode'])
-
   testid_measurement = ET.SubElement(results_element, 'NamedMeasurement', type='text/string', name='Test ID')
   ET.SubElement(testid_measurement, 'Value').text = test['full_id']
+
+  returncode_measurement = ET.SubElement(results_element, 'NamedMeasurement', type='numeric/double', name='Return Code')
+  ET.SubElement(returncode_measurement, 'Value').text = str(test['returncode'])
+
+  user_measurement = ET.SubElement(results_element, 'NamedMeasurement', type='text/string', name='User')
+  ET.SubElement(user_measurement, 'Value').text = test['user']
+
+  hostname_measurement = ET.SubElement(results_element, 'NamedMeasurement', type='text/string', name='Hostname')
+  ET.SubElement(hostname_measurement, 'Value').text = test['hostname']
+
+  executor_measurement = ET.SubElement(results_element, 'NamedMeasurement', type='text/string', name='executor')
+  ET.SubElement(executor_measurement, 'Value').text = test['executor']
+
+  tags_measurement = ET.SubElement(results_element, 'NamedMeasurement', type='text/string', name='Tags')
+  ET.SubElement(tags_measurement, 'Value').text = test['tags']
+
+  testpath_measurement = ET.SubElement(results_element, 'NamedMeasurement', type='text/string', name='testpath')
+  ET.SubElement(testpath_measurement, 'Value').text = test['path']
+
+  starttime_measurement = ET.SubElement(results_element, 'NamedMeasurement', type='text/string', name='starttime')
+  ET.SubElement(starttime_measurement, 'Value').text = test['starttime']
+
+  endtime_measurement = ET.SubElement(results_element, 'NamedMeasurement', type='text/string', name='endtime')
+  ET.SubElement(endtime_measurement, 'Value').text = test['endtime']
+
+  compiler_measurement = ET.SubElement(results_element, 'NamedMeasurement', type='text/string', name='compiler')
+  ET.SubElement(compiler_measurement, 'Value').text = test['compiler']
+
+  schema_measurement = ET.SubElement(results_element, 'NamedMeasurement', type='text/string', name='schemafile')
+  ET.SubElement(schema_measurement, 'Value').text = test['schemafile']
 
   output_measurement = ET.SubElement(results_element, 'Measurement')
 
@@ -123,10 +160,6 @@ for test in tests:
     gitlab_link_measurement = ET.SubElement(results_element, 'NamedMeasurement', type='text/link', name='View GitLab CI results')
     ET.SubElement(gitlab_link_measurement, 'Value').text = gitlab_job_url
 
-  # TODO: report as NamedMeasurements?
-  #executor = test_data['executor']
-  # tags sound like labels
-  #tags = test_data['tags']
 
 xml_tree = ET.ElementTree(site_element)
 xml_tree.write(filename)
