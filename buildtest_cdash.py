@@ -5,7 +5,6 @@ import hashlib
 import json
 import os.path
 import re
-import socket
 import sys
 import time
 import xml.etree.cElementTree as ET
@@ -14,7 +13,7 @@ import zlib
 from datetime import datetime
 from urllib.request import urlopen, HTTPHandler, Request
 from urllib.parse import urlencode
-
+from buildtest.defaults import BUILD_REPORT
 argc = len(sys.argv)
 
 if argc != 3:
@@ -25,7 +24,6 @@ cdash_url = 'https://my.cdash.org/submit.php?project=buildtest-cori'
 # For best CDash results, builds names should be consistent (ie not change every time).
 
 site_name = sys.argv[1]
-hostname = socket.gethostname()
 build_name = sys.argv[2]
 
 input_datetime_format = '%Y/%m/%d %H:%M:%S'
@@ -35,8 +33,10 @@ build_starttime = None
 build_endtime = None
 
 tests = []
-report_file = os.path.join(os.getenv("BUILDTEST_ROOT"),"var","report.json")
-with open(report_file) as json_file:
+if not os.path.exists(BUILD_REPORT):
+  sys.exit(f"Unable to find report file: {BUILD_REPORT} please build a test via buildtest build")
+
+with open(BUILD_REPORT) as json_file:
     buildtest_data = json.load(json_file)
     for file_name in buildtest_data.keys():
       for test_name, tests_data in buildtest_data[file_name].items():
@@ -58,7 +58,6 @@ with open(report_file) as json_file:
         test['path'] = test_data['testpath']
         test['test_content'] = test_data['test_content']
         test['output'] = test_data['output']
-        test['output'] += test_data['error']
         test['runtime'] = test_data['runtime']
         test['returncode'] = test_data['returncode']
         test['full_id'] = test_data['full_id']
@@ -72,12 +71,13 @@ with open(report_file) as json_file:
         test['starttime'] = test_data['starttime']
         test['endtime'] = test_data['endtime']
 
-        # extra stuff to capture as measurements
-        full_id = test_data['full_id']
-        executor = test_data['executor']
+        # extra preformatted output fields
+        test['buildspec_content'] = test_data['buildspec_content']
+        test['error'] = test_data['error']
+        test['test_content'] = test_data['test_content']
 
-        # tags sound like labels
-        tags = test_data['tags']
+        # tags == labels
+        test['tags'] = test_data['tags']
 
         # ignored for now
         #testroot = test_data['testroot']
@@ -85,7 +85,6 @@ with open(report_file) as json_file:
         #rundir = test_data['rundir']
         #outfile = test_data['outfile']
         #errfile = test_data['errfile']
-        #schemafile = test_data['schemafile']
 
         # test start and end time.
         starttime = test_data['starttime']
@@ -150,6 +149,15 @@ for test in tests:
   schema_measurement = ET.SubElement(results_element, 'NamedMeasurement', type='text/string', name='schemafile')
   ET.SubElement(schema_measurement, 'Value').text = test['schemafile']
 
+  error_content = ET.SubElement(results_element, 'NamedMeasurement', type='text/preformatted', name='Error')
+  ET.SubElement(error_content, 'Value').text = test['error']
+
+  buildspec_content = ET.SubElement(results_element, 'NamedMeasurement', type='text/preformatted', name='Buildspec Content')
+  ET.SubElement(buildspec_content, 'Value').text = test['buildspec_content']
+
+  test_content = ET.SubElement(results_element, 'NamedMeasurement', type='text/preformatted', name='Test Content')
+  ET.SubElement(test_content, 'Value').text = test['test_content']
+
   output_measurement = ET.SubElement(results_element, 'Measurement')
 
   base64_zlib_output = base64.b64encode(zlib.compress(bytes(''.join(test['output']), 'ascii'))).decode('ascii')
@@ -160,6 +168,10 @@ for test in tests:
     gitlab_link_measurement = ET.SubElement(results_element, 'NamedMeasurement', type='text/link', name='View GitLab CI results')
     ET.SubElement(gitlab_link_measurement, 'Value').text = gitlab_job_url
 
+  # Report tags as labels
+  labels_element = ET.SubElement(test_element, 'Labels')
+  for tag in test['tags'].split(' '):
+    ET.SubElement(labels_element, 'Label').text = tag
 
 xml_tree = ET.ElementTree(site_element)
 xml_tree.write(filename)
