@@ -13,7 +13,7 @@ import zlib
 from datetime import datetime
 from urllib.request import urlopen, HTTPHandler, Request
 from urllib.parse import urlencode
-
+from buildtest.defaults import BUILD_REPORT
 argc = len(sys.argv)
 
 if argc != 3:
@@ -33,8 +33,10 @@ build_starttime = None
 build_endtime = None
 
 tests = []
-report_file = os.path.join(os.getenv("BUILDTEST_ROOT"),"var","report.json")
-with open(report_file) as json_file:
+if not os.path.exists(BUILD_REPORT):
+  sys.exit(f"Unable to find report file: {BUILD_REPORT} please build a test via buildtest build")
+
+with open(BUILD_REPORT) as json_file:
     buildtest_data = json.load(json_file)
     for file_name in buildtest_data.keys():
       for test_name, tests_data in buildtest_data[file_name].items():
