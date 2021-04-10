@@ -32,7 +32,7 @@ validate_tests:
     - buildtest config validate    
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
     - mkdir -p $CI_PROJECT_DIR/.artifacts
-    - cp $BUILDTEST_ROOT/var/{buildspec-cache.json,buildspec.error} $CI_PROJECT_DIR/.artifacts
+    - cp $HOME/.buildtest/buildspecs/{cache.json,error.txt} $CI_PROJECT_DIR/.artifacts
     - source deactivate 
   
   after_script:
@@ -64,8 +64,8 @@ scheduled_system_check:
     - buildtest build --tags daily -ft daily
     - buildtest report --filter state=FAIL
     - mkdir $CI_PROJECT_DIR/.artifacts
-      #- cp $BUILDTEST_ROOT/buildtest.log $CI_PROJECT_DIR/.artifacts
-    - cp $BUILDTEST_ROOT/var/report.json $CI_PROJECT_DIR/.artifacts
+    - cp $BUILDTEST_ROOT/buildtest.log $CI_PROJECT_DIR/.artifacts
+    - cp $HOME/.buildtest/report.json $CI_PROJECT_DIR/.artifacts
     - python $CI_PROJECT_DIR/buildtest_cdash.py cori scheduled_system_check
     - ls -l Test.xml
     - source deactivate 
@@ -77,24 +77,27 @@ scheduled_system_check:
       - $CI_PROJECT_DIR/.artifacts      
     expire_in: 2 week
 
-run_everything:
+apps:
   stage: test
   tags: [cori]
   only: 
     refs: 
-      - web
-  when: manual
+      - schedules
+    variables:
+      - $APP == "True"
+
   before_script:
   - *setup-buildtest
   script:
     - cd $CI_PROJECT_DIR
     - cp $CI_PROJECT_DIR/config.yml $HOME/.buildtest/config.yml
     - buildtest config validate
-    - buildtest build -b buildspecs
+    - buildtest build -b buildspecs/apps
     - buildtest report --filter state=FAIL
     - mkdir $CI_PROJECT_DIR/.artifacts
-      #- cp $BUILDTEST_ROOT/buildtest.log $CI_PROJECT_DIR/.artifacts
-    - cp $BUILDTEST_ROOT/var/report.json $CI_PROJECT_DIR/.artifacts
+    - cp $BUILDTEST_ROOT/buildtest.log $CI_PROJECT_DIR/.artifacts
+    - cp $HOME/.buildtest/report.json $CI_PROJECT_DIR/.artifacts
+    - python $CI_PROJECT_DIR/buildtest_cdash.py cori apps
     - source deactivate 
   after_script:
     - *cleanup-buildtest
@@ -124,8 +127,8 @@ e4s_tests:
     - buildtest build --tags e4s
     - buildtest report --filter state=FAIL
     - mkdir $CI_PROJECT_DIR/.artifacts
-      #- cp $BUILDTEST_ROOT/buildtest.log $CI_PROJECT_DIR/.artifacts
-    - cp $BUILDTEST_ROOT/var/report.json $CI_PROJECT_DIR/.artifacts
+    - cp $BUILDTEST_ROOT/buildtest.log $CI_PROJECT_DIR/.artifacts
+    - cp $$HOME/.buildtest/report.json $CI_PROJECT_DIR/.artifacts
     - python $CI_PROJECT_DIR/buildtest_cdash.py cori e4s_tests
     - source deactivate 
   after_script:
