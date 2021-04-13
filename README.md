@@ -180,7 +180,7 @@ buildtest-cori mirror repo has integration with Github and Slack. The integratio
 
 ## CDASH
 
-buildtest will push test results to [CDASH](https://www.kitware.com/cdash/project/about.html) server at https://my.cdash.org/index.php?project=buildtest-cori using the script [buildtest_cdash.py](https://github.com/buildtesters/buildtest-cori/blob/devel/buildtest_cdash.py). This script is run in gitlab pipeline after job completion where it processes the file **$BUILDTEST_ROOT/var/report.json**. If you want to debug the script you just need to run the script `python buildtest_cdash.py` as is. The file **$BUILDTEST_ROOT/var/report.json** is created upon building a test (`buildtest build`).
+buildtest will push test results to [CDASH](https://www.kitware.com/cdash/project/about.html) server at https://my.cdash.org/index.php?project=buildtest-cori using `buildtest cdash upload` command which uploads all tests found in report file found in **$HOME/.buildtest/report.json**. 
 
 ## Contributing Guide
 
