@@ -66,8 +66,7 @@ scheduled_system_check:
     - mkdir $CI_PROJECT_DIR/.artifacts
     - cp $BUILDTEST_ROOT/buildtest.log $CI_PROJECT_DIR/.artifacts
     - cp $HOME/.buildtest/report.json $CI_PROJECT_DIR/.artifacts
-    - python $CI_PROJECT_DIR/buildtest_cdash.py cori scheduled_system_check
-    - ls -l Test.xml
+    - buildtest cdash upload --buildname=daily_check
     - source deactivate 
   after_script:
     - *cleanup-buildtest
@@ -97,7 +96,7 @@ apps:
     - mkdir $CI_PROJECT_DIR/.artifacts
     - cp $BUILDTEST_ROOT/buildtest.log $CI_PROJECT_DIR/.artifacts
     - cp $HOME/.buildtest/report.json $CI_PROJECT_DIR/.artifacts
-    - python $CI_PROJECT_DIR/buildtest_cdash.py cori apps
+    - buildtest cdash upload --buildname=apps
     - source deactivate 
   after_script:
     - *cleanup-buildtest
@@ -129,7 +128,7 @@ e4s_tests:
     - mkdir $CI_PROJECT_DIR/.artifacts
     - cp $BUILDTEST_ROOT/buildtest.log $CI_PROJECT_DIR/.artifacts
     - cp $$HOME/.buildtest/report.json $CI_PROJECT_DIR/.artifacts
-    - python $CI_PROJECT_DIR/buildtest_cdash.py cori e4s_tests
+    - buildtest cdash upload --buildname=e4s
     - source deactivate 
   after_script:
     - *cleanup-buildtest
