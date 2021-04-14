@@ -28,6 +28,8 @@ system:
     cdash:
       url: https://my.cdash.org/submit.php?project=buildtest-cori
       site: gerty
+      buildname: gerty
+
   perlmutter:
     hostnames:
     - login*
@@ -64,6 +66,7 @@ system:
     cdash:
       url: https://my.cdash.org/submit.php?project=buildtest-cori
       site: perlmutter
+      buildname: perlmutter
   cori:
     hostnames:
     - cori*
@@ -72,6 +75,7 @@ system:
     cdash:
       url: https://my.cdash.org/submit.php?project=buildtest-cori
       site: cori
+      buildname: cori
     executors:
       defaults:
         pollinterval: 60
