@@ -9,6 +9,7 @@ variables:
   - cd buildtest 
   - . setup.sh
   - buildtest --help
+  - rm -rf $HOME/.buildtest
   - mkdir -p $HOME/.buildtest
   
 .cleanup-buildtest: &cleanup-buildtest
@@ -22,6 +23,9 @@ validate_tests:
   tags: [cori]
   before_script:
     - *setup-buildtest
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "web" || $CI_PIPELINE_SOURCE == "push"'
+      when: manual
   script:
     - whoami    
     - cd $CI_PROJECT_DIR/
@@ -60,10 +64,10 @@ scheduled_system_check:
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
     - buildtest build --tags daily -ft daily
     - buildtest report --filter state=FAIL
-    - mkdir $CI_PROJECT_DIR/.artifacts
+    - mkdir -p $CI_PROJECT_DIR/.artifacts
     - cp $BUILDTEST_ROOT/buildtest.log $CI_PROJECT_DIR/.artifacts
     - cp $HOME/.buildtest/report.json $CI_PROJECT_DIR/.artifacts
-    - buildtest cdash upload buildname=daily_check
+    - buildtest cdash upload daily_check
     - source deactivate 
   after_script:
     - *cleanup-buildtest
@@ -90,10 +94,10 @@ apps:
     - buildtest config validate
     - buildtest build --tags compile --filter-tags compile
     - buildtest report --filter state=FAIL
-    - mkdir $CI_PROJECT_DIR/.artifacts
+    - mkdir -p $CI_PROJECT_DIR/.artifacts
     - cp $BUILDTEST_ROOT/buildtest.log $CI_PROJECT_DIR/.artifacts
     - cp $HOME/.buildtest/report.json $CI_PROJECT_DIR/.artifacts
-    - buildtest cdash upload buildname=apps
+    - buildtest cdash upload apps
     - source deactivate 
   after_script:
     - *cleanup-buildtest
@@ -122,10 +126,10 @@ e4s_tests:
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
     - buildtest build --tags e4s
     - buildtest report --filter state=FAIL
-    - mkdir $CI_PROJECT_DIR/.artifacts
+    - mkdir -p $CI_PROJECT_DIR/.artifacts
     - cp $BUILDTEST_ROOT/buildtest.log $CI_PROJECT_DIR/.artifacts
     - cp $$HOME/.buildtest/report.json $CI_PROJECT_DIR/.artifacts
-    - buildtest cdash upload buildname=e4s
+    - buildtest cdash upload e4s
     - source deactivate 
   after_script:
     - *cleanup-buildtest
