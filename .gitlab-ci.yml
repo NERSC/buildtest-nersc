@@ -63,7 +63,7 @@ scheduled_system_check:
     - mkdir $CI_PROJECT_DIR/.artifacts
     - cp $BUILDTEST_ROOT/buildtest.log $CI_PROJECT_DIR/.artifacts
     - cp $HOME/.buildtest/report.json $CI_PROJECT_DIR/.artifacts
-    - buildtest cdash upload --buildname=daily_check
+    - buildtest cdash upload buildname=daily_check
     - source deactivate 
   after_script:
     - *cleanup-buildtest
@@ -88,12 +88,12 @@ apps:
     - cd $CI_PROJECT_DIR
     - cp $CI_PROJECT_DIR/config.yml $HOME/.buildtest/config.yml
     - buildtest config validate
-    - buildtest build -b buildspecs/apps
+    - buildtest build --tags compile --filter-tags compile
     - buildtest report --filter state=FAIL
     - mkdir $CI_PROJECT_DIR/.artifacts
     - cp $BUILDTEST_ROOT/buildtest.log $CI_PROJECT_DIR/.artifacts
     - cp $HOME/.buildtest/report.json $CI_PROJECT_DIR/.artifacts
-    - buildtest cdash upload --buildname=apps
+    - buildtest cdash upload buildname=apps
     - source deactivate 
   after_script:
     - *cleanup-buildtest
@@ -125,7 +125,7 @@ e4s_tests:
     - mkdir $CI_PROJECT_DIR/.artifacts
     - cp $BUILDTEST_ROOT/buildtest.log $CI_PROJECT_DIR/.artifacts
     - cp $$HOME/.buildtest/report.json $CI_PROJECT_DIR/.artifacts
-    - buildtest cdash upload --buildname=e4s
+    - buildtest cdash upload buildname=e4s
     - source deactivate 
   after_script:
     - *cleanup-buildtest
