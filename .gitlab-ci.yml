@@ -63,10 +63,10 @@ scheduled_system_check:
     - buildtest config validate
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
     - buildtest build --tags daily -ft daily -r $BUILDTEST_ROOT/report.json
-    - buildtest report --filter state=FAIL -f $BUILDTEST_ROOT/report.json
+    - buildtest report --filter state=FAIL -r $BUILDTEST_ROOT/report.json
     - mkdir -p $CI_PROJECT_DIR/.artifacts
     - cp $BUILDTEST_ROOT/{buildtest.log,report.json} $CI_PROJECT_DIR/.artifacts
-    - buildtest cdash upload daily_check -f $BUILDTEST_ROOT/report.json
+    - buildtest cdash upload daily_check -r $BUILDTEST_ROOT/report.json
     - source deactivate 
   after_script:
     - *cleanup-buildtest
@@ -92,10 +92,9 @@ apps:
     - cp $CI_PROJECT_DIR/config.yml $HOME/.buildtest/config.yml
     - buildtest config validate
     - buildtest build --tags compile --filter-tags compile -r $BUILDTEST_ROOT/report.json
-    - buildtest report --filter state=FAIL -f $BUILDTEST_ROOT/report.json
+    - buildtest report --filter state=FAIL -r $BUILDTEST_ROOT/report.json
     - mkdir -p $CI_PROJECT_DIR/.artifacts
     - cp $BUILDTEST_ROOT/{buildtest.log,report.json} $CI_PROJECT_DIR/.artifacts
-    - cp $HOME/.buildtest/report.json $CI_PROJECT_DIR/.artifacts
     - buildtest cdash upload apps -r $BUILDTEST_ROOT/report.json
     - source deactivate 
   after_script:
@@ -124,7 +123,7 @@ e4s_tests:
     - buildtest config validate
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
     - buildtest build --tags e4s -r $BUILDTEST_ROOT/report.json
-    - buildtest report --filter state=FAIL -f $BUILDTEST_ROOT/report.json
+    - buildtest report --filter state=FAIL -r $BUILDTEST_ROOT/report.json
     - mkdir -p $CI_PROJECT_DIR/.artifacts
     - cp $BUILDTEST_ROOT/{buildtest.log,report.json} $CI_PROJECT_DIR/.artifacts
     - buildtest cdash upload e4s -r $BUILDTEST_ROOT/report.json
