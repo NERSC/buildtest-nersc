@@ -10,7 +10,7 @@ buildspecs:
       name: ["^(intel/19.0.3.199)$"]
       default:
         intel:
-          cc: mpiifort
+          fc: mpiifort
           fflags: -qopenmp
           sbatch: ["-N 1", "-n 8", "-t 20:00"]
           env:
