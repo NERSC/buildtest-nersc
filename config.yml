@@ -26,7 +26,8 @@ system:
             cxx: /usr/bin/g++
             fc: /usr/bin/gfortran
     cdash:
-      url: https://my.cdash.org/submit.php?project=buildtest-cori
+      url: https://my.cdash.org
+      project: buildtest-cori
       site: gerty
 
   perlmutter:
@@ -63,7 +64,8 @@ system:
             fc: /usr/bin/gfortran
 
     cdash:
-      url: https://my.cdash.org/submit.php?project=buildtest-cori
+      url: https://my.cdash.org
+      project: buildtest-cori
       site: perlmutter
   cori:
     hostnames:
@@ -71,7 +73,8 @@ system:
     load_default_buildspecs: false
     moduletool: environment-modules
     cdash:
-      url: https://my.cdash.org/submit.php?project=buildtest-cori
+      url: https://my.cdash.org
+      project: buildtest-cori
       site: cori
     executors:
       defaults:
