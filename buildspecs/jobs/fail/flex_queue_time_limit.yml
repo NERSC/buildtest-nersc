@@ -1,42 +1,63 @@
 version: "1.0"
 buildspecs:
-  flex_queue_timemin_not_specified:
+  knl_flex_queue_timemin_missing:
     type: script
     executor: cori.local.bash
-    description: --time-min flag is required for flex queue
-    tags: [slurm, fail]
+    description: --time-min flag is required for flex queue on KNL
+    tags: [daily, slurm, fail]
     shell: bash -e
     run: sbatch -N 1 -t 03:00:00 -C knl -q flex --wrap="hostname"
     status:
       returncode: 1 
 
-  flex_queue_timemin_2hrs_greater:    
+  knl_flex_queue_timemin_2hrs:    
     type: script
     executor: cori.local.bash
-    description: --time-min flag must be within 2hrs for flex queue
-    tags: [slurm, fail]
+    description: --time-min flag must be within 2hrs for flex queue on KNL
+    tags: [daily, slurm, fail]
     shell: bash -e
     run: sbatch -N 1 -t 03:00:00 --time-min 02:00:01 -C knl --wrap="hostname"
     status:
       returncode: 1 
 
-  flex_queue_time_2hrs_greater:    
+  knl_flex_queue_time_2hrs:    
     type: script
     executor: cori.local.bash
-    description: --time must be greater than 2hrs, a 2hr job will fail on flex queue 
-    tags: [slurm, fail]
+    description: --time must be greater than 2hrs, a 2hr job will fail on flex queue on KNL
+    tags: [daily, slurm, fail]
     shell: bash -e
     run: sbatch -N 1 -t 02:00:00 --time-min 02:00:00 -C knl --wrap="hostname"
     status:
       returncode: 1
 
 
-  flex_queue_time_48hrs_greater:    
+  knl_flex_queue_time_48hrs:    
     type: script
     executor: cori.local.bash
-    description: --time must be 48hrs or less, a 48:00:01 job will fail on flex queue 
-    tags: [slurm, fail]
+    description: --time must be 48hrs or less, a 48:00:01 job will fail on flex queue on KNL 
+    tags: [daily, slurm, fail]
     shell: bash -e
     run: sbatch -N 1 -t 48:00:01 --time-min 02:00:00 -C knl --wrap="hostname"
+    status:
+      returncode: 1
+
+
+  hsw_flex_queue_time_48hrs:    
+    type: script
+    executor: cori.local.bash
+    description: flex queue on Haswell --time must be within 48hrs or less
+    tags: [daily, slurm, fail]
+    shell: bash -e
+    run: sbatch -N 1 -t 48:00:01 --time-min 02:00:00 -C haswell --wrap="hostname"
+    status:
+      returncode: 1
+
+  hsw_flex_queue_time_2hrs:
+    type: script
+    executor: cori.local.bash
+    description: flex queue on Haswell --time must be greater than 2hrs
+    tags: [daily, slurm, fail]
+    shell: bash -e
+    run: sbatch -N 1 -t 02:00:01 --time-min 02:00:00 -C haswell --wrap="hostname"
     status:
       returncode: 1
