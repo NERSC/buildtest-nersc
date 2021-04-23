@@ -4,7 +4,7 @@ buildspecs:
     type: script
     description: regular queue has max node limit of 9489 on KNL partition
     executor: cori.local.sh
-    tags: [slurm, fail]
+    tags: [daily, slurm, fail]
     run: sbatch -q shared -t 10 -N 9490 -C knl --wrap="hostname"
     status:
       regex:
@@ -15,7 +15,7 @@ buildspecs:
     type: script
     description: max node limit for debug queue is 512 on KNL partition
     executor: cori.local.sh
-    tags: [slurm, fail]
+    tags: [daily, slurm, fail]
     run: sbatch -q debug -t 10 -N 513 -C knl --wrap="hostname"
     status:
       regex:
@@ -26,7 +26,7 @@ buildspecs:
     type: script
     description: max node limit for premium queue is 9489 on KNL partition
     executor: cori.local.sh
-    tags: [slurm, fail]
+    tags: [daily, slurm, fail]
     run: sbatch -q premium -t 10 -N 9490 -C knl  --wrap="hostname"
     status:
       regex:
@@ -37,7 +37,7 @@ buildspecs:
     type: script
     description: max node limit for low queue is 9489 on KNL partition
     executor: cori.local.sh
-    tags: [slurm, fail]
+    tags: [daily, slurm, fail]
     run: sbatch -q xfer -t 10 -N 9490 -C knl  --wrap="hostname"
     status:
       regex:
@@ -48,7 +48,7 @@ buildspecs:
     type: script
     description: max node limit for flex queue is 256 on KNL partition
     executor: cori.local.sh
-    tags: [slurm, fail]
+    tags: [daily, slurm, fail]
     run: sbatch -q bigmem -t 10 -N 257 -C KNL  --wrap="hostname"
     status:
       regex:

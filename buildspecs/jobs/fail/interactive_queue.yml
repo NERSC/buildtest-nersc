@@ -5,7 +5,7 @@ buildspecs:
     executor: cori.local.bash
     shell: bash -e
     description: interactive qos expects salloc not sbatch
-    tags: [slurm, fail]
+    tags: [daily, slurm, fail]
     run: sbatch -N 1 -t 30 -C haswell -q interactive --wrap="hostname"
     status:
       returncode: 1
@@ -14,7 +14,7 @@ buildspecs:
     type: script
     executor: cori.local.bash
     shell: bash -e
-    tags: [slurm, fail]
+    tags: [daily, slurm, fail]
     description: interactive queue job cannot exceed 4hr limit, A 04:00:01 job will fail 
     run: salloc -N 1 -t 04:00:01 -C haswell -q interactive 
     status:

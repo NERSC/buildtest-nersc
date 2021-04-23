@@ -4,18 +4,29 @@ buildspecs:
     type: script
     description: shared queue has max node limit of 1932 on Haswell partition
     executor: cori.local.sh
-    tags: [slurm, fail]
+    tags: [daily, slurm, fail]
     run: sbatch -q shared -t 10 -N 1933 -C haswell --wrap="hostname"
     status:
       regex:
         stream: stderr
         exp: "(Batch job submission failed)"
+  
+  max_nodes_regular_queue_haswell:
+    type: script
+    description: regular queue has limit of 512 nodes on Haswell partition
+    executor: cori.local.sh
+    tags: [daily, slurm, fail]
+    run: sbatch -q regular -t 10 -C haswell -N 513 --wrap="hostname"
+    status: 
+      regex:
+        stream: stderr
+        exp: "(sbatch: error: Job request does not match any supported policy.)"
 
   max_nodes_shared_haswell:
     type: script
     description: shared queue has max node limit of 0.5 on Haswell partition
     executor: cori.local.sh
-    tags: [slurm, fail]
+    tags: [daily, slurm, fail]
     run: sbatch -q shared -t 10 -N 2 -C haswell --wrap="hostname"
     status:
       regex:
@@ -26,7 +37,7 @@ buildspecs:
     type: script
     description: max node limit for debug queue is 64 on Haswell partition
     executor: cori.local.sh
-    tags: [slurm, fail]
+    tags: [daily, slurm, fail]
     run: sbatch -q debug -t 10 -N 65 -C haswell --wrap="hostname"
     status:
       regex:
@@ -37,7 +48,7 @@ buildspecs:
     type: script
     description: max node limit for premium queue is 1772 on Haswell partition
     executor: cori.local.sh
-    tags: [slurm, fail]
+    tags: [daily, slurm, fail]
     run: sbatch -q premium -t 10 -N 1773 -C haswell  --wrap="hostname"
     status:
       regex:
@@ -48,20 +59,42 @@ buildspecs:
     type: script
     description: max node limit for xfer queue is 1 on Haswell partition
     executor: cori.local.sh
-    tags: [slurm, fail]
+    tags: [daily, slurm, fail]
     run: sbatch -q xfer -t 10 -N 2 -M escori -C haswell  --wrap="hostname"
     status:
       regex:
         stream: stderr
         exp: "(Batch job submission failed)"
-
+  
   max_nodes_bigmem_haswell:
     type: script
     description: max node limit for bigmem queue is 1 on Haswell partition
     executor: cori.local.sh
-    tags: [slurm, fail]
+    tags: [daily, slurm, fail]
     run: sbatch -q bigmem -t 10 -N 2 -M escori -C haswell  --wrap="hostname"
     status:
       regex:
         stream: stderr
         exp: "(Batch job submission failed)"
+
+  max_nodes_compile_queue:
+    type: script
+    description: max node limit for compile queue is 1
+    executor: cori.local.sh
+    tags: [daily, slurm, fail]
+    run: sbatch -M escori -q compile -t 1 -N 2 -C haswell  --wrap="hostname"
+    status:
+      regex:
+        stream: stderr
+        exp: "(sbatch: error: Batch job submission failed: Node count specification invalid)"
+
+  max_nodes_flex_haswell:
+    type: script
+    description: max node limit for flex queue is 64 on Haswell partition
+    executor: cori.local.sh
+    tags: [daily, slurm, fail]
+    run: sbatch -q flex --time-min=01:00:00 -t 03:00:00 -N 65 -C haswell  --wrap="hostname"
+    status:
+      regex:
+        stream: stderr
+        exp: "(sbatch: error: Job request does not match any supported policy.)"
