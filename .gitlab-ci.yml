@@ -104,6 +104,33 @@ apps:
     paths:
       - $CI_PROJECT_DIR/.artifacts
 
+benchmark:
+  stage: test
+  tags: [cori]
+  only:
+    refs:
+      - schedules
+    variables:
+      - $BENCHMARK == "True"
+
+  before_script:
+  - *setup-buildtest
+  script:
+    - cd $CI_PROJECT_DIR
+    - buildtest -c $CI_PROJET_DIR/config.yml config validate
+    - buildtest -c $CI_PROJECT_DIR/config.yml build --tags benchmark --filter-tags benchmark -r $BUILDTEST_ROOT/report.json
+    - buildtest report --filter state=FAIL -r $BUILDTEST_ROOT/report.json
+    - mkdir -p $CI_PROJECT_DIR/.artifacts
+    - cp $BUILDTEST_ROOT/{buildtest.log,report.json} $CI_PROJECT_DIR/.artifacts
+    - buildtest cdash upload benchmark -r $BUILDTEST_ROOT/report.json
+    - source deactivate
+  after_script:
+    - *cleanup-buildtest
+
+  artifacts:
+    paths:
+      - $CI_PROJECT_DIR/.artifacts
+
 e4s_tests:
   stage: test
   only:

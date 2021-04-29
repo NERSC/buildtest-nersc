@@ -4,11 +4,11 @@ buildspecs:
     type: script
     executor: cori.slurm.haswell_debug
     sbatch: [ "-N 1", "-t 15"]
-    description: dgemm performance via libsci and gnu compiler -  user ticket INC0167504
+    description: dgemm performance via intel mkl sequential  user ticket INC0167504
     tags: [benchmark, ticket]
     run: |
-      module swap PrgEnv-intel PrgEnv-gnu
-      make -f Makefile.libsci_gnu
+      module load PrgEnv-intel
+      make -f Makefile.mkl_intel_sequential
       export OMP_PLACES=threads
       export OMP_PROC_BIND=spread
       OMP_NUM_THREADS=1 srun -c 64 --cpu_bind=cores ./run

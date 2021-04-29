@@ -65,9 +65,9 @@ CFLAGS	= -O3 -DGEMM
 BLASOPTS = -O3
 FFLAGS	= -O3
 # BLASLIB=-Wl,--start-group ${MKLROOT}/lib/intel64/libmkl_intel_lp64.a ${MKLROOT}/lib/intel64/libmkl_gnu_thread.a ${MKLROOT}/lib/intel64/libmkl_core.a -Wl,--end-group -lgomp -lpthread -lm -ldl
-BLASLIB=-Wl,--start-group /opt/cray/pe/libsci/19.06.1/GNU/8.1/x86_64/lib/libsci_gnu_82_mpi_mp.so -Wl,--end-group -lgomp -lpthread -lm -ldl
+#BLASLIB=-Wl,--start-group /opt/cray/pe/libsci/19.06.1/GNU/8.1/x86_64/lib/libsci_gnu_82_mpi_mp.so -Wl,--end-group -lgomp -lpthread -lm -ldl
 # BLASLIB=-Wl,--start-group ${MKLROOT}/lib/intel64/libmkl_intel_lp64.a ${MKLROOT}/lib/intel64/libmkl_intel_thread.a ${MKLROOT}/lib/intel64/libmkl_core.a -Wl,--end-group -liomp5 -lpthread -lm -ldl
-# BLASLIB= -Wl,--start-group ${MKLROOT}/lib/intel64/libmkl_intel_lp64.a ${MKLROOT}/lib/intel64/libmkl_sequential.a ${MKLROOT}/lib/intel64/libmkl_core.a -Wl,--end-group -lpthread -lm -ldl
+BLASLIB= -Wl,--start-group ${MKLROOT}/lib/intel64/libmkl_intel_lp64.a ${MKLROOT}/lib/intel64/libmkl_sequential.a ${MKLROOT}/lib/intel64/libmkl_core.a -Wl,--end-group -lpthread -lm -ldl
 ISA = 
 
 
