@@ -11,6 +11,7 @@ variables:
   - buildtest --help
   - rm -rf $HOME/.buildtest
   - mkdir -p $HOME/.buildtest
+  - buildtest -c $CI_PROJECT_DIR/config.yml config validate
   
 .cleanup-buildtest: &cleanup-buildtest
   - conda env remove -p $CI_PROJECT_DIR/.conda  -y
@@ -27,11 +28,7 @@ validate_tests:
     - if: '$CI_PIPELINE_SOURCE == "web" || $CI_PIPELINE_SOURCE == "push"'
       when: manual
   script:
-    - whoami    
-    - cd $CI_PROJECT_DIR/
-    - cp $CI_PROJECT_DIR/config.yml $HOME/.buildtest/config.yml
-    - buildtest config validate    
-    - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
+    - buildtest -c $CI_PROJECT_DIR/config.yml buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
     - mkdir -p $CI_PROJECT_DIR/.artifacts
     - cp $HOME/.buildtest/buildspecs/{cache.json,error.txt} $CI_PROJECT_DIR/.artifacts
     - source deactivate 
@@ -55,14 +52,8 @@ scheduled_system_check:
   before_script:
     - *setup-buildtest
   script:
-    - whoami && ls -l 
-    - git log --oneline -1
-    - echo $CI_PROJECT_DIR   
-    - cd $CI_PROJECT_DIR
-    - cp $CI_PROJECT_DIR/config.yml $HOME/.buildtest/config.yml
-    - buildtest config validate
-    - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
-    - buildtest build --tags daily -ft daily -r $BUILDTEST_ROOT/report.json
+    - buildtest -c $CI_PROJECT_DIR/config.yml buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
+    - buildtest -c $CI_PROJECT_DIR/config.yml build --tags daily -ft daily -r $BUILDTEST_ROOT/report.json
     - buildtest report --filter state=FAIL -r $BUILDTEST_ROOT/report.json
     - mkdir -p $CI_PROJECT_DIR/.artifacts
     - cp $BUILDTEST_ROOT/{buildtest.log,report.json} $CI_PROJECT_DIR/.artifacts
@@ -88,10 +79,8 @@ apps:
   before_script:
   - *setup-buildtest
   script:
-    - cd $CI_PROJECT_DIR
-    - cp $CI_PROJECT_DIR/config.yml $HOME/.buildtest/config.yml
-    - buildtest config validate
-    - buildtest build --tags compile --filter-tags compile -r $BUILDTEST_ROOT/report.json
+    - buildtest -c $CI_PROJECT_DIR/config.yml buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
+    - buildtest -c $CI_PROJECT_DIR/config.yml build --tags compile --filter-tags compile -r $BUILDTEST_ROOT/report.json
     - buildtest report --filter state=FAIL -r $BUILDTEST_ROOT/report.json
     - mkdir -p $CI_PROJECT_DIR/.artifacts
     - cp $BUILDTEST_ROOT/{buildtest.log,report.json} $CI_PROJECT_DIR/.artifacts
@@ -116,8 +105,7 @@ benchmark:
   before_script:
   - *setup-buildtest
   script:
-    - cd $CI_PROJECT_DIR
-    - buildtest -c $CI_PROJET_DIR/config.yml config validate
+    - buildtest -c $CI_PROJECT_DIR/config.yml buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
     - buildtest -c $CI_PROJECT_DIR/config.yml build --tags benchmark --filter-tags benchmark -r $BUILDTEST_ROOT/report.json
     - buildtest report --filter state=FAIL -r $BUILDTEST_ROOT/report.json
     - mkdir -p $CI_PROJECT_DIR/.artifacts
@@ -142,14 +130,8 @@ e4s_tests:
   before_script:
     - *setup-buildtest
   script:
-    - whoami && ls -l 
-    - git log --oneline -1
-    - echo $CI_PROJECT_DIR   
-    - cd $CI_PROJECT_DIR
-    - cp $CI_PROJECT_DIR/config.yml $HOME/.buildtest/config.yml
-    - buildtest config validate
-    - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
-    - buildtest build --tags e4s -r $BUILDTEST_ROOT/report.json
+    - buildtest -c $CI_PROJECT_DIR/config.yml buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
+    - buildtest -c $CI_PROJECT_DIR/config.yml build --tags e4s -r $BUILDTEST_ROOT/report.json
     - buildtest report --filter state=FAIL -r $BUILDTEST_ROOT/report.json
     - mkdir -p $CI_PROJECT_DIR/.artifacts
     - cp $BUILDTEST_ROOT/{buildtest.log,report.json} $CI_PROJECT_DIR/.artifacts
