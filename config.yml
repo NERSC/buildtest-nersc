@@ -97,13 +97,11 @@ system:
         e4s:
           description: E4S testsuite locally
           shell: bash
-          before_script: 'source /global/common/software/spackecp/e4s-20.10/spack/share/spack/setup-env.sh
-
+          before_script: |
+            module load e4s/20.10
             cd $SCRATCH/testsuite
-
             source setup.sh
 
-            '
       slurm:
         haswell_debug:
           qos: debug
@@ -198,13 +196,11 @@ system:
           - -C knl
           - -t 10
           - -n 4
-          before_script: 'source /global/common/software/spackecp/e4s-20.10/spack/share/spack/setup-env.sh
-
+          before_script:  |
+            module load e4s/20.10
             cd $SCRATCH/testsuite
-
             source setup.sh
 
-            '
     compilers:
       find:
         gcc: ^(gcc|PrgEnv-gnu)

@@ -1,6 +1,6 @@
 version: "1.0"
 buildspecs:
-  libsci_gnu_dgemm:
+  mkl_intel_threaded_dgemm:
     type: script
     executor: cori.slurm.haswell_debug
     sbatch: [ "-N 1", "-t 15"]
