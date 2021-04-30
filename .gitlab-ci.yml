@@ -57,7 +57,7 @@ scheduled_system_check:
     - buildtest report --filter state=FAIL -r $BUILDTEST_ROOT/report.json
     - mkdir -p $CI_PROJECT_DIR/.artifacts
     - cp $BUILDTEST_ROOT/{buildtest.log,report.json} $CI_PROJECT_DIR/.artifacts
-    - buildtest cdash upload daily_check -r $BUILDTEST_ROOT/report.json
+    - buildtest -c $CI_PROJECT_DIR/config.yml cdash upload daily_check -r $BUILDTEST_ROOT/report.json
     - source deactivate 
   after_script:
     - *cleanup-buildtest
@@ -84,7 +84,7 @@ apps:
     - buildtest report --filter state=FAIL -r $BUILDTEST_ROOT/report.json
     - mkdir -p $CI_PROJECT_DIR/.artifacts
     - cp $BUILDTEST_ROOT/{buildtest.log,report.json} $CI_PROJECT_DIR/.artifacts
-    - buildtest cdash upload apps -r $BUILDTEST_ROOT/report.json
+    - buildtest -c $CI_PROJECT_DIR/config.yml cdash upload apps -r $BUILDTEST_ROOT/report.json
     - source deactivate 
   after_script:
     - *cleanup-buildtest
@@ -110,7 +110,7 @@ benchmark:
     - buildtest report --filter state=FAIL -r $BUILDTEST_ROOT/report.json
     - mkdir -p $CI_PROJECT_DIR/.artifacts
     - cp $BUILDTEST_ROOT/{buildtest.log,report.json} $CI_PROJECT_DIR/.artifacts
-    - buildtest cdash upload benchmark -r $BUILDTEST_ROOT/report.json
+    - buildtest -c $CI_PROJECT_DIR/config.yml cdash upload benchmark -r $BUILDTEST_ROOT/report.json
     - source deactivate
   after_script:
     - *cleanup-buildtest
@@ -135,7 +135,7 @@ e4s_tests:
     - buildtest report --filter state=FAIL -r $BUILDTEST_ROOT/report.json
     - mkdir -p $CI_PROJECT_DIR/.artifacts
     - cp $BUILDTEST_ROOT/{buildtest.log,report.json} $CI_PROJECT_DIR/.artifacts
-    - buildtest cdash upload e4s -r $BUILDTEST_ROOT/report.json
+    - buildtest -c $CI_PROJECT_DIR/config.yml cdash upload e4s -r $BUILDTEST_ROOT/report.json
     - source deactivate 
   after_script:
     - *cleanup-buildtest
