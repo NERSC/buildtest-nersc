@@ -7,14 +7,10 @@ buildspecs:
     source: src/hello_upcxx.cpp
     tags: [compile]
     compilers:
-      name: [builtin_gcc]
+      name: ["^(upcxx\/)"]
       default:
-        gcc:
+        upcxx:
           sbatch: ["-t 01:00", "-N 1"]
-          cxx: upcxx
+          cxx: "upcxx"
           cxxflags: "-g --network=aries"
-          run: upcxx-run -N 1 -n 8 $_EXEC
-      config:
-        builtin_gcc:
-          module:
-            load: [upcxx/2020.3.0]
+          run: "upcxx-run -N 1 -n 8 $_EXEC"

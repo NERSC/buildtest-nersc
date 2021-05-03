@@ -8,6 +8,7 @@ variables:
   - git clone -b devel https://github.com/buildtesters/buildtest    
   - cd buildtest 
   - . setup.sh
+  - git log --oneline -1
   - buildtest --help
   - rm -rf $HOME/.buildtest
   - mkdir -p $HOME/.buildtest
