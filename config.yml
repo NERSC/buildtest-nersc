@@ -78,9 +78,9 @@ system:
       site: cori
     executors:
       defaults:
-        pollinterval: 60
+        pollinterval: 30
         launcher: sbatch
-        max_pend_time: 90
+        max_pend_time: 300
       local:
         bash:
           description: submit jobs on local machine using bash shell
