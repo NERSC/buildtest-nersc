@@ -1,10 +1,7 @@
-variables:
-  SCHEDULER_PARAMETERS: "-N 1 -M escori -t 06:00:00 -q compile -A m3503"
-  
 .setup-buildtest: &setup-buildtest
   - module load python
   - conda create -p $CI_PROJECT_DIR/.conda python=3.8 -y
-  - source activate buildtest
+  - source activate $CI_PROJECT_DIR/.conda
   - git clone -b devel https://github.com/buildtesters/buildtest    
   - cd buildtest 
   - . setup.sh
@@ -22,7 +19,7 @@ stages:
   - test
 validate_tests:
   stage: build
-  tags: [cori]
+  tags: [c_e4s_cori01]
   before_script:
     - *setup-buildtest
   rules:
@@ -49,7 +46,7 @@ scheduled_system_check:
       - schedules
     variables:
       - $DAILYCHECK == "True"
-  tags: [cori]
+  tags: [c_e4s_cori01]
   before_script:
     - *setup-buildtest
   script:
@@ -70,7 +67,7 @@ scheduled_system_check:
 
 apps:
   stage: test
-  tags: [cori]
+  tags: [c_e4s_cori01]
   only: 
     refs: 
       - schedules
@@ -96,7 +93,7 @@ apps:
 
 benchmark:
   stage: test
-  tags: [cori]
+  tags: [c_e4s_cori01]
   only:
     refs:
       - schedules
@@ -122,15 +119,16 @@ benchmark:
 
 e4s_tests:
   stage: test
+  tags: [c_e4s_cori01]
   only:
     refs:
       - schedules
     variables:
       - $E4S == "True"
-  tags: [cori]
   before_script:
     - *setup-buildtest
   script:
+    - env
     - buildtest -c $CI_PROJECT_DIR/config.yml buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
     - buildtest -c $CI_PROJECT_DIR/config.yml build --tags e4s -r $BUILDTEST_ROOT/report.json
     - buildtest report --filter state=FAIL -r $BUILDTEST_ROOT/report.json
@@ -145,4 +143,3 @@ e4s_tests:
     paths:
       - $CI_PROJECT_DIR/.artifacts
     expire_in: 2 week
-    
