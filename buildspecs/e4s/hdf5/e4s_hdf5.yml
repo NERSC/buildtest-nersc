@@ -1,6 +1,7 @@
 version: "1.0"
 buildspecs:
   e4s_hdf5:
+    skip: true
     type: script
     executor: cori.slurm.e4s
     description: Run hdf5 test from E4S TestSuite
