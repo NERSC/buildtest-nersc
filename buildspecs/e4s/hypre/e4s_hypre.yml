@@ -1,6 +1,7 @@
 version: "1.0"
 buildspecs:
   e4s_hypre:
+    skip: true
     type: script
     executor: cori.slurm.e4s
     description: Run hypre test from E4S Testsuite

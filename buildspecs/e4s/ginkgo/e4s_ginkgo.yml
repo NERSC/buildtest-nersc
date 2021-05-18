@@ -1,6 +1,7 @@
 version: "1.0"
 buildspecs:
   e4s_ginkgo:
+    skip: true
     type: script
     executor: cori.slurm.e4s
     description: Run ginkgo test from E4S Testsuite
