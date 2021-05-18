@@ -2,7 +2,7 @@ version: "1.0"
 buildspecs:
   upc_hello_e4s:
     type: compiler
-    executor: cori.slurm.knl_debug
+    executor: cori.slurm.haswell_debug
     description: Hello world in upc for e4s/20.10
     source: src/hello_upcxx.cpp
     tags: [compile, e4s]
@@ -12,8 +12,9 @@ buildspecs:
         gcc:
           sbatch: ["-t 01:00", "-N 1"]
           cxx: "upcxx"
-          cxxflags: "-g --network=aries"
+          cxxflags: "-L/opt/cray/pe/pmi/default/lib64 -L/opt/cray/ugni/default/lib64 -L/opt/cray/udreg/default/lib64 -L/opt/cray/xpmem/default/lib64 -g --network=aries"
           pre_build: |
+            module swap intel intel/19.1.2.254
             module load e4s/20.10
             spack load upcxx@2020.3.0
           run: "upcxx-run -N 1 -n 8 $_EXEC"
