@@ -1,9 +1,0 @@
-version: "1.0"
-buildspecs:
-  e4s_caliper:
-    skip: true
-    type: script
-    executor: cori.slurm.e4s
-    description: Run caliper test from E4S Testsuite
-    tags: [e4s]
-    run: $SCRATCH/testsuite/test-all.sh $SCRATCH/testsuite/validation_tests/caliper --settings $SCRATCH/testsuite/settings.cori.sh --print-logs

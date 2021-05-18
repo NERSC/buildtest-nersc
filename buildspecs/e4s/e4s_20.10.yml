@@ -2,7 +2,7 @@ version: "1.0"
 buildspecs:
   e4s_adios2:
     type: script
-    executor: cori.slurm.haswell_regular
+    executor: cori.slurm.haswell_premium
     description: Run adios2 test from E4S Testsuite
     tags: [e4s]
     sbatch: ["-t 30", "-N 1"]
@@ -15,7 +15,7 @@ buildspecs:
 
   e4s_bolt:
     type: script
-    executor: cori.slurm.haswell_regular
+    executor: cori.slurm.haswell_premium
     description: Run bolt test from E4S Testsuite
     tags: [e4s]
     sbatch: ["-t 30", "-N 1"]
