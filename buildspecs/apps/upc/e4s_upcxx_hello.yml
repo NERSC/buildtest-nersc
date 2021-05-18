@@ -1,0 +1,19 @@
+version: "1.0"
+buildspecs:
+  upc_hello_e4s:
+    type: compiler
+    executor: cori.slurm.knl_debug
+    description: Hello world in upc for e4s/20.10
+    source: src/hello_upcxx.cpp
+    tags: [compile, e4s]
+    compilers:
+      name: ["^builtin_gcc$"]
+      default:
+        gcc:
+          sbatch: ["-t 01:00", "-N 1"]
+          cxx: "upcxx"
+          cxxflags: "-g --network=aries"
+          pre_build: |
+            module load e4s/20.10
+            spack load upcxx@2020.3.0
+          run: "upcxx-run -N 1 -n 8 $_EXEC"

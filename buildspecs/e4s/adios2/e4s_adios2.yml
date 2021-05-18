@@ -2,7 +2,13 @@ version: "1.0"
 buildspecs:
   e4s_adios2:
     type: script
-    executor: cori.slurm.e4s
+    executor: cori.slurm.haswell_debug
     description: Run adios2 test from E4S Testsuite
     tags: [e4s]
-    run: $SCRATCH/testsuite/test-all.sh $SCRATCH/testsuite/validation_tests/adios2 --print-logs --settings $SCRATCH/testsuite/settings.cori.sh
+    sbatch: ["-t 30", "-N 1"]
+    run: |
+      module load e4s/20.10
+      git clone https://github.com/E4S-Project/testsuite
+      cd testsuite
+      source ./setup.sh
+      sh test-all.sh validation_tests/adios2 --print-logs --settings settings.cori.sh
