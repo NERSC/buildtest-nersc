@@ -130,7 +130,8 @@ e4s_tests:
   script:
     - env
     - buildtest -c $CI_PROJECT_DIR/config.yml buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
-    - buildtest -c $CI_PROJECT_DIR/config.yml build --tags e4s -r $BUILDTEST_ROOT/report.json
+    - buildtest -c $CI_PROJECT_DIR/config.yml build --tags e4s -r $BUILDTEST_ROOT/report.json --max-pend-time 600
+    - buildtest report -r $BUILDTEST_ROOT/report.json --format name,id,state,runtime
     - buildtest report --filter state=FAIL -r $BUILDTEST_ROOT/report.json
     - mkdir -p $CI_PROJECT_DIR/.artifacts
     - cp $BUILDTEST_ROOT/{buildtest.log,report.json} $CI_PROJECT_DIR/.artifacts
