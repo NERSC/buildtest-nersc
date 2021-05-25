@@ -2,11 +2,13 @@ version: "1.0"
 buildspecs:
   e4s_adios2:
     type: script
+    skip: true
     executor: cori.slurm.haswell_premium
     description: Run adios2 test from E4S Testsuite
     tags: [e4s]
     sbatch: ["-t 30", "-N 1"]
     run: |
+      module swap intel intel/19.1.2.254
       module load e4s/20.10
       git clone https://github.com/E4S-Project/testsuite
       cd testsuite
@@ -20,8 +22,26 @@ buildspecs:
     tags: [e4s]
     sbatch: ["-t 30", "-N 1"]
     run: |
+      module swap intel intel/19.1.2.254
       module load e4s/20.10
       git clone https://github.com/E4S-Project/testsuite
       cd testsuite
       source ./setup.sh
       sh test-all.sh validation_tests/bolt --print-logs --settings settings.cori.sh
+
+
+  e4s_hypre:
+    type: script
+    executor: cori.slurm.haswell_premium
+    description: Run hypre test from E4S Testsuite
+    tags: [e4s]
+    sbatch: ["-t 30", "-N 1"]
+    run: |
+      module swap intel intel/19.1.2.254
+      module load e4s/20.10
+      git clone https://github.com/E4S-Project/testsuite
+      cd testsuite
+      source ./setup.sh
+      sh test-all.sh validation_tests/hypre --print-logs --settings settings.cori.sh
+
+
