@@ -10,7 +10,7 @@ buildspecs:
       name: ["^builtin_gcc$"]
       default:
         gcc:
-          sbatch: ["-t 01:00", "-N 1"]
+          sbatch: ["-t 10", "-N 1"]
           cxx: "upcxx"
           cxxflags: "-L/opt/cray/pe/pmi/default/lib64 -L/opt/cray/ugni/default/lib64 -L/opt/cray/udreg/default/lib64 -L/opt/cray/xpmem/default/lib64 -g --network=aries"
           pre_build: |
