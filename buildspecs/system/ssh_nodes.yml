@@ -29,8 +29,6 @@ buildspecs:
       ssh -q dtn02 hostname
       ssh -q dtn03 hostname
       ssh -q dtn04 hostname
-      ssh -q dtn05 hostname
-      ssh -q dtn06 hostname
 
   ssh_gerty:
     type: script
