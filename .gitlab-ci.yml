@@ -134,8 +134,10 @@ e4s_tests:
     - buildtest report -r $BUILDTEST_ROOT/report.json --format name,id,state,runtime
     - buildtest report --filter state=FAIL -r $BUILDTEST_ROOT/report.json
     - mkdir -p $CI_PROJECT_DIR/.artifacts
-    - cp $BUILDTEST_ROOT/{buildtest.log,report.json} $CI_PROJECT_DIR/.artifacts
+    - cp $BUILDTEST_ROOT/{buildtest.log,report.json} $CI_PROJECT_DIR/.artifacts     
     - buildtest -c $CI_PROJECT_DIR/config.yml cdash upload e4s -r $BUILDTEST_ROOT/report.json
+    # copying the generated Xml file from CDASH upload for troubleshooting
+    - cp $CI_PROJECT_DIR/Test.xml $CI_PROJECT_DIR/.artifacts
     - source deactivate 
   after_script:
     - *cleanup-buildtest
