@@ -4,6 +4,7 @@ buildspecs:
     type: compiler
     executor: cori.local.bash
     source: src/reduction.c
+    description: OpenMP reduction example using gcc, intel, PrgEnv-cray compiler
     tags: [openmp]
     compilers:
       name: ["^(gcc|intel|PrgEnv-cray)"]
