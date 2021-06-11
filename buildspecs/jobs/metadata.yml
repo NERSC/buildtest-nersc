@@ -3,11 +3,10 @@ buildspecs:
   slurm_metadata:
     description: Get metadata from compute node when submitting job
     type: script
-    executor: cori.slurm.haswell_debug
+    executor: cori.slurm.knl_debug
     tags: [jobs]
     sbatch:
       - "-t 00:05"
-      - "-C haswell"
       - "-N 1"
     run: |
       export SLURM_JOB_NAME="firstjob"
