@@ -1,0 +1,11 @@
+version: "1.0"
+buildspecs: 
+  spack_test_qthreads_e4s_21.02:
+    type: script
+    executor: cori.local.sh
+    description: qthreads E4S 21.02 test via spack test
+    tags: e4s
+    run: | 
+      module load e4s/21.02
+      spack test run qthreads@1.16
+      spack test results -l
