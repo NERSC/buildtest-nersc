@@ -13,7 +13,7 @@ buildspecs:
       git clone https://github.com/E4S-Project/testsuite
       cd testsuite
       source ./setup.sh
-      sh test-all.sh validation_tests/adios2 --print-logs --settings settings.cori.sh
+      sh test-all.sh --color-off validation_tests/adios2 --print-logs --settings settings.cori.sh
 
   e4s_bolt:
     type: script
@@ -27,7 +27,7 @@ buildspecs:
       git clone https://github.com/E4S-Project/testsuite
       cd testsuite
       source ./setup.sh
-      sh test-all.sh validation_tests/bolt --print-logs --settings settings.cori.sh
+      sh test-all.sh --color-off validation_tests/bolt --print-logs --settings settings.cori.sh
 
 
   e4s_hdf5:
@@ -42,7 +42,7 @@ buildspecs:
       git clone https://github.com/E4S-Project/testsuite
       cd testsuite
       source ./setup.sh
-      sh test-all.sh validation_tests/hdf5 --print-logs --settings settings.cori.sh
+      sh test-all.sh --color-off validation_tests/hdf5 --print-logs --settings settings.cori.sh
 
   e4s_hypre:
     type: script
@@ -56,6 +56,9 @@ buildspecs:
       git clone https://github.com/E4S-Project/testsuite
       cd testsuite
       source ./setup.sh
-      sh test-all.sh validation_tests/hypre --print-logs --settings settings.cori.sh
+      sh test-all.sh --color-off validation_tests/hypre --print-logs --settings settings.cori.sh
 
+maintainers:
+  - @shahzebsiddiqui
+  - @wspear
 
