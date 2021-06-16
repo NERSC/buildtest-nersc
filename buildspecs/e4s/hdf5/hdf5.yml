@@ -9,3 +9,5 @@ buildspecs:
       module load e4s/21.02
       spack test run hdf5@1.10.7
       spack test results -l
+maintainers:
+  - "@shahzebsiddiqui"
