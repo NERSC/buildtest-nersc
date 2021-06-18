@@ -1,0 +1,8 @@
+version: "1.0"
+buildspecs:
+  srun_mpi_list:
+    type: script
+    executor: cori.local.sh
+    description: List mpi types for srun
+    tags: [slurm, daily]
+    run: srun --mpi=list

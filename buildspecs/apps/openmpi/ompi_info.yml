@@ -1,0 +1,12 @@
+version: "1.0"
+buildspecs: 
+  ompi_info:
+    type: script
+    executor: cori.local.sh
+    tags: [daily]
+    description: "Running ompi_info with default openmpi module"
+    run: |
+       module load openmpi
+       ompi_info
+maintainers:
+  - "@shahzebsiddiqui"
