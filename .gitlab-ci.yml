@@ -14,9 +14,6 @@
 .cleanup-buildtest: &cleanup-buildtest
   - conda env remove -p $CI_PROJECT_DIR/.conda  -y
 
-variables:
-  TEST_DIR: $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
-
 stages:
   - build
   - test
@@ -54,7 +51,7 @@ scheduled_system_check:
     - *setup-buildtest
   script:
     - buildtest -c $CI_PROJECT_DIR/config.yml buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
-    - buildtest -c $CI_PROJECT_DIR/config.yml build --tags daily -ft daily -r $BUILDTEST_ROOT/report.json  --testdir $TEST_DIR
+    - buildtest -c $CI_PROJECT_DIR/config.yml build --tags daily -ft daily -r $BUILDTEST_ROOT/report.json  --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
     - buildtest report --filter state=FAIL -r $BUILDTEST_ROOT/report.json
     - mkdir -p $CI_PROJECT_DIR/.artifacts
     - cp $BUILDTEST_ROOT/{buildtest.log,report.json} $CI_PROJECT_DIR/.artifacts
@@ -66,7 +63,6 @@ scheduled_system_check:
   artifacts:
     paths:
       - $CI_PROJECT_DIR/.artifacts      
-    expire_in: 2 week
 
 apps:
   stage: test
@@ -81,7 +77,7 @@ apps:
   - *setup-buildtest
   script:
     - buildtest -c $CI_PROJECT_DIR/config.yml buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
-    - buildtest -c $CI_PROJECT_DIR/config.yml build --tags compile --filter-tags compile -r $BUILDTEST_ROOT/report.json --testdir $TEST_DIR
+    - buildtest -c $CI_PROJECT_DIR/config.yml build --tags compile --filter-tags compile -r $BUILDTEST_ROOT/report.json --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
     - buildtest report --filter state=FAIL -r $BUILDTEST_ROOT/report.json
     - mkdir -p $CI_PROJECT_DIR/.artifacts
     - cp $BUILDTEST_ROOT/{buildtest.log,report.json} $CI_PROJECT_DIR/.artifacts
@@ -107,7 +103,7 @@ benchmark:
   - *setup-buildtest
   script:
     - buildtest -c $CI_PROJECT_DIR/config.yml buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
-    - buildtest -c $CI_PROJECT_DIR/config.yml build --tags benchmark --filter-tags benchmark -r $BUILDTEST_ROOT/report.json --testdir $TEST_DIR
+    - buildtest -c $CI_PROJECT_DIR/config.yml build --tags benchmark --filter-tags benchmark -r $BUILDTEST_ROOT/report.json --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
     - buildtest report --filter state=FAIL -r $BUILDTEST_ROOT/report.json
     - mkdir -p $CI_PROJECT_DIR/.artifacts
     - cp $BUILDTEST_ROOT/{buildtest.log,report.json} $CI_PROJECT_DIR/.artifacts
@@ -133,7 +129,7 @@ e4s_tests:
   script:
     - env
     - buildtest -c $CI_PROJECT_DIR/config.yml buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
-    - buildtest -c $CI_PROJECT_DIR/config.yml build --tags e4s -r $BUILDTEST_ROOT/report.json --max-pend-time 600 --testdir $TEST_DIR
+    - buildtest -c $CI_PROJECT_DIR/config.yml build --tags e4s -r $BUILDTEST_ROOT/report.json --max-pend-time 600 --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
     - buildtest report -r $BUILDTEST_ROOT/report.json --format name,id,state,runtime
     - buildtest report --filter state=FAIL -r $BUILDTEST_ROOT/report.json
     - mkdir -p $CI_PROJECT_DIR/.artifacts
