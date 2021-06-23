@@ -1,6 +1,6 @@
 version: "1.0"
 buildspecs:
-  spack_default_module:
+  default_spack_sanity_check:
     type: script
     description: "Test default spack module to see if some basic commands work"
     executor: cori.local.bash
@@ -39,3 +39,18 @@ buildspecs:
       regex:
         stream: stdout
         exp: "^(0.15.4-1620-e1e0bbb4c)$"
+
+  e4s_21_02_spack:
+    type: script
+    executor: cori.local.bash
+    tags: ["spack", "e4s"]
+    description: Check e4s/21.02 spack instance
+    run: |
+      module load e4s/21.02
+      spack --version
+    status:
+      regex:
+        stream: stdout
+        exp: "^(0.16.1-1522-4acb3cea22)$"
+maintainers:
+  - "@shahzebsiddiqui"
