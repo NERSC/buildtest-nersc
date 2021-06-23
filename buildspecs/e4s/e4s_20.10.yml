@@ -17,6 +17,7 @@ buildspecs:
 
   e4s_bolt:
     type: script
+    skip: true
     executor: cori.slurm.haswell_premium
     description: Run bolt test from E4S Testsuite
     tags: [e4s]
@@ -32,6 +33,7 @@ buildspecs:
 
   e4s_hdf5:
     type: script
+    skip: true
     executor: cori.slurm.haswell_premium
     description: Run hdf5 test from E4S Testsuite
     tags: [e4s]
@@ -46,6 +48,7 @@ buildspecs:
 
   e4s_hypre:
     type: script
+    skip: true
     executor: cori.slurm.haswell_premium
     description: Run hypre test from E4S Testsuite
     tags: [e4s]
