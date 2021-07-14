@@ -2,22 +2,16 @@ version: "1.0"
 buildspecs:
   bash_alias:
     type: script
-    shebang: "#!/bin/bash -l"
-    description: "Check predefined alias set in /etc/profile.d script"
+    shebang: "#!/bin/bash -i"
+    description: "Check predefined alias set in /etc/profile.d/alias.bash"
     tags: [daily, system]
     executor: cori.local.bash
     run: |
-      shopt -s expand_aliases
-      alias
-      alias o
-      alias ..
-      alias ...
-      alias rd
-      alias egrep
-      alias grep
-      alias md
-      aliash rehash
-      alias beep
-      alias you
-      alias unmount
-
+      type o 
+      type ..
+      type ...
+      type rm 
+      type md
+      type rehash
+      type beep
+      type unmount

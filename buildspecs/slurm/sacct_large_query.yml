@@ -9,7 +9,7 @@ buildspecs:
     status:
       regex: 
         stream: stderr
-        exp: "sacct: error: slurmdbd: Too wide of a date range in query"
+        exp: "sacct: error: Too wide of a date range in query"
 
   sacct_query_31_days:
     type: script
