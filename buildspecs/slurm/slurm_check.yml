@@ -9,4 +9,4 @@ buildspecs:
     status:
       regex:
         stream: stdout
-        exp: "^(slurm 20.02.6)$"
+        exp: "^(slurm 20.11.8)$"
