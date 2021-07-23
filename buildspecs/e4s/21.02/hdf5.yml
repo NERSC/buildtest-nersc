@@ -5,7 +5,7 @@ buildspecs:
     executor: cori.local.sh
     description: Test HDF5 from e4s/21.02 using spack test
     tags: e4s
-    pre_cmds: module load e4s
+    pre_cmds: module load e4s/21.02
     spack:
       root: /global/common/software/spackecp/e4s-21.02/spack/
       verify_spack: false
@@ -13,6 +13,7 @@ buildspecs:
         run:
           specs: ['hdf5@1.10.7%gcc', 'hdf5@1.10.7%intel']
         results:
+          option: '-l'
           specs: ['hdf5@1.10.7%gcc', 'hdf5@1.10.7%intel']
 maintainers:
   - "@shahzebsiddiqui"

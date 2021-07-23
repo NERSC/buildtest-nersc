@@ -5,7 +5,7 @@ buildspecs:
     executor: cori.local.sh
     description: "Test hypre@2.20.0 E4S 21.02 test via spack test"
     tags: e4s
-    pre_cmds: module load e4s
+    pre_cmds: module load e4s/21.02
     spack:
       root: /global/common/software/spackecp/e4s-21.02/spack/
       verify_spack: false
@@ -13,6 +13,7 @@ buildspecs:
         run:
           specs: ['hypre%intel~openmp', 'hypre%intel+openmp']
         results:
+          option: '-l'
           specs: ['hypre%intel~openmp', 'hypre@intel+openmp']
 maintainers:
   - "@shahzebsiddiqui"
