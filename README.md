@@ -211,6 +211,37 @@ the scheduled job based on the variable name.
 The `validate_tests` gitlab job is responsible for validating buildspecs, please review this job when contributing tests. The buildspec must pass validation
 in order for buildtest to build and run the test. 
 
+### Runner settings
+
+The runner on Cori is generally run on the hostname `cori01` by the user [e4s](https://iris.nersc.gov/user/93315/info). The runner can be started using the following command 
+```
+screen -dmS e4s-runner-buildtest $(which gitlab-runner) run
+```
+
+The command allows the process to detach from the terminal and remain active on logoff. The gitlab-runner in question is the ECP fork runner which can be found at `/global/homes/e/e4s/nersc-ecp-staff-runner/ecp-ci-0.6.1/gitlab-runner/out/binaries/gitlab-runner`. The config.toml is not specified in the command line because it is stored in the default config location `$HOME/.gitlab-runner/config.toml`.
+
+The runner is tied to a particular hostname and is not run as a service, it is advisable to check/be notified when the runner goes down. It may be useful to run a cronjob to check the runner status.
+
+```
+kavaluav@cori01:~> crontab -l
+#This cronjob checks whether the E4S runner is active
+PATH=/bin:/usr/bin:/usr/local/bin
+00 * * * * /bin/bash /global/cscratch1/sd/kavaluav/e4s_runner_check.sh > /dev/null 2>&1
+```
+
+The script referenced above has the below content.
+```
+kavaluav@cori01:~> cat /global/cscratch1/sd/kavaluav/e4s_runner_check.sh
+#!/bin/bash
+
+process=$(ps -u e4s | grep -i screen | wc -l) 
+if [[ $process -lt 1 ]]
+then
+	mail -s "e4s runner is dead" akavalur@lbl.gov <<< "E4S runner on Cori is no longer visible"
+fi
+
+```
+
 ## Integrations
 
 buildtest-cori mirror repo has integration with Github and Slack. The integrations can be found at 
