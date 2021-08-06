@@ -1,0 +1,35 @@
+version: "1.0"
+buildspecs: 
+  spack_test_superlu_e4s_21.02:
+    type: spack
+    executor: cori.local.sh
+    description: "Test superlu@5.2.1 E4S 21.02 test via spack test"
+    tags: e4s
+    pre_cmds: module load e4s/21.02
+    spack:
+      root: /global/common/software/spackecp/e4s-21.02/spack/
+      verify_spack: false
+      test: 
+        run:
+          specs: ['superlu@5.2.1']
+        results:
+          option: '-l'
+          specs: ['superlu@5.2.1']
+  spack_test_superlu_e4s_21.05:
+    type: spack
+    executor: cori.local.sh
+    description: "Test superlu@5.2.1 and superlu-dist@6.4.0 for e4s/21.05 test via spack test"
+    tags: e4s
+    pre_cmds: module load e4s/21.05
+    spack:
+      root: /global/common/software/spackecp/e4s-21.05/spack/
+      verify_spack: false
+      test:
+        run:
+          specs: ['superlu@5.2.1%intel', 'superlu-dist@6.4.0%intel']
+        results:
+          option: '-l'
+          specs: ['superlu@5.2.1%intel', 'superlu-dist@6.4.0%intel']
+
+maintainers:
+  - "@shahzebsiddiqui"
