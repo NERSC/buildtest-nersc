@@ -10,7 +10,18 @@ body:
     attributes:
       label: CDASH Build 
       description: Specify link to cdash build or gitlab pipeline
-      placeholder: ex. https://my.cdash.org/index.php?project=buildtest-cori or https://software.nersc.gov/siddiq90/buildtest-cori/-/pipelines
+  - type: input
+    id: buildspec
+    attributes:
+      label: Link to buildspec file 
+      description: Please provide link to buildspec file in https://github.com/buildtesters/buildtest-cori 
+      
+  - type: textarea
+    id: description
+    attributes:
+      label: Please describe the issue?
+    validations:
+      required: true
   - type: textarea
     id: logs
     attributes:
