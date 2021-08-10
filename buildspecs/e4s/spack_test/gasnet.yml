@@ -16,4 +16,6 @@ buildspecs:
           option: '-l'
           specs: ['gasnet@2021.3.0%intel']
 maintainers:
-  - "@shahzebsiddiqui"
+  - "shahzebsiddiqui"
+  - "PHHargrove"
+  - "bonachea"
