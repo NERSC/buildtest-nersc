@@ -18,3 +18,6 @@ buildspecs:
             module load e4s/20.10
             spack load upcxx@2020.3.0
           run: "upcxx-run -N 1 -n 8 $_EXEC"
+maintainers:
+  - PHHargrove
+  - bonachea

@@ -16,4 +16,7 @@ buildspecs:
           option: '-l'
           specs: ['upcxx@2021.03.0%intel']
 maintainers:
-- "@shahzebsiddiqui"
+- "shahzebsiddiqui"
+- "PHHargrove"
+- "bonachea"
+
