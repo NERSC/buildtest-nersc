@@ -1,0 +1,21 @@
+name: Bug Report
+description: File a bug report
+title: "[Bug]: "
+labels: [bug, triage]
+assignees:
+  - shahzebsiddiqui
+body:
+  - type: input
+    id: link
+    attributes:
+      label: CDASH Build 
+      description: Specify link to cdash build or gitlab pipeline
+      placeholder: ex. https://my.cdash.org/index.php?project=buildtest-cori or https://software.nersc.gov/siddiq90/buildtest-cori/-/pipelines
+  - type: textarea
+      id: logs
+      attributes:
+        label: Relevant log output
+        description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
+        render: shell
+      validations:
+        required: true
