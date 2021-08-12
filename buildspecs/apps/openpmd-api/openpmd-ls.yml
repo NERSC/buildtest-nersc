@@ -1,0 +1,18 @@
+version: "1.0"
+buildspecs:
+  openpmd_ls_version_e4s_21.05:
+    type: script
+    executor: cori.local.bash
+    description: Run openpmd-ls version check for e4s/21.05
+    tags: e4s
+    run: |
+      module load e4s/21.05
+      spack load openpmd-api@0.13.4
+      openpmd-ls --version
+    status:
+      regex:
+        stream: stdout
+        exp: '(openpmd-ls) \(openPMD-api\) 0.13.4'
+maintainers:
+  - ax3l
+  - shahzebsiddiqui
