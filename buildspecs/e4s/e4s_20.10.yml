@@ -61,6 +61,20 @@ buildspecs:
       source ./setup.sh
       sh test-all.sh --color-off validation_tests/hypre --print-logs --settings settings.cori.sh
 
+  e4s_NPB3.1:
+    type: script
+    skip: true
+    executor: cori.slurm.haswell_premium
+    description: Run NPB3.1 test from E4S Testsuite to test TAU, PDT and PAPI
+    tags: [e4s]
+    sbatch: ["-t 30", "-N 1"]
+    run: |
+      module swap intel intel/19.1.2.254
+      module load e4s/20.10
+      git clone https://github.com/E4S-Project/testsuite
+      cd testsuite
+      sh test-all.sh --color-off validation_tests/NPB3.1 --print-logs --settings settings.cori.sh
+
 maintainers:
   - "@shahzebsiddiqui"
   - "@wspear"
