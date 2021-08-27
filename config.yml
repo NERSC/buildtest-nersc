@@ -116,7 +116,7 @@ system:
           - -C haswell
           description: shared queue on Haswell partition
         haswell_regular:
-          qos: normal
+          qos: regular
           cluster: cori
           options:
           - -C haswell
@@ -127,6 +127,12 @@ system:
           options:
           - -C haswell
           description: premium queue on Haswell partition
+        haswell_flex:
+          qos: flex
+          cluster: cori
+          options:
+          - -C haswell
+          description: flex queue on Haswell partition
         knl_flex:
           description: overrun queue on KNL partition
           qos: overrun

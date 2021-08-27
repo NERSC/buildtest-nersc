@@ -1,0 +1,24 @@
+version: "1.0"
+buildspecs:
+  hostname_haswell_qos:
+    description: run hostname on haswell partitions
+    type: script
+    executor: 'cori.slurm.haswell_(debug|premium|shared|flex)'
+    tags: ["queues","jobs", "reframe"]
+    sbatch: ["-t 5", "-n 1"]
+    run: hostname
+    executors:
+      cori.slurm.haswell_flex:
+        sbatch: ["--time-min 5", "-t 180", "-n 1"]
+
+  hostname_knl_qos:
+    description: run hostname on knl partitions
+    type: script
+    executor: 'cori.slurm.knl_(debug|premium|shared|flex)'
+    tags: ["queues","jobs", "reframe"]
+    sbatch: ["-t 5", "-n 1"]
+    run: hostname
+    executors:
+      cori.slurm.haswell_flex:
+        sbatch: ["--time-min 5", "-t 180", "-n 1"]
+
