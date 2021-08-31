@@ -3,7 +3,7 @@ buildspecs:
   spack_test_hdf5_e4s_21.02:
     type: spack
     executor: cori.local.sh
-    description: Test hdf5@1.10.7%gcc and hdf5@1.10.7%intel from e4s/21.02 using spack test
+    description: Test hdf5@1.10.7%gcc, hdf5@1.10.7%intel, hdf5@develop-1.10%gcc, and hdf5@develop-1.10%intel from e4s/21.02 using spack test
     tags: e4s
     pre_cmds: module load e4s/21.02
     spack:
@@ -11,15 +11,15 @@ buildspecs:
       verify_spack: false
       test:
         run:
-          specs: ['hdf5@1.10.7%gcc', 'hdf5@1.10.7%intel']
+          specs: ['hdf5@1.10.7%gcc', 'hdf5@1.10.7%intel', 'hdf5@develop-1.10%gcc', 'hdf5@develop-1.10%intel']
         results:
           option: '-l'
-          specs: ['hdf5@1.10.7%gcc', 'hdf5@1.10.7%intel']
+          specs: ['hdf5@1.10.7%gcc', 'hdf5@1.10.7%intel', 'hdf5@develop-1.10%gcc', 'hdf5@develop-1.10%intel']
 
   spack_test_hdf5_e4s_21.05:
     type: spack
     executor: cori.local.sh
-    description: Test hdf5@1.8.22%intel and hdf5@1.10.7%intel from e4s/21.05 using spack test
+    description: Test hdf5@1.8.22%intel, hdf5@1.10.7%intel, and hdf5@develop-1.10%intel from e4s/21.05 using spack test
     tags: e4s
     pre_cmds: module load e4s/21.05
     spack:
@@ -27,9 +27,9 @@ buildspecs:
       verify_spack: false
       test:
         run:
-          specs: ['hdf5@1.8.22%intel', 'hdf5@1.10.7%intel']
+          specs: ['hdf5@1.8.22%intel', 'hdf5@1.10.7%intel', 'hdf5@develop-1.10%intel']
         results:
           option: '-l'
-          specs: ['hdf5@1.8.22%intel', 'hdf5@1.10.7%intel']
+          specs: ['hdf5@1.8.22%intel', 'hdf5@1.10.7%intel', 'hdf5@develop-1.10%intel']
 maintainers:
   - "@shahzebsiddiqui"
