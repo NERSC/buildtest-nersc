@@ -22,7 +22,7 @@ Next, navigate to `buildtest-cori` directory and copy your site configuration to
 
 ```
 cd buildtest-cori
-cp .config.yml $HOME/.buildtest/config.yml
+cp config.yml $HOME/.buildtest/config.yml
 ```
 
 Assuming you have [installed buildtest](https://buildtest.readthedocs.io/en/devel/installing_buildtest.html) you 
