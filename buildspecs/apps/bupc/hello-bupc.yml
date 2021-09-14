@@ -2,7 +2,7 @@ version: "1.0"
 buildspecs:
   bupc_hello:
     type: compiler
-    executor: cori.slurm.haswell_debug
+    executor: cori.slurm.knl_debug
     description: "bupc hello world example in C"
     source: src/bupc-hello.c
     tags: ["compile"]
@@ -12,8 +12,8 @@ buildspecs:
         gcc:
           cc: upcc
           cflags: -g --network=aries
-          run: upcrun -N 2 -n 8 $_EXEC
-          sbatch: ["-t 10", "-n 8", "-N 2"]
+          run: upcrun -N 1 -n 4 $_EXEC
+          sbatch: ["-t 10", "-n 4", "-N 1"]
       config:
         builtin_gcc:
           module:

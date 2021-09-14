@@ -3,9 +3,9 @@ buildspecs:
   c_hello:
     type: compiler
     executor: cori.local.bash
-    description: hello world program in C compiled with gcc and intel compiler
+    description: hello world program in C compiled with gcc compiler
     tags: [compile]
     source: src/hello.c
     compilers:
-      name: ["^(intel|gcc)"]
+      name: ["(gcc)"]
 
