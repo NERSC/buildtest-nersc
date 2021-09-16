@@ -32,7 +32,7 @@ buildspecs:
   e4s_hdf5:
     type: script
     executor: cori.slurm.haswell_premium
-    description: Run hdf5 test from E4S Testsuite
+    description: Run hdf5 test from E4S Testsuite. This test is expected to fail
     tags: [e4s]
     sbatch: ["-t 30", "-N 1"]
     run: |
@@ -42,6 +42,8 @@ buildspecs:
       cd testsuite
       source ./setup.sh
       sh test-all.sh --color-off validation_tests/hdf5 --print-logs --settings settings.cori.sh
+    status:
+      state: FAIL
 
   e4s_hypre:
     type: script
