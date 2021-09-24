@@ -75,86 +75,13 @@ buildtest can run tests via tags which can be useful when grouping tests, to see
 can run: ``buildtest buildspec find --tags``
 
 
-
-For instance if you want to run all ``lustre`` tests you can use ``buildtest build --tags`` option. 
+For instance if you want to run all ``lustre`` tests you can run the following:
 
 ```
-    (buildtest) siddiq90@cori10:~/github/buildtest-cori> buildtest build --tags lustre
-    
-    
-    User:  siddiq90
-    Hostname:  cori10
-    Platform:  Linux
-    Current Time:  2021/04/13 21:47:43
-    buildtest path: /global/homes/s/siddiq90/github/buildtest/bin/buildtest
-    buildtest version:  0.9.5
-    python path: /global/homes/s/siddiq90/.conda/envs/buildtest/bin/python
-    python version:  3.8.8
-    Test Directory:  /global/homes/s/siddiq90/.buildtest/var/tests
-    Configuration File:  /global/homes/s/siddiq90/.buildtest/config.yml
-    
-    +-------------------------------+
-    | Stage: Discovering Buildspecs |
-    +-------------------------------+ 
-    
-    Discovered Buildspecs:
-    /global/u1/s/siddiq90/github/buildtest-cori/buildspecs/filesystem/lustre.yml
-    
-    BREAKDOWN OF BUILDSPECS BY TAGS
-    
-    lustre
-    ----------------------------------------------------------------------------
-    /global/u1/s/siddiq90/github/buildtest-cori/buildspecs/filesystem/lustre.yml
-    
-    +---------------------------+
-    | Stage: Parsing Buildspecs |
-    +---------------------------+ 
-    
-     schemafile              | validstate   | buildspec
-    -------------------------+--------------+------------------------------------------------------------------------------
-     script-v1.0.schema.json | True         | /global/u1/s/siddiq90/github/buildtest-cori/buildspecs/filesystem/lustre.yml
-    
-    
-    
-    name                 description
-    -------------------  ---------------------------
-    lustre_osts          List all lustre OSTs
-    lustre_mdts          List all lustre MDTs
-    lustre_nstaff_quota  Show quota for group nstaff
-    
-    +----------------------+
-    | Stage: Building Test |
-    +----------------------+ 
-    
-     name                | id       | type   | executor        | tags                                        | testpath
-    ---------------------+----------+--------+-----------------+---------------------------------------------+--------------------------------------------------------------------------------------------------------------
-     lustre_osts         | d44454aa | script | cori.local.bash | ['daily', 'system', 'filesystem', 'lustre'] | /global/homes/s/siddiq90/.buildtest/var/tests/cori.local.bash/lustre/lustre_osts/3/stage/generate.sh
-     lustre_mdts         | f5730b5e | script | cori.local.bash | ['daily', 'system', 'filesystem', 'lustre'] | /global/homes/s/siddiq90/.buildtest/var/tests/cori.local.bash/lustre/lustre_mdts/3/stage/generate.sh
-     lustre_nstaff_quota | 479d1b57 | script | cori.local.bash | ['daily', 'system', 'filesystem', 'lustre'] | /global/homes/s/siddiq90/.buildtest/var/tests/cori.local.bash/lustre/lustre_nstaff_quota/3/stage/generate.sh
-    
-    
-    
-    +---------------------+
-    | Stage: Running Test |
-    +---------------------+ 
-    
-     name                | id       | executor        | status   |   returncode
-    ---------------------+----------+-----------------+----------+--------------
-     lustre_osts         | d44454aa | cori.local.bash | PASS     |            0
-     lustre_mdts         | f5730b5e | cori.local.bash | PASS     |            0
-     lustre_nstaff_quota | 479d1b57 | cori.local.bash | PASS     |            0
-    
-    +----------------------+
-    | Stage: Test Summary  |
-    +----------------------+ 
-    
-    Passed Tests: 3/3 Percentage: 100.000%
-    Failed Tests: 0/3 Percentage: 0.000%
-    
-    
-    Writing Logfile to: /tmp/buildtest_0m3fe3m9.log
-    A copy of logfile can be found at $BUILDTEST_ROOT/buildtest.log -  /global/homes/s/siddiq90/github/buildtest/buildtest.log
+buildtest build --tags lustre
 ```
+
+For more details on buildtest test please see the [buildtest tutorial](https://buildtest.readthedocs.io/en/devel/getting_started.html)
 
 ## Tags Breakdown
 
@@ -166,7 +93,7 @@ below is a summary of tag description
 - **slurm** - this tag is used for slurm test that includes slurm utility check, slurm controller, etc... This tag **shouldn't** be used for job submission that is managed by **jobs** tag. The `slurm` tag tests should be short running test that use a Local Executor.
 - **jobs** - this tag is used for testing slurm policies by submitting jobs to scheduler. 
 - **compile** - this tag is used for compilation of application (OpenMP, MPI, OpenACC, CUDA, upc, bupc, etc...)
-- **e4s** - this tag is used for running tests from [E4S Testsuite](https://github.com/E4S-Project/testsuite) for E4S stack deployed on Cori.
+- **e4s** - this tag is used for running tests for E4S stack via `spack test` or [E4S Testsuite](https://github.com/E4S-Project/testsuite).
 - **module** - this tag is used for testing module system
 - **benchmark** - this tag is used for benchmark tests. This can be application benchmarks, mini-benchmarks, kernels, etc... 
 
@@ -207,10 +134,6 @@ scheduled job, please define a [new schedule](https://software.nersc.gov/siddiq9
 `target branch` should be `devel` and define a unique variable used to distinguish scheduled jobs. Next, create a job in `.gitlab-ci.yml` that references 
 the scheduled job based on the variable name.
 
-
-The `validate_tests` gitlab job is responsible for validating buildspecs, please review this job when contributing tests. The buildspec must pass validation
-in order for buildtest to build and run the test. 
-
 ### Runner settings
 
 The runner on Cori is generally run on the hostname `cori01` by the user [e4s](https://iris.nersc.gov/user/93315/info). The runner can be started using the following command 
@@ -241,6 +164,10 @@ then
 fi
 
 ```
+
+All scheduled pipelines are run via `e4s` user which is done by  specifying `tags: [c_e4s_cori01]` in gitlab job 
+to run jobs with a single user account. Please make sure `e4s` user has access to all the queues required to run tests.
+This can be configured in [iris](https://iris.nersc.gov/).
 
 ## Integrations
 
