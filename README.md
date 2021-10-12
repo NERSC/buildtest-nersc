@@ -1,7 +1,6 @@
 # buildtest-cori
 
-This repository is [Cori](https://docs.nersc.gov/) Testsuite with buildtest. A mirror of this repository is located at https://software.nersc.gov/siddiq90/buildtest-cori used for running gitlab CI specified in file [.gitlab-ci.yml](https://github.com/buildtesters/buildtest-cori/blob/devel/.gitlab-ci.yml).
-
+This repo is testsuite for Cori and Perlmutter system at NERSC using buildtest. A mirror of this repository is located at https://github.com/buildtesters/buildtest-cori that is public facing. 
 
 
 ## Setup
@@ -9,7 +8,7 @@ This repository is [Cori](https://docs.nersc.gov/) Testsuite with buildtest. A m
 To get started clone this repo on Cori as follows:
 
 ```
-git clone https://github.com/buildtesters/buildtest-cori
+git clone https://software.nersc.gov/siddiq90/buildtest-cori.git
 ```
 
 buildtest configuration file is read at `$HOME/.buildtest` if you don't have a directory please run
@@ -33,7 +32,7 @@ buildtest config validate
 buildtest config view
 ```
 
-Please make sure you are using tip of `devel` with buildtest when writing tests. You should sync your local `devel` with upstream
+Please make sure you are using tip of `devel` with buildtest when writing tests. You should sync your local devel branch with upstream
 fork, for more details see [contributing guide](https://buildtest.readthedocs.io/en/devel/contributing/code_contribution_guide.html).
 
 First time around you should discover all buildspecs this can be done via ``buildtest buildspec find``.  The command below will find
