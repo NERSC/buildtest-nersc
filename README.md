@@ -40,7 +40,7 @@ First time around you should discover all buildspecs this can be done via ``buil
 and validate all buildspecs in the buildtest-cori repo and load them in buildspec cache.
 
 ```
-$ buildtest buildspec find --root /path/to/buildtest-cori/buildspecs
+$ buildtest buildspec find --root /path/to/buildtest-cori/buildspecs --rebuild
 ```
 
 The buildspecs are loaded in buildspec cache file (JSON) that is used by `buildtest buildspec find` for querying cache. Subsequent runs will
@@ -112,7 +112,7 @@ responsible for mirroring upstream project to https://software.nersc.gov/siddiq9
 [secret](https://github.com/buildtesters/buildtest-cori/settings/secrets/actions) that contains gitlab personal access token created from 
 https://software.nersc.gov/-/profile/personal_access_tokens. The Personal access token must have `read_api`, `read_repository`, `write_repository` scope.  
 
-Tests are run on schedule basis with one schedule corresponding to one gitlab job in `.gitlab-ci.yml`. The scheduled pipelines are configured in 
+Tests are run on schedule basis with one schedule corresponding to one gitlab job in [.gitlab-ci.yml](https://github.com/buildtesters/buildtest-cori/blob/devel/.gitlab-ci.yml). The scheduled pipelines are configured in 
 https://software.nersc.gov/siddiq90/buildtest-cori/-/pipeline_schedules. Each schedule has a variable defined to control which pipeline 
 is run. In the `.gitlab-ci.yml` we make use of conditional rules using [only](https://docs.gitlab.com/ee/ci/yaml/#onlyexcept-basic). For example the daily
 system test has variable defined `DAILYCHECK` set to `True` and the gitlab job is defined as follows:
@@ -207,7 +207,7 @@ To view all examples for script schema you can run ``buildtest schema -n script-
 all invalid/valid tests. buildtest will validate each example before it shows content which will be help understand how to write
 tests and see all the edge cases.
 
-Alternately you can see all published schemas and examples on https://buildtest.readthedocs.io/en/devel/buildspecs/schema_examples.html
+Alternately you can see all published schemas and examples on https://buildtest.readthedocs.io/en/devel/schema_examples.html
 
 If you want to contribute your tests, please see [CONTRIBUTING.md](https://github.com/buildtesters/buildtest-cori/blob/devel/CONTRIBUTING.md)
 
@@ -217,7 +217,7 @@ If you want to contribute your tests, please see [CONTRIBUTING.md](https://githu
 - buildtest documentation: https://buildtest.readthedocs.io/en/devel/
 - buildtest schema docs: https://buildtesters.github.io/buildtest/
 - Getting Started: https://buildtest.readthedocs.io/en/devel/getting_started.html
-- Writing Buildspecs: https://buildtest.readthedocs.io/en/devel/writing_buildspecs.html
+- Writing Buildspecs: https://buildtest.readthedocs.io/en/devel/buildspec_tutorial.html
 - Contributing Guide: https://buildtest.readthedocs.io/en/devel/contributing.html
 
 
