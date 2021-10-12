@@ -4,14 +4,14 @@ buildspecs:
     type: script
     executor: cori.local.bash
     description: Run myquota --check which returns any quota violation. 
-    tags: ["daily", "system", "tool", "reframe"]
+    tags: ["daily", "system", "tool"]
     run: myquota --check
 
   myquota_numbers:
     type: script
     executor: cori.local.bash
     description: Run myquota -H which shows quota in human readable format
-    tags: ["daily", "system", "tool", "reframe"]
+    tags: ["daily", "system", "tool"]
     run: myquota -H
 
   myquota_scratch:

@@ -7,6 +7,6 @@ buildspecs:
     sbatch:
       - "-t 5"
       - "-N 1"
-    tags: ["queues","jobs","reframe"]
+    tags: ["queues","jobs"]
     run: hostname
 

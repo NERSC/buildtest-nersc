@@ -8,5 +8,5 @@ buildspecs:
       - "-t 5"
       - "-C haswell"
       - "-N 1"
-    tags: ["queues","jobs", "reframe"]
+    tags: ["queues","jobs"]
     run: hostname
