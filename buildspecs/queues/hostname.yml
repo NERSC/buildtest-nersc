@@ -21,4 +21,3 @@ buildspecs:
     executors:
       cori.slurm.haswell_flex:
         sbatch: ["--time-min 5", "-t 180", "-n 1"]
-

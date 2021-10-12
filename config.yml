@@ -51,6 +51,11 @@ system:
         python:
           description: submit jobs on local machine using python shell
           shell: python
+      slurm:
+        regular:
+          qos: regular        
+        debug:
+          qos: debug
     compilers:
       find:
         gcc: ^(gcc)

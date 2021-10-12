@@ -1,0 +1,9 @@
+version: "1.0"
+buildspecs:
+  gpu_task_example: 
+    type: script
+    executor: perlmutter.slurm.regular
+    sbatch: ["-C gpu", "-t 60", "-n 1", "--ntasks-per-node=1", "-c 128", "--gpus-per-task=1"]
+    run: |
+      export SLURM_CPU_BIND="cores"
+      srun ./gpus_for_tasks
