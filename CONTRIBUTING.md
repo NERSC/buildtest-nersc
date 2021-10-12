@@ -3,42 +3,28 @@ Getting Started
 
 Contribution is not easy, so we created this document to describe how to get you setup
 so you can contribute back and make everyone's life easier. All contributions will be made via
-[pull request](https://github.com/buildtesters/buildtest-cori/pulls) which goes through code review 
-process. We have disabled push to main branch, therefore all changes must go through pull request.
-
-GitHub Account
---------------
-
-If you don't have a GitHub account please [register](http://github.com/join) your account.
+[merge request](https://software.nersc.gov/siddiq90/buildtest-cori/-/merge_requests).
+ We have disabled push to **devel** branch, therefore all changes must go through merge request.
 
 Fork the repo
 --------------
 
-First, you'll need to fork this repo https://github.com/buildtesters/buildtest-cori
+First, you'll need to fork this repo https://software.nersc.gov/siddiq90/buildtest-cori/
 
 You might need to setup your SSH keys in your git profile if you are using ssh option for cloning. For more details on
-setting up SSH keys in your profile, follow instruction found in
-https://help.github.com/articles/connecting-to-github-with-ssh/
-
-SSH key will help you pull and push to repository without requesting for password for every commit. Once you have forked the repo, clone your local repo
-
-```
-git clone git@github.com:YOUR\_GITHUB\_LOGIN/buildtest-cori.git
-```
-
-All contributions will come from your fork, so please fork this repo.
+setting up SSH keys in your profile, follow instruction found in https://docs.gitlab.com/ee/ssh/ 
 
 Adding Upstream Remote
 -----------------------
 
-First you need to add the ``upstream`` repo, to do this you can issue the
+First you need to add the `upstream` repo, to do this you can issue the
 following:
 
 ```
 git remote add upstream git@github.com/buildtesters/buildtest-cori.git
 ```
 
-The ``upstream`` tag is used to sync your local fork with upstream repo.
+The `upstream` tag is used to sync your local fork with upstream repo.
 
 Make sure you set your user name and email set properly in git configuration.
 We don't want commits from unknown users. This can be done by setting the following:
@@ -53,7 +39,7 @@ For more details see [First Time Git Setup](https://git-scm.com/book/en/v2/Getti
 Sync your branch from upstream
 -------------------------------
 
-The ``devel`` from upstream will get Pull Requests from other contributors, in-order
+The `devel` from upstream will get Pull Requests from other contributors, in-order
 to sync your forked repo with upstream, run the commands below::
 
 ```
@@ -75,9 +61,9 @@ Feature Branch
 ------------------
 
 Please make sure to create a new branch when adding and new feature. Do not
-push to ``devel`` branch on your fork or upstream.
+push to `devel` branch on your fork or upstream.
 
-Create a new branch from ``devel`` as follows:
+Create a new branch from `devel` as follows:
 
 ```
  cd buildtest-cori
@@ -91,25 +77,20 @@ Once you are ready to push to your fork repo do the following:
 git push origin featureX
 ```
 
-Once the branch is created in your fork, you can issue a Pull Request to ``devel``
-branch for ``upstream`` repo (https://github.com/buildtesters/buildtest-cori)
+Once the branch is created in your fork, you can issue a Merge Request to `devel`
+branch for upstream repo (https://software.nersc.gov/siddiq90/buildtest-cori.git).
 
 Default Branch
 ---------------
 
-The default branch is `devel`. This branch is [protected branch](https://docs.github.com/en/github/administering-a-repository/about-protected-branches) 
-which prevents users from accidently deleting the branch. The branch settings are found in https://docs.github.com/en/github/administering-a-repository/about-protected-branches.
+The default branch is `devel`. This branch is [protected branch](https://docs.gitlab.com/ee/user/project/protected_branches.html) 
+which prevents users from accidently deleting the branch. 
 
-Merge Options
----------------
-
-The default preference for merging PRs is [Squash Merge](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-request-merges#squash-and-merge-your-pull-request-commits) which "squash" all commits into single commit, this avoids having unneccessary commits from PR in upstream
-commit history. 
 
 Contributing Tests
 -------------------
 
-All incoming PRs for tests are pushed to ``devel`` branch which uses HEAD of `devel` branch from buildtest repo (https://github.com/buildtesters/buildtest).
+All incoming PRs for tests are pushed to `devel` branch which uses HEAD of devel branch from buildtest repo (https://github.com/buildtesters/buildtest).
 
 Please make sure you sync your buildtest with `devel` when you contribute tests and buildspec. Please refer to buildtest [contributing guide](https://buildtest.readthedocs.io/en/devel/contributing.html) for more details.
 
@@ -121,13 +102,11 @@ If you are adding a buildspec in your PR, please add a test description using ``
 
 Please add yourself to ``maintainers`` field which helps contact individual when test fails. When you contribute your test and buildspec please test this locally. The buildspec must be valid, this can be done by building the test via ``buildtest build -b /path/to/test.yml``. 
 
-PRs must pass [CI checks](https://github.com/buildtesters/buildtest-cori/actions) before any PRs are merged. Please make sure you review the CI checks before you contact a reviewer. All PRs must be reviewed by a maintainer which requires approval before it can be merged. 
-
 Resolving PR Merge Conflicts
 -----------------------------
 
 Often times, you may start a feature branch and your PR get's out of sync with
-``devel`` branch which may lead to conflicts, this is a result of merging incoming
+`devel` branch which may lead to conflicts, this is a result of merging incoming
 PRs that may cause upstream `HEAD` to change over time which can cause merge conflicts.
 This may be confusing at first, but don't worry we are here to help. For more details
 about merge conflicts click [here](https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/about-merge-conflicts).
@@ -136,17 +115,16 @@ Syncing your feature branch with devel is out of scope for this documentation,
 however you can use the steps below as a *guide* when you run into this issue.
 
 You may want to take the steps to first sync devel branch and then
-selectively rebase or merge ``devel`` into your feature branch.
+selectively rebase or merge `devel` into your feature branch.
 
-First go to ``devel`` branch and fetch changes from upstream:
+First go to `devel` branch and fetch changes from upstream:
 
 ```
 git checkout devel
 git fetch upstream devel
 ```
 
-Note you shouldn't be making any changes to your local ``devel`` branch, if
-``git fetch`` was successful you can merge your ``devel`` with upstream as follows:
+Note you shouldn't be making any changes to your local `devel` branch, if `git fetch` was successful you can merge your `devel` with upstream as follows:
 
 ```
  git merge upstream/devel
@@ -161,10 +139,10 @@ git merge devel
 
 !!! note:
 
-   Running above command will sync your feature branch with ``devel`` but you may have some file conflicts depending on files changed during PR.
+   Running above command will sync your feature branch with `devel` but you may have some file conflicts depending on files changed during PR.
    You will need to resolve them manually before pushing your changes
 
-Instead of merge from ``devel`` you can rebase your commits interactively when syncing with ``devel``. This can be done by running:
+Instead of merge from `devel` you can rebase your commits interactively when syncing with `devel`. This can be done by running:
 
 ```
 git rebase -i devel
@@ -173,13 +151,12 @@ git rebase -i devel
 Once you have synced your branch push your changes and check if file conflicts are resolved in your Pull Request:
 
 ```
- git push origin <feature-branch>
- ```
+git push origin <feature-branch>
+```
 
 Project Maintainers
 ---------------------
 
-If you need elevated priviledge to project settings please contact one of the maintainers
+If you need elevated priviledge to project settings please contact the maintainer
 
-- Aditya Kavalur, [@adityakavalur](https://github.com/adityakavalur)
 - Shahzeb Siddiqui, [@shahzebsiddiqui](http://github.com/shahzebsiddiqui)
