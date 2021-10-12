@@ -34,10 +34,10 @@ buildtest config view
 ```
 
 Please make sure you are using tip of `devel` with buildtest when writing tests. You should sync your local `devel` with upstream
-fork, for more details see https://buildtest.readthedocs.io/en/devel/contributing/code_contribution_guide.html
+fork, for more details see [contributing guide](https://buildtest.readthedocs.io/en/devel/contributing/code_contribution_guide.html).
 
 First time around you should discover all buildspecs this can be done via ``buildtest buildspec find``.  The command below will find
-and validate all buildspecs in the buildtest-cori repo and load them in buildspec cache.
+and validate all buildspecs in the **buildtest-cori** repo and load them in buildspec cache.
 
 ```
 $ buildtest buildspec find --root /path/to/buildtest-cori/buildspecs --rebuild
