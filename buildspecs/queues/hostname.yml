@@ -4,7 +4,7 @@ buildspecs:
     description: run hostname on haswell partitions
     type: script
     executor: 'cori.slurm.haswell_(debug|premium|shared|flex)'
-    tags: ["queues","jobs", "reframe"]
+    tags: ["queues","jobs"]
     sbatch: ["-t 5", "-n 1"]
     run: hostname
     executors:
@@ -15,7 +15,7 @@ buildspecs:
     description: run hostname on knl partitions
     type: script
     executor: 'cori.slurm.knl_(debug|premium|shared|flex)'
-    tags: ["queues","jobs", "reframe"]
+    tags: ["queues","jobs"]
     sbatch: ["-t 5", "-n 1"]
     run: hostname
     executors:

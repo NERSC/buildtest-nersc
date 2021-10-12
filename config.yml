@@ -2,7 +2,6 @@ system:
   gerty:
     hostnames:
     - gert01.nersc.gov
-    load_default_buildspecs: false
     moduletool: environment-modules
     executors:
       local:
@@ -33,7 +32,6 @@ system:
   perlmutter:
     hostnames:
     - login*
-    load_default_buildspecs: false
     moduletool: lmod
     executors:
       defaults:
@@ -70,7 +68,6 @@ system:
   cori:
     hostnames:
     - cori*
-    load_default_buildspecs: false
     moduletool: environment-modules
     cdash:
       url: https://my.cdash.org

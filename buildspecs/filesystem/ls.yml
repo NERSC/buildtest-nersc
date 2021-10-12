@@ -1,11 +1,11 @@
-# https://gitlab.nersc.gov/nersc/consulting/reframe-at-nersc/reframe-nersc-tests/-/tree/main/filesystem_health/ls
+# https://gitlab.nersc.gov/nersc/consulting/-at-nersc/reframe-nersc-tests/-/tree/main/filesystem_health/ls
 version: "1.0"
 buildspecs:
   filesystem_benchmark_ls:
     type: script
     executor: cori.local.bash
     description: time ls with nwchem for various filesystems
-    tags: [filesystem, reframe, benchmark]
+    tags: [filesystem, benchmark]
     vars:
       dirs: "(/global/cfs/cdirs/nstaff/ /global/common/software/nstaff/ $SCRATCH )"
     run: |
