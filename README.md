@@ -8,7 +8,7 @@ This repo is testsuite for Cori and Perlmutter system at NERSC using buildtest. 
 To get started clone this repo on Cori as follows:
 
 ```
-git clone https://software.nersc.gov/siddiq90/buildtest-cori.git
+git clone https://software.nersc.gov/NERSC/buildtest-cori.git
 ```
 
 buildtest configuration file is read at `$HOME/.buildtest` if you don't have a directory please run
@@ -106,13 +106,9 @@ For more details on querying tests see https://buildtest.readthedocs.io/en/devel
 
 ## CI Setup
 
-There is a github workflow [.mirror_to_cori.yml](https://github.com/buildtesters/buildtest-cori/blob/devel/.github/workflows/mirror_to_cori.yml) 
-responsible for mirroring upstream project to https://software.nersc.gov/siddiq90/buildtest-cori.  We have setup a gitlab 
-[secret](https://github.com/buildtesters/buildtest-cori/settings/secrets/actions) that contains gitlab personal access token created from 
-https://software.nersc.gov/-/profile/personal_access_tokens. The Personal access token must have `read_api`, `read_repository`, `write_repository` scope.  
 
-Tests are run on schedule basis with one schedule corresponding to one gitlab job in [.gitlab-ci.yml](https://github.com/buildtesters/buildtest-cori/blob/devel/.gitlab-ci.yml). The scheduled pipelines are configured in 
-https://software.nersc.gov/siddiq90/buildtest-cori/-/pipeline_schedules. Each schedule has a variable defined to control which pipeline 
+Tests are run on schedule basis with one schedule corresponding to one gitlab job in [.gitlab-ci.yml](https://software.nersc.gov/NERSC/buildtest-cori/-/blob/devel/.gitlab-ci.yml). The scheduled pipelines are configured in 
+https://software.nersc.gov/NERSC/buildtest-cori/-/pipeline_schedules. Each schedule has a variable defined to control which pipeline 
 is run. In the `.gitlab-ci.yml` we make use of conditional rules using [only](https://docs.gitlab.com/ee/ci/yaml/#onlyexcept-basic). For example the daily
 system test has variable defined `DAILYCHECK` set to `True` and the gitlab job is defined as follows:
 
@@ -129,39 +125,41 @@ scheduled_system_check:
 
 The scheduled jobs are run at different intervals (1x/day, 1x/week, etc...) at different times of day to avoid overloading the system. The gitlab jobs
 will run jobs based on tags, alternately some tests may be defined by running all tests in a directory (`buildtest build -b apps`). If you want to add a new
-scheduled job, please define a [new schedule](https://software.nersc.gov/siddiq90/buildtest-cori/-/pipeline_schedules/new) with an appropriate time. The 
+scheduled job, please define a [new schedule](https://software.nersc.gov/NERSC/buildtest-cori/-/pipeline_schedules/new) with an appropriate time. The 
 `target branch` should be `devel` and define a unique variable used to distinguish scheduled jobs. Next, create a job in `.gitlab-ci.yml` that references 
 the scheduled job based on the variable name.
 
 ### Runner settings
 
-The runner on Cori is generally run on the hostname `cori01` by the user [e4s](https://iris.nersc.gov/user/93315/info). The runner can be started using the following command 
+This project is using a custom runner hosted via user [e4s](https://iris.nersc.gov/user/93315/info) in order for all jobs to be run by user *e4s*. The **e4s** user is a [collaboration account](https://docs.nersc.gov/accounts/collaboration_accounts/), if you don't have access to collaboration account. Please check in https://iris.nersc.gov/ for the setting or contact the PI.  If you are logged in to Cori/Perlmutter you can run the following to switch to e4s user. You will need to type your NERSC password for your user account.
+
 ```
-screen -dmS e4s-runner-buildtest $(which gitlab-runner) run
+collabsu e4s
 ```
 
-The command allows the process to detach from the terminal and remain active on logoff. The gitlab-runner in question is the ECP fork runner which can be found at `/global/homes/e/e4s/nersc-ecp-staff-runner/ecp-ci-0.6.1/gitlab-runner/out/binaries/gitlab-runner`. The config.toml is not specified in the command line because it is stored in the default config location `$HOME/.gitlab-runner/config.toml`.
+The runner can be started using the following command 
+```
+sh $HOME/cron/restart.sh
+```
+
+The script is defined as follows
+
+```console
+#!/bin/bash
+process=$(ps -u e4s | grep -i screen | wc -l)
+if [[ $process -lt 1 ]]
+then
+  screen -dmS e4s-runner-buildtest $(which gitlab-runner) run
+  #mail -s "restart e4s runner" shahzebsiddiqui@lbl.gov <<< "restarting e4s runner on cori.01"
+fi
+```
+The command allows the process to detach from the terminal and remain active on logoff. The gitlab-runner in question is the ECP fork runner which can be found at `$HOME/nersc-ecp-staff-runner/ecp-ci-0.6.1/gitlab-runner/out/binaries/gitlab-runner`. The config.toml is not specified in the command line because it is stored in the default config location `$HOME/.gitlab-runner/config.toml`.
 
 The runner is tied to a particular hostname and is not run as a service, it is advisable to check/be notified when the runner goes down. It may be useful to run a cronjob to check the runner status.
 
 ```
-kavaluav@cori01:~> crontab -l
-#This cronjob checks whether the E4S runner is active
-PATH=/bin:/usr/bin:/usr/local/bin
-00 * * * * /bin/bash /global/cscratch1/sd/kavaluav/e4s_runner_check.sh > /dev/null 2>&1
-```
-
-The script referenced above has the below content.
-```
-kavaluav@cori01:~> cat /global/cscratch1/sd/kavaluav/e4s_runner_check.sh
-#!/bin/bash
-
-process=$(ps -u e4s | grep -i screen | wc -l) 
-if [[ $process -lt 1 ]]
-then
-	mail -s "e4s runner is dead" akavalur@lbl.gov <<< "E4S runner on Cori is no longer visible"
-fi
-
+e4s@cori01:/global/u1/e/e4s> crontab -l
+* 0 * * * $HOME/cron/restart.sh >/dev/null 2>&1
 ```
 
 All scheduled pipelines are run via `e4s` user which is done by  specifying `tags: [c_e4s_cori01]` in gitlab job 
@@ -170,10 +168,11 @@ This can be configured in [iris](https://iris.nersc.gov/).
 
 ## Integrations
 
-buildtest-cori mirror repo has integration with Github and Slack. The integrations can be found at 
-https://software.nersc.gov/siddiq90/buildtest-cori/-/settings/integrations. The Github integration 
-will push result back to upstream project: https://github.com/buildtesters/buildtest-cori. The CI
-checks are pushed to [buildtest Slack](https://hpcbuildtest.slack.com) at **#cori-testsuite** workspace. 
+This project has integration with Slack to notify CI builds to [buildtest Slack](https://hpcbuildtest.slack.com) at **#cori-testsuite** workspace. The integrations can be 
+found at https://software.nersc.gov/NERSC/buildtest-cori/-/settings/integrations.
+
+This project has setup a push mirror to https://github.com/buildtesters/buildtest-cori which can be seen at https://software.nersc.gov/NERSC/buildtest-cori/-/settings/repository 
+under **Mirroring Repositories**. If the push mirror is not setup, please add the mirror. 
 
 ## CDASH
 
@@ -184,9 +183,9 @@ uploads all tests found in report file found in **$HOME/.buildtest/report.json**
 ## Contributing Guide
 
 To contribute back you will want to make sure your buildspec is validated before you contribute back, this could be 
-done by running test manually ``buildtest build`` or see if buildspec is valid via ``buildtest buildspec find``. It 
-would be good to run your test and make sure it is working as expected, you can view test detail using ``buildtest inspect id <ID>`` 
-or see [Test Inspection](https://buildtest.readthedocs.io/en/devel/getting_started.html#test-inspection) section. 
+done by running test manually `buildtest build` or see if buildspec is valid via `buildtest buildspec find`. It 
+would be good to run your test and make sure it is working as expected, you can view test detail using `buildtest inspect name <testname>`. For more 
+details on how to inspect test, see https://buildtest.readthedocs.io/en/devel/getting_started.html#test-inspection.
 
 buildtest relies on json schema to validate buildspecs and you will need to understand the json schema to understand how
 to write valid tests. To get all schemas run the following:
@@ -199,16 +198,16 @@ compiler-v1.0.schema.json
 script-v1.0.schema.json
 ```
 
-The schemas ``script``, ``compiler``, ``global`` are of interest when writing buildspec to view the json content for script 
-schema you can run ``buildtest schema -n script-v1.0.schema.json --json``.
+The schemas `script`, `compiler`, `global` are of interest when writing buildspec to view the json content for script 
+schema you can run `buildtest schema -n script-v1.0.schema.json --json`.
 
-To view all examples for script schema you can run ``buildtest schema -n script-v1.0.schema.json --examples`` which will show
+To view all examples for script schema you can run `buildtest schema -n script-v1.0.schema.json --examples` which will show
 all invalid/valid tests. buildtest will validate each example before it shows content which will be help understand how to write
 tests and see all the edge cases.
 
 Alternately you can see all published schemas and examples on https://buildtest.readthedocs.io/en/devel/schema_examples.html
 
-If you want to contribute your tests, please see [CONTRIBUTING.md](https://github.com/buildtesters/buildtest-cori/blob/devel/CONTRIBUTING.md)
+If you want to contribute your tests, please see [CONTRIBUTING.md](https://software.nersc.gov/NERSC/buildtest-cori/-/blob/devel/CONTRIBUTING.md)
 
 
 ## References
