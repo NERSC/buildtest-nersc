@@ -6,25 +6,28 @@ so you can contribute back and make everyone's life easier. All contributions wi
 [merge request](https://software.nersc.gov/NERSC/buildtest-cori/-/merge_requests).
  We have disabled push to **devel** branch, therefore all changes must go through merge request.
 
-Fork the repo
---------------
+First, you'll need to fork this repo https://software.nersc.gov/NERSC/buildtest-cori/ in your userspace and clone 
+the repo.
 
-First, you'll need to fork this repo https://software.nersc.gov/NERSC/buildtest-cori/
-
-You might need to setup your SSH keys in your git profile if you are using ssh option for cloning. For more details on
-setting up SSH keys in your profile, follow instruction found in https://docs.gitlab.com/ee/ssh/ 
 
 Adding Upstream Remote
 -----------------------
 
-First you need to add the `upstream` repo, to do this you can issue the
-following:
+First you need to add the `upstream` repo, to do this by running the following:
 
 ```
-git remote add upstream git@github.com/buildtesters/buildtest-cori.git
+git remote add upstream https://software.nersc.gov/NERSC/buildtest-cori.git
 ```
 
-The `upstream` tag is used to sync your local fork with upstream repo.
+The `upstream` tag is used to sync your local fork with upstream repo. If your remotes are setup properly you should have something like this:
+
+```
+siddiq90@cori01> git remote -v
+origin	https://software.nersc.gov/siddiq90/buildtest-cori (fetch)
+origin	https://software.nersc.gov/siddiq90/buildtest-cori (push)
+upstream	https://software.nersc.gov/NERSC/buildtest-cori.git (fetch)
+upstream	https://software.nersc.gov/NERSC/buildtest-cori.git (push)
+```
 
 Make sure you set your user name and email set properly in git configuration.
 We don't want commits from unknown users. This can be done by setting the following:
@@ -32,6 +35,23 @@ We don't want commits from unknown users. This can be done by setting the follow
 ```
 git config user.name "First Last"
 git config user.email "abc@example.com"
+```
+
+This will save the configuration local to this repo, Alternately you can setup your *user.name* and *user.email* 
+in global setting so its configured for all projects which can be done by running the following:
+
+```
+git config --global user.name "First Last"
+git config --global user.email "abc@example.com"
+```
+
+The global git configuration is stored in `~/.gitconfig`. If you have done this correctly you may have something like as follows
+
+```
+siddiq90@cori01> cat ~/.gitconfig
+[user]
+	name = Shahzeb Siddiqui
+	email = shahzebmsiddiqui@gmail.com
 ```
 
 For more details see [First Time Git Setup](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup)
@@ -94,13 +114,12 @@ All incoming PRs for tests are pushed to `devel` branch which uses HEAD of devel
 
 Please make sure you sync your buildtest with `devel` when you contribute tests and buildspec. Please refer to buildtest [contributing guide](https://buildtest.readthedocs.io/en/devel/contributing.html) for more details.
 
-Application tests are stored in [apps](https://github.com/buildtesters/buildtest-cori/tree/devel/buildspecs/apps) directory. Tests are categorized by application, please consider adding test in one of the 
-appropriate directories or create a new directory. Tests from [E4S Testsuite](https://github.com/E4S-Project/testsuite) are located in [e4s](https://github.com/buildtesters/buildtest-cori/tree/devel/buildspecs/e4s) directory. This should be used for 
-testing E4S stack on Cori. 
+Application tests are stored in [apps](https://software.nersc.gov/NERSC/buildtest-cori/-/tree/devel/buildspecs/apps) directory. Tests are categorized by application, please consider adding test in one of the 
+appropriate directories or create a new directory. Tests from [E4S Testsuite](https://github.com/E4S-Project/testsuite) are located in [e4s](https://software.nersc.gov/NERSC/buildtest-cori/-/tree/devel/buildspecs/e4s) directory. This should be used for testing E4S stack on Cori. 
 
-If you are adding a buildspec in your PR, please add a test description using ``description`` field. Please add test with appropriate tagname using ``tags`` field. For instance all e4s tests are set to ``e4s`` tag name. This allows all e4s tests to be run via ``buildtest build --tags e4s``. 
+If you are adding a buildspec in your PR, please add a test description using `description` field. Please add test with appropriate tagname using `tags` field. For instance all e4s tests are set to `e4s` tag name. This allows all e4s tests to be run via `buildtest build --tags e4s`. 
 
-Please add yourself to ``maintainers`` field which helps contact individual when test fails. When you contribute your test and buildspec please test this locally. The buildspec must be valid, this can be done by building the test via ``buildtest build -b /path/to/test.yml``. 
+Please add yourself to `maintainers` field which helps contact individual when test fails. When you contribute your test and buildspec please test this locally. 
 
 Resolving PR Merge Conflicts
 -----------------------------
