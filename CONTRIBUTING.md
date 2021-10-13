@@ -3,13 +3,13 @@ Getting Started
 
 Contribution is not easy, so we created this document to describe how to get you setup
 so you can contribute back and make everyone's life easier. All contributions will be made via
-[merge request](https://software.nersc.gov/siddiq90/buildtest-cori/-/merge_requests).
+[merge request](https://software.nersc.gov/NERSC/buildtest-cori/-/merge_requests).
  We have disabled push to **devel** branch, therefore all changes must go through merge request.
 
 Fork the repo
 --------------
 
-First, you'll need to fork this repo https://software.nersc.gov/siddiq90/buildtest-cori/
+First, you'll need to fork this repo https://software.nersc.gov/NERSC/buildtest-cori/
 
 You might need to setup your SSH keys in your git profile if you are using ssh option for cloning. For more details on
 setting up SSH keys in your profile, follow instruction found in https://docs.gitlab.com/ee/ssh/ 
