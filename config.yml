@@ -36,7 +36,6 @@ system:
     executors:
       defaults:
         pollinterval: 60
-        launcher: sbatch
         max_pend_time: 90
       local:
         bash:
@@ -81,7 +80,6 @@ system:
     executors:
       defaults:
         pollinterval: 30
-        launcher: sbatch
         max_pend_time: 300
       local:
         bash:
