@@ -2,9 +2,9 @@ version: "1.0"
 buildspecs:
   wall_timeout:
     type: script
-    executor: cori.slurm.haswell_debug
+    executor: cori.slurm.knl_debug
     sbatch: [ "-t '00:00:10'", "-n 1"]
-    description: "This job simulates job timeout by sleeping for 300sec while requesting 5sec"
+    description: "This job simulates job timeout by sleeping for 180sec while requesting 10sec"
     tags: ["jobs", "fail"]
     run: sleep 180
     status:
