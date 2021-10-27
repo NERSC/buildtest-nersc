@@ -1,0 +1,24 @@
+version: "0"
+buildspecs:
+  amrex_single_vortex:
+    type: compiler
+    executor: cori.slurm.haswell_debug
+    description: "AMReX CI Test: AmrLevel_SingleVortex"
+    source: src/bupc-hello.c
+    tags: ["compile"]
+    compilers:
+      name: ["builtin_gcc"]
+      default:
+        pre_build: |
+          module load e4s/21.05
+          spack load amrex
+        gcc:
+          cc: upcc
+          cflags: -g --network=aries
+          run: upcrun -N 1 -n 4 $_EXEC
+          sbatch: ["-t 10", "-n 4", "-N 1"]
+         
+      config:
+        builtin_gcc:
+          module:
+            load: [bupc/2020.4.0]
