@@ -10,17 +10,17 @@ buildspecs:
       - "-t 00:10:00"
     run: |
       module load e4s/21.05
-
+      
       # Load compiler used to compile AMReX library
       AMREX_COMP_NAME=$(spack find --json amrex | jq -r '.[0].compiler.name')
       AMREX_COMP_VER=$(spack find --json amrex | jq -r '.[0].compiler.version')
       module load ${AMREX_COMP_NAME}/${AMREX_COMP_VER}
 
-
       module load impi
       spack load amrex
       spack load cmake@3.20.2
 
+      # Store AMReX install location
       export AMR_DIR=$(spack location -i amrex)
 
       cd test/Exec
