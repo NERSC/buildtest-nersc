@@ -29,3 +29,5 @@ buildspecs:
       regex:
         stream: stdout
         exp: "finalized"
+maintainers:
+  - epalmer
