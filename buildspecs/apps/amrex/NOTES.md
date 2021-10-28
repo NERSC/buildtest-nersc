@@ -24,7 +24,7 @@ Flags for building with CMake:
 -DAMReX_SPACEDIM=2
 
 
-after build use
+after build use:
 
 srun -n 4 ./SingleVortex ../inputs max_step=1
  
