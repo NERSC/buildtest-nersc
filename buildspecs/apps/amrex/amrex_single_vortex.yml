@@ -4,7 +4,7 @@ buildspecs:
     executor: cori.slurm.haswell_debug
     type: script
     description: "AmrLevel SingleVortex Build and Run"
-    tags: ["daily"]
+    tags: ["e4s"]
     sbatch:
       - "-N 1"
       - "-t 00:10:00"
