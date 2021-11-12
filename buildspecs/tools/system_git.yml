@@ -9,6 +9,6 @@ buildspecs:
     status:
       regex:
         stream: stdout
-        exp: 'git version (2.26.1)'
+        exp: 'git version (2.26.2)'
 maintainers:
   - "shahzebsiddiqui"
