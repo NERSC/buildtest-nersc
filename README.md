@@ -5,23 +5,27 @@ This repo is testsuite for Cori and Perlmutter system at NERSC using buildtest. 
 
 ## Setup
 
-To get started clone this repo on Cori as follows:
+To get started clone this repo and buildtest in your filesystem:
 
 ```
+git clone https://github.com/buildtesters/buildtest.git
 git clone https://software.nersc.gov/NERSC/buildtest-cori.git
 ```
 
-buildtest configuration file is read at `$HOME/.buildtest` if you don't have a directory please run
+You will need a python instance to setup buildtest, on Cori this can be done by loading python module and create a conda environment as shown below
 
 ```
-mkdir $HOME/.buildtest
+module load python/3.8-anaconda-2020.11
+conda create -n buildtest
+source activate buildtest
+source /path/to/buildtest/setup.sh
 ```
 
-Next, navigate to `buildtest-cori` directory and copy your site configuration to the following location
+Next, navigate to `buildtest-cori` directory and set environment `BUILDTEST_CONFIGFILE` to point to **config.yml** which is the configuration file.
 
 ```
 cd buildtest-cori
-cp config.yml $HOME/.buildtest/config.yml
+export BUILDTEST_CONFIGFILE=$PWD/config.yml
 ```
 
 Assuming you have [installed buildtest](https://buildtest.readthedocs.io/en/devel/installing_buildtest.html) you 
