@@ -11,4 +11,4 @@ buildspecs:
         exp: "SUSE Linux Enterprise Server 15"
         stream: stdout
 maintainers:
-  - "@shahzebsiddiqui"
+  - "shahzebsiddiqui"

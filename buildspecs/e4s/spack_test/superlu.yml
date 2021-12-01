@@ -32,4 +32,4 @@ buildspecs:
           specs: ['superlu@5.2.1%intel', 'superlu-dist@6.4.0%intel']
 
 maintainers:
-  - "@shahzebsiddiqui"
+  - "shahzebsiddiqui"

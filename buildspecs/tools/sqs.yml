@@ -31,4 +31,4 @@ buildspecs:
     run: sqs -a -q regular,premium
 
 maintainers:
-  - "@shahzebsiddiqui"
+  - "shahzebsiddiqui"
