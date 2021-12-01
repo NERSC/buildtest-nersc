@@ -25,5 +25,5 @@ buildspecs:
        exp: "^(search nersc.gov)$"
 
 maintainers:
-  - "@shahzebsiddiqui"
+  - "shahzebsiddiqui"
 

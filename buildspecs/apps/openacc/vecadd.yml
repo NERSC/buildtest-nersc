@@ -20,4 +20,4 @@ buildspecs:
             load: [cuda, gcc/8.1.1-openacc-gcc-8-branch-20190215]
 
 maintainers:
-  - "@shahzebsiddiqui"
+  - "shahzebsiddiqui"

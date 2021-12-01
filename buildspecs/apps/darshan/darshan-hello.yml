@@ -28,4 +28,4 @@ buildspecs:
           module:
             swap: [intel, intel/19.1.2.254]
 maintainers:
-  - "Shahzeb Siddiqui <@shahzebsiddiqui>"
+  - "shahzebsiddiqui"

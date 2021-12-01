@@ -33,4 +33,4 @@ buildspecs:
           specs: ['raja@0.13.0%intel']
 
 maintainers:
-  - "@shahzebsiddiqui"
+  - "shahzebsiddiqui"

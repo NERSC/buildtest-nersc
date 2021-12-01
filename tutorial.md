@@ -32,7 +32,7 @@ You can see content of any test using `buildtest buildspec show` and name of the
 │     run: srun -n 32 shifter hostname                                                              │
 │                                                                                                   │
 │ maintainers:                                                                                      │
-│   - "@shahzebsiddiqui"                                                                            │
+│   - "shahzebsiddiqui"                                                                            │
 │                                                                                                   │
 ╰───────────────────────────────────────────────────────────────────────────────────────────────────╯
 ```

@@ -50,4 +50,4 @@ buildspecs:
       pdsh -w dtn[01-06] uptime
 
 maintainers:
-  - "@shahzebsiddiqui"
+  - "shahzebsiddiqui"

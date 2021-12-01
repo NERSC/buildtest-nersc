@@ -9,4 +9,4 @@ buildspecs:
        module load openmpi
        ompi_info
 maintainers:
-  - "@shahzebsiddiqui"
+  - "shahzebsiddiqui"

@@ -76,6 +76,6 @@ buildspecs:
       sh test-all.sh --color-off validation_tests/NPB3.1 --print-logs --settings settings.cori.sh
 
 maintainers:
-  - "@shahzebsiddiqui"
-  - "@wspear"
+  - "shahzebsiddiqui"
+  - "wspear"
 

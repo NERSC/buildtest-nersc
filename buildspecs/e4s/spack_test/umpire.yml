@@ -16,4 +16,4 @@ buildspecs:
           option: '-l'
           specs: ['umpire@4.1.2']
 maintainers:
-  - "@shahzebsiddiqui"
+  - "shahzebsiddiqui"

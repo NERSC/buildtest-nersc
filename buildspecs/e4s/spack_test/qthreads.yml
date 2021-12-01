@@ -16,4 +16,4 @@ buildspecs:
           option: '-l'
           specs: ['qthreads@1.16']
 maintainers:
-  - "@shahzebsiddiqui"
+  - "shahzebsiddiqui"
