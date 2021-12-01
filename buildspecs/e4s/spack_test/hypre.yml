@@ -31,4 +31,4 @@ buildspecs:
           option: '-l'
           specs: ['hypre@2.20.0%intel']
 maintainers:
-  - "@shahzebsiddiqui"
+  - "shahzebsiddiqui"

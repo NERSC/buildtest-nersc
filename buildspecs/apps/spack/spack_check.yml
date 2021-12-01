@@ -67,4 +67,4 @@ buildspecs:
         stream: stdout
         exp: "^(0.16.1-2805-abed824555)$"
 maintainers:
-  - "@shahzebsiddiqui"
+  - "shahzebsiddiqui"

@@ -32,4 +32,4 @@ buildspecs:
           specs: ['strumpack@5.1.1%intel']
 
 maintainers:
-  - "@shahzebsiddiqui"
+  - "shahzebsiddiqui"

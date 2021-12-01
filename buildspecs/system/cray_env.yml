@@ -12,4 +12,4 @@ buildspecs:
       assert os.getenv("CRAY_CPU_TARGET") == "haswell"
 
 maintainers:
-  - "@shahzebsiddiqui"
+  - "shahzebsiddiqui"

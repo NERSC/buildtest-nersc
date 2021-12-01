@@ -19,4 +19,5 @@ buildspecs:
           specs: ['kokkos@3.4.00 +openmp', 'kokkos@3.4.00 -openmp']
     status:
       state: "FAIL"
-
+maintainers:
+  - "shahzebsiddiqui"

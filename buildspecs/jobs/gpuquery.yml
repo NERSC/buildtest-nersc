@@ -8,4 +8,4 @@ buildspecs:
     sbatch: ["-G 1", "-t 5", "-N 1"]
     run: srun nvidia-smi
 maintainers:
-  - "Shahzeb Siddiqui <@shahzebsiddiqui>"
+  - "shahzebsiddiqui"
