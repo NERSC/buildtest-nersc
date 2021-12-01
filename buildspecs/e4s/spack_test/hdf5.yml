@@ -32,4 +32,4 @@ buildspecs:
           option: '-l'
           specs: ['hdf5@1.8.22%intel', 'hdf5@1.10.7%intel']
 maintainers:
-  - "@shahzebsiddiqui"
+  - "shahzebsiddiqui"

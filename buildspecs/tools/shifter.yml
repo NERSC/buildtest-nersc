@@ -16,4 +16,4 @@ buildspecs:
     run: srun -n 32 shifter hostname
 
 maintainers:
-  - "@shahzebsiddiqui"
+  - "shahzebsiddiqui"

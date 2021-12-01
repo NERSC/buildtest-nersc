@@ -12,4 +12,4 @@ buildspecs:
       module load likwid
       likwid-topology -c
 maintainers:
-  - "Shahzeb Siddiqui @shahzebsiddiqui"
+  - "shahzebsiddiqui"

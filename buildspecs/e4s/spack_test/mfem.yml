@@ -33,4 +33,4 @@ buildspecs:
           specs: ['mfem@4.2.0%intel']
 
 maintainers:
-  - "@shahzebsiddiqui"
+  - "shahzebsiddiqui"

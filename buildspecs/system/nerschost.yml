@@ -15,5 +15,5 @@ buildspecs:
       os.system("nersc_host")
 
 maintainers:
-  - "@shahzebsiddiqui"
+  - "shahzebsiddiqui"
 
