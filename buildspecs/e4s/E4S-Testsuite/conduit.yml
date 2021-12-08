@@ -1,0 +1,17 @@
+version: "1.0"
+buildspecs:
+  conduit_testsuite_e4s_21.05:
+    type: script
+    executor: cori.slurm.haswell_premium
+    description: Run conduit test
+    tags: [e4s]
+    sbatch: ["-t 30", "-N 1"]
+    run: |
+      module swap intel intel/19.1.3.304
+      module load e4s/21.05
+      git clone https://github.com/E4S-Project/testsuite
+      cd testsuite
+      sh test-all.sh --color-off validation_tests/conduit --print-logs --settings settings.cori.sh
+maintainers:
+  - shahzebsiddiqui
+  - cyrush
