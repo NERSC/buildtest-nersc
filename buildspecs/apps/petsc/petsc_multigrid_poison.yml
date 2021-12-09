@@ -1,0 +1,14 @@
+version: "1.0"
+buildspecs:  
+  poisson_equation_multigrid:
+    type: script
+    executor: cori.slurm.haswell_debug
+    description: Solves 2D Poisson equation using multigrid
+    tags: [e4s]
+    sbatch: [-n 4, -t 10] 
+    run: |
+      module load e4s/21.05
+      cp $(spack location -i petsc)/share/petsc/examples/src/ksp/ksp/tutorials/ex50.c .
+      cp $(spack location -i petsc)/share/petsc/examples/src/ksp/ksp/tutorials/makefile .
+      make PETSC_DIR=$(spack location -i petsc) ex50
+      srun -n 4 ex50 -da_grid_x 4 -da_grid_y 4 -ksp_monitor
