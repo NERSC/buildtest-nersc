@@ -32,7 +32,14 @@ validate_tests:
   
   after_script:
     - *cleanup-buildtest
-  
+
+perlmutter:
+  stage: test
+  tags: [perlmutter-e4s]
+  script:
+    - hostname
+    - whoami
+      
 daily_check:
   stage: test
   only:
