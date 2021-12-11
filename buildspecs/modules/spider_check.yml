@@ -1,9 +1,10 @@
 version: "1.0"
 buildspecs:
   spider_check:
+    skip: true
     type: script
     executor: perlmutter.local.bash
-    description: Check $LMOD_DIR/spider utility
+    description: Check LMOD spider utuility 
     tags: [module]
     run: |
       $LMOD_DIR/spider --version
