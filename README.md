@@ -12,7 +12,8 @@ git clone https://github.com/buildtesters/buildtest.git
 git clone https://software.nersc.gov/NERSC/buildtest-cori.git
 ```
 
-You will need a python instance to setup buildtest, on Cori this can be done by loading python module and create a conda environment as shown below
+You will need python 3.7 or higher to [install buildtest](https://buildtest.readthedocs.io/en/devel/installing_buildtest.html), on Cori this can be done by loading python module
+and create a conda environment as shown below. 
 
 ```
 module load python/3.8-anaconda-2020.11
@@ -21,29 +22,31 @@ source activate buildtest
 source /path/to/buildtest/setup.sh
 ```
 
-Next, navigate to `buildtest-cori` directory and set environment `BUILDTEST_CONFIGFILE` to point to **config.yml** which is the configuration file.
+The perlmutter setup would be very similar just perform the same step with the default python module that comes with anaconda - `python/3.9-anaconda-2021.11`
+
+Next, navigate to `buildtest-cori` directory and set environment `BUILDTEST_CONFIGFILE` to point to **config.yml** which is the configuration file for NERSC system. 
 
 ```
 cd buildtest-cori
 export BUILDTEST_CONFIGFILE=$PWD/config.yml
 ```
 
-Assuming you have [installed buildtest](https://buildtest.readthedocs.io/en/devel/installing_buildtest.html) you 
-can view and validate your configuration via:
+You can view and validate your configuration and see if configuration makes sense:
 
 ```
 buildtest config validate
 buildtest config view
 ```
 
-Please make sure you are using tip of `devel` with buildtest when writing tests. You should sync your local devel branch with upstream
+Please make sure you are using tip of [devel](https://github.com/buildtesters/buildtest/tree/devel) branch of buildtest when writing tests. You should sync your local devel branch with upstream
 fork, for more details see [contributing guide](https://buildtest.readthedocs.io/en/devel/contributing/code_contribution_guide.html).
 
 First time around you should discover all buildspecs this can be done via ``buildtest buildspec find``.  The command below will find
-and validate all buildspecs in the **buildtest-cori** repo and load them in buildspec cache.
+and validate all buildspecs in the **buildtest-cori** repo and load them in buildspec cache. Note that one needs to specify `--root` to specify location where
+all buildspecs are located, we have not configured [buildspec_root](https://buildtest.readthedocs.io/en/devel/configuring_buildtest/overview.html#buildspec-roots) in the configuration file since we don't have a central location where this repo will reside.
 
 ```
-$ buildtest buildspec find --root /path/to/buildtest-cori/buildspecs --rebuild
+buildtest buildspec find --root /path/to/buildtest-cori/buildspecs --rebuild
 ```
 
 The buildspecs are loaded in buildspec cache file (JSON) that is used by `buildtest buildspec find` for querying cache. Subsequent runs will
@@ -100,6 +103,13 @@ below is a summary of tag description
 - **module** - this tag is used for testing module system
 - **benchmark** - this tag is used for benchmark tests. This can be application benchmarks, mini-benchmarks, kernels, etc... 
 
+You can see breakdown of tags and buildspec summary with the following commands
+
+```
+buildtest buildspec summary
+buildtest buildspec find --group-by-tags
+```
+
 ## Querying Tests
 
 You can use ``buildtest report`` and ``buildtest inspect`` to query tests. The commands differ slightly and data is 
@@ -135,40 +145,48 @@ the scheduled job based on the variable name.
 
 ### Runner settings
 
-This project is using a custom runner hosted via user [e4s](https://iris.nersc.gov/user/93315/info) in order for all jobs to be run by user *e4s*. The **e4s** user is a [collaboration account](https://docs.nersc.gov/accounts/collaboration_accounts/), if you don't have access to collaboration account. Please check in https://iris.nersc.gov/ for the setting or contact the PI.  If you are logged in to Cori/Perlmutter you can run the following to switch to e4s user. You will need to type your NERSC password for your user account.
+This project is using a custom runner hosted via user [e4s](https://iris.nersc.gov/user/93315/info) in order for all jobs to be run by user *e4s*. The **e4s** user is a [collaboration account](https://docs.nersc.gov/accounts/collaboration_accounts/), if you don't have access to collaboration account, please contact the PI for project [m3503](https://iris.nersc.gov/project/67107/info) to see if you can be added to group.  If you are logged in to Cori/Perlmutter you can run the following command to switch to e4s user.
 
 ```
 collabsu e4s
 ```
 
-The runner can be started using the following command 
-```
-sh $HOME/cron/restart.sh
-```
+You will be prompted to type your NERSC password for your user account.
 
-The script is defined as follows
+The `e4s` user has two shell runners configured with this project. Please note that you must be on the login node `cori01` or `login37` in order to restart runner.
 
-```console
-#!/bin/bash
-process=$(ps -u e4s | grep -i screen | wc -l)
-if [[ $process -lt 1 ]]
-then
-  screen -dmS e4s-runner-buildtest $(which gitlab-runner) run
-  #mail -s "restart e4s runner" shahzebsiddiqui@lbl.gov <<< "restarting e4s runner on cori.01"
-fi
-```
-The command allows the process to detach from the terminal and remain active on logoff. The gitlab-runner in question is the ECP fork runner which can be found at `$HOME/nersc-ecp-staff-runner/ecp-ci-0.6.1/gitlab-runner/out/binaries/gitlab-runner`. The config.toml is not specified in the command line because it is stored in the default config location `$HOME/.gitlab-runner/config.toml`.
+| System | Hostname | Runner Configuration |  Runner Tag Name |
+| ------- | --------- | ----------------- | ------------------- | 
+| Cori | cori01       | `~/.gitlab-runner/cori-cori01.config.toml` | `tags: [cori-e4s]` or `tags: [cori01-e4s]` |
+| Perlmutter | login37       | `~/.gitlab-runner/perlmutter-login17.config.toml` | `tags: [perlmutter-e4s]` | 
 
-The runner is tied to a particular hostname and is not run as a service, it is advisable to check/be notified when the runner goes down. It may be useful to run a cronjob to check the runner status.
+The runner can be started manually by running the following. 
 
 ```
-e4s@cori01:/global/u1/e/e4s> crontab -l
-* 0 * * * $HOME/cron/restart.sh >/dev/null 2>&1
+# Cori
+sh $HOME/cron/restart-cori01.sh
+
+# Perlmutter
+sh $HOME/cron/restart-login37.sh
 ```
 
-All scheduled pipelines are run via `e4s` user which is done by  specifying `tags: [c_e4s_cori01]` in gitlab job 
-to run jobs with a single user account. Please make sure `e4s` user has access to all the queues required to run tests.
-This can be configured in [iris](https://iris.nersc.gov/).
+The gitlab-runner is the ECP fork runner which can be found at `$HOME/nersc-ecp-staff-runner/`, and `gitlab-runner` should be in `$PATH` when you login via *e4s* which is set in `~/.bashrc` file.
+
+The runner is tied to a particular hostname and is not run as a service, it is advisable to check/be notified when the runner goes down. There is a cronjob setup on `cori01` and `login37` which is setup to run the restart 
+script every 1hr. 
+
+```
+# Crontab on Cori - cori01
+e4s@cori01:~/cron> crontab -l
+0 * * * * $HOME/cron/restart-cori01.sh >/dev/null  2>&1 
+
+
+# Crontab on Perlmutter - login37
+e4s@login37:~/cron> crontab -l
+0 * * * * $HOME/cron/restart-login37.sh >/dev/null  2>&1 
+```
+
+All scheduled pipelines are run via `e4s` user your gitlab job must specify the appropriate tag name. You can check registered runner at https://software.nersc.gov/NERSC/buildtest-cori/-/settings/ci_cd under `Runners` section. Please make sure `e4s` user has access to all the queues required to run tests, this can be configured in [iris](https://iris.nersc.gov/).
 
 ## Integrations
 
@@ -188,28 +206,8 @@ uploads all tests found in report file found in **$HOME/.buildtest/report.json**
 
 To contribute back you will want to make sure your buildspec is validated before you contribute back, this could be 
 done by running test manually `buildtest build` or see if buildspec is valid via `buildtest buildspec find`. It 
-would be good to run your test and make sure it is working as expected, you can view test detail using `buildtest inspect name <testname>`. For more 
-details on how to inspect test, see https://buildtest.readthedocs.io/en/devel/getting_started.html#test-inspection.
-
-buildtest relies on json schema to validate buildspecs and you will need to understand the json schema to understand how
-to write valid tests. To get all schemas run the following:
-```
-$ buildtest schema
-global.schema.json
-definitions.schema.json
-settings.schema.json
-compiler-v1.0.schema.json
-script-v1.0.schema.json
-```
-
-The schemas `script`, `compiler`, `global` are of interest when writing buildspec to view the json content for script 
-schema you can run `buildtest schema -n script-v1.0.schema.json --json`.
-
-To view all examples for script schema you can run `buildtest schema -n script-v1.0.schema.json --examples` which will show
-all invalid/valid tests. buildtest will validate each example before it shows content which will be help understand how to write
-tests and see all the edge cases.
-
-Alternately you can see all published schemas and examples on https://buildtest.readthedocs.io/en/devel/schema_examples.html
+would be good to run your test and make sure it is working as expected, you can view test detail using `buildtest inspect name <testname>` or `buildtest inspect query <testname>`. For more 
+details on querying test please see https://buildtest.readthedocs.io/en/devel/gettingstarted/query_test_report.html. 
 
 If you want to contribute your tests, please see [CONTRIBUTING.md](https://software.nersc.gov/NERSC/buildtest-cori/-/blob/devel/CONTRIBUTING.md)
 
