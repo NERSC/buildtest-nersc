@@ -6,7 +6,5 @@ buildspecs:
     description: Check if Lmod will autoswap same modules
     tags: [module]
     run: |
-      ml purge
-      ml gcc/10.2.0
-      ml gcc/8.1.0
+      ml gcc/10.3.0
       ml gcc/9.3.0
