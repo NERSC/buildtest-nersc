@@ -3,11 +3,10 @@ Getting Started
 
 Contribution is not easy, so we created this document to describe how to get you setup
 so you can contribute back and make everyone's life easier. All contributions will be made via
-[merge request](https://software.nersc.gov/NERSC/buildtest-cori/-/merge_requests).
- We have disabled push to **devel** branch, therefore all changes must go through merge request.
+[merge request](https://software.nersc.gov/NERSC/buildtest-cori/-/merge_requests) at https://software.nersc.gov/NERSC/buildtest-cori/, **please do not submit a 
+pull request to https://github.com/buildtesters/buildtest-cori**. We have disabled push to **devel** branch, therefore all changes must go through merge request.
 
-First, you'll need to fork this repo https://software.nersc.gov/NERSC/buildtest-cori/ in your userspace and clone 
-the repo.
+First, you'll need to fork this repo https://software.nersc.gov/NERSC/buildtest-cori/ in your userspace and clone the repo.
 
 
 Adding Upstream Remote
@@ -80,15 +79,13 @@ git push origin devel
 Feature Branch
 ------------------
 
-Please make sure to create a new branch when adding and new feature. Do not
-push to `devel` branch on your fork or upstream.
-
-Create a new branch from `devel` as follows:
+Please make sure to create a new branch when contributing to this project. **Do not push to `devel` branch on your fork or upstream**, instead you should create a new branch 
+from `devel` as follows:
 
 ```
- cd buildtest-cori
- git checkout devel
- git checkout -b featureX
+cd buildtest-cori
+git checkout devel
+git checkout -b featureX
 ```
 
 Once you are ready to push to your fork repo do the following:
@@ -97,8 +94,7 @@ Once you are ready to push to your fork repo do the following:
 git push origin featureX
 ```
 
-Once the branch is created in your fork, you can issue a Merge Request to `devel`
-branch for upstream repo (https://software.nersc.gov/siddiq90/buildtest-cori.git).
+Once the branch is created in your fork, you can issue a Merge Request to `devel` branch for upstream repo(https://software.nersc.gov/NERSC/buildtest-cori.git).
 
 Default Branch
 ---------------
@@ -110,12 +106,10 @@ which prevents users from accidently deleting the branch.
 Contributing Tests
 -------------------
 
-All incoming PRs for tests are pushed to `devel` branch which uses HEAD of devel branch from buildtest repo (https://github.com/buildtesters/buildtest).
-
-Please make sure you sync your buildtest with `devel` when you contribute tests and buildspec. Please refer to buildtest [contributing guide](https://buildtest.readthedocs.io/en/devel/contributing.html) for more details.
+All incoming PRs submitted to [devel](https://software.nersc.gov/NERSC/buildtest-cori/-/tree/devel) branch. Please make sure you sync your buildtest codebase with `devel` when you contribute tests and buildspec.
 
 Application tests are stored in [apps](https://software.nersc.gov/NERSC/buildtest-cori/-/tree/devel/buildspecs/apps) directory. Tests are categorized by application, please consider adding test in one of the 
-appropriate directories or create a new directory. Tests from [E4S Testsuite](https://github.com/E4S-Project/testsuite) are located in [e4s](https://software.nersc.gov/NERSC/buildtest-cori/-/tree/devel/buildspecs/e4s) directory. This should be used for testing E4S stack on Cori. 
+appropriate directories or create a new directory. Tests from [E4S Testsuite](https://github.com/E4S-Project/testsuite) or `spack test` are located in [e4s](https://software.nersc.gov/NERSC/buildtest-cori/-/tree/devel/buildspecs/e4s) directory. This should be used for testing E4S stack on Cori. 
 
 If you are adding a buildspec in your PR, please add a test description using `description` field. Please add test with appropriate tagname using `tags` field. For instance all e4s tests are set to `e4s` tag name. This allows all e4s tests to be run via `buildtest build --tags e4s`. 
 
@@ -146,7 +140,7 @@ git fetch upstream devel
 Note you shouldn't be making any changes to your local `devel` branch, if `git fetch` was successful you can merge your `devel` with upstream as follows:
 
 ```
- git merge upstream/devel
+git merge upstream/devel
 ```
 
 Next, navigate to your feature branch and sync feature changes with devel::
