@@ -20,7 +20,7 @@ stages:
   - test
 validate_tests:
   stage: build
-  tags: [c_e4s_cori01]
+  tags: [cori-e4s]
   before_script:
     - *setup-buildtest
   rules:
@@ -36,9 +36,26 @@ validate_tests:
 perlmutter:
   stage: test
   tags: [perlmutter-e4s]
+  only:
+    refs:
+      - schedules
+    variables:
+      - $PM_TEST == "True"
+  before_script:
+    - *setup-buildtest   
   script:
-    - hostname
-    - whoami
+    - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
+    - buildtest build -e perlmutter.local.bash --max-pend-time 600 --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
+    - buildtest report --filter state=FAIL
+    - buildtest cdash upload perlmutter-e4s_tests
+    - mkdir -p $CI_PROJECT_DIR/.artifacts
+    - cp $BUILDTEST_ROOT/var/{buildtest.log,report.json} $CI_PROJECT_DIR/.artifacts     
+    - source deactivate 
+  after_script:
+    - *cleanup-buildtest
+  artifacts:
+    paths:
+      - $CI_PROJECT_DIR/.artifacts
       
 daily_check:
   stage: test
@@ -67,7 +84,7 @@ daily_check:
 
 apps:
   stage: test
-  tags: [c_e4s_cori01]
+  tags: [cori-e4s]
   only: 
     refs: 
       - schedules
@@ -93,7 +110,7 @@ apps:
 
 benchmark:
   stage: test
-  tags: [c_e4s_cori01]
+  tags: [cori-e4s]
   only:
     refs:
       - schedules
@@ -119,7 +136,7 @@ benchmark:
 
 e4s_tests:
   stage: test
-  tags: [c_e4s_cori01]
+  tags: [cori-e4s]
   only:
     refs:
       - schedules
@@ -128,7 +145,7 @@ e4s_tests:
   before_script:
     - *setup-buildtest
   script:
-    - buildtest  buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
+    - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
     - buildtest build --tags e4s --max-pend-time 600 --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
     - buildtest report --filter state=FAIL
     - buildtest  cdash upload e4s 
