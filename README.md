@@ -158,7 +158,7 @@ The `e4s` user has two shell runners configured with this project. Please note t
 | System | Hostname | Runner Configuration |  Runner Tag Name |
 | ------- | --------- | ----------------- | ------------------- | 
 | Cori | cori01       | `~/.gitlab-runner/cori-cori01.config.toml` | `tags: [cori-e4s]` or `tags: [cori01-e4s]` |
-| Perlmutter | login37       | `~/.gitlab-runner/perlmutter-login17.config.toml` | `tags: [perlmutter-e4s]` | 
+| Perlmutter | login37  | `~/.gitlab-runner/perlmutter-login37.config.toml` | `tags: [perlmutter-e4s]` | 
 
 The runner can be started manually by running the following. 
 
