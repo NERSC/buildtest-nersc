@@ -308,7 +308,7 @@ Failed Tests: 0/1 Percentage: 0.000%
 Writing Logfile to: /tmp/buildtest_yqs_ntfv.log
 ```
 
-We can see the generated content of the test via `buildtest inspect querty -t` followed by name of test. Its worth noting 
+We can see the generated content of the test via `buildtest inspect query -t` followed by name of test. Its worth noting 
 that `module load e4s/21.05` will drop us into a spack instance however the schema requires one to specify root of spack inorder
 to `source` the setup script which is used for generating the line `source /global/common/software/spackecp/e4s-21.05/spack/share/spack/setup-env.sh` that 
 initialize spack for e4s/21.05 stack.
