@@ -1,0 +1,14 @@
+version: "1.0"
+buildspecs:
+  cuda_mpi_seperate_compilation:
+    type: script
+    executor: perlmutter.slurm.regular
+    description: cuda mpi separate compilation
+    sbatch: ["-N 1", "-C gpu", "-G 4", "-t 5", "-A m3503_g"]
+    run: |
+      ml PrgEnv-nvidia
+      ml cudatoolkit
+      make clean
+      make
+      srun -n4 ./vec_add
+

@@ -1,0 +1,13 @@
+version: "1.0"
+buildspecs:
+  cuda_mpi_nvhpc_example:
+    type: script
+    executor: perlmutter.slurm.regular
+    description: Cuda MPI example using nvhpc compiler
+    sbatch: ["-N 1", "-C gpu", "-G 4", "-t 5", "-A m3503_g"]
+    run: |
+      ml PrgEnv-nvidia
+      make clean
+      make
+      srun -n4 ./vec_add
+

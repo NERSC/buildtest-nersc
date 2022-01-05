@@ -1,0 +1,12 @@
+version: "1.0"
+buildspecs:
+  gcc_nvhpc_compilation:
+    type: script
+    executor: perlmutter.slurm.regular
+    description: gcc and nvhpc compilation example
+    sbatch: ["-N 1", "-C  gpu", "-G 1", "-t 5", "-A m3503_g"]
+    run: |
+      ml gcc cudatoolkit
+      make clean
+      make
+      ./vec_add
