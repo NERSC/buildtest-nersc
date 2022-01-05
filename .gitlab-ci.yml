@@ -45,9 +45,9 @@ perlmutter:
     - *setup-buildtest   
   script:
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
-    - buildtest build -e perlmutter.local.bash --max-pend-time 600 --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
+    - buildtest build -e perlmutter.local.bash -e perlmutter.slurm.regular --maxpendtime 1200 --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
     - buildtest report --filter state=FAIL
-    - buildtest cdash upload perlmutter-e4s_tests
+    - buildtest cdash upload perlmutter-tests
     - mkdir -p $CI_PROJECT_DIR/.artifacts
     - cp $BUILDTEST_ROOT/var/{buildtest.log,report.json} $CI_PROJECT_DIR/.artifacts     
     - source deactivate 
@@ -146,7 +146,7 @@ e4s_tests:
     - *setup-buildtest
   script:
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
-    - buildtest build --tags e4s --max-pend-time 600 --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
+    - buildtest build --tags e4s --maxpendtime 600 --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
     - buildtest report --filter state=FAIL
     - buildtest  cdash upload e4s 
     - mkdir -p $CI_PROJECT_DIR/.artifacts
