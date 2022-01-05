@@ -1,0 +1,11 @@
+version: "1.0"
+buildspecs:
+  cuda_example_nvcc:
+    type: script
+    executor: perlmutter.slurm.regular
+    sbatch: ["-N 1", "-C gpu", "-t 5", "-A m3503_g"]
+    run: |
+      ml cudatoolkit
+      make clean
+      make
+      ./vec_add
