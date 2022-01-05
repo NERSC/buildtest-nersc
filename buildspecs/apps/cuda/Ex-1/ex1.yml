@@ -1,0 +1,13 @@
+version: "1.0"
+buildspecs:
+  cuda_example_nvcc:
+    type: script
+    executor: perlmutter.slurm.regular
+    description: Cuda C++ example using nvcc compiler
+    sbatch: ["-N 1", "-C gpu", "-t 5", "-A m3503_g"]
+    run: |
+      ml PrgEnv-nvidia
+      ml cudatoolkit
+      make clean
+      make
+      ./vec_add
