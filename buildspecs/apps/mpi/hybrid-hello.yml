@@ -4,7 +4,7 @@ buildspecs:
     type: compiler
     executor: cori.slurm.knl_debug
     description: Hybrid MPI+OpenMP Hello World in Fortran 
-    tags: [mpi]
+    tags: [mpi, compile]
     source: src/hybrid-hello.f90
     compilers:
       name: ["^(intel/19.0.3.199)$"]
