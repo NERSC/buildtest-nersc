@@ -4,7 +4,7 @@ buildspecs:
     type: compiler
     description: Laplace MPI code in C
     executor: cori.slurm.knl_debug
-    tags: ["mpi"]
+    tags: [mpi, compile]
     source: src/laplace_mpi.c
     compilers:
       name: ["^(intel/19.1.2.254)$"]
