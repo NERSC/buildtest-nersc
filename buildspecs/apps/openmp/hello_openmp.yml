@@ -1,0 +1,20 @@
+version: "1.0"
+buildspecs:
+  hello_world_openmp:
+    type: compiler
+    executor: cori.local.bash
+    source: src/hello.c
+    description: Hello World OpenMP example on login node with all PrgEnv modules
+    tags: [compile,openmp]
+    compilers:
+      name: ["^PrgEnv-(gnu|intel|cray)"]
+      default:
+        all:
+          env:
+            OMP_NUM_THREADS: "4"
+        gcc:
+          cflags: -fopenmp
+        intel:
+          cflags: -qopenmp
+        cray:
+          cflags: -h omp

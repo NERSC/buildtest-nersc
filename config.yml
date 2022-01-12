@@ -221,25 +221,25 @@ system:
             cxx: /usr/bin/g++
             fc: /usr/bin/gfortran
           PrgEnv-gnu/6.0.5:
-            cc: gcc
-            cxx: g++
-            fc: gfortran
+            cc: cc
+            cxx: CC
+            fc: ftn
             module:
               load:
               - PrgEnv-gnu/6.0.5
               purge: false
           PrgEnv-gnu/6.0.7:
-            cc: gcc
-            cxx: g++
-            fc: gfortran
+            cc: cc
+            cxx: CC
+            fc: ftn
             module:
               load:
               - PrgEnv-gnu/6.0.7
               purge: false
           PrgEnv-gnu/6.0.9:
-            cc: gcc
-            cxx: g++
-            fc: gfortran
+            cc: cc
+            cxx: CC
+            fc: ftn
             module:
               load:
               - PrgEnv-gnu/6.0.9
@@ -343,25 +343,25 @@ system:
               purge: false
         intel:
           PrgEnv-intel/6.0.5:
-            cc: icc
-            cxx: icpc
-            fc: ifort
+            cc: cc
+            cxx: CC
+            fc: ftn
             module:
               load:
               - PrgEnv-intel/6.0.5
               purge: false
           PrgEnv-intel/6.0.7:
-            cc: icc
-            cxx: icpc
-            fc: ifort
+            cc: cc
+            cxx: CC
+            fc: ftn
             module:
               load:
               - PrgEnv-intel/6.0.7
               purge: false
           PrgEnv-intel/6.0.9:
-            cc: icc
-            cxx: icpc
-            fc: ifort
+            cc: cc
+            cxx: CC
+            fc: ftn
             module:
               load:
               - PrgEnv-intel/6.0.9
