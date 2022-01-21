@@ -1,0 +1,19 @@
+version: "1.0"
+buildspecs:
+  spack_test_petsc_e4s_21.11:
+    type: spack
+    executor: perlmutter.local.sh
+    description: "Test petsc build for e4s/21.11 stack on Perlmutter" 
+    tags: e4s
+    pre_cmds: |
+      module load e4s/21.11-tcl
+    spack:
+      root: /global/common/software/spackecp/perlmutter/e4s-21.11/spack/
+      verify_spack: false
+      test:
+        run:
+          specs: ['petsc' ]
+        results:
+          option: '-l'
+          specs: ['petsc']
+
