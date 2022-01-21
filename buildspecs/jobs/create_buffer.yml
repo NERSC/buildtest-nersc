@@ -3,12 +3,9 @@ buildspecs:
   create_burst_buffer:
     type: script
     executor: cori.slurm.knl_debug
-    batch: 
-      nodecount: "1"
-      timelimit: "5"
-      cpucount: "1"
     description: Create a burst buffer
     tags: [jobs, cray]
+    sbatch: ["-N 1", "-t 5", "-n 1"]
     BB: 
       - create_persistent name=databuffer capacity=10GB access_mode=striped type=scratch
     DW: 
