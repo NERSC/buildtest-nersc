@@ -5,8 +5,7 @@ int main(int argc, char **argv)
   MPI_Init(&argc, &argv); 
   MPI_Comm_size(MPI_COMM_WORLD, &size);
   MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-  if (rank == 0) {
-    printf("%d\n", size);
-  }
+  // Print off a hello world message
+  printf("Hello world from processor %d out of %d processors\n", rank, size);
   MPI_Finalize();
 }
