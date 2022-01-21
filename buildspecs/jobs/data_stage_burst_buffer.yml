@@ -4,7 +4,7 @@ buildspecs:
     type: script
     executor: cori.slurm.knl_debug
     tags: [jobs, cray]
-    description: Stage in data to Burst Buffer
+    description: Stage out data from Burst Buffer
     sbatch: ["-t 10", "-n 1", "-n 4"]
     DW:
       - jobdw capacity=1GB access_mode=striped type=scratch
