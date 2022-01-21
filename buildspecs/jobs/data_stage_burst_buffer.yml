@@ -4,16 +4,12 @@ buildspecs:
     type: script
     executor: cori.slurm.knl_debug
     tags: [jobs, cray]
-    description: Stage in data to Burst Buffer
-    batch:
-      timelimit: "10"
-      nodecount: "1"
-      cpucount: "4"
+    description: Stage out data from Burst Buffer
+    sbatch: ["-t 10", "-n 1", "-n 4"]
     DW:
       - jobdw capacity=1GB access_mode=striped type=scratch
-      - stage_in source=$SCRATCH/stage_in.txt destination=$DW_JOB_STRIPED/stage_in.txt type=file
+      - stage_out source=$DW_JOB_STRIPED/output/ destination=$SCRATCH/output/output.txt type=file
     run: |
-      cd $SCRATCH
-      dd if=/dev/urandom of=stage_in.txt bs=1G count=1 iflag=fullblock
-      ls -lh ${DW_JOB_STRIPED}/stage_in.txt
-      rm  $SCRATCH/stage_in.txt
+      mkdir $DW_JOB_STRIPED/output
+      srun check-mpi.intel.cori > ${DW_JOB_STRIPED}/output/output.txt
+      cat ${DW_JOB_STRIPED}/output/output.txt

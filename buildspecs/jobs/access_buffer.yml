@@ -5,10 +5,7 @@ buildspecs:
     executor: cori.slurm.haswell_debug
     tags: [cray, jobs]
     description: request 1GB burst buffer striped access and write content to buffer
-    batch:
-      nodecount: "1"
-      cpucount: "4"
-      timelimit: "15"
+    sbatch: ["-N 1", "-n 4", "-t 15"]
     DW: 
       - jobdw capacity=1GB access_mode=striped type=scratch
     run: |
