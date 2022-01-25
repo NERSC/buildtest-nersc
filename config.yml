@@ -35,8 +35,8 @@ system:
     moduletool: lmod
     executors:
       defaults:
-        pollinterval: 60
-        max_pend_time: 90
+        pollinterval: 30
+        maxpendtime: 86400
       local:
         bash:
           description: submit jobs on local machine using bash shell
@@ -80,7 +80,7 @@ system:
     executors:
       defaults:
         pollinterval: 30
-        max_pend_time: 300
+        maxpendtime: 86400
       local:
         bash:
           description: submit jobs on local machine using bash shell
@@ -143,7 +143,7 @@ system:
           description: bigmem jobs
           cluster: escori
           qos: bigmem
-          max_pend_time: 300
+          maxpendtime: 300
         xfer:
           description: xfer qos jobs
           qos: xfer
@@ -192,20 +192,7 @@ system:
           options:
           - -C gpu
           cluster: escori
-          max_pend_time: 300
-        e4s:
-          description: E4S runner
-          cluster: cori
-          max_pend_time: 20000
-          options:
-          - -q regular
-          - -C knl
-          - -t 10
-          - -n 4
-          before_script:  |
-            module load e4s/20.10
-            cd $SCRATCH/testsuite
-            source setup.sh
+          maxpendtime: 300
 
     compilers:
       find:

@@ -1,0 +1,13 @@
+version: "1.0"
+buildspecs:
+  trilinos_zoltan_cuda:
+    type: script
+    executor: perlmutter.slurm.regular
+    sbatch: ["-N 2", "-t 5", "-G 4", "-C gpu", "-A m3503_g"]
+    tags: [e4s]
+    description: Run trilinos zoltan test from shifter container
+    run: |
+      git clone https://github.com/E4S-Project/testsuite
+      cd testsuite/validation_tests/trilinos-cuda
+      srun -n 2 shifter -E --image="ecpe4s/ubuntu20.04-gpu-x86_64:21.11" -- /bin/bash -c "unset CRAYPE_VERSION; unset MODULEPATH ; . /spack/share/spack/setup-env.sh; which spack; spack find; spack load trilinos+cuda cuda_arch=80 ; spack unload mpich; export LD_LIBRARY_PATH=/opt/udiImage/modules/mpich/dep/:$LD_LIBRARY_PATH ; ./compile.sh; ./Zoltan"
+
