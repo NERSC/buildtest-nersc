@@ -143,7 +143,6 @@ system:
           description: bigmem jobs
           cluster: escori
           qos: bigmem
-          maxpendtime: 300
         xfer:
           description: xfer qos jobs
           qos: xfer
@@ -192,8 +191,6 @@ system:
           options:
           - -C gpu
           cluster: escori
-          maxpendtime: 300
-
     compilers:
       find:
         gcc: ^(gcc|PrgEnv-gnu)
