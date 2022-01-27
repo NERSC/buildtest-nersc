@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs: 
   spack_test_qthreads_e4s_21.02:
     type: spack

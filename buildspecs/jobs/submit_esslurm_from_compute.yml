@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs:
   submit_esslurm_from_cori:
     type: script

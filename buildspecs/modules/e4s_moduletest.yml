@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs:
   moduletest_e4s_20_10:
     description: Run module load test for e4s 20.10 module tree

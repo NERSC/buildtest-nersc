@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs:
   gcc_nvhpc_compilation:
     type: script

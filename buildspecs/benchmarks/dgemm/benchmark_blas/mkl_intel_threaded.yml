@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs:
   mkl_intel_threaded_dgemm:
     type: script

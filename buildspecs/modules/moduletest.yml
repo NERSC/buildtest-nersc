@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs:
   moduletest_opt_modulefiles:
     description: Run module load test for tree /opt/modulefiles 

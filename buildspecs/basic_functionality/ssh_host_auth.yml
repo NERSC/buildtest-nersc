@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs:
   ssh_host_auth:
     type: script

@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs:
   cuda_mpi_nvhpc_example:
     type: script

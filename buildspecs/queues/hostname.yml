@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs:
   hostname_haswell_qos:
     description: run hostname on haswell partitions

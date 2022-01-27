@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs:
   gpfs_clustername:
     type: script

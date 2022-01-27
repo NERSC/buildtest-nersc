@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs:
   openpmd_ls_version_e4s_21.05:
     type: script

@@ -1,5 +1,5 @@
 # https://gitlab.nersc.gov/nersc/consulting/reframe-at-nersc/reframe-nersc-tests/-/blob/main/esslurm/check_admin_comment_esslurm/check_admin_comment_esslurm.py
-version: "1.0"
+
 buildspecs:
   check_admin_comment_esslurm:
     type: script

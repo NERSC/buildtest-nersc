@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs:
   hybrid_mpi_hello_fortran:
     type: compiler

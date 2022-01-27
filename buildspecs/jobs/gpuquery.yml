@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs:
   nvidiasmi:
     description: run nvidia-smi command on a single GPU node.
