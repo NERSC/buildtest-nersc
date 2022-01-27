@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs:
   tmp_spack_test:
     description: Spack sanity test on /tmp filesystem by concretize trilinos. 

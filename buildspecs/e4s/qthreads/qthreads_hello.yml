@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs:
   hello_world_qthreads:
     type: compiler

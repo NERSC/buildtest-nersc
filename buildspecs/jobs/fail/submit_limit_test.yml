@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs:
   debug_submit_limit_test:
     type: script

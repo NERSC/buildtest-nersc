@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs:
   knl_flex_queue_timemin_missing:
     type: script

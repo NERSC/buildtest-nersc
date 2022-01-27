@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs:
   darshan_cpi_example:
     type: compiler

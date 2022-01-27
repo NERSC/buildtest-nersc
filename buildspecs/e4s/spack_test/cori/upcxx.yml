@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs: 
   spack_test_upcxx_e4s_21.05:
     type: spack

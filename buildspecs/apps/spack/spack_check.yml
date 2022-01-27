@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs:
   default_spack_sanity_check:
     type: script

@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs:
   vecadd_hpcsdk_gnu:
     type: compiler

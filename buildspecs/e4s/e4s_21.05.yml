@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs:
   e4s_adios2:
     type: script

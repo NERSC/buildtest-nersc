@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs:
   petsc_fortran_example:
     type: script

@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs:
   stream_uniprocess_c:
     executor: cori.local.bash

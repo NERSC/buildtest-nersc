@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs:
   nameserver_ping:
     executor: cori.local.bash

@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs:
   zzz_uegdotfile_sh:
     description: check alias and commands from /etc/zzz-uegdotfile.sh

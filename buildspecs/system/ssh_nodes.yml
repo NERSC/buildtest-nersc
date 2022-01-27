@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs:
   ssh_login_nodes:
     type: script

@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs:
   sgemm_intel:
     executor: cori.local.bash
