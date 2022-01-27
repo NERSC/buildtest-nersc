@@ -1,0 +1,16 @@
+buildspecs:
+  kokkos_CUDA_axpby:
+    type: script
+    executor: perlmutter.local.bash
+    description: kokkos axpby CUDA example
+    tags: ["e4s"]
+    run: |
+      ./run-spack-kokkos-CUDA-test.sh
+
+  kokkos_OpenMP_axpby:
+    type: script
+    executor: perlmutter.local.bash
+    tags: ["e4s"]
+    description: kokkos axpby OpenMP example
+    run: |
+      ./run-spack-kokkos-OpenMP-test.sh
