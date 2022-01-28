@@ -50,9 +50,7 @@ perlmutter:
     - buildtest cdash upload perlmutter-tests
     - mkdir -p $CI_PROJECT_DIR/.artifacts
     - cp $BUILDTEST_ROOT/var/{buildtest.log,report.json} $CI_PROJECT_DIR/.artifacts     
-    - source deactivate 
-  after_script:
-    - *cleanup-buildtest
+    - conda deactivate 
   artifacts:
     paths:
       - $CI_PROJECT_DIR/.artifacts
