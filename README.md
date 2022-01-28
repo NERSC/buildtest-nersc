@@ -28,7 +28,7 @@ Next, navigate to `buildtest-cori` directory and set environment `BUILDTEST_CONF
 
 ```
 cd buildtest-cori
-export BUILDTEST_CONFIGFILE=$PWD/config.yml
+export BUILDTEST_CONFIGFILE=$(pwd)/config.yml
 ```
 
 You can view and validate your configuration and see if configuration makes sense:
@@ -112,9 +112,9 @@ buildtest buildspec find --group-by-tags
 
 ## Querying Tests
 
-You can use ``buildtest report`` and ``buildtest inspect`` to query tests. The commands differ slightly and data is 
-represented differently. The ``buildtest report`` command will show output in tabular form and only show some of the metadata,
-if you want to access the entire test record use ``buildtest inspect`` command which displays the content in JSON format.
+You can use `buildtest report` and `buildtest inspect` to query tests. The commands differ slightly and data is 
+represented differently. The `buildtest report` command will show output in tabular form and only show some of the metadata,
+if you want to access the entire test record use `buildtest inspect` command which displays the content in JSON format.
 For more details on querying tests see https://buildtest.readthedocs.io/en/devel/gettingstarted/query_test_report.html
 
 
@@ -140,8 +140,7 @@ scheduled_system_check:
 The scheduled jobs are run at different intervals (1x/day, 1x/week, etc...) at different times of day to avoid overloading the system. The gitlab jobs
 will run jobs based on tags, alternately some tests may be defined by running all tests in a directory (`buildtest build -b apps`). If you want to add a new
 scheduled job, please define a [new schedule](https://software.nersc.gov/NERSC/buildtest-cori/-/pipeline_schedules/new) with an appropriate time. The 
-`target branch` should be `devel` and define a unique variable used to distinguish scheduled jobs. Next, create a job in `.gitlab-ci.yml` that references 
-the scheduled job based on the variable name.
+`target branch` should be `devel` and define a unique variable used to distinguish scheduled jobs. Next, create a job in `.gitlab-ci.yml` that references the scheduled job based on the variable name.
 
 ### Runner settings
 
@@ -153,38 +152,33 @@ collabsu e4s
 
 You will be prompted to type your NERSC password for your user account.
 
-The `e4s` user has two shell runners configured with this project. Please note that you must be on the login node `cori01` or `login37` in order to restart runner.
+The `e4s` user has two shell runners configured with this project. Please note that you must be on the login node to the appropriate system to restart the runner
 
-| System | Hostname | Runner Configuration |  Runner Tag Name |
-| ------- | --------- | ----------------- | ------------------- | 
-| Cori | cori01       | `~/.gitlab-runner/cori-cori01.config.toml` | `tags: [cori-e4s]` or `tags: [cori01-e4s]` |
-| Perlmutter | login37  | `~/.gitlab-runner/perlmutter-login37.config.toml` | `tags: [perlmutter-e4s]` | 
+| System |  Runner Tag Name |
+| ------- | ------------------- | 
+| Cori | `tags: [cori-e4s]` |
+| Perlmutter | `tags: [perlmutter-e4s]` | 
 
 The runner can be started manually by running the following. 
 
 ```
 # Cori
-sh $HOME/cron/restart-cori01.sh
+bash $HOME/cron/restart-cori.sh
 
 # Perlmutter
-sh $HOME/cron/restart-login37.sh
+bash $HOME/cron/restart-perlmutter.sh
 ```
 
 The gitlab-runner is the ECP fork runner which can be found at `$HOME/nersc-ecp-staff-runner/`, and `gitlab-runner` should be in `$PATH` when you login via *e4s* which is set in `~/.bashrc` file.
 
-The runner is tied to a particular hostname and is not run as a service, it is advisable to check/be notified when the runner goes down. There is a cronjob setup on `cori01` and `login37` which is setup to run the restart 
-script every 1hr. 
+The runner is tied to a particular hostname and is not run as a service, it is advisable to check/be notified when the runner goes down. There is a cronjob setup on `cori01` to automatically restart the gitlab runner if it goes down. Shown below is the crontab
 
 ```
 # Crontab on Cori - cori01
 e4s@cori01:~/cron> crontab -l
-0 * * * * $HOME/cron/restart-cori01.sh >/dev/null  2>&1 
-
-
-# Crontab on Perlmutter - login37
-e4s@login37:~/cron> crontab -l
-0 * * * * $HOME/cron/restart-login37.sh >/dev/null  2>&1 
+0 * * * * $HOME/cron/restart-cori.sh >/dev/null  2>&1 
 ```
+
 
 All scheduled pipelines are run via `e4s` user your gitlab job must specify the appropriate tag name. You can check registered runner at https://software.nersc.gov/NERSC/buildtest-cori/-/settings/ci_cd under `Runners` section. Please make sure `e4s` user has access to all the queues required to run tests, this can be configured in [iris](https://iris.nersc.gov/).
 
