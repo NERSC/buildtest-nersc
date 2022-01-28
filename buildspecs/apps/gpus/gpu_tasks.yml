@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs:
   gpu_task_example: 
     type: script

@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs:
   shifter_pull:
     type: script

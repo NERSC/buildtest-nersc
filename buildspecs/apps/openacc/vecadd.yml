@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs:
   vecadd_openacc_gnu:
     type: compiler

@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs:
   test_ml_command:
     type: script

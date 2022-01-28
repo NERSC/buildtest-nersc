@@ -1,5 +1,5 @@
 #!/bin/bash
-version: "1.0"
+
 buildspecs:
   lmod_cmd:
     type: script

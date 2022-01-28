@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs:
   sacct_query_more_than_31_days:
     type: script

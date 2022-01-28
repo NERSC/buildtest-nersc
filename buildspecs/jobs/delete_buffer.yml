@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs:
   delete_burst_buffer:
     type: script

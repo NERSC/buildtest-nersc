@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs:
   spack_test_hdf5_e4s_21.11:
     type: spack

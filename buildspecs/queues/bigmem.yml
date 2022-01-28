@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs:
   bigmem_qos_hostname:
     description: run hostname through bigmem qos

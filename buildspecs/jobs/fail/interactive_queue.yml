@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs:
   sbatch_with_interactive_queue:
     type: script

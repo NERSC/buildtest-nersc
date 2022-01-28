@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs:
   wall_timeout:
     type: script

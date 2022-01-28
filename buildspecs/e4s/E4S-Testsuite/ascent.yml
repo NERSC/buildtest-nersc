@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs:
   ascent_e4stestsuite_e4s_21.05:
     type: script
