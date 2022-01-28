@@ -18,7 +18,7 @@ and create a conda environment as shown below.
 ```
 module load python/3.8-anaconda-2020.11
 conda create -n buildtest
-source activate buildtest
+conda activate buildtest
 source /path/to/buildtest/setup.sh
 ```
 
