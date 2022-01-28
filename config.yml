@@ -1,5 +1,6 @@
 system:
   gerty:
+    description: "Test System for Cori"
     hostnames:
     - gert01.nersc.gov
     moduletool: environment-modules
@@ -30,6 +31,7 @@ system:
       site: gerty
 
   perlmutter:
+    description: "Cray Shasta system with AMD CPU and NVIDIA A100 GPUs"        
     hostnames:
     - login*
     moduletool: lmod
@@ -72,6 +74,7 @@ system:
   cori:
     hostnames:
     - cori*
+    description: "Cray XC system based on Intel Haswell and KNL nodes"
     moduletool: environment-modules
     cdash:
       url: https://my.cdash.org
