@@ -97,14 +97,6 @@ system:
         python:
           description: submit jobs on local machine using python shell
           shell: python
-        e4s:
-          description: E4S testsuite locally
-          shell: bash
-          before_script: |
-            module load e4s/20.10
-            cd $SCRATCH/testsuite
-            source setup.sh
-
       slurm:
         haswell_debug:
           qos: debug
