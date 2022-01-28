@@ -14,3 +14,6 @@ buildspecs:
     description: kokkos axpby OpenMP example
     run: |
       ./run-spack-kokkos-OpenMP-test.sh
+
+maintainers:
+  - rgayatri
