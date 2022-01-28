@@ -4,7 +4,9 @@
   - source activate $CI_PROJECT_DIR/.conda
   - git clone -b devel https://github.com/buildtesters/buildtest    
   - cd buildtest 
+  - set -x +e
   - . setup.sh
+  - set +x
   - git log --oneline -1
   - buildtest --help
   - rm -rf $HOME/.buildtest
