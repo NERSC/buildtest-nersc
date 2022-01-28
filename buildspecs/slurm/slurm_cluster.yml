@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs:
   slurm_cluster_cori:
     type: script

@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs:
   mount_check:
     executor: cori.local.bash

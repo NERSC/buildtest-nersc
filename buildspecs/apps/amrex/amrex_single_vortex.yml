@@ -1,4 +1,3 @@
-version: "1.0"
 buildspecs:
   amrex_single_vortex:
     executor: cori.slurm.haswell_debug

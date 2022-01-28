@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs:
   mkl_gnu_threaded:
     type: script

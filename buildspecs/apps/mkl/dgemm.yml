@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs:
   dgemm_test1:
     executor: cori.local.bash

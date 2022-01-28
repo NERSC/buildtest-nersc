@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs:
   cplusplus_hello:
     executor: cori.local.bash

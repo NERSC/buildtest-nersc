@@ -1,5 +1,5 @@
 # https://gitlab.nersc.gov/nersc/consulting/-at-nersc/reframe-nersc-tests/-/blob/main/filesystem_health/creates/src/creates_helper.sh
-version: "1.0"
+
 buildspecs:
   filesystem_benchmark_creates:
     description: "File System Health benchmark: Creates" 

@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs:
   ssh_cori_from_gerty:
     type: script

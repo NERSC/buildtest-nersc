@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs:
   burst_buffer_example:
     type: script

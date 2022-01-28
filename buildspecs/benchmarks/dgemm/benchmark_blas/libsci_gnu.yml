@@ -1,4 +1,4 @@
-version: "1.0"
+
 buildspecs:
   libsci_gnu_dgemm:
     type: script
