@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -xe
+set -e
 
 # Load the right modules
 module load PrgEnv-gnu
