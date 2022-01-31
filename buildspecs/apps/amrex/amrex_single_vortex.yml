@@ -13,7 +13,7 @@ buildspecs:
       # Load compiler used to compile AMReX library
       AMREX_COMP_NAME=$(spack find --json amrex | jq -r '.[0].compiler.name')
       AMREX_COMP_VER=$(spack find --json amrex | jq -r '.[0].compiler.version')
-      module load ${AMREX_COMP_NAME}/${AMREX_COMP_VER}
+      module swap intel ${AMREX_COMP_NAME}/${AMREX_COMP_VER}
 
       module load impi
       spack load amrex
