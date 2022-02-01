@@ -1,7 +1,7 @@
 .setup-buildtest: &setup-buildtest
   - module load python
   - python -m venv $CI_PROJECT_DIR/pyenv
-  - source activate $CI_PROJECT_DIR/pyenv/bin/activate
+  - source $CI_PROJECT_DIR/pyenv/bin/activate
   - git clone -b devel https://github.com/buildtesters/buildtest    
   - cd buildtest 
   - . setup.sh
