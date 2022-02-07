@@ -1,21 +1,20 @@
 .setup-buildtest: &setup-buildtest
   - module load python
-  - conda create -p $CI_PROJECT_DIR/.conda python=3.8 -y
-  - source activate $CI_PROJECT_DIR/.conda
+  - python -m venv $CI_PROJECT_DIR/pyenv
+  - source $CI_PROJECT_DIR/pyenv/bin/activate
   - git clone -b devel https://github.com/buildtesters/buildtest    
   - cd buildtest 
-  - set -x +e
   - . setup.sh
-  - set +x
   - git log --oneline -1
   - buildtest --help
   - rm -rf $HOME/.buildtest
-  - mkdir -p $HOME/.buildtest
   - export BUILDTEST_CONFIGFILE=$CI_PROJECT_DIR/config.yml
   - buildtest config validate
   
 .cleanup-buildtest: &cleanup-buildtest
-  - conda env remove -p $CI_PROJECT_DIR/.conda  -y
+  - mkdir -p $CI_PROJECT_DIR/.artifacts
+  - cp $BUILDTEST_ROOT/var/{buildtest.log,report.json} $CI_PROJECT_DIR/.artifacts
+  - source deactivate
 
 stages:
   - build
@@ -50,9 +49,8 @@ perlmutter:
     - buildtest build -e perlmutter.local.bash -e perlmutter.slurm.regular --maxpendtime 1200 --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
     - buildtest report --filter state=FAIL
     - buildtest cdash upload perlmutter-tests
-    - mkdir -p $CI_PROJECT_DIR/.artifacts
-    - cp $BUILDTEST_ROOT/var/{buildtest.log,report.json} $CI_PROJECT_DIR/.artifacts     
-    - conda deactivate 
+  after_script:
+    - *cleanup-buildtest
   artifacts:
     paths:
       - $CI_PROJECT_DIR/.artifacts
@@ -64,7 +62,7 @@ daily_check:
       - schedules
     variables:
       - $DAILYCHECK == "True"
-  tags: [c_e4s_cori01]
+  tags: [cori-e4s]
   before_script:
     - *setup-buildtest
   script:
@@ -72,16 +70,12 @@ daily_check:
     - buildtest build --tags daily --filter tags=daily  --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
     - buildtest report --filter state=FAIL 
     - buildtest cdash upload daily_check 
-    - mkdir -p $CI_PROJECT_DIR/.artifacts
-    - cp $BUILDTEST_ROOT/var/{buildtest.log,report.json} $CI_PROJECT_DIR/.artifacts   
-    - source deactivate 
   after_script:
     - *cleanup-buildtest
-  
   artifacts:
     paths:
-      - $CI_PROJECT_DIR/.artifacts      
-
+      - $CI_PROJECT_DIR/.artifacts   
+  
 apps:
   stage: test
   tags: [cori-e4s]
@@ -97,13 +91,9 @@ apps:
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
     - buildtest build --tags compile --filter tags=compile  --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
     - buildtest report --filter state=FAIL 
-    - buildtest cdash upload apps 
-    - mkdir -p $CI_PROJECT_DIR/.artifacts
-    - cp $BUILDTEST_ROOT/var/{buildtest.log,report.json} $CI_PROJECT_DIR/.artifacts
-    - source deactivate 
+    - buildtest cdash upload apps  
   after_script:
-    - *cleanup-buildtest
-    
+    - *cleanup-buildtest  
   artifacts:
     paths:
       - $CI_PROJECT_DIR/.artifacts
@@ -124,12 +114,8 @@ benchmark:
     - buildtest build --tags benchmark --filter tags=benchmark --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
     - buildtest report --filter state=FAIL
     - buildtest cdash upload benchmark
-    - mkdir -p $CI_PROJECT_DIR/.artifacts
-    - cp $BUILDTEST_ROOT/var/{buildtest.log,report.json} $CI_PROJECT_DIR/.artifacts
-    - source deactivate
   after_script:
     - *cleanup-buildtest
-
   artifacts:
     paths:
       - $CI_PROJECT_DIR/.artifacts
@@ -149,12 +135,8 @@ e4s_tests:
     - buildtest build --tags e4s --maxpendtime 600 --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
     - buildtest report --filter state=FAIL
     - buildtest  cdash upload e4s 
-    - mkdir -p $CI_PROJECT_DIR/.artifacts
-    - cp $BUILDTEST_ROOT/var/{buildtest.log,report.json} $CI_PROJECT_DIR/.artifacts     
-    - source deactivate 
   after_script:
-    - *cleanup-buildtest
-    
+    - *cleanup-buildtest  
   artifacts:
     paths:
       - $CI_PROJECT_DIR/.artifacts
