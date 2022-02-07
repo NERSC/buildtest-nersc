@@ -21,6 +21,11 @@ set(_input_dir ${_base_dir}/Exec)
 
 message("Base dir: ${_base_dir}")
 
+if (AMReX_FORTRAN_INTERFACES)
+    enable_language(Fortran)
+endif()
+
+
 find_package(AMReX REQUIRED)
 
 if (AMReX_3D_FOUND)
