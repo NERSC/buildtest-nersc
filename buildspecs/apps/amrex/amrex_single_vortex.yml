@@ -8,19 +8,14 @@ buildspecs:
       - "-N 1"
       - "-t 00:05:00"
       - "-C gpu"
-      - "-A mp111_g"
+      # Note: This test doesn't use GPUs.
     run: |
       module load e4s/21.11-tcl
       
+      # Use the PrgEnv-gnu to avoid issues with NVHPC and Fortran
       module load PrgEnv-gnu
 
-      # Load compiler used to compile AMReX library
-      #AMREX_COMP_NAME=$(spack find --json amrex | jq -r '.[0].compiler.name')
-      #AMREX_COMP_VER=$(spack find --json amrex | jq -r '.[0].compiler.version')
-      #module load ${AMREX_COMP_NAME}/${AMREX_COMP_VER}
-
       spack load cmake
-
       spack load amrex
 
       # Store AMReX install location
@@ -35,8 +30,6 @@ buildspecs:
       -DAMReX_FORTRAN_INTERFACES=ON \
       -DAMReX_DIR=${AMR_DIR}/lib/cmake/AMReX \
       -DAMReX_SPACEDIM=3
-      #-DCMAKE_CXX_COMPILER=$(which icpc) \
-      #-DCMAKE_C_COMPILER=$(which icc) \
 
       cmake --build . -j4
       srun -n 4 ./SingleVortex ../inputs max_step=1
