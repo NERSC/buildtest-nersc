@@ -122,25 +122,14 @@ For more details on querying tests see https://buildtest.readthedocs.io/en/devel
 
 
 Tests are run on schedule basis with one schedule corresponding to one gitlab job in [.gitlab-ci.yml](https://software.nersc.gov/NERSC/buildtest-cori/-/blob/devel/.gitlab-ci.yml). The scheduled pipelines are configured in 
-https://software.nersc.gov/NERSC/buildtest-cori/-/pipeline_schedules. Each schedule has a variable defined to control which pipeline 
-is run. In the `.gitlab-ci.yml` we make use of conditional rules using [only](https://docs.gitlab.com/ee/ci/yaml/#onlyexcept-basic). For example the daily
-system test has variable defined `DAILYCHECK` set to `True` and the gitlab job is defined as follows:
-
-
-```
-scheduled_system_check:
-  stage: test
-  only:
-    refs:
-      - schedules
-    variables:
-      - $DAILYCHECK == "True"
-```
+https://software.nersc.gov/NERSC/buildtest-cori/-/pipeline_schedules. Each schedule has a variable ``TESTNAME`` defined to control which pipeline 
+is run since we have multiple gitlab jobs. In the `.gitlab-ci.yml` we make use of conditional rules using [only](https://docs.gitlab.com/ee/ci/yaml/#onlyexcept-basic). 
 
 The scheduled jobs are run at different intervals (1x/day, 1x/week, etc...) at different times of day to avoid overloading the system. The gitlab jobs
 will run jobs based on tags, alternately some tests may be defined by running all tests in a directory (`buildtest build -b apps`). If you want to add a new
 scheduled job, please define a [new schedule](https://software.nersc.gov/NERSC/buildtest-cori/-/pipeline_schedules/new) with an appropriate time. The 
-`target branch` should be `devel` and define a unique variable used to distinguish scheduled jobs. Next, create a job in `.gitlab-ci.yml` that references the scheduled job based on the variable name.
+`target branch` should be `devel` and define a unique variable used to distinguish scheduled jobs. Next, create a job in `.gitlab-ci.yml` that references the scheduled job and define variable ``TESTNAME`` in the scheduled pipeline.
+
 
 ### Runner settings
 
@@ -193,8 +182,7 @@ under **Mirroring Repositories**. If the push mirror is not setup, please add th
 ## CDASH
 
 buildtest will push test results to [CDASH](https://www.kitware.com/cdash/project/about.html) server 
-at https://my.cdash.org/index.php?project=buildtest-cori using `buildtest cdash upload` command which 
-uploads all tests found in report file found in **$HOME/.buildtest/report.json**. 
+at https://my.cdash.org/index.php?project=buildtest-cori using `buildtest cdash upload` command.
 
 ## Contributing Guide
 
