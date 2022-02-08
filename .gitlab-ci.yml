@@ -46,7 +46,7 @@ perlmutter_e4s:
     - *setup-buildtest   
   script:
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
-    - buildtest build -t e4s --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
+    - buildtest build -t e4s --account m3503_g --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
     - buildtest report --filter state=FAIL
     - buildtest cdash upload e4s
   after_script:
