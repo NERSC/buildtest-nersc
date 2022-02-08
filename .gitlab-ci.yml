@@ -34,34 +34,34 @@ validate_tests:
   after_script:
     - *cleanup-buildtest
 
-perlmutter:
+perlmutter_e4s:
   stage: test
   tags: [perlmutter-e4s]
   only:
     refs:
       - schedules
     variables:
-      - $PM_TEST == "True"
+      - $TESTNAME == "perlmutter_e4s"
   before_script:
     - *setup-buildtest   
   script:
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
-    - buildtest build -e perlmutter.local.bash -e perlmutter.slurm.regular --maxpendtime 1200 --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
+    - buildtest build -t e4s --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
     - buildtest report --filter state=FAIL
-    - buildtest cdash upload perlmutter-tests
+    - buildtest cdash upload e4s
   after_script:
     - *cleanup-buildtest
   artifacts:
     paths:
       - $CI_PROJECT_DIR/.artifacts
       
-daily_check:
+cori_daily_check:
   stage: test
   only:
     refs:
       - schedules
     variables:
-      - $DAILYCHECK == "True"
+      - $TESTNAME == "cori_daily_check"
   tags: [cori-e4s]
   before_script:
     - *setup-buildtest
@@ -76,14 +76,14 @@ daily_check:
     paths:
       - $CI_PROJECT_DIR/.artifacts   
   
-apps:
+cori_apps:
   stage: test
   tags: [cori-e4s]
   only: 
     refs: 
       - schedules
     variables:
-      - $APP == "True"
+      - $TESTNAME == "cori_apps"
 
   before_script:
   - *setup-buildtest
@@ -98,14 +98,14 @@ apps:
     paths:
       - $CI_PROJECT_DIR/.artifacts
 
-benchmark:
+cori_benchmark:
   stage: test
   tags: [cori-e4s]
   only:
     refs:
       - schedules
     variables:
-      - $BENCHMARK == "True"
+      - $TESTNAME == "cori_benchmark"
 
   before_script:
   - *setup-buildtest
@@ -120,19 +120,19 @@ benchmark:
     paths:
       - $CI_PROJECT_DIR/.artifacts
 
-e4s_tests:
+cori_e4s:
   stage: test
   tags: [cori-e4s]
   only:
     refs:
       - schedules
     variables:
-      - $E4S == "True"
+      - $TESTNAME == "cori_e4s"
   before_script:
     - *setup-buildtest
   script:
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
-    - buildtest build --tags e4s --maxpendtime 600 --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
+    - buildtest build --tags e4s --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
     - buildtest report --filter state=FAIL
     - buildtest  cdash upload e4s 
   after_script:
