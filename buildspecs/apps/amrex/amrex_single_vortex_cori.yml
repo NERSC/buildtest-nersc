@@ -1,0 +1,43 @@
+buildspecs:
+  amrex_single_vortex:
+    executor: cori.slurm.haswell_debug
+    type: script
+    description: "AmrLevel SingleVortex Build and Run"
+    tags: ["e4s"]
+    sbatch:
+      - "-N 1"
+      - "-t 00:10:00"
+    run: |
+      module load e4s/21.05
+      
+      # Load compiler used to compile AMReX library
+      AMREX_COMP_NAME=$(spack find --json amrex | jq -r '.[0].compiler.name')
+      AMREX_COMP_VER=$(spack find --json amrex | jq -r '.[0].compiler.version')
+      module swap intel ${AMREX_COMP_NAME}/${AMREX_COMP_VER}
+
+      module load impi
+      spack load amrex
+      spack load cmake@3.20.2
+
+      # Store AMReX install location
+      export AMR_DIR=$(spack location -i amrex)
+
+      cd test/Exec
+      mkdir build
+      cd build
+
+      cmake .. \
+      -DAMReX_DIR=${AMR_DIR}/lib/cmake/AMReX \
+      -DCMAKE_CXX_COMPILER=$(which icpc) \
+      -DCMAKE_C_COMPILER=$(which icc) \
+      -DAMReX_SPACEDIM=3
+
+      cmake --build . -j4
+      srun -n 4 ./SingleVortex ../inputs max_step=1
+
+    status:
+      regex:
+        stream: stdout
+        exp: "finalized"
+maintainers:
+  - epalmer
