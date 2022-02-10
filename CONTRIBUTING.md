@@ -3,10 +3,10 @@ Getting Started
 
 Contribution is not easy, so we created this document to describe how to get you setup
 so you can contribute back and make everyone's life easier. All contributions will be made via
-[merge request](https://software.nersc.gov/NERSC/buildtest-cori/-/merge_requests) at https://software.nersc.gov/NERSC/buildtest-cori/, **please do not submit a 
-pull request to https://github.com/buildtesters/buildtest-cori**. We have disabled push to **devel** branch, therefore all changes must go through merge request.
+[merge request](https://software.nersc.gov/NERSC/buildtest-nersc/-/merge_requests) at https://software.nersc.gov/NERSC/buildtest-nersc/, **please do not submit a 
+pull request to https://github.com/buildtesters/buildtest-nersc**. We have disabled push to **devel** branch, therefore all changes must go through merge request.
 
-First, you'll need to fork this repo https://software.nersc.gov/NERSC/buildtest-cori/ in your userspace and clone the repo.
+First, you'll need to fork this repo https://software.nersc.gov/NERSC/buildtest-nersc/ in your userspace and clone the repo.
 
 
 Adding Upstream Remote
@@ -15,17 +15,17 @@ Adding Upstream Remote
 First you need to add the `upstream` repo, to do this by running the following:
 
 ```
-git remote add upstream https://software.nersc.gov/NERSC/buildtest-cori.git
+git remote add upstream https://software.nersc.gov/NERSC/buildtest-nersc.git
 ```
 
 The `upstream` tag is used to sync your local fork with upstream repo. If your remotes are setup properly you should have something like this:
 
 ```
 siddiq90@cori01> git remote -v
-origin	https://software.nersc.gov/siddiq90/buildtest-cori (fetch)
-origin	https://software.nersc.gov/siddiq90/buildtest-cori (push)
-upstream	https://software.nersc.gov/NERSC/buildtest-cori.git (fetch)
-upstream	https://software.nersc.gov/NERSC/buildtest-cori.git (push)
+origin	https://software.nersc.gov/siddiq90/buildtest-nersc (fetch)
+origin	https://software.nersc.gov/siddiq90/buildtest-nersc (push)
+upstream	https://software.nersc.gov/NERSC/buildtest-nersc.git (fetch)
+upstream	https://software.nersc.gov/NERSC/buildtest-nersc.git (push)
 ```
 
 Make sure you set your user name and email set properly in git configuration.
@@ -62,7 +62,7 @@ The `devel` from upstream will get Pull Requests from other contributors, in-ord
 to sync your forked repo with upstream, run the commands below::
 
 ```
-cd buildtest-cori
+cd buildtest-nersc
 git checkout devel
 git fetch upstream devel
 git pull upstream devel
@@ -83,7 +83,7 @@ Please make sure to create a new branch when contributing to this project. **Do 
 from `devel` as follows:
 
 ```
-cd buildtest-cori
+cd buildtest-nersc
 git checkout devel
 git checkout -b featureX
 ```
@@ -94,7 +94,7 @@ Once you are ready to push to your fork repo do the following:
 git push origin featureX
 ```
 
-Once the branch is created in your fork, you can issue a Merge Request to `devel` branch for upstream repo(https://software.nersc.gov/NERSC/buildtest-cori.git).
+Once the branch is created in your fork, you can issue a Merge Request to `devel` branch for upstream repo(https://software.nersc.gov/NERSC/buildtest-nersc.git).
 
 Default Branch
 ---------------
@@ -106,10 +106,10 @@ which prevents users from accidently deleting the branch.
 Contributing Tests
 -------------------
 
-All incoming PRs submitted to [devel](https://software.nersc.gov/NERSC/buildtest-cori/-/tree/devel) branch. Please make sure you sync your buildtest codebase with `devel` when you contribute tests and buildspec.
+All incoming PRs submitted to [devel](https://software.nersc.gov/NERSC/buildtest-nersc/-/tree/devel) branch. Please make sure you sync your buildtest codebase with `devel` when you contribute tests and buildspec.
 
-Application tests are stored in [apps](https://software.nersc.gov/NERSC/buildtest-cori/-/tree/devel/buildspecs/apps) directory. Tests are categorized by application, please consider adding test in one of the 
-appropriate directories or create a new directory. Tests from [E4S Testsuite](https://github.com/E4S-Project/testsuite) or `spack test` are located in [e4s](https://software.nersc.gov/NERSC/buildtest-cori/-/tree/devel/buildspecs/e4s) directory. This should be used for testing E4S stack on Cori. 
+Application tests are stored in [apps](https://software.nersc.gov/NERSC/buildtest-nersc/-/tree/devel/buildspecs/apps) directory. Tests are categorized by application, please consider adding test in one of the 
+appropriate directories or create a new directory. Tests from [E4S Testsuite](https://github.com/E4S-Project/testsuite) or `spack test` are located in [e4s](https://software.nersc.gov/NERSC/buildtest-nersc/-/tree/devel/buildspecs/e4s) directory. This should be used for testing E4S stack on Cori. 
 
 If you are adding a buildspec in your PR, please add a test description using `description` field. Please add test with appropriate tagname using `tags` field. For instance all e4s tests are set to `e4s` tag name. This allows all e4s tests to be run via `buildtest build --tags e4s`. 
 

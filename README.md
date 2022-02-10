@@ -1,6 +1,6 @@
-# buildtest-cori
+# buildtest-nersc
 
-This repo is testsuite for Cori and Perlmutter system at NERSC using buildtest. A mirror of this repository is located at https://github.com/buildtesters/buildtest-cori that is public facing. 
+This repo is testsuite for Cori and Perlmutter system at NERSC using buildtest. A mirror of this repository is located at https://github.com/buildtesters/buildtest-nersc that is public facing. 
 
 
 ## Setup
@@ -9,7 +9,7 @@ To get started clone this repo and buildtest in your filesystem:
 
 ```
 git clone https://github.com/buildtesters/buildtest.git
-git clone https://software.nersc.gov/NERSC/buildtest-cori.git
+git clone https://software.nersc.gov/NERSC/buildtest-nersc.git
 ```
 
 You will need python 3.7 or higher to [install buildtest](https://buildtest.readthedocs.io/en/devel/installing_buildtest.html), on Cori this can be done by loading python module
@@ -24,10 +24,10 @@ source /path/to/buildtest/setup.sh
 
 The perlmutter setup would be very similar just perform the same step with the default python module that comes with anaconda - `python/3.9-anaconda-2021.11`
 
-Next, navigate to `buildtest-cori` directory and set environment `BUILDTEST_CONFIGFILE` to point to **config.yml** which is the configuration file for NERSC system. 
+Next, navigate to `buildtest-nersc` directory and set environment `BUILDTEST_CONFIGFILE` to point to **config.yml** which is the configuration file for NERSC system. 
 
 ```
-cd buildtest-cori
+cd buildtest-nersc
 export BUILDTEST_CONFIGFILE=$(pwd)/config.yml
 ```
 
@@ -42,11 +42,11 @@ Please make sure you are using tip of [devel](https://github.com/buildtesters/bu
 fork, for more details see [contributing guide](https://buildtest.readthedocs.io/en/devel/contributing/code_contribution_guide.html).
 
 First time around you should discover all buildspecs this can be done via ``buildtest buildspec find``.  The command below will find
-and validate all buildspecs in the **buildtest-cori** repo and load them in buildspec cache. Note that one needs to specify `--root` to specify location where
+and validate all buildspecs in the **buildtest-nersc** repo and load them in buildspec cache. Note that one needs to specify `--root` to specify location where
 all buildspecs are located, we have not configured [buildspec_root](https://buildtest.readthedocs.io/en/devel/configuring_buildtest/overview.html#buildspec-roots) in the configuration file since we don't have a central location where this repo will reside.
 
 ```
-buildtest buildspec find --root /path/to/buildtest-cori/buildspecs --rebuild
+buildtest buildspec find --root /path/to/buildtest-nersc/buildspecs --rebuild
 ```
 
 The buildspecs are loaded in buildspec cache file (JSON) that is used by `buildtest buildspec find` for querying cache. Subsequent runs will
@@ -121,13 +121,13 @@ For more details on querying tests see https://buildtest.readthedocs.io/en/devel
 ## CI Setup
 
 
-Tests are run on schedule basis with one schedule corresponding to one gitlab job in [.gitlab-ci.yml](https://software.nersc.gov/NERSC/buildtest-cori/-/blob/devel/.gitlab-ci.yml). The scheduled pipelines are configured in 
-https://software.nersc.gov/NERSC/buildtest-cori/-/pipeline_schedules. Each schedule has a variable ``TESTNAME`` defined to control which pipeline 
+Tests are run on schedule basis with one schedule corresponding to one gitlab job in [.gitlab-ci.yml](https://software.nersc.gov/NERSC/buildtest-nersc/-/blob/devel/.gitlab-ci.yml). The scheduled pipelines are configured in 
+https://software.nersc.gov/NERSC/buildtest-nersc/-/pipeline_schedules. Each schedule has a variable ``TESTNAME`` defined to control which pipeline 
 is run since we have multiple gitlab jobs. In the `.gitlab-ci.yml` we make use of conditional rules using [only](https://docs.gitlab.com/ee/ci/yaml/#onlyexcept-basic). 
 
 The scheduled jobs are run at different intervals (1x/day, 1x/week, etc...) at different times of day to avoid overloading the system. The gitlab jobs
 will run jobs based on tags, alternately some tests may be defined by running all tests in a directory (`buildtest build -b apps`). If you want to add a new
-scheduled job, please define a [new schedule](https://software.nersc.gov/NERSC/buildtest-cori/-/pipeline_schedules/new) with an appropriate time. The 
+scheduled job, please define a [new schedule](https://software.nersc.gov/NERSC/buildtest-nersc/-/pipeline_schedules/new) with an appropriate time. The 
 `target branch` should be `devel` and define a unique variable used to distinguish scheduled jobs. Next, create a job in `.gitlab-ci.yml` that references the scheduled job and define variable ``TESTNAME`` in the scheduled pipeline.
 
 
@@ -169,20 +169,20 @@ e4s@cori01:~/cron> crontab -l
 ```
 
 
-All scheduled pipelines are run via `e4s` user your gitlab job must specify the appropriate tag name. You can check registered runner at https://software.nersc.gov/NERSC/buildtest-cori/-/settings/ci_cd under `Runners` section. Please make sure `e4s` user has access to all the queues required to run tests, this can be configured in [iris](https://iris.nersc.gov/).
+All scheduled pipelines are run via `e4s` user your gitlab job must specify the appropriate tag name. You can check registered runner at https://software.nersc.gov/NERSC/buildtest-nersc/-/settings/ci_cd under `Runners` section. Please make sure `e4s` user has access to all the queues required to run tests, this can be configured in [iris](https://iris.nersc.gov/).
 
 ## Integrations
 
 This project has integration with Slack to notify CI builds to [buildtest Slack](https://hpcbuildtest.slack.com) at **#cori-testsuite** workspace. The integrations can be 
-found at https://software.nersc.gov/NERSC/buildtest-cori/-/settings/integrations.
+found at https://software.nersc.gov/NERSC/buildtest-nersc/-/settings/integrations.
 
-This project has setup a push mirror to https://github.com/buildtesters/buildtest-cori which can be seen at https://software.nersc.gov/NERSC/buildtest-cori/-/settings/repository 
+This project has setup a push mirror to https://github.com/buildtesters/buildtest-nersc which can be seen at https://software.nersc.gov/NERSC/buildtest-nersc/-/settings/repository 
 under **Mirroring Repositories**. If the push mirror is not setup, please add the mirror. 
 
 ## CDASH
 
 buildtest will push test results to [CDASH](https://www.kitware.com/cdash/project/about.html) server 
-at https://my.cdash.org/index.php?project=buildtest-cori using `buildtest cdash upload` command.
+at https://my.cdash.org/index.php?project=buildtest-nersc using `buildtest cdash upload` command.
 
 ## Contributing Guide
 
@@ -191,7 +191,7 @@ done by running test manually `buildtest build` or see if buildspec is valid via
 would be good to run your test and make sure it is working as expected, you can view test detail using `buildtest inspect name <testname>` or `buildtest inspect query <testname>`. For more 
 details on querying test please see https://buildtest.readthedocs.io/en/devel/gettingstarted/query_test_report.html. 
 
-If you want to contribute your tests, please see [CONTRIBUTING.md](https://software.nersc.gov/NERSC/buildtest-cori/-/blob/devel/CONTRIBUTING.md)
+If you want to contribute your tests, please see [CONTRIBUTING.md](https://software.nersc.gov/NERSC/buildtest-nersc/-/blob/devel/CONTRIBUTING.md)
 
 
 ## References
