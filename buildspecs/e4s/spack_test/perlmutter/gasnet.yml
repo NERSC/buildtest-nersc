@@ -1,20 +1,20 @@
 buildspecs:
-  spack_test_kokkos_e4s_21.11:
+  spack_test_gasnet_e4s_21.11:
     type: spack
     executor: perlmutter.local.sh
-    description: "Test kokkos build for e4s/21.11 stack on Perlmutter" 
+    description: "Test gasnet build with for e4s/21.11 stack on Perlmutter via spack test"
     tags: e4s
     pre_cmds: |
       module load e4s/21.11-tcl
+      module swap PrgEnv-nvidia PrgEnv-gnu
     spack:
       root: /global/common/software/spackecp/perlmutter/e4s-21.11/spack/
       verify_spack: false
       test:
         run:
-          specs: ['kokkos' ]
+          specs: ['gasnet']
         results:
           option: '-l'
-          specs: ['kokkos']
-    status:
-      state: FAIL
+          specs: ['gasnet']
+
 
