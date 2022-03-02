@@ -1,4 +1,3 @@
-
 buildspecs:
   default_spack_sanity_check:
     type: script

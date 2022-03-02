@@ -27,7 +27,7 @@ system:
             fc: /usr/bin/gfortran
     cdash:
       url: https://my.cdash.org
-      project: buildtest-cori
+      project: buildtest-nersc
       site: gerty
 
   perlmutter:
@@ -49,6 +49,9 @@ system:
         csh:
           description: submit jobs on local machine using csh shell
           shell: csh
+        zsh:
+          description: submit jobs on local machine using zsh shell
+          shell: zsh
         python:
           description: submit jobs on local machine using python shell
           shell: python
@@ -69,7 +72,7 @@ system:
 
     cdash:
       url: https://my.cdash.org
-      project: buildtest-cori
+      project: buildtest-nersc
       site: perlmutter
   cori:
     hostnames:
@@ -78,7 +81,7 @@ system:
     moduletool: environment-modules
     cdash:
       url: https://my.cdash.org
-      project: buildtest-cori
+      project: buildtest-nersc
       site: cori
     executors:
       defaults:

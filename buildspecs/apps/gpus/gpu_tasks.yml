@@ -1,8 +1,9 @@
-
 buildspecs:
   gpu_task_example: 
     type: script
     executor: perlmutter.slurm.regular
+    description: "Run script gpus_for_task with 1 node, 1 GPU with 128 CPUs"
+    tags: [system]
     sbatch: ["-C gpu", "-t 60", "-n 1", "--ntasks-per-node=1", "-c 128", "--gpus-per-task=1"]
     run: |
       export SLURM_CPU_BIND="cores"
