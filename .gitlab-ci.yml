@@ -54,7 +54,28 @@ perlmutter_e4s:
   artifacts:
     paths:
       - $CI_PROJECT_DIR/.artifacts
-      
+
+perlmutter_check:
+  stage: test
+  tags: [perlmutter-e4s]
+  only:
+    refs:
+      - schedules
+    variables:
+      - $TESTNAME == "perlmutter_check"
+  before_script:
+    - *setup-buildtest
+  script:
+    - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
+    - buildtest build -t system --account m3503_g --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
+    - buildtest report --filter state=FAIL
+    - buildtest cdash upload systemcheck
+  after_script:
+    - *cleanup-buildtest
+  artifacts:
+    paths:
+      - $CI_PROJECT_DIR/.artifacts
+
 cori_daily_check:
   stage: test
   only:
