@@ -1,8 +1,7 @@
-
 buildspecs: 
   ompi_info:
     type: script
-    executor: cori.local.sh
+    executor: cori.local.bash
     tags: [daily]
     description: "Running ompi_info with default openmpi module"
     run: |
