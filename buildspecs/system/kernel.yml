@@ -9,7 +9,7 @@ buildspecs:
     status:
       regex:
         stream: stdout
-        exp: "^4.12.14-150.69.1.22005.0.PTF.1183816-default$"
+        exp: "^4.12.14-150.75-default$"
 
 maintainers:
   - "shahzebsiddiqui"
