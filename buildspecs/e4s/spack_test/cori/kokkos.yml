@@ -1,4 +1,3 @@
-
 buildspecs:
   spack_test_kokkos_e4s_21.05:
     type: spack
@@ -19,5 +18,20 @@ buildspecs:
           specs: ['kokkos@3.4.00 +openmp', 'kokkos@3.4.00 -openmp']
     status:
       state: "FAIL"
+  spack_test_kokkos_e4s_22.02:
+    type: spack
+    executor: cori.local.bash
+    description: Test kokkos for e4s/22.02 using spack test
+    tags: e4s
+    pre_cmds: |
+      module load e4s/22.02
+    spack:
+      root: /global/common/software/spackecp/cori/e4s-22.02/spack/
+      verify_spack: false
+      test:
+        run:
+          specs: ['kokkos']
+        results:
+          specs: ['kokkos']
 maintainers:
   - "shahzebsiddiqui"
