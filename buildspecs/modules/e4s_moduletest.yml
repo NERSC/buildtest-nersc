@@ -1,13 +1,23 @@
 
 buildspecs:
-  moduletest_e4s_20_10:
-    description: Run module load test for e4s 20.10 module tree
+  moduletest_e4s_21_05:
+    description: Run module load test for e4s 21.05 module tree
     type: script
     executor: cori.local.bash
-    tags: [modules, e4s]
-    run: MODULEPATH=/global/common/software/spackecp/e4s-20.10/modules/cray-cnl7-haswell/ python moduletest.py
+    tags: [modules, daily]
+    run: MODULEPATH=/global/common/software/spackecp/e4s-21.05/modules/cray-cnl7-haswell/ python moduletest.py
     status:
       regex:
         stream: stdout
         exp: "PASS RATE: 100.000"
-
+  
+  moduletest_e4s_22_02:
+    description: Run module load test for e4s 22.02 module tree
+    type: script
+    executor: cori.local.bash
+    tags: [modules, daily]
+    run: MODULEPATH=/global/common/software/spackecp/cori/e4s-22.02/modules/cray-cnl7-haswell/ python moduletest.py
+    status:
+      regex:
+        stream: stdout
+        exp: "PASS RATE: 100.000"
