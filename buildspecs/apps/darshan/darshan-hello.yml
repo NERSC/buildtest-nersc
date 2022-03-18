@@ -16,7 +16,7 @@ buildspecs:
           env: 
             DARSHAN_LOGFILE: "$HOME/mpi_c_basic_offset.darshan"
           pre_build: |
-            module load e4s/21.02
+            module load e4s/21.05
             spack load darshan-runtime
             spack load darshan-util
           run: srun $_EXEC
