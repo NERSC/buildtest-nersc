@@ -76,13 +76,34 @@ perlmutter_check:
     paths:
       - $CI_PROJECT_DIR/.artifacts
 
-cori_daily_check:
+perlmutter_gpu:
+  stage: test
+  tags: [perlmutter-e4s]
+  only:
+    refs:
+      - schedules
+    variables:
+      - $TESTNAME == "perlmutter_gpu"
+  before_script:
+    - *setup-buildtest
+  script:
+    - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
+    - buildtest build -t gpu --account m3503_g --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
+    - buildtest report --filter state=FAIL
+    - buildtest cdash upload gpu
+  after_script:
+    - *cleanup-buildtest
+  artifacts:
+    paths:
+      - $CI_PROJECT_DIR/.artifacts
+
+cori_check:
   stage: test
   only:
     refs:
       - schedules
     variables:
-      - $TESTNAME == "cori_daily_check"
+      - $TESTNAME == "cori_check"
   tags: [cori-e4s]
   before_script:
     - *setup-buildtest
@@ -90,7 +111,7 @@ cori_daily_check:
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
     - buildtest build --tags daily --filter tags=daily  --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
     - buildtest report --filter state=FAIL 
-    - buildtest cdash upload daily_check 
+    - buildtest cdash upload systemcheck 
   after_script:
     - *cleanup-buildtest
   artifacts:
