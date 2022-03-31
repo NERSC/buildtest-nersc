@@ -1,8 +1,7 @@
-
 buildspecs:
   git_version:
     type: script
-    executor: cori.local.bash
+    executor: '(cori|perlmutter).local.bash'
     tags: [tool, daily]
     description: "Check version of /usr/bin/git"
     run: /usr/bin/git --version

@@ -1,29 +1,24 @@
-
 buildspecs:
   myquota:
     type: script
-    executor: cori.local.bash
+    executor: '(cori|perlmutter).local.bash'
     description: Run myquota --check which returns any quota violation. 
     tags: ["daily", "system", "tool"]
     run: myquota --check
 
   myquota_numbers:
     type: script
-    executor: cori.local.bash
+    executor: '(cori|perlmutter).local.bash'
     description: Run myquota -H which shows quota in human readable format
     tags: ["daily", "system", "tool"]
     run: myquota -H
 
   myquota_scratch:
     type: script
-    executor: cori.local.bash
+    executor: '(cori|perlmutter).local.bash'
     description: Check quota for $SCRATCH
     tags: ["daily", "system", "tool"]
-    run: |
-      entry=$(myquota $SCRATCH | grep cscratch1 | wc -l)
-      if [ "$entry" -ne "1" ]; then
-        exit 1        
-      fi
+    run: myquota $SCRATCH
 
 maintainers:
   - "shahzebsiddiqui"
