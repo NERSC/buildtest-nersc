@@ -1,14 +1,23 @@
-
 buildspecs:
   jobstats:
     type: script
-    executor: cori.local.bash
+    executor: '(cori|perlmutter).local.bash'
     description: run jobstats program
     tags: ["system", "tool", "slurm"]
     run: |
       jobstats
       jobstats -j
       jobstats -u root
+
+  jobstats_python2_error:
+    type: script
+    executor: perlmutter.local.bash
+    description: Running jobstats with Python 2 raise exception.
+    run: /usr/bin/python $(which jobstats)
+    status:
+      regex:
+        stream: stderr
+        exp: '^Traceback*'
 
 maintainers:
   - "shahzebsiddiqui"
