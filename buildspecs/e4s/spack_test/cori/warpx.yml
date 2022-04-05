@@ -1,0 +1,22 @@
+buildspecs:
+  spack_test_warpx_e4s_22.02:
+    type: spack
+    executor: cori.slurm.haswell_debug
+    description: Test warpx from e4s/22.02 using spack test
+    tags: e4s
+    sbatch: ["-t 10", "-N 1"]
+    pre_cmds: | 
+      module load e4s/22.02
+    status:
+      state: FAIL
+    spack:
+      root: /global/common/software/spackecp/cori/e4s-22.02/spack/
+      verify_spack: false
+      test:
+        run:
+          specs: ['warpx']
+        results:
+          option: '-l'
+          specs: ['warpx']
+maintainers:
+  - "shahzebsiddiqui"
