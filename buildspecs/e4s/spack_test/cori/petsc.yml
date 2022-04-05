@@ -1,12 +1,10 @@
 buildspecs:
-  spack_test_amrex_e4s_22.02:
+  spack_test_petsc_e4s_22.02:
     type: spack
     executor: cori.local.bash
-    description: Test amrex from e4s/22.02 using spack test
+    description: Test petsc from e4s/22.02 using spack test
     tags: e4s
-    pre_cmds: | 
-      module load e4s/22.02
-      module swap PrgEnv-intel PrgEnv-gnu
+    pre_cmds: module load e4s/22.02
     status:
      state: FAIL
     spack:
@@ -14,9 +12,9 @@ buildspecs:
       verify_spack: false
       test:
         run:
-          specs: ['amrex']
+          specs: ['petsc']
         results:
           option: '-l'
-          specs: ['amrex']
+          specs: ['petsc']
 maintainers:
   - "shahzebsiddiqui"
