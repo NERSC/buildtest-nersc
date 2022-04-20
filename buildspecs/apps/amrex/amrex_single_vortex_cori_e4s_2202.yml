@@ -12,7 +12,7 @@ buildspecs:
     run: |
       module load e4s/22.02
       spack load amrex
-      spack load --first cmake@3.22.2%intel
+      spack load --first cmake@3.22.2
 
       # Store AMReX install location
       export AMR_DIR=$(spack location -i amrex)
