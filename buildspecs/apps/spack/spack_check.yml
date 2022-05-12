@@ -40,6 +40,33 @@ buildspecs:
       regex:
         stream: stdout
         exp: "^(0.16.1-2805-abed824555)$"
+
+  e4s_21_05_spack_mirror_check:
+    type: script
+    executor: cori.local.bash
+    tags: ["spack", "e4s"]
+    description: Check e4s/21.05 mirror for name cori-e4s-21.05
+    run: |
+      module load e4s/21.05
+      spack mirror list
+    status:
+      regex: 
+        stream: stdout
+        exp: "^(cori-e4s-21.05)"
+
+  e4s_21_05_spack_sanity_check:
+    type: script
+    executor: cori.local.bash
+    tags: ["spack", "e4s"]
+    shell: bash -e
+    description: Check output of some basic spack commands for e4s/21.05 stack 
+    run: |
+      module load e4s/21.05
+      spack find
+      spack arch
+      spack buildcache list 
+      spack compiler list  
+
   e4s_22_02_spack:
     type: script
     executor: cori.local.bash
@@ -52,5 +79,6 @@ buildspecs:
       regex:
         stream: stdout
         exp: "^(0.17.1-1177-783615cacf)$"
+
 maintainers:
   - "shahzebsiddiqui"
