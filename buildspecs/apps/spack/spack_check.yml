@@ -25,7 +25,7 @@ buildspecs:
     status:
       regex:
         stream: stdout
-        exp: "^(0.17.0-1-f92a2d688d)$"
+        exp: "^(0.17.1-1177-783615cacf)$"
 
 
   e4s_21_05_spack:
@@ -39,7 +39,7 @@ buildspecs:
     status:
       regex:
         stream: stdout
-        exp: "^(0.16.1-2805-abed824555)$"
+        exp: "^(0.16.1-2806-16370e1b16)$"
 
   e4s_21_05_spack_mirror_check:
     type: script
