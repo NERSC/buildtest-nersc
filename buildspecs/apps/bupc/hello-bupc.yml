@@ -17,4 +17,4 @@ buildspecs:
       config:
         builtin_gcc:
           module:
-            load: [bupc/2020.4.0]
+            load: [bupc]
