@@ -23,4 +23,4 @@ buildspecs:
       config:
         intel/19.0.3.199:
           module:
-            load: [impi/2020, intel/19.0.3.199]        
+            load: [impi, intel/19.0.3.199]        
