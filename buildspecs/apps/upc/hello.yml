@@ -7,7 +7,7 @@ buildspecs:
     source: src/hello_upcxx.cpp
     tags: [compile]
     compilers:
-      name: ["^(upcxx\/)"]
+      name: ["^(upcxx\/nightly)", "^(upcxx\/bleeding-edge)"]
       default:
         upcxx:
           sbatch: ["-t 01:00", "-N 1"]
