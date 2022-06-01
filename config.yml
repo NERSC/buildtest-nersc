@@ -662,3 +662,19 @@ system:
               load:
               - upcxx-extras/master
               purge: false
+          upcxx/2021.9.0:
+            cc: upcxx
+            cxx: upcxx
+            fc: None
+            module:
+              load:
+              - upcxx/2021.9.0
+              purge: false
+          upcxx/2022.3.0:
+            cc: upcxx
+            cxx: upcxx
+            fc: None
+            module:
+              load:
+              - upcxx/2022.3.0
+              purge: false
