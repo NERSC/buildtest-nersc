@@ -7,7 +7,7 @@ buildspecs:
     tags: [mpi, compile]
     source: src/hybrid-hello.f90
     compilers:
-      name: ["^(intel/19.0.3.199)$"]
+      name: ["^(intel/19.0.3.199)$", "^(intel/19.1.2.254)$"]
       default:
         intel:
           fc: mpiifort
@@ -23,4 +23,7 @@ buildspecs:
       config:
         intel/19.0.3.199:
           module:
-            load: [impi/2020, intel/19.0.3.199]        
+            load: [impi, intel/19.0.3.199] 
+        intel/19.1.2.254:
+          module:
+            load: [impi, intel/19.1.2.254]       
