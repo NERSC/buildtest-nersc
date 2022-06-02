@@ -12,7 +12,7 @@ export HOME_BASE=$(pwd)
 # Load the e4s and kokkos modules
 ml e4s/21.11-tcl
 
-spack_kokkos_cuda_version="kokkos@3.4.01%gcc@9.3.0 +cuda+openmp+wrapper cuda_arch=80"
+spack_kokkos_cuda_version="kokkos@3.4.01%gcc@11.2.0 +cuda cuda_arch=80"
 spack load ${spack_kokkos_cuda_version}
 
 export KOKKOS_ROOT=$(spack location -i ${spack_kokkos_cuda_version})
