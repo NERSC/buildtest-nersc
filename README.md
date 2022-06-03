@@ -12,19 +12,17 @@ git clone https://github.com/buildtesters/buildtest.git
 git clone https://software.nersc.gov/NERSC/buildtest-nersc.git
 ```
 
-You will need python 3.7 or higher to [install buildtest](https://buildtest.readthedocs.io/en/devel/installing_buildtest.html), on Cori this can be done by loading python module
-and create a conda environment as shown below. 
+You will need python 3.7 or higher to [install buildtest](https://buildtest.readthedocs.io/en/devel/installing_buildtest.html), on Cori/Perlmutter this can be done by loading **python**
+module and create a conda environment as shown below. 
 
 ```
-module load python/3.8-anaconda-2020.11
+module load python
 conda create -n buildtest
 conda activate buildtest
 source /path/to/buildtest/setup.sh
 ```
 
-The perlmutter setup would be very similar just perform the same step with the default python module that comes with anaconda - `python/3.9-anaconda-2021.11`
-
-Next, navigate to `buildtest-nersc` directory and set environment `BUILDTEST_CONFIGFILE` to point to **config.yml** which is the configuration file for NERSC system. 
+Next, navigate to `buildtest-nersc` directory and set environment `BUILDTEST_CONFIGFILE` to point to [config.yml](https://software.nersc.gov/NERSC/buildtest-nersc/-/blob/devel/config.yml) which is the configuration file for NERSC system. 
 
 ```
 cd buildtest-nersc
@@ -173,7 +171,7 @@ All scheduled pipelines are run via `e4s` user your gitlab job must specify the 
 
 ## Integrations
 
-This project has integration with Slack to notify CI builds to [buildtest Slack](https://hpcbuildtest.slack.com) at **#cori-testsuite** workspace. The integrations can be 
+This project has integration with Slack to notify CI builds to [buildtest Slack](https://hpcbuildtest.slack.com) at **#buildtest-nersc** workspace. The integrations can be 
 found at https://software.nersc.gov/NERSC/buildtest-nersc/-/settings/integrations.
 
 This project has setup a push mirror to https://github.com/buildtesters/buildtest-nersc which can be seen at https://software.nersc.gov/NERSC/buildtest-nersc/-/settings/repository 
