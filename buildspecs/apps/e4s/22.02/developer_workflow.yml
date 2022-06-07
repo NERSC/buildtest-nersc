@@ -11,7 +11,7 @@ buildspecs:
       source $SPACK_ROOT/bin/spack-setup.sh
       rm -rf $HOME/spack-demo
       despactivate  
-      spack env create -d $HOME/spack-demo 22.02/spack.yaml
+      spack env create -d $HOME/spack-demo spack.yaml
       spack env activate -d $HOME/spack-demo
       spack env st
       spack install
