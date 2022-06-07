@@ -1,0 +1,16 @@
+buildspecs:
+  e4s_testsuite_for_e4s_21.11:
+    type: script
+    executor: perlmutter.slurm.regular
+    description: Run E4S Testsuite kokkos test for e4s/21.11-tcl stack
+    tags: [e4s, pmr]
+    sbatch: ["-t 30", "-N 1", "-G 1", "-A m3503_g", "-C gpu"]
+    run: |
+      module load e4s/21.11-tcl
+      git clone https://github.com/E4S-Project/testsuite
+      cd testsuite
+
+      sh test-all.sh --color-off validation_tests/kokkos --print-logs --settings settings.cori.sh
+maintainers:
+  - shahzebsiddiqui
+  - wspear
