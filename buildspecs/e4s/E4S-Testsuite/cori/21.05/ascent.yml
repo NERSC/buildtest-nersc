@@ -13,4 +13,5 @@ buildspecs:
       sh test-all.sh --color-off validation_tests/ascent --print-logs --settings settings.cori.sh
 maintainers:
   - shahzebsiddiqui
-  - cyrush    
+  - cyrush   
+  - wspear 
