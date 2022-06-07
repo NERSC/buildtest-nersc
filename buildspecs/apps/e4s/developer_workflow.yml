@@ -1,0 +1,25 @@
+buildspecs:
+  e4s_22.02_dev_workflow:        
+    type: script
+    executor: cori.local.bash
+    description: E4S/22.02 Developer Workflow Check
+    tags: [e4s]
+    summary: |
+      This workflow will check the developer workflow outlined in https://docs.nersc.gov/applications/e4s/cori/22.02/
+    run: |
+      module load e4s/22.02
+      source $SPACK_ROOT/bin/spack-setup.sh
+      rm -rf $HOME/spack-demo
+      despactivate  
+      spack env create -d $HOME/spack-demo 22.02/spack.yaml
+      spack env activate -d $HOME/spack-demo
+      spack env st
+      spack install
+      spack find -Lvp
+      spack module tcl refresh --delete-tree -y
+      ls $HOME/spack-workspace/cori/modules/$(spack arch)
+      module use $HOME/spack-workspace/cori/modules/$(spack arch)
+
+maintainers:
+ - "@shahzebsiddiqui"
+
