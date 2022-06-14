@@ -1,4 +1,3 @@
-
 buildspecs:
   module_version:
     type: script
@@ -12,4 +11,4 @@ buildspecs:
         exp: "^(VERSION=3.2.11.4)"
 
 maintainers:
-  - "@shahzebsiddiqui"
+  - "shahzebsiddiqui"
