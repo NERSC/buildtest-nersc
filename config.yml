@@ -60,6 +60,8 @@ system:
           qos: regular        
         debug:
           qos: debug
+        preempt:
+          qos: preempt
     compilers:
       find:
         gcc: ^(gcc)
