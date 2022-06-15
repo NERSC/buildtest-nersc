@@ -5,5 +5,5 @@ buildspecs:
     type: script
     executor: 'perlmutter.slurm.(regular|debug|preempt)'
     tags: ["queues","jobs"]
-    sbatch: ["-t 5", "-n 1", "-t 10", "-N 1", "-C gpu", "-A m3503"]
+    sbatch: ["-t 5", "-n 1", "-N 1", "-C gpu", "-A m3503"]
     run: hostname
