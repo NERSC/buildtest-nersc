@@ -1,9 +1,9 @@
 
 buildspecs:
-  hostname_perlmutter:
-    description: run hostname on perlmutter
+  hostname_perlmutter_cpu:
+    description: run hostname on perlmutter CPUs
     type: script
-    executor: 'perlmutter.slurm.(regular|debug|preempt)'
+    executor: 'perlmutter.slurm.(regular|debug)'
     tags: ["queues","jobs"]
-    sbatch: ["-t 5", "-n 1", "-t 10", "-N 1", "-C cpu", "-A m3503"]
+    sbatch: ["-t 5", "-n 1", "-C cpu", "-A m3503"]
     run: hostname
