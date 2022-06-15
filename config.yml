@@ -62,6 +62,8 @@ system:
           qos: debug
         xfer:
           qos: xfer
+        preempt:
+          qos: preempt
     compilers:
       find:
         gcc: ^(gcc)
