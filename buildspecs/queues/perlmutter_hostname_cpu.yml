@@ -1,0 +1,9 @@
+
+buildspecs:
+  hostname_perlmutter_cpu:
+    description: run hostname on perlmutter CPUs
+    type: script
+    executor: 'perlmutter.slurm.(regular|debug)'
+    tags: ["queues","jobs"]
+    sbatch: ["-t 5", "-n 1", "-C cpu", "-A m3503"]
+    run: hostname
