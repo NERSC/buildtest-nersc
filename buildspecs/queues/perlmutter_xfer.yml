@@ -1,0 +1,9 @@
+
+buildspecs:
+  xfer_qos_hostname_perlmutter:
+    description: add batch test to xfer qos from Perlmutter
+    type: script
+    executor: perlmutter.slurm.xfer
+    sbatch: ["-n 1", "-t 10", "-q xfer"]
+    run: hostname
+    tags: ["queues", "jobs"]
