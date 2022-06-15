@@ -1,14 +1,10 @@
-# https://gitlab.nersc.gov/nersc/consulting/reframe-at-nersc/reframe-nersc-tests/-/blob/main/esslurm/check_admin_comment_esslurm/check_admin_comment_esslurm.py
-
 buildspecs:
   check_admin_comment_esslurm:
     type: script
     description: Check if a job has an admin comment after running for esslurm
-    tags: [slurm, reframe]
+    tags: [slurm]
     executor: cori.slurm.bigmem
-    batch:
-      nodecount: "1"
-      timelimit: "5"
+    sbatch: ["-N 1", "-t 5"]
     run: |
       module load esslurm
       ./admin_comment.sh
