@@ -1,13 +1,10 @@
-
 buildspecs:
   likwid_topology_knl:
     type: script
     executor: cori.slurm.knl_debug
     description: Show thread, numa and cahce topology on Haswell via likwid-topology
     tags: [tools]
-    batch:
-      nodecount: "1"
-      timelimit: "5"
+    sbatch: ["-N 1", "-t 5"]
     run: |
       module load likwid
       likwid-topology -c
