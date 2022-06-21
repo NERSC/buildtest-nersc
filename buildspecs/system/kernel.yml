@@ -1,15 +1,21 @@
-
 buildspecs:
   kernel_version:
     type: script
-    executor: cori.local.bash
+    executor: '(cori|perlmutter).local.bash'
     description: check and match kernel version
     run: uname -r 
     tags: [daily, system]
-    status:
-      regex:
-        stream: stdout
-        exp: "^4.12.14-150.75-default$"
+    executors:
+      cori.local.bash:            
+        status:
+          regex:
+            stream: stdout
+            exp: "^5.3.18-24.107-default$"
+      perlmutter.local.bash:            
+        status:
+          regex:
+            stream: stdout
+            exp: "^5.3.18-150300.59.43_11.0.51-cray_shasta_c$"
 
 maintainers:
   - "shahzebsiddiqui"
