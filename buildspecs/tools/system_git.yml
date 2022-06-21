@@ -5,9 +5,16 @@ buildspecs:
     tags: [tool, daily]
     description: "Check version of /usr/bin/git"
     run: /usr/bin/git --version
-    status:
-      regex:
-        stream: stdout
-        exp: 'git version (2.26.2)'
+    executors:
+      cori.local.bash:
+        status:
+          regex:
+            stream: stdout
+            exp: 'git version (2.26.2)'
+      perlmutter.local.bash:            
+        status:
+          regex:
+            stream: stdout
+            exp: 'git version (2.34.1)'
 maintainers:
   - "shahzebsiddiqui"
