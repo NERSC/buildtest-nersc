@@ -1,0 +1,23 @@
+buildspecs:
+  e4s-21.05-dev-workflow:        
+    type: script
+    executor: cori.local.bash
+    description: E4S/21.05 Developer Workflow Check
+    tags: [e4s]
+    summary: |
+      This workflow will check the developer workflow outlined in https://docs.nersc.gov/applications/e4s/cori/21.05/
+    run: |
+      module load e4s/21.05
+      rm -rf $HOME/e4s-21.05-demo
+      despactivate  
+      spack env create -d $HOME/e4s-21.05-demo
+      spack env activate -d $HOME/e4s-21.05-demo
+      spack env st
+      spack install m4
+      spack install papi
+      spack find -Lvp
+      module use $HOME/spack-workspace/modules/cray-cnl7-haswell/
+      module -t av papi
+maintainers:
+ - "shahzebsiddiqui"
+ - "wspear"
