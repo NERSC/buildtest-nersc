@@ -5,7 +5,8 @@ buildspecs:
     shell: python
     description: Check TZ is set to US/Pacific in /etc/profile.d script
     tags: [daily, python, configuration]
-    executor: cori.local.python
+    executor: cori.local.bash
+    shell: python
     run: |
       import os
       assert os.getenv("TZ") == "US/Pacific"
