@@ -15,9 +15,6 @@ system:
         csh:
           description: submit jobs on local machine using csh shell
           shell: csh
-        python:
-          description: submit jobs on local machine using python shell
-          shell: python
     compilers:
       compiler:
         gcc:
