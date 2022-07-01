@@ -8,7 +8,7 @@ Once you are set, you can see preview of all tests in cache by run the folllowin
 $ buildtest buildspec find
 ```
 
-You can see content of any test using `buildtest buildspec show` and name of the test. 
+You can see content of any test using `buildtest buildspec show`, shown below is output for test **shifter_job**.
 
 ```
 (buildtest) siddiq90@cori03> buildtest buildspec show shifter_job
@@ -41,106 +41,109 @@ You can run this test as follows, this test will perform two tests, one will pul
 
 ```
 (buildtest) siddiq90@cori03> buildtest build -b buildspecs/tools/shifter.yml 
-╭──────────────────────────────────────────────── buildtest summary ────────────────────────────────────────────────╮ 
-│                                                                                                                   │ 
-│ User:               siddiq90                                                                                      │ 
-│ Hostname:           cori03                                                                                        │ 
-│ Platform:           Linux                                                                                         │ 
-│ Current Time:       2021/11/12 13:39:51                                                                           │ 
-│ buildtest path:     /global/homes/s/siddiq90/github/buildtest/bin/buildtest                                       │ 
-│ buildtest version:  0.11.0                                                                                        │ 
-│ python path:        /usr/common/software/python/3.8-anaconda-2020.11/bin/python                                   │ 
-│ python version:     3.8.5                                                                                         │ 
-│ Configuration File: /global/u1/s/siddiq90/github/buildtest-cori/config.yml                                        │ 
-│ Test Directory:     /global/u1/s/siddiq90/github/buildtest/var/tests                                              │ 
-│ Command:            /global/homes/s/siddiq90/github/buildtest/bin/buildtest build -b buildspecs/tools/shifter.yml │ 
-│                                                                                                                   │ 
-╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯ 
-──────────────────────────────────────────────  Discovering Buildspecs ───────────────────────────────────────────────
-Discovered Buildspecs:  1
-Excluded Buildspecs:  0
+╭───────────────────────────────────────────────── buildtest summary ─────────────────────────────────────────────────╮
+│                                                                                                                     │
+│ User:               siddiq90                                                                                        │
+│ Hostname:           cori10                                                                                          │
+│ Platform:           Linux                                                                                           │
+│ Current Time:       2022/07/01 06:26:39                                                                             │
+│ buildtest path:     /global/homes/s/siddiq90/gitrepos/buildtest/bin/buildtest                                       │
+│ buildtest version:  0.15.0                                                                                          │
+│ python path:        /global/common/software/nersc/cori-2022q1/sw/python/3.9-anaconda-2021.11/bin/python3            │
+│ python version:     3.9.7                                                                                           │
+│ Configuration File: /global/u1/s/siddiq90/gitrepos/buildtest-nersc/config.yml                                       │
+│ Test Directory:     /global/u1/s/siddiq90/gitrepos/buildtest/var/tests                                              │
+│ Report File:        /global/u1/s/siddiq90/gitrepos/buildtest/var/report.json                                        │
+│ Command:            /global/homes/s/siddiq90/gitrepos/buildtest/bin/buildtest build -b buildspecs/tools/shifter.yml │
+│                                                                                                                     │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+────────────────────────────────────────────────────────────  Discovering Buildspecs ────────────────────────────────────────────────────────────
+                             Discovered buildspecs
+╔═════════════════════════════════════════════════════════════════════════════╗
+║ buildspec                                                                   ║
+╟─────────────────────────────────────────────────────────────────────────────╢
+║ /global/u1/s/siddiq90/gitrepos/buildtest-nersc/buildspecs/tools/shifter.yml ║
+╚═════════════════════════════════════════════════════════════════════════════╝
+
+
+Total Discovered Buildspecs:  1
+Total Excluded Buildspecs:  0
 Detected Buildspecs after exclusion:  1
-                           Discovered buildspecs                            
-╔══════════════════════════════════════════════════════════════════════════╗
-║ Buildspecs                                                               ║
-╟──────────────────────────────────────────────────────────────────────────╢
-║ /global/u1/s/siddiq90/github/buildtest-cori/buildspecs/tools/shifter.yml ║
-╚══════════════════════════════════════════════════════════════════════════╝
-───────────────────────────────────────────────── Parsing Buildspecs ─────────────────────────────────────────────────
+────────────────────────────────────────────────────────────── Parsing Buildspecs ───────────────────────────────────────────────────────────────
+Buildtest will parse 1 buildspecs
 Valid Buildspecs: 1
 Invalid Buildspecs: 0
-/global/u1/s/siddiq90/github/buildtest-cori/buildspecs/tools/shifter.yml: VALID
-
-
+/global/u1/s/siddiq90/gitrepos/buildtest-nersc/buildspecs/tools/shifter.yml: VALID
 Total builder objects created: 2
-
-
-                                                   Builder Details                                                    
-┏━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃ Builder               ┃ Executor                 ┃ description                    ┃ buildspecs                     ┃
-┡━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
-│ shifter_pull/93905ceb │ cori.local.bash          │ Check if shifterimg pull can   │ /global/u1/s/siddiq90/github/b │
-│                       │                          │ download a container           │ uildtest-cori/buildspecs/tools │
-│                       │                          │                                │ /shifter.yml                   │
-├───────────────────────┼──────────────────────────┼────────────────────────────────┼────────────────────────────────┤
-│ shifter_job/5fde86aa  │ cori.slurm.haswell_debug │ Run shifter in a slurm job and │ /global/u1/s/siddiq90/github/b │
-│                       │                          │ run 32 instance of shifter     │ uildtest-cori/buildspecs/tools │
-│                       │                          │ image to echo hostname         │ /shifter.yml                   │
-└───────────────────────┴──────────────────────────┴────────────────────────────────┴────────────────────────────────┘
-─────────────────────────────────────────────────── Building Test ────────────────────────────────────────────────────
-[13:39:51] shifter_pull/93905ceb: Creating test directory:                                                 base.py:437
-           /global/u1/s/siddiq90/github/buildtest/var/tests/cori.local.bash/shifter/shifter_pull/93905ceb             
-           shifter_pull/93905ceb: Creating the stage directory: /global/u1/s/siddiq90/github/buildtest/var base.py:448
-           /tests/cori.local.bash/shifter/shifter_pull/93905ceb/stage                                                 
-           shifter_pull/93905ceb: Writing build script: /global/u1/s/siddiq90/github/buildtest/var/tests/c base.py:565
-           ori.local.bash/shifter/shifter_pull/93905ceb/shifter_pull_build.sh                                         
-           shifter_job/5fde86aa: Creating test directory: /global/u1/s/siddiq90/github/buildtest/var/tests base.py:437
-           /cori.slurm.haswell_debug/shifter/shifter_job/5fde86aa                                                     
-           shifter_job/5fde86aa: Creating the stage directory: /global/u1/s/siddiq90/github/buildtest/var/ base.py:448
-           tests/cori.slurm.haswell_debug/shifter/shifter_job/5fde86aa/stage                                          
-           shifter_job/5fde86aa: Writing build script: /global/u1/s/siddiq90/github/buildtest/var/tests/co base.py:565
-           ri.slurm.haswell_debug/shifter/shifter_job/5fde86aa/shifter_job_build.sh                                   
-─────────────────────────────────────────────────── Running Tests ────────────────────────────────────────────────────
-______________________________
-Launching test: shifter_pull/93905ceb
-shifter_pull/93905ceb: Running Test script 
-/global/u1/s/siddiq90/github/buildtest/var/tests/cori.local.bash/shifter/shifter_pull/93905ceb/shifter_pull_build.sh
-______________________________
-Launching test: shifter_job/5fde86aa
-shifter_job/5fde86aa: Running Test script /global/u1/s/siddiq90/github/buildtest/var/tests/cori.slurm.haswell_debug/sh
-ifter/shifter_job/5fde86aa/shifter_job_build.sh
-shifter_pull/93905ceb: completed with returncode: 0
-shifter_pull/93905ceb: Writing output file -  
-/global/u1/s/siddiq90/github/buildtest/var/tests/cori.local.bash/shifter/shifter_pull/93905ceb/shifter_pull.out
-shifter_pull/93905ceb: Writing error file - 
-/global/u1/s/siddiq90/github/buildtest/var/tests/cori.local.bash/shifter/shifter_pull/93905ceb/shifter_pull.err
-shifter_job/5fde86aa: JobID 50197716 dispatched to scheduler
+Total compiler builder: 0
+Total script builder: 2
+Total spack builder: 0
+                                                             Script Builder Details
+┏━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ builder               ┃ executor                 ┃ compiler ┃ nodes ┃ procs ┃ description                    ┃ buildspecs                     ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ shifter_pull/97a1e57c │ cori.local.bash          │ None     │ None  │ None  │ Check if shifterimg pull can   │ /global/u1/s/siddiq90/gitrepo… │
+│                       │                          │          │       │       │ download a container           │                                │
+├───────────────────────┼──────────────────────────┼──────────┼───────┼───────┼────────────────────────────────┼────────────────────────────────┤
+│ shifter_job/7c779344  │ cori.slurm.haswell_debug │ None     │ None  │ None  │ Run shifter in a slurm job and │ /global/u1/s/siddiq90/gitrepo… │
+│                       │                          │          │       │       │ run 32 instance of shifter     │                                │
+│                       │                          │          │       │       │ image to echo hostname         │                                │
+└───────────────────────┴──────────────────────────┴──────────┴───────┴───────┴────────────────────────────────┴────────────────────────────────┘
+                                                       Batch Job Builders
+┏━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ builder              ┃ executor                 ┃ buildspecs                                                                  ┃
+┡━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ shifter_job/7c779344 │ cori.slurm.haswell_debug │ /global/u1/s/siddiq90/gitrepos/buildtest-nersc/buildspecs/tools/shifter.yml │
+└──────────────────────┴──────────────────────────┴─────────────────────────────────────────────────────────────────────────────┘
+───────────────────────────────────────────────────────────────── Building Test ─────────────────────────────────────────────────────────────────
+shifter_pull/97a1e57c: Creating test directory: /global/u1/s/siddiq90/gitrepos/buildtest/var/tests/cori.local.bash/shifter/shifter_pull/97a1e57c
+shifter_pull/97a1e57c: Creating the stage directory:
+/global/u1/s/siddiq90/gitrepos/buildtest/var/tests/cori.local.bash/shifter/shifter_pull/97a1e57c/stage
+shifter_pull/97a1e57c: Writing build script:
+/global/u1/s/siddiq90/gitrepos/buildtest/var/tests/cori.local.bash/shifter/shifter_pull/97a1e57c/shifter_pull_build.sh
+shifter_job/7c779344: Creating test directory:
+/global/u1/s/siddiq90/gitrepos/buildtest/var/tests/cori.slurm.haswell_debug/shifter/shifter_job/7c779344
+shifter_job/7c779344: Creating the stage directory:
+/global/u1/s/siddiq90/gitrepos/buildtest/var/tests/cori.slurm.haswell_debug/shifter/shifter_job/7c779344/stage
+shifter_job/7c779344: Writing build script:
+/global/u1/s/siddiq90/gitrepos/buildtest/var/tests/cori.slurm.haswell_debug/shifter/shifter_job/7c779344/shifter_job_build.sh
+───────────────────────────────────────────────────────────────── Running Tests ─────────────────────────────────────────────────────────────────
+Spawning 64 processes for processing builders
+────────────────────────────────────────────────────────────────── Iteration 1 ──────────────────────────────────────────────────────────────────
+shifter_job/7c779344 does not have any dependencies adding test to queue
+shifter_pull/97a1e57c does not have any dependencies adding test to queue
+In this iteration we are going to run the following tests: [shifter_job/7c779344, shifter_pull/97a1e57c]
+shifter_pull/97a1e57c: Running Test via command: bash --norc --noprofile -eo pipefail shifter_pull_build.sh
+shifter_job/7c779344: Running Test via command: bash --norc --noprofile -eo pipefail shifter_job_build.sh
+shifter_job/7c779344: JobID 60694501 dispatched to scheduler
+shifter_pull/97a1e57c: Test completed in 5.154386 seconds
+shifter_pull/97a1e57c: Test completed with returncode: 0
+shifter_pull/97a1e57c: Writing output file -
+/global/u1/s/siddiq90/gitrepos/buildtest/var/tests/cori.local.bash/shifter/shifter_pull/97a1e57c/shifter_pull.out
+shifter_pull/97a1e57c: Writing error file -
+/global/u1/s/siddiq90/gitrepos/buildtest/var/tests/cori.local.bash/shifter/shifter_pull/97a1e57c/shifter_pull.err
 Polling Jobs in 30 seconds
-shifter_job/5fde86aa: Job 50197716 is complete! 
-shifter_job/5fde86aa: Writing output file -  
-/global/u1/s/siddiq90/github/buildtest/var/tests/cori.slurm.haswell_debug/shifter/shifter_job/5fde86aa/shifter_job.out
-shifter_job/5fde86aa: Writing error file - 
-/global/u1/s/siddiq90/github/buildtest/var/tests/cori.slurm.haswell_debug/shifter/shifter_job/5fde86aa/shifter_job.err
-                   Pending Jobs                    
-┏━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━┓
-┃ Builder ┃ executor ┃ JobID ┃ JobState ┃ runtime ┃
-┡━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━┩
-└─────────┴──────────┴───────┴──────────┴─────────┘
-                                    Completed Jobs                                    
+shifter_job/7c779344: Job 60694501 is complete!
+shifter_job/7c779344: Test completed in 35.205025 seconds
+shifter_job/7c779344: Test completed with returncode: 0
+shifter_job/7c779344: Writing output file -
+/global/u1/s/siddiq90/gitrepos/buildtest/var/tests/cori.slurm.haswell_debug/shifter/shifter_job/7c779344/shifter_job.out
+shifter_job/7c779344: Writing error file -
+/global/u1/s/siddiq90/gitrepos/buildtest/var/tests/cori.slurm.haswell_debug/shifter/shifter_job/7c779344/shifter_job.err
+                                    Completed Jobs
 ┏━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
-┃ Builder              ┃ executor                 ┃ JobID    ┃ JobState  ┃ runtime   ┃
+┃ builder              ┃ executor                 ┃ jobid    ┃ jobstate  ┃ runtime   ┃
 ┡━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━┩
-│ shifter_job/5fde86aa │ cori.slurm.haswell_debug │ 50197716 │ COMPLETED │ 35.184099 │
+│ shifter_job/7c779344 │ cori.slurm.haswell_debug │ 60694501 │ COMPLETED │ 35.205025 │
 └──────────────────────┴──────────────────────────┴──────────┴───────────┴───────────┘
-                                                     Test Summary                                                     
-┏━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┓
-┃ Builder               ┃ executor                 ┃ status ┃ Checks (ReturnCode, Regex,    ┃ ReturnCode ┃ Runtime   ┃
-┃                       ┃                          ┃        ┃ Runtime)                      ┃            ┃           ┃
-┡━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━┩
-│ shifter_pull/93905ceb │ cori.local.bash          │ PASS   │ N/A N/A N/A                   │ 0          │ 4.417946  │
-├───────────────────────┼──────────────────────────┼────────┼───────────────────────────────┼────────────┼───────────┤
-│ shifter_job/5fde86aa  │ cori.slurm.haswell_debug │ PASS   │ N/A N/A N/A                   │ 0          │ 35.184099 │
-└───────────────────────┴──────────────────────────┴────────┴───────────────────────────────┴────────────┴───────────┘
+                                                        Test Summary
+┏━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃ builder               ┃ executor                 ┃ status ┃ checks (ReturnCode, Regex, Runtime) ┃ returnCode ┃ runtime   ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ shifter_job/7c779344  │ cori.slurm.haswell_debug │ PASS   │ N/A N/A N/A                         │ 0          │ 35.205025 │
+├───────────────────────┼──────────────────────────┼────────┼─────────────────────────────────────┼────────────┼───────────┤
+│ shifter_pull/97a1e57c │ cori.local.bash          │ PASS   │ N/A N/A N/A                         │ 0          │ 5.154386  │
+└───────────────────────┴──────────────────────────┴────────┴─────────────────────────────────────┴────────────┴───────────┘
 
 
 
@@ -148,7 +151,8 @@ Passed Tests: 2/2 Percentage: 100.000%
 Failed Tests: 0/2 Percentage: 0.000%
 
 
-Writing Logfile to: /tmp/buildtest_sr624mkc.log
+Adding 2 test results to /global/u1/s/siddiq90/gitrepos/buildtest/var/report.json
+Writing Logfile to: /global/u1/s/siddiq90/gitrepos/buildtest/var/logs/buildtest_w3eiqmti.log
 ```
 
 We can inspect the output of the test via `buildtest inspect query` with `-o` we fetch the output file. 
@@ -174,7 +178,7 @@ endtime:  2021/11/12 13:39:55
 2021-11-12T13:39:55 Pulling Image: docker:ubuntu:latest, status: READY                                                                                                                       
 ```
 
-The `buildtest path` command can be used to retrieve path to test, output, error file, etc... For this test we can fetch outputfile via
+The `buildtest path` command can be used to retrieve path to test, output, error file, etc... For this test we can fetch output file via
 
 ```
 (buildtest) siddiq90@cori03> buildtest path -o shifter_pull
@@ -187,163 +191,66 @@ You can use this to do more elaborate command such as
 cat $(buildtest path -o shifter_pull) | grep [PATTERN]
 ```
 
-Let's run one of the E4S tests via `spack test` examples in buildtest. The e4s tests are tag with name `e4s` so you can filter output of `buildtest buildspec find` with tags as follows
+Let's try querying the buildspec cache and see all tests corresponding to tagname `e4s`, this can be done using the `--filter` option which filters buildspec cache. Try running the following command and see available tests:
 
 ```
 buildtest buildspec find --filter tags=e4s
 ```
 
-Let's take a look at the gasnet test we can see that this test will use [spack schema](https://buildtest.readthedocs.io/en/devel/buildspecs/spack.html) indicated by `type: spack` field to validate
-the buildspec. This test will run against spec `gasnet@2021.3.0%intel` which is installed for `e4s/21.05` deployment.
+Let's take a look at test `e4s_22.02_dev_workflow` try running `buildtest buildspec show e4s_22.02_dev_workflow` to see content of test. This test will validate the spack developer workflow which we have outlined in the user documentation. Let's run this test by 
+running the following command:
 
 ```
-(buildtest) siddiq90@cori03> buildtest buildspec show spack_test_gasnet_e4s_21.05
-────────────────── /global/u1/s/siddiq90/github/buildtest-cori/buildspecs/e4s/spack_test/gasnet.yml ──────────────────
-╭─────────────────────────────────────────────────────────────────────────────╮
-│ version: "1.0"                                                              │
-│ buildspecs:                                                                 │
-│   spack_test_gasnet_e4s_21.05:                                              │
-│     type: spack                                                             │
-│     executor: cori.local.sh                                                 │
-│     description: "Test gasnet@2021.3.0%intel with e4s/21.05 via spack test" │
-│     tags: e4s                                                               │
-│     pre_cmds: module load e4s/21.05                                         │
-│     spack:                                                                  │
-│       root: /global/common/software/spackecp/e4s-21.05/spack/               │
-│       verify_spack: false                                                   │
-│       test:                                                                 │
-│         run:                                                                │
-│           specs: ['gasnet@2021.3.0%intel']                                  │
-│         results:                                                            │
-│           option: '-l'                                                      │
-│           specs: ['gasnet@2021.3.0%intel']                                  │
-│ maintainers:                                                                │
-│   - "shahzebsiddiqui"                                                       │
-│   - "PHHargrove"                                                            │
-│   - "bonachea"                                                              │
-│                                                                             │
-╰─────────────────────────────────────────────────────────────────────────────╯
+buildtest build -b buildspecs/apps/e4s/22.02/developer_workflow.yml
 ```
 
-Let's run this test
-
-```
-(buildtest) siddiq90@cori03> buildtest build -b buildspecs/e4s/spack_test/gasnet.yml
-╭──────────────────────────────────────────────── buildtest summary ─────────────────────────────────────────────────╮
-│                                                                                                                    │
-│ User:               siddiq90                                                                                       │
-│ Hostname:           cori03                                                                                         │
-│ Platform:           Linux                                                                                          │
-│ Current Time:       2021/11/12 13:47:57                                                                            │
-│ buildtest path:     /global/homes/s/siddiq90/github/buildtest/bin/buildtest                                        │
-│ buildtest version:  0.11.0                                                                                         │
-│ python path:        /usr/common/software/python/3.8-anaconda-2020.11/bin/python                                    │
-│ python version:     3.8.5                                                                                          │
-│ Configuration File: /global/u1/s/siddiq90/github/buildtest-cori/config.yml                                         │
-│ Test Directory:     /global/u1/s/siddiq90/github/buildtest/var/tests                                               │
-│ Command:            /global/homes/s/siddiq90/github/buildtest/bin/buildtest build -b                               │
-│ buildspecs/e4s/spack_test/gasnet.yml                                                                               │
-│                                                                                                                    │
-╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
-──────────────────────────────────────────────  Discovering Buildspecs ───────────────────────────────────────────────
-Discovered Buildspecs:  1
-Excluded Buildspecs:  0
-Detected Buildspecs after exclusion:  1
-                               Discovered buildspecs                                
-╔══════════════════════════════════════════════════════════════════════════════════╗
-║ Buildspecs                                                                       ║
-╟──────────────────────────────────────────────────────────────────────────────────╢
-║ /global/u1/s/siddiq90/github/buildtest-cori/buildspecs/e4s/spack_test/gasnet.yml ║
-╚══════════════════════════════════════════════════════════════════════════════════╝
-───────────────────────────────────────────────── Parsing Buildspecs ─────────────────────────────────────────────────
-Valid Buildspecs: 1
-Invalid Buildspecs: 0
-/global/u1/s/siddiq90/github/buildtest-cori/buildspecs/e4s/spack_test/gasnet.yml: VALID
-
-
-Total builder objects created: 1
-
-
-                                                   Builder Details                                                    
-┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃ Builder                         ┃ Executor      ┃ description                    ┃ buildspecs                      ┃
-┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
-│ spack_test_gasnet_e4s_21.05/904 │ cori.local.sh │ Test gasnet@2021.3.0%intel     │ /global/u1/s/siddiq90/github/bu │
-│ 6f857                           │               │ with e4s/21.05 via spack test  │ ildtest-cori/buildspecs/e4s/spa │
-│                                 │               │                                │ ck_test/gasnet.yml              │
-└─────────────────────────────────┴───────────────┴────────────────────────────────┴─────────────────────────────────┘
-─────────────────────────────────────────────────── Building Test ────────────────────────────────────────────────────
-[13:47:57] spack_test_gasnet_e4s_21.05/9046f857: Creating test directory: /global/u1/s/siddiq90/github/bui base.py:437
-           ldtest/var/tests/cori.local.sh/gasnet/spack_test_gasnet_e4s_21.05/9046f857                                 
-           spack_test_gasnet_e4s_21.05/9046f857: Creating the stage directory: /global/u1/s/siddiq90/githu base.py:448
-           b/buildtest/var/tests/cori.local.sh/gasnet/spack_test_gasnet_e4s_21.05/9046f857/stage                      
-           spack_test_gasnet_e4s_21.05/9046f857: Writing build script: /global/u1/s/siddiq90/github/buildt base.py:565
-           est/var/tests/cori.local.sh/gasnet/spack_test_gasnet_e4s_21.05/9046f857/spack_test_gasnet_e4s_2            
-           1.05_build.sh                                                                                              
-─────────────────────────────────────────────────── Running Tests ────────────────────────────────────────────────────
-______________________________
-Launching test: spack_test_gasnet_e4s_21.05/9046f857
-spack_test_gasnet_e4s_21.05/9046f857: Running Test script /global/u1/s/siddiq90/github/buildtest/var/tests/cori.local.
-sh/gasnet/spack_test_gasnet_e4s_21.05/9046f857/spack_test_gasnet_e4s_21.05_build.sh
-spack_test_gasnet_e4s_21.05/9046f857: completed with returncode: 0
-spack_test_gasnet_e4s_21.05/9046f857: Writing output file -  /global/u1/s/siddiq90/github/buildtest/var/tests/cori.loc
-al.sh/gasnet/spack_test_gasnet_e4s_21.05/9046f857/spack_test_gasnet_e4s_21.05.out
-spack_test_gasnet_e4s_21.05/9046f857: Writing error file - /global/u1/s/siddiq90/github/buildtest/var/tests/cori.local
-.sh/gasnet/spack_test_gasnet_e4s_21.05/9046f857/spack_test_gasnet_e4s_21.05.err
-                                                     Test Summary                                                     
-┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┓
-┃ Builder                         ┃ executor      ┃ status ┃ Checks (ReturnCode, Regex,     ┃ ReturnCode ┃ Runtime   ┃
-┃                                 ┃               ┃        ┃ Runtime)                       ┃            ┃           ┃
-┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━┩
-│ spack_test_gasnet_e4s_21.05/904 │ cori.local.sh │ PASS   │ N/A N/A N/A                    │ 0          │ 38.853554 │
-│ 6f857                           │               │        │                                │            │           │
-└─────────────────────────────────┴───────────────┴────────┴────────────────────────────────┴────────────┴───────────┘
-
-
-
-Passed Tests: 1/1 Percentage: 100.000%
-Failed Tests: 0/1 Percentage: 0.000%
-
-
-Writing Logfile to: /tmp/buildtest_yqs_ntfv.log
-```
-
-We can see the generated content of the test via `buildtest inspect query -t` followed by name of test. Its worth noting 
-that `module load e4s/21.05` will drop us into a spack instance however the schema requires one to specify root of spack inorder
-to `source` the setup script which is used for generating the line `source /global/common/software/spackecp/e4s-21.05/spack/share/spack/setup-env.sh` that 
-initialize spack for e4s/21.05 stack.
+Upon completion take a look at output you can fetch output file using `buildtest path -o` which will return the filepath. Take note of the output, this test will install `papi` via spack in a spack environment defined by **spack.yaml**.
 
 
 ```
-(buildtest) siddiq90@cori03> buildtest inspect query -t spack_test_gasnet_e4s_21.05
-────────────────────────── spack_test_gasnet_e4s_21.05/9046f857-d408-4503-a976-c72efb14ef3c ──────────────────────────
-executor:  cori.local.sh
-description:  Test gasnet@2021.3.0%intel with e4s/21.05 via spack test
-state:  PASS
-returncode:  0
-runtime:  38.853554
-starttime:  2021/11/12 13:47:57
-endtime:  2021/11/12 13:48:36
-─ Test File: /global/u1/s/siddiq90/github/buildtest/var/tests/cori.local.sh/gasnet/spack_test_gasnet_e4s_21.05/9046… ─
-   1 #!/bin/bash                                                                                                      
-   2                                                                                                                  
-   3                                                                                                                  
-   4 ######## START OF PRE COMMANDS ########                                                                          
-   5 module load e4s/21.05                                                                                            
-   6 ######## END OF PRE COMMANDS   ########                                                                          
-   7                                                                                                                  
-   8                                                                                                                  
-   9 source /global/common/software/spackecp/e4s-21.05/spack/share/spack/setup-env.sh                                 
-  10 spack test run --alias spack_test_gasnet_e4s_21.05 gasnet@2021.3.0%intel                                         
-  11 spack test results -l -- gasnet@2021.3.0%intel                                                                   
+(buildtest) siddiq90@cori03> cat $(buildtest path -o e4s_22.02_dev_workflow)          
+Creating python virtual environment in /global/homes/s/siddiq90/.spack-pyenv
+Package                     Version
+--------------------------- -------
+cffi                        1.15.0
+clingo                      5.5.2
+pip                         21.2.3
+pycparser                   2.21
+python3-nersc-customs       0.4.0
+python3-nersc-modster       0.4.0
+python3-nersc-sitecustomize 0.4.0
+python3-nerscjson           0.9.0
+setuptools                  57.4.0
+Your python interpreter used by spack is /global/homes/s/siddiq90/.spack-pyenv/bin/python
+==> Updating view at /global/homes/s/siddiq90/spack-demo/.spack-env/view
+==> Created environment in /global/homes/s/siddiq90/spack-demo
+==> You can activate this environment with:
+==>   spack env activate /global/homes/s/siddiq90/spack-demo
+==> In environment /global/homes/s/siddiq90/spack-demo
+==> Starting concretization pool with 2 processes
+==> Environment concretized in 10.48 seconds.
+==> Concretized papi%gcc
+[+]  wph5r5w  papi@6.0.0.1%gcc@11.2.0~cuda+example~infiniband~lmsensors~nvml~powercap~rapl~rocm~rocm_smi~sde+shared~static_tools arch=cray-cnl7-haswell
+==> Concretized papi%intel
+[+]  5mdo5ba  papi@6.0.0.1%intel@19.1.2.254~cuda+example~infiniband~lmsensors~nvml~powercap~rapl~rocm~rocm_smi~sde+shared~static_tools arch=cray-cnl7-haswell
+==> Installing environment /global/homes/s/siddiq90/spack-demo
+==> All of the packages are already installed
+==> Updating view at /global/homes/s/siddiq90/spack-demo/.spack-env/view
+==> In environment /global/homes/s/siddiq90/spack-demo
+==> Root specs
+-- no arch / gcc ------------------------------------------------
+-------------------------------- papi%gcc
+-- no arch / intel ----------------------------------------------
+-------------------------------- papi%intel
+-- cray-cnl7-haswell / gcc@11.2.0 -------------------------------
+wph5r5ws5zttcphffedwiywbh6tq4nkw papi@6.0.0.1~cuda+example~infiniband~lmsensors~nvml~powercap~rapl~rocm~rocm_smi~sde+shared~static_tools  /global/homes/s/siddiq90/spack-workspace/cori/software/cray-cnl7-haswell/gcc-11.2.0/papi-6.0.0.1-wph5r5ws5zttcphffedwiywbh6tq4nkw
+-- cray-cnl7-haswell / intel@19.1.2.254 -------------------------
+5mdo5bakcsj55qc24o22g3mpkjwvh4bk papi@6.0.0.1~cuda+example~infiniband~lmsensors~nvml~powercap~rapl~rocm~rocm_smi~sde+shared~static_tools  /global/homes/s/siddiq90/spack-workspace/cori/software/cray-cnl7-haswell/intel-19.1.2.254/papi-6.0.0.1-5mdo5bakcsj55qc24o22g3mpkjwvh4bk
+==> Regenerating tcl module files
+papi-6.0.0.1-gcc-11.2.0-wph5r5w
+papi-6.0.0.1-intel-19.1.2.254-5mdo5ba
 ```
 
-We can confirm the output of this test by running the following command.
-
-```
-module load e4s/21.05
-spack test results -l -- gasnet@2021.3.0%intel
-```
 
 Let's push our test results to cdash via `buildtest cdash upload` and specify an arbitrary build name of your choice. For now we will pick the buildname `nersc-demo`. CDASH will group tests by build name. buildtest
 will take all test results from the report file and upload them to CDASH and provide you a link to view results.
@@ -365,7 +272,7 @@ The site configuration includes the cdash setting which is used by buildtest whe
 ```
     cdash:
       url: https://my.cdash.org
-      project: buildtest-cori
+      project: buildtest-nersc
       site: cori
 ```
 
