@@ -1,15 +1,21 @@
 # buildtest-nersc
 
-This repo is testsuite for Cori and Perlmutter system at NERSC using buildtest. A mirror of this repository is located at https://github.com/buildtesters/buildtest-nersc that is public facing. 
+This repository contains tests for Cori and Perlmutter using [buildtest](https://buildtest.readthedocs.io/en/devel/) framework. A mirror of this repository is located on GitHub at https://github.com/buildtesters/buildtest-nersc that is public facing. 
 
 
 ## Setup
 
-To get started clone this repo and buildtest in your filesystem:
+To get started, please [connect to NERSC system](https://docs.nersc.gov/connect/) and clone this repo and buildtest:
 
 ```
 git clone https://github.com/buildtesters/buildtest.git
 git clone https://software.nersc.gov/NERSC/buildtest-nersc.git
+```
+
+Note if you don't have access to Gitlab server you may clone the mirror on Github:
+
+```
+git clone https://github.com/buildtesters/buildtest-nersc.git
 ```
 
 You will need python 3.7 or higher to [install buildtest](https://buildtest.readthedocs.io/en/devel/installing_buildtest.html), on Cori/Perlmutter this can be done by loading **python**
@@ -19,7 +25,15 @@ module and create a conda environment as shown below.
 module load python
 conda create -n buildtest
 conda activate buildtest
-source /path/to/buildtest/setup.sh
+```
+
+Now let's install buildtest, assuming you have cloned buildtest in $HOME directory source the setup script. For csh users you need to source **setup.csh**
+
+```
+source ~/buildtest/setup.sh
+
+# csh users
+source ~/buildtest/setup.csh
 ```
 
 Next, navigate to `buildtest-nersc` directory and set environment `BUILDTEST_CONFIGFILE` to point to [config.yml](https://software.nersc.gov/NERSC/buildtest-nersc/-/blob/devel/config.yml) which is the configuration file for NERSC system. 
@@ -29,11 +43,10 @@ cd buildtest-nersc
 export BUILDTEST_CONFIGFILE=$(pwd)/config.yml
 ```
 
-You can view and validate your configuration and see if configuration makes sense:
+Make sure the configuration is valid, this can be done by running the following. buildtest will validate the configuration file with the JSON schema :
 
 ```
 buildtest config validate
-buildtest config view
 ```
 
 Please make sure you are using tip of [devel](https://github.com/buildtesters/buildtest/tree/devel) branch of buildtest when writing tests. You should sync your local devel branch with upstream
@@ -44,7 +57,8 @@ and validate all buildspecs in the **buildtest-nersc** repo and load them in bui
 all buildspecs are located, we have not configured [buildspec_root](https://buildtest.readthedocs.io/en/devel/configuring_buildtest/overview.html#buildspec-roots) in the configuration file since we don't have a central location where this repo will reside.
 
 ```
-buildtest buildspec find --root /path/to/buildtest-nersc/buildspecs --rebuild
+cd buildtest-nersc
+buildtest buildspec find --root buildspecs --rebuild -q
 ```
 
 The buildspecs are loaded in buildspec cache file (JSON) that is used by `buildtest buildspec find` for querying cache. Subsequent runs will
