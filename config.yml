@@ -64,12 +64,64 @@ system:
     compilers:
       find:
         gcc: ^(gcc)
+        cray: ^(cce)
+        nvhpc: ^(nvhpc)
       compiler:
         gcc:
           builtin_gcc:
             cc: /usr/bin/gcc
             cxx: /usr/bin/g++
             fc: /usr/bin/gfortran
+          gcc/11.2.0:
+            cc: gcc
+            cxx: g++
+            fc: gfortran
+            module:
+              load:
+              - gcc/11.2.0
+              purge: false
+          gcc/10.3.0:
+            cc: gcc
+            cxx: g++
+            fc: gfortran
+            module:
+              load:
+              - gcc/10.3.0
+              purge: false
+        cray:
+          cce/13.0.2:
+            cc: cc
+            cxx: CC
+            fc: ftn
+            module:
+              load:
+              - cce/13.0.2
+              purge: false
+          cce/13.0.1:
+            cc: cc
+            cxx: CC
+            fc: ftn
+            module:
+              load:
+              - cce/13.0.1
+              purge: false
+        nvhpc:
+          nvhpc/21.11:
+            cc: nvc
+            cxx: nvcc
+            fc: nvfortran
+            module:
+              load:
+              - nvhpc/21.11
+              purge: false
+          nvhpc/21.3:
+            cc: nvc
+            cxx: nvcc
+            fc: nvfortran
+            module:
+              load:
+              - nvhpc/21.3
+              purge: false
 
     cdash:
       url: https://my.cdash.org

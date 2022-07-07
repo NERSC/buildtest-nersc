@@ -2,10 +2,10 @@
 buildspecs:
   c_hello:
     type: compiler
-    executor: cori.local.bash
-    description: hello world program in C compiled with gcc compiler
+    executor: '(perlmutter|cori).local.bash'
+    description: hello world program in C compiled with gcc, nvhpc and cray compiler
     tags: [compile]
     source: src/hello.c
     compilers:
-      name: ["(gcc)"]
+            name: ["^(gcc|nvhpc|cce)"]
 
