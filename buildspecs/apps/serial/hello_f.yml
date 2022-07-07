@@ -1,12 +1,12 @@
 buildspecs:
   hello_fortran:
     type: compiler
-    executor: cori.local.bash
-    description: hello world program in Fortran compiled with gnu compiler
+    executor: '(perlmutter|cori).local.bash'
+    description: hello world program in Fortran compiled with gnu, nvhpc and cray compiler
     tags: [compile]
     source: src/hello.f90
     compilers:
-      name: ["^(gcc)"]
+      name: ["^(gcc|nvhpc|cce)"]
       default:
         gcc:
           fflags: -O1
