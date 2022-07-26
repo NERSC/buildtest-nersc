@@ -1,0 +1,12 @@
+version: "1.0"
+buildspecs: 
+  mvapich2_mpi_test:
+    type: script
+    executor: perlmutter.slurm.regular
+    description: MPI Hello World 2 node test with mvapich2
+    sbatch: ["-N 2", "-t 10" , "-G 2", "-C gpu", "-A nstaff_g"]
+    run: |
+      module use /global/common/software/spackecp/perlmutter/mvapich2/modulefiles
+      module load mvapich2
+      mpicc foo.c -o foo 
+      mpirun -np 2 ./foo
