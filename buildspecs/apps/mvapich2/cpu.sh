@@ -2,9 +2,8 @@
 #SBATCH --nodes 2
 #SBATCH -q regular 
 #SBATCH -t 60
-#SBATCH -C gpu
-#SBATCH -G 2 
-#SBATCH --account=nstaff_g
+#SBATCH -C cpu
+#SBATCH --account=nstaff
 
 module use /global/cfs/cdirs/m3896/shared/modulefiles
 module load mvapich2/2.3.7
