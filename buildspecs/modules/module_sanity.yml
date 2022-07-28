@@ -40,3 +40,12 @@ buildspecs:
     run: |
       module purge
       module restore
+  module_test_shells:
+    type: script
+    executor: perlmutter.local.(bash|csh|zsh)
+    description: test module command for bash, csh, zsh
+    tags: [module]
+    run: |
+      module list
+
+
