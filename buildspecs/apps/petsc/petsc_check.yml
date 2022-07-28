@@ -34,7 +34,7 @@ buildspecs:
       cp $(spack location -i petsc@3.16.1%gcc@11.2.0 ~cuda +mpi arch=cray-sles15-zen3)/share/petsc/examples/src/ksp/ksp/tutorials/ex50.c .
       cp $(spack location -i petsc@3.16.1%gcc@11.2.0 ~cuda +mpi arch=cray-sles15-zen3)/share/petsc/examples/src/ksp/ksp/tutorials/makefile .
       make PETSC_DIR=$(spack location -i petsc@3.16.1%gcc@11.2.0 ~cuda +mpi arch=cray-sles15-zen3) ex50
-      srun -n 4 ex50 -da_grid_x 4 -da_grid_y 4 -ksp_monitor
+      srun -A m3503_g -C gpu -n 4 ex50 -da_grid_x 4 -da_grid_y 4 -ksp_monitor
 
       rm makefile
       
@@ -42,7 +42,7 @@ buildspecs:
       cp $(spack location -i petsc@3.16.1%gcc@11.2.0 ~cuda +mpi arch=cray-sles15-zen3)/share/petsc/examples//src/snes/tutorials/makefile .
       make PETSC_DIR=$(spack location -i petsc@3.16.1%gcc@11.2.0 ~cuda +mpi arch=cray-sles15-zen3) ex19
       # petsc with superlu_dist test
-      srun -n 4 ex19 -da_grid_x 20 -da_grid_y 20 -pc_type lu -pc_factor_mat_solver_type superlu_dist
+      srun -A m3503_g -C gpu -n 4 ex19 -da_grid_x 20 -da_grid_y 20 -pc_type lu -pc_factor_mat_solver_type superlu_dist
       # petsc with hypre test  
-      srun -n 4 ex19 -da_refine 3 -snes_monitor_short -pc_type hypre  
+      srun -A m3503_g -C gpu -n 4 ex19 -da_refine 3 -snes_monitor_short -pc_type hypre  
 
