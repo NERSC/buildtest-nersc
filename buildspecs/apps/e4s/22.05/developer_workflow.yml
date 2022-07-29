@@ -10,8 +10,7 @@ buildspecs:
       module load e4s/22.05
       source $SPACK_ROOT/bin/spack-setup.sh
       despacktivate
-      rm -rf $HOME/e4s-22.05-demo
-      ls -l 
+      rm -rf $HOME/e4s-22.05-demo 
       spack env create -d $HOME/e4s-22.05-demo spack.yaml 
       spack env activate -d $HOME/e4s-22.05-demo
       spack install
