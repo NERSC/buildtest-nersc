@@ -1,0 +1,23 @@
+buildspecs:
+  e4s_22.05_dev_workflow:
+    type: script
+    executor: perlmutter.local.bash
+    description: E4S/22.05 Developer Workflow Check
+    tags: [e4s]
+    summary: |
+      This workflow will check the developer workflow for Perlmutter outlined in https://docs.nersc.gov/applications/e4s/perlmutter/22.05/
+    run: |
+      module load e4s/22.05
+      source $SPACK_ROOT/bin/spack-setup.sh
+      despacktivate
+      rm -rf $HOME/e4s-22.05-demo 
+      spack env create -d $HOME/e4s-22.05-demo spack.yaml 
+      spack env activate -d $HOME/e4s-22.05-demo
+      spack install
+      spack location -i papi
+      spack module tcl refresh --delete-tree -y
+      spack module tcl find --full-path papi
+      module use $HOME/spack-workspace/perlmutter/modules/$(spack arch)
+      ml -t av papi
+maintainers:
+ - "@shahzebsiddiqui"  
