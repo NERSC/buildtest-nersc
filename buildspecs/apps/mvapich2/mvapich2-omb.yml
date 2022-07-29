@@ -1,0 +1,13 @@
+buildspecs: 
+  mvapich2_mpi_omb_tests:
+    type: script
+    executor: perlmutter.slurm.debug
+    description: Run OSU microbenchmarks
+    tags: [gpu, mpi]
+    sbatch: ["-N 2", "-t 5" , "-G 4", "-C gpu", "-A m3503_g"]
+    run: |
+      module use /global/cfs/cdirs/m3896/shared/modulefiles
+      module load mvapich2/2.3.7
+      srun -n 2 osu_latency
+      srun -n 2 osu_bw
+      srun -n 2 osu_bibw
