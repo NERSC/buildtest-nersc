@@ -14,7 +14,6 @@
 .cleanup-buildtest: &cleanup-buildtest
   - mkdir -p $CI_PROJECT_DIR/.artifacts
   - cp $CI_PROJECT_DIR/buildtest/var/buildtest.log $CI_PROJECT_DIR/.artifacts
-  - deactivate
 
 stages:
   - build
@@ -23,30 +22,24 @@ stages:
 validate_cori:
   stage: build
   tags: [cori-e4s]
-  before_script:
-    - *setup-buildtest
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+  before_script:
+    - *setup-buildtest
   script:
     - buildtest buildspec find --quiet --rebuild --root $CI_PROJECT_DIR/buildspecs
     - buildtest buildspec find invalid   
-  
-  after_script:
-    - *cleanup-buildtest
 
 validate_perlmutter:
   stage: build
   tags: [perlmutter-e4s]
-  before_script:
-    - *setup-buildtest
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+  before_script:
+    - *setup-buildtest
   script:
     - buildtest buildspec find --quiet --rebuild --root $CI_PROJECT_DIR/buildspecs
-    - buildtest buildspec find invalid   
-  
-  after_script:
-    - *cleanup-buildtest
+    - buildtest buildspec find invalid
 
 perlmutter_e4s:
   stage: test
