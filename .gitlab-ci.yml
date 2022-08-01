@@ -13,7 +13,7 @@
   
 .cleanup-buildtest: &cleanup-buildtest
   - mkdir -p $CI_PROJECT_DIR/.artifacts
-  - cp $CI_PROJECT_DIR/buildtest/var/{buildtest.log,report.json} $CI_PROJECT_DIR/.artifacts
+  - cp $CI_PROJECT_DIR/buildtest/var/buildtest.log $CI_PROJECT_DIR/.artifacts
   - source deactivate
 
 stages:
