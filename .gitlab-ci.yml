@@ -19,16 +19,30 @@
 stages:
   - build
   - test
-validate_tests:
+
+validate_cori:
   stage: build
   tags: [cori-e4s]
   before_script:
     - *setup-buildtest
   rules:
-    - if: '$CI_PIPELINE_SOURCE == "web" || $CI_PIPELINE_SOURCE == "push"'
-      when: manual
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
   script:
-    - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
+    - buildtest buildspec find --quiet --rebuild --root $CI_PROJECT_DIR/buildspecs
+    - buildtest buildspec find invalid   
+  
+  after_script:
+    - *cleanup-buildtest
+
+validate_perlmutter:
+  stage: build
+  tags: [perlmutter-e4s]
+  before_script:
+    - *setup-buildtest
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+  script:
+    - buildtest buildspec find --quiet --rebuild --root $CI_PROJECT_DIR/buildspecs
     - buildtest buildspec find invalid   
   
   after_script:
