@@ -108,6 +108,14 @@ system:
               - cce/13.0.1
               purge: false
         nvhpc:
+          nvhpc/22.5:
+            cc: nvc
+            cxx: nvcc
+            fc: nvfortran
+            module:
+              load:
+              - nvhpc/22.5
+              purge: false
           nvhpc/21.11:
             cc: nvc
             cxx: nvcc
