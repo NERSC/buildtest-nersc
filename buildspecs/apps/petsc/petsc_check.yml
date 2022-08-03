@@ -28,21 +28,23 @@ buildspecs:
     executor: 'perlmutter.slurm.debug'
     description: petsc tests for e4s/21.11 deployment
     tags: [e4s]
-    sbatch: [-A m3503_g, -C gpu, -n 4, -t 10] 
+    sbatch: [-A m3503, -C cpu, -n 4, -t 10] 
     run: |
+      export OMP_NUM_THREADS=1
       module load e4s/21.11-tcl
-      cp $(spack location -i petsc@3.16.1%gcc@11.2.0 ~cuda +mpi arch=cray-sles15-zen3)/share/petsc/examples/src/ksp/ksp/tutorials/ex50.c .
-      cp $(spack location -i petsc@3.16.1%gcc@11.2.0 ~cuda +mpi arch=cray-sles15-zen3)/share/petsc/examples/src/ksp/ksp/tutorials/makefile .
-      make PETSC_DIR=$(spack location -i petsc@3.16.1%gcc@11.2.0 ~cuda +mpi arch=cray-sles15-zen3) ex50
-      srun -A m3503_g -C gpu -n 4 ex50 -da_grid_x 4 -da_grid_y 4 -ksp_monitor
+      export PETSC_LOC=$(spack location -i petsc@3.16.1%gcc@11.2.0 ~cuda)
+      cp ${PETSC_LOC}/share/petsc/examples/src/ksp/ksp/tutorials/ex50.c .
+      cp ${PETSC_LOC}/share/petsc/examples/src/ksp/ksp/tutorials/makefile .
+      make PETSC_DIR=${PETSC_LOC} ex50
+      srun -A m3503 -C cpu -n 4 ex50 -da_grid_x 4 -da_grid_y 4 -ksp_monitor
 
       rm makefile
       
-      cp $(spack location -i petsc@3.16.1%gcc@11.2.0 ~cuda +mpi arch=cray-sles15-zen3)/share/petsc/examples/src/snes/tutorials/ex19.c .
-      cp $(spack location -i petsc@3.16.1%gcc@11.2.0 ~cuda +mpi arch=cray-sles15-zen3)/share/petsc/examples//src/snes/tutorials/makefile .
-      make PETSC_DIR=$(spack location -i petsc@3.16.1%gcc@11.2.0 ~cuda +mpi arch=cray-sles15-zen3) ex19
+      cp ${PETSC_LOC}/share/petsc/examples/src/snes/tutorials/ex19.c .
+      cp ${PETSC_LOC}/share/petsc/examples/src/snes/tutorials/makefile .
+      make PETSC_DIR=${PETSC_LOC} ex19
       # petsc with superlu_dist test
-      srun -A m3503_g -C gpu -n 4 ex19 -da_grid_x 20 -da_grid_y 20 -pc_type lu -pc_factor_mat_solver_type superlu_dist
+      srun -A m3503 -C cpu -n 4 ex19 -da_grid_x 20 -da_grid_y 20 -pc_type lu -pc_factor_mat_solver_type superlu_dist
       # petsc with hypre test  
-      srun -A m3503_g -C gpu -n 4 ex19 -da_refine 3 -snes_monitor_short -pc_type hypre  
+      srun -A m3503 -C cpu -n 4 ex19 -da_refine 3 -snes_monitor_short -pc_type hypre  
 
