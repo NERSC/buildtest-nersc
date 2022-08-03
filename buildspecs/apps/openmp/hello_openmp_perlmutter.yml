@@ -7,7 +7,7 @@ buildspecs:
     summary: Hello World OpenMP example on login node for Perlmutter using gcc, nvhpc or cray compiler.
     tags: [compile,openmp]
     compilers:
-      name: ["gcc/11.2.0", "gcc/10.3.0", "nvhpc/21.11", "nvhpc/22.5", "cce/13.0.1"]
+      name: ["gcc/11.2.0", "gcc/10.3.0", "nvhpc/21.11", "nvhpc/22.5"]
       default:
         all:
           env:
