@@ -29,3 +29,7 @@ buildspecs:
       cp ${PETSC_LOC}/share/petsc/examples/src/snes/tutorials/ex5f.h .
       make PETSC_DIR=${PETSC_LOC} ex5f
       srun -A m3503 -C cpu -n 4  ./ex5f -da_processors_x 2 -da_processors_y 2 -snes_monitor_short -ksp_gmres_cgs_refinement_type refine_always
+    status:
+      regex:
+        stream: stdout
+        exp: 'Number of SNES iterations'
