@@ -1,6 +1,6 @@
 
 buildspecs:
-  petsc_fortran_example:
+  petsc_fortran_example_21.05:
     type: script
     executor: cori.slurm.haswell_debug
     description: Run petsc fortran example for e4s/21.05 stack
@@ -13,3 +13,23 @@ buildspecs:
       cp $(spack location -i petsc)/share/petsc/examples/src/snes/tutorials/ex5f.h .
       make PETSC_DIR=$(spack location -i petsc) ex5f
       srun -n 4  ./ex5f -da_processors_x 2 -da_processors_y 2 -snes_monitor_short -ksp_gmres_cgs_refinement_type refine_always
+
+  petsc_fortran_example_21.11:
+    type: script
+    executor: perlmutter.slurm.debug
+    description: Run petsc fortran example for e4s/21.11 stack
+    tags: [e4s]
+    sbatch: [-A m3503, -C cpu, -n 4, -t 10]
+    run: |
+      export OMP_NUM_THREADS=1
+      module load e4s/21.11-tcl
+      export PETSC_LOC=$(spack location -i petsc@3.16.1%gcc@11.2.0 ~cuda)
+      cp ${PETSC_LOC}/share/petsc/examples/src/snes/tutorials/makefile .
+      cp ${PETSC_LOC}/share/petsc/examples/src/snes/tutorials/ex5f.F90 .
+      cp ${PETSC_LOC}/share/petsc/examples/src/snes/tutorials/ex5f.h .
+      make PETSC_DIR=${PETSC_LOC} ex5f
+      srun -A m3503 -C cpu -n 4  ./ex5f -da_processors_x 2 -da_processors_y 2 -snes_monitor_short -ksp_gmres_cgs_refinement_type refine_always
+    status:
+      regex:
+        stream: stdout
+        exp: 'Number of SNES iterations'
