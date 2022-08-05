@@ -1,0 +1,23 @@
+
+buildspecs:
+  hybrid_mpi_hello_fortran:
+    type: compiler
+    executor: perlmutter.slurm.debug
+    description: Hybrid MPI+OpenMP Hello World in Fortran 
+    tags: [mpi, compile]
+    source: src/hybrid-hello.f90
+    compilers:
+      name: ["gcc/11.2.0"]
+      default:
+        gcc:
+          fc: ftn
+          fflags: -openmp
+          sbatch: ["-N 1", "-n 8", "-t 20:00", "-A m3503", "-C cpu"]
+          env:
+            OMP_NUM_THREADS: 8
+            OMP_PROC_BIND: spread
+            OMP_PLACES: threads
+            OMP_DISPLAY_AFFINITY: true
+            OMP_AFFINITY_FORMAT: '"host=%H, pid=%P, thread_num=%n, thread affinity=%A"'
+          run: srun -n 8 --cpu-bind=cores $_EXEC
+
