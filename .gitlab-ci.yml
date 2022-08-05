@@ -1,5 +1,5 @@
 .setup-buildtest: &setup-buildtest
-  - echo $NERSC_HOST
+  - export NERSC_HOST=$(cat /etc/clustername)
   - module load python
   - python -m venv $CI_PROJECT_DIR/pyenv
   - source $CI_PROJECT_DIR/pyenv/bin/activate
