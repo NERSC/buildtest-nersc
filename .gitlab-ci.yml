@@ -29,6 +29,7 @@ validate_cori:
     - *setup-buildtest
   script:
     - buildtest buildspec find --quiet --rebuild --root $CI_PROJECT_DIR/buildspecs
+    - buildtest buildspec summary
     - buildtest buildspec find invalid   
 
 validate_perlmutter:
@@ -40,6 +41,7 @@ validate_perlmutter:
     - *setup-buildtest
   script:
     - buildtest buildspec find --quiet --rebuild --root $CI_PROJECT_DIR/buildspecs
+    - buildtest buildspec summary
     - buildtest buildspec find invalid
 
 perlmutter_e4s:
