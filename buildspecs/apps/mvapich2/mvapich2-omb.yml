@@ -7,7 +7,7 @@ buildspecs:
     sbatch: ["-N 2", "-t 5" , "-G 4", "-C gpu", "-A m3503_g"]
     run: |
       module use /global/cfs/cdirs/m3896/shared/modulefiles
-      module load mvapich2/2.3.7
+      module load mvapich2/3.0a
       srun -n 2 osu_latency
       srun -n 2 osu_bw
       srun -n 2 osu_bibw
