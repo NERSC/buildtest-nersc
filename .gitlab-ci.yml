@@ -51,7 +51,7 @@ perlmutter_check:
     refs:
       - schedules
     variables:
-      - $TESTNAME == "perlmutter_check"
+      - $SYSTEM == "perlmutter"
   before_script:
     - *setup-buildtest
   script:
@@ -71,7 +71,7 @@ cori_check:
     refs:
       - schedules
     variables:
-      - $TESTNAME == "cori_check"
+      - $SYSTEM == "cori"
   tags: [cori-e4s]
   before_script:
     - *setup-buildtest
