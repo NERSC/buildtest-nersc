@@ -44,27 +44,6 @@ validate_perlmutter:
     - buildtest buildspec summary
     - buildtest buildspec find invalid
 
-perlmutter_e4s:
-  stage: test
-  tags: [perlmutter-e4s]
-  only:
-    refs:
-      - schedules
-    variables:
-      - $TESTNAME == "perlmutter_e4s"
-  before_script:
-    - *setup-buildtest   
-  script:
-    - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
-    - buildtest build -t e4s --account m3503_g --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
-    - buildtest report --filter state=FAIL
-    - buildtest cdash upload e4s
-  after_script:
-    - *cleanup-buildtest
-  artifacts:
-    paths:
-      - $CI_PROJECT_DIR/.artifacts
-
 perlmutter_check:
   stage: test
   tags: [perlmutter-e4s]
@@ -77,30 +56,9 @@ perlmutter_check:
     - *setup-buildtest
   script:
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
-    - buildtest build -t system --account m3503_g --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
-    - buildtest report --filter state=FAIL
-    - buildtest cdash upload systemcheck
-  after_script:
-    - *cleanup-buildtest
-  artifacts:
-    paths:
-      - $CI_PROJECT_DIR/.artifacts
-
-perlmutter_gpu:
-  stage: test
-  tags: [perlmutter-e4s]
-  only:
-    refs:
-      - schedules
-    variables:
-      - $TESTNAME == "perlmutter_gpu"
-  before_script:
-    - *setup-buildtest
-  script:
-    - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
-    - buildtest build -t gpu --account m3503_g --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
-    - buildtest report --filter state=FAIL
-    - buildtest cdash upload gpu
+    - buildtest build -t $TAGNAME --account m3503_g --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
+    - buildtest report --failure
+    - buildtest cdash upload $TAGNAME
   after_script:
     - *cleanup-buildtest
   artifacts:
@@ -119,76 +77,11 @@ cori_check:
     - *setup-buildtest
   script:
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
-    - buildtest build --tags daily --filter tags=daily  --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
-    - buildtest report --filter state=FAIL 
-    - buildtest cdash upload systemcheck 
+    - buildtest build --tags $TAGNAME  --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
+    - buildtest report --failure 
+    - buildtest cdash upload $TAGNAME
   after_script:
     - *cleanup-buildtest
   artifacts:
     paths:
       - $CI_PROJECT_DIR/.artifacts   
-  
-cori_apps:
-  stage: test
-  tags: [cori-e4s]
-  only: 
-    refs: 
-      - schedules
-    variables:
-      - $TESTNAME == "cori_apps"
-
-  before_script:
-  - *setup-buildtest
-  script:
-    - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
-    - buildtest build --tags compile --filter tags=compile  --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
-    - buildtest report --filter state=FAIL 
-    - buildtest cdash upload apps  
-  after_script:
-    - *cleanup-buildtest  
-  artifacts:
-    paths:
-      - $CI_PROJECT_DIR/.artifacts
-
-cori_benchmark:
-  stage: test
-  tags: [cori-e4s]
-  only:
-    refs:
-      - schedules
-    variables:
-      - $TESTNAME == "cori_benchmark"
-
-  before_script:
-  - *setup-buildtest
-  script:
-    - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
-    - buildtest build --tags benchmark --filter tags=benchmark --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
-    - buildtest report --filter state=FAIL
-    - buildtest cdash upload benchmark
-  after_script:
-    - *cleanup-buildtest
-  artifacts:
-    paths:
-      - $CI_PROJECT_DIR/.artifacts
-
-cori_e4s:
-  stage: test
-  tags: [cori-e4s]
-  only:
-    refs:
-      - schedules
-    variables:
-      - $TESTNAME == "cori_e4s"
-  before_script:
-    - *setup-buildtest
-  script:
-    - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
-    - buildtest build --tags e4s --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
-    - buildtest report --filter state=FAIL
-    - buildtest  cdash upload e4s 
-  after_script:
-    - *cleanup-buildtest  
-  artifacts:
-    paths:
-      - $CI_PROJECT_DIR/.artifacts
