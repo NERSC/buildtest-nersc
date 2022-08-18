@@ -11,3 +11,6 @@ buildspecs:
       srun -n 2 osu_latency
       srun -n 2 osu_bw
       srun -n 2 osu_bibw
+maintainers:
+  - wspear
+  - shahzebsiddiqui  
