@@ -1,9 +1,7 @@
-
 buildspecs:
   spider_check:
-    skip: true
     type: script
-    executor: perlmutter.local.bash
+    executor: '(perlmutter|muller).local.bash'
     description: Check LMOD spider utuility 
     tags: [module]
     run: |

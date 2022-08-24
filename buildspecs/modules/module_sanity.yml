@@ -1,9 +1,7 @@
-#!/bin/bash
-
 buildspecs:
   lmod_cmd:
     type: script
-    executor: perlmutter.local.bash
+    executor: '(perlmutter|muller).local.bash'
     description: check for LMOD_CMD variable 
     tags: [module]
     shell: bash -e
@@ -13,7 +11,7 @@ buildspecs:
 
   module_collection_list:
     type: script
-    executor: perlmutter.local.bash
+    executor: '(perlmutter|muller).local.bash'
     description: show module collection list
     tags: [module]
     shell: bash -e
@@ -21,7 +19,7 @@ buildspecs:
 
   module_and_ml_check:
     type: script
-    executor: perlmutter.local.bash
+    executor: '(perlmutter|muller.local.bash)'
     description: test module and ml command
     tags: [module]
     shell: bash -e
@@ -33,7 +31,7 @@ buildspecs:
 
   purge_restore:
     type: script
-    executor: perlmutter.local.bash
+    executor: '(perlmutter|muller).local.bash'
     description: test module purge and restore. 
     tags: [module]
     shell: bash -e
@@ -42,10 +40,17 @@ buildspecs:
       module restore
   module_test_shells:
     type: script
-    executor: perlmutter.local.(bash|csh|zsh)
+    executor: '(perlmutter|muller).local.(bash|csh|zsh)'
     description: test module command for bash, csh, zsh
     tags: [module]
     run: |
       module list
 
-
+  auto_swap_same_modules:
+    type: script
+    executor: '(perlmutter|muller).local.bash'
+    description: Check if Lmod will autoswap same modules
+    tags: [module]
+    run: |
+      ml gcc/11.2.0
+      ml gcc/10.3.0

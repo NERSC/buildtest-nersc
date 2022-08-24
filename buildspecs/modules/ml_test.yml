@@ -1,8 +1,7 @@
-
 buildspecs:
   test_ml_command:
     type: script
-    executor: perlmutter.local.bash
+    executor: '(perlmutter|muller).local.bash'
     description: Mimic ml command for some of the module commands 
     tags: [module]
     shell: bash -e
@@ -16,12 +15,12 @@ buildspecs:
 
   ml_load_unload_same_command:
     type: script
-    executor: perlmutter.local.bash
+    executor: '(perlmutter|muller).local.bash'
     description: load and unload modules with ml in same command
     tags: [module]
     shell: bash -e
     run: |
       ml gcc
       ml
-      ml -gcc intel
+      ml -gcc craype
       ml
