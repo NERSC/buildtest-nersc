@@ -1,7 +1,7 @@
 buildspecs:
   spack_e4s_21.11_tcl:
     type: script
-    executor: 'perlmutter.local.(bash|sh|csh|zsh)'
+    executor: '(muller|perlmutter).local.(bash|sh|csh|zsh)'
     description: Check version of spack for e4s/21.11-tcl module
     tags: [system, e4s]
     run: |
@@ -14,7 +14,7 @@ buildspecs:
 
   spack_e4s_21.11_lmod:
     type: script
-    executor: 'perlmutter.local.(bash|sh|csh|zsh)'
+    executor: '(perlmutter|muller).local.(bash|sh|csh|zsh)'
     description: Check version of spack for e4s/21.11-lmod module
     tags: [system, e4s]
     run: |
@@ -27,7 +27,7 @@ buildspecs:
 
   spack_e4s_22.05:
     type: script
-    executor: 'perlmutter.local.(bash|sh|csh|zsh)'
+    executor: '(perlmutter|muller).local.(bash|sh|csh|zsh)'
     description: Check version of spack for e4s/22.05 module
     tags: [system, e4s]
     run: |
