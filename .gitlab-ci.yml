@@ -1,4 +1,5 @@
 .setup-buildtest: &setup-buildtest
+  - export COLUMNS=160
   - export NERSC_HOST=$(cat /etc/clustername)
   - module load python
   - python -m venv $CI_PROJECT_DIR/pyenv
