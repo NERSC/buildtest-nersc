@@ -44,6 +44,30 @@ validate_perlmutter:
     - buildtest buildspec summary
     - buildtest buildspec find invalid
 
+validate_gerty:
+  stage: build
+  tags: [gerty-e4s]
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+  before_script:
+    - *setup-buildtest
+  script:
+    - buildtest buildspec find --quiet --rebuild --root $CI_PROJECT_DIR/buildspecs
+    - buildtest buildspec summary
+    - buildtest buildspec find invalid      
+
+validate_muller:
+  stage: build
+  tags: [muller-e4s]
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+  before_script:
+    - *setup-buildtest
+  script:
+    - buildtest buildspec find --quiet --rebuild --root $CI_PROJECT_DIR/buildspecs
+    - buildtest buildspec summary
+    - buildtest buildspec find invalid      
+
 perlmutter_check:
   stage: test
   tags: [perlmutter-e4s]
@@ -52,6 +76,27 @@ perlmutter_check:
       - schedules
     variables:
       - $SYSTEM == "perlmutter"
+  before_script:
+    - *setup-buildtest
+  script:
+    - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
+    - buildtest build -t $TAGNAME --account m3503_g --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
+    - buildtest report --failure
+    - buildtest cdash upload $TAGNAME
+  after_script:
+    - *cleanup-buildtest
+  artifacts:
+    paths:
+      - $CI_PROJECT_DIR/.artifacts
+
+muller_check:
+  stage: test
+  tags: [muller-e4s]
+  only:
+    refs:
+      - schedules
+    variables:
+      - $SYSTEM == "muller"
   before_script:
     - *setup-buildtest
   script:
@@ -85,3 +130,24 @@ cori_check:
   artifacts:
     paths:
       - $CI_PROJECT_DIR/.artifacts   
+
+gerty_check:
+  stage: test
+  only:
+    refs:
+      - schedules
+    variables:
+      - $SYSTEM == "cori"
+  tags: [gerty-e4s]
+  before_script:
+    - *setup-buildtest
+  script:
+    - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
+    - buildtest build --tags $TAGNAME  --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
+    - buildtest report --failure
+    - buildtest cdash upload $TAGNAME
+  after_script:
+    - *cleanup-buildtest
+  artifacts:
+    paths:
+      - $CI_PROJECT_DIR/.artifacts        
