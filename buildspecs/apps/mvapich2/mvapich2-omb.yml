@@ -1,7 +1,7 @@
 buildspecs: 
   mvapich2_mpi_omb_tests:
     type: script
-    executor: perlmutter.slurm.debug
+    executor: '(perlmutter|muller).slurm.debug'
     description: Run OSU microbenchmarks
     tags: [gpu, mpi]
     sbatch: ["-N 2", "-t 5" , "-G 4", "-C gpu", "-A m3503_g"]

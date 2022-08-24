@@ -1,13 +1,13 @@
 buildspecs: 
   mvapich2_mpi_test:
     type: script
-    executor: perlmutter.slurm.debug
+    executor: '(perlmutter|muller).slurm.debug'
     description: MPI Hello World 2 node test with mvapich2
     sbatch: ["-N 2", "-t 5" , "-G 4", "-C gpu", "-A m3503_g"]
     tags: [mpi, gpu]
     run: |
       module use /global/cfs/cdirs/m3896/shared/modulefiles
-      module load mvapich2/2.3.7
+      module load mvapich2/3.0a
       mpicc foo.c -o foo 
       srun -n 2 ./foo
 maintainers:
