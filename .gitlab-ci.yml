@@ -16,6 +16,10 @@
   - mkdir -p $CI_PROJECT_DIR/.artifacts
   - cp $CI_PROJECT_DIR/buildtest/var/buildtest.log $CI_PROJECT_DIR/.artifacts
 
+.buildspec_cache: &buildspec_cache
+  - buildtest buildspec find --quiet --rebuild --root $CI_PROJECT_DIR/buildspecs
+  - buildtest buildspec summary
+  - buildtest buildspec find invalid
 stages:
   - build
   - test
@@ -28,9 +32,7 @@ validate_cori:
   before_script:
     - *setup-buildtest
   script:
-    - buildtest buildspec find --quiet --rebuild --root $CI_PROJECT_DIR/buildspecs
-    - buildtest buildspec summary
-    - buildtest buildspec find invalid   
+    - *buildspec_cache
 
 validate_perlmutter:
   stage: build
@@ -40,9 +42,7 @@ validate_perlmutter:
   before_script:
     - *setup-buildtest
   script:
-    - buildtest buildspec find --quiet --rebuild --root $CI_PROJECT_DIR/buildspecs
-    - buildtest buildspec summary
-    - buildtest buildspec find invalid
+    - *buildspec_cache
 
 validate_gerty:
   stage: build
@@ -52,9 +52,7 @@ validate_gerty:
   before_script:
     - *setup-buildtest
   script:
-    - buildtest buildspec find --quiet --rebuild --root $CI_PROJECT_DIR/buildspecs
-    - buildtest buildspec summary
-    - buildtest buildspec find invalid      
+    - *buildspec_cache   
 
 validate_muller:
   stage: build
@@ -64,9 +62,7 @@ validate_muller:
   before_script:
     - *setup-buildtest
   script:
-    - buildtest buildspec find --quiet --rebuild --root $CI_PROJECT_DIR/buildspecs
-    - buildtest buildspec summary
-    - buildtest buildspec find invalid      
+    - *buildspec_cache   
 
 perlmutter_check:
   stage: test
@@ -137,7 +133,7 @@ gerty_check:
     refs:
       - schedules
     variables:
-      - $SYSTEM == "cori"
+      - $SYSTEM == "gerty"
   tags: [gerty-e4s]
   before_script:
     - *setup-buildtest
