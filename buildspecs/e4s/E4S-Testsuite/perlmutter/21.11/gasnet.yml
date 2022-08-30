@@ -3,7 +3,7 @@ buildspecs:
     type: script
     executor: perlmutter.slurm.regular
     description: Run E4S Testsuite gasnet test for e4s/21.11-tcl stack
-    tags: [e4s, pmr]
+    tags: [e4s]
     sbatch: ["-t 30", "-N 1", "-G 1", "-A m3503_g", "-C gpu"]
     run: |
       module load e4s/21.11-tcl
