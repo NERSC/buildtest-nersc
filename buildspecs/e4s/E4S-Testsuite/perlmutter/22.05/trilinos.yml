@@ -1,12 +1,12 @@
 buildspecs:
-  trilinos_e4s_testsuite_21.11:
+  trilinos_e4s_testsuite_22.05:
     type: script
     executor: perlmutter.slurm.regular
-    description: Run E4S Testsuite trilinos test for e4s/21.11-tcl stack
+    description: Run E4S Testsuite trilinos test for e4s/22.05 stack
     tags: [e4s]
     sbatch: ["-t 30", "-N 1", "-G 1", "-A m3503_g", "-C gpu"]
     run: |
-      module load e4s/21.11-tcl
+      module load e4s/22.05
       spack load cmake 
       git clone https://github.com/E4S-Project/testsuite
       cd testsuite
