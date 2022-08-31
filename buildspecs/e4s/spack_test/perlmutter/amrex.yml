@@ -1,7 +1,7 @@
 buildspecs:
   spack_test_amrex_e4s_22.05:
     type: spack
-    executor: perlmutter.local.sh
+    executor: '(perlmutter|muller).local.sh'
     description: "Test AMReX for e4s/22.05 stack for Perlmutter via spack test"
     tags: e4s
     pre_cmds: |

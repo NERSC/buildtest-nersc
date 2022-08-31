@@ -1,9 +1,9 @@
 
 buildspecs:
   hostname_perlmutter:
-    description: run hostname on perlmutter
+    description: run hostname on perlmutter or muller
     type: script
-    executor: 'perlmutter.slurm.(regular|debug|preempt)'
+    executor: '(perlmutter|muller).slurm.(regular|debug|preempt)'
     tags: ["queues","jobs"]
     sbatch: ["-t 5", "-n 1", "-N 1", "-C gpu", "-A m3503"]
     run: hostname
