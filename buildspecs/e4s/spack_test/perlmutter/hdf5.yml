@@ -1,7 +1,7 @@
 buildspecs:
   spack_test_hdf5_e4s_21.11:
     type: spack
-    executor: perlmutter.local.sh
+    executor: '(perlmutter|muller).local.sh'
     description: "Test hdf5@1.12.1 for e4s/21.11 stack for Perlmutter via spack test"
     tags: e4s
     pre_cmds: |

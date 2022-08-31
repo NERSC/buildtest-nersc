@@ -1,6 +1,6 @@
 buildspecs:
   amrex_single_vortex:
-    executor: perlmutter.slurm.regular
+    executor: '(perlmutter|muller).slurm.regular'
     type: script
     description: "AmrLevel SingleVortex Build and Run"
     tags: ["e4s"]
@@ -11,7 +11,7 @@ buildspecs:
       # Note: This test doesn't use GPUs.
     run: |
       module load e4s/21.11-tcl
-      
+
       # Use the PrgEnv-gnu to avoid issues with NVHPC and Fortran
       module load PrgEnv-gnu
 

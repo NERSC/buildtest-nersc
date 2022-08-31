@@ -2,8 +2,8 @@
 buildspecs:
   spack_test_petsc_e4s_21.11:
     type: spack
-    executor: perlmutter.local.sh
-    description: "Test petsc build for e4s/21.11 stack on Perlmutter" 
+    executor: '(perlmutter|muller).local.sh'
+    description: "Test petsc build for e4s/21.11 stack on Perlmutter"
     tags: e4s
     pre_cmds: |
       module load e4s/21.11-tcl

@@ -1,7 +1,7 @@
 buildspecs:
   e4s_21.11_dev_workflow:
     type: script
-    executor: perlmutter.local.bash
+    executor: '(perlmutter|muller).local.bash'
     description: E4S/21.11 Developer Workflow Check
     tags: [e4s]
     summary: |
@@ -11,8 +11,8 @@ buildspecs:
       source $SPACK_ROOT/bin/spack-setup.sh
       despactivate
       rm -rf $HOME/e4s-21.11-spack-demo
-      ls -l 
-      spack env create -d $HOME/e4s-21.11-spack-demo 
+      ls -l
+      spack env create -d $HOME/e4s-21.11-spack-demo
       spack env activate -d $HOME/e4s-21.11-spack-demo
       spack install m4
       spack install papi
@@ -21,4 +21,4 @@ buildspecs:
       module use $HOME/spack-workspace/perlmutter/modules/tcl/cray-sles15-zen3
       ml -t av papi
 maintainers:
- - "@shahzebsiddiqui"  
+ - "@shahzebsiddiqui"
