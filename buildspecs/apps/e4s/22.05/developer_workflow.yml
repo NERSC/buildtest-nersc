@@ -1,7 +1,7 @@
 buildspecs:
   e4s_22.05_dev_workflow:
     type: script
-    executor: '(perlmutter|muller)'.local.bash
+    executor: '(perlmutter|muller).local.bash'
     description: E4S/22.05 Developer Workflow Check
     tags: [e4s]
     summary: |

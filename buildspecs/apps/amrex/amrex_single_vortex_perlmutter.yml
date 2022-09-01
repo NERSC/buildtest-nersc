@@ -5,6 +5,7 @@ buildspecs:
     description: "AmrLevel SingleVortex Build and Run"
     tags: ["e4s"]
     sbatch:
+      - "-A m3503"
       - "-N 1"
       - "-t 00:05:00"
       - "-C gpu"
