@@ -1,4 +1,3 @@
-
 buildspecs:
   hostname_perlmutter:
     description: run hostname on perlmutter

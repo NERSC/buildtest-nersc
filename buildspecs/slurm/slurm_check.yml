@@ -1,4 +1,3 @@
-
 buildspecs:
   sinfo_version:
     executor: cori.local.bash

@@ -1,4 +1,3 @@
-
 buildspecs:
   hostname_perlmutter_cpu:
     description: run hostname on perlmutter CPUs
