@@ -11,7 +11,7 @@ buildspecs:
       git clone https://github.com/E4S-Project/testsuite
       cd testsuite
 
-      sh test-all.sh --color-off validation_tests/trilinos --print-logs --settings settings.cori.sh
+      sh test-all.sh --color-off validation_tests/trilinos --print-logs --settings settings.cray.sh
 maintainers:
   - shahzebsiddiqui
   - wspear

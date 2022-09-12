@@ -12,7 +12,7 @@ buildspecs:
       git clone https://github.com/E4S-Project/testsuite
       cd testsuite
       export TESTSUITE_VARIANT="%gcc"
-      sh test-all.sh --color-off --print-logs --settings settings.cori.sh  --test-only "adios2 aml arborx bolt caliper conduit dyninst faodel gasnet ginkgo legion llvm netcdf-c parallel-netcdf parsec petsc qthreads sz vtk-m zfp"
+      sh test-all.sh --color-off --print-logs --settings settings.cray.sh  --test-only "adios2 aml arborx bolt caliper conduit dyninst faodel gasnet ginkgo legion llvm netcdf-c parallel-netcdf parsec petsc qthreads sz vtk-m zfp"
 maintainers:
   - shahzebsiddiqui
   - wspear
