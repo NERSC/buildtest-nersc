@@ -12,7 +12,7 @@ buildspecs:
       git clone https://github.com/E4S-Project/testsuite
       cd testsuite
       export TESTSUITE_VARIANT="%intel"
-      sh test-all.sh --color-off --print-logs --settings settings.cori.sh  --test-only "adios2 arborx caliper conduit faodel gasnet ginkgo hypre legion libquo llvm netcdf-c parallel-netcdf parsec petsc qthreads strumpack sz zfp"
+      sh test-all.sh --color-off --print-logs --settings settings.cray.sh  --test-only "adios2 arborx caliper conduit faodel gasnet ginkgo hypre legion libquo llvm netcdf-c parallel-netcdf parsec petsc qthreads strumpack sz zfp"
 maintainers:
   - shahzebsiddiqui
   - wspear

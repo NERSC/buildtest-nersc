@@ -12,7 +12,7 @@ buildspecs:
       git clone https://github.com/E4S-Project/testsuite
       cd testsuite
       source ./setup.sh
-      sh test-all.sh --color-off validation_tests/adios2 --print-logs --settings settings.cori.sh
+      sh test-all.sh --color-off validation_tests/adios2 --print-logs --settings settings.cray.sh
 
   e4s_bolt:
     type: script
@@ -26,7 +26,7 @@ buildspecs:
       git clone https://github.com/E4S-Project/testsuite
       cd testsuite
       source ./setup.sh
-      sh test-all.sh --color-off validation_tests/bolt --print-logs --settings settings.cori.sh
+      sh test-all.sh --color-off validation_tests/bolt --print-logs --settings settings.cray.sh
 
 
   e4s_hdf5:
@@ -41,7 +41,7 @@ buildspecs:
       git clone https://github.com/E4S-Project/testsuite
       cd testsuite
       source ./setup.sh
-      sh test-all.sh --color-off validation_tests/hdf5 --print-logs --settings settings.cori.sh
+      sh test-all.sh --color-off validation_tests/hdf5 --print-logs --settings settings.cray.sh
     status:
       state: FAIL
 
@@ -57,7 +57,7 @@ buildspecs:
       git clone https://github.com/E4S-Project/testsuite
       cd testsuite
       source ./setup.sh
-      sh test-all.sh --color-off validation_tests/hypre --print-logs --settings settings.cori.sh
+      sh test-all.sh --color-off validation_tests/hypre --print-logs --settings settings.cray.sh
 
   e4s_superlu-dist:
     type: script
@@ -71,7 +71,7 @@ buildspecs:
       git clone https://github.com/E4S-Project/testsuite
       cd testsuite
       source ./setup.sh
-      sh test-all.sh --color-off validation_tests/superlu-dist --print-logs --settings settings.cori.sh
+      sh test-all.sh --color-off validation_tests/superlu-dist --print-logs --settings settings.cray.sh
 
   e4s_strumpack:
     type: script
@@ -85,7 +85,7 @@ buildspecs:
       git clone https://github.com/E4S-Project/testsuite
       cd testsuite
       source ./setup.sh
-      sh test-all.sh --color-off validation_tests/strumpack --print-logs --settings settings.cori.sh
+      sh test-all.sh --color-off validation_tests/strumpack --print-logs --settings settings.cray.sh
 
   e4s_butterflypack:
     type: script
@@ -99,7 +99,7 @@ buildspecs:
       git clone https://github.com/E4S-Project/testsuite
       cd testsuite
       source ./setup.sh
-      sh test-all.sh --color-off validation_tests/butterflypack --print-logs --settings settings.cori.sh
+      sh test-all.sh --color-off validation_tests/butterflypack --print-logs --settings settings.cray.sh
 
   e4s_tau.pdt.papi:
     type: script
@@ -112,7 +112,7 @@ buildspecs:
       module load e4s/21.05
       git clone https://github.com/E4S-Project/testsuite
       cd testsuite
-      sh test-all.sh --color-off validation_tests/NPB3.1 --print-logs --settings settings.cori.sh
+      sh test-all.sh --color-off validation_tests/NPB3.1 --print-logs --settings settings.cray.sh
 
 maintainers:
   - "shahzebsiddiqui"

@@ -13,7 +13,7 @@ buildspecs:
       git clone https://github.com/E4S-Project/testsuite
       cd testsuite
       source ./setup.sh
-      sh test-all.sh --color-off validation_tests/adios2 --print-logs --settings settings.cori.sh
+      sh test-all.sh --color-off validation_tests/adios2 --print-logs --settings settings.cray.sh
 
   e4s_bolt:
     type: script
@@ -28,7 +28,7 @@ buildspecs:
       git clone https://github.com/E4S-Project/testsuite
       cd testsuite
       source ./setup.sh
-      sh test-all.sh --color-off validation_tests/bolt --print-logs --settings settings.cori.sh
+      sh test-all.sh --color-off validation_tests/bolt --print-logs --settings settings.cray.sh
 
 
   e4s_hdf5:
@@ -44,7 +44,7 @@ buildspecs:
       git clone https://github.com/E4S-Project/testsuite
       cd testsuite
       source ./setup.sh
-      sh test-all.sh --color-off validation_tests/hdf5 --print-logs --settings settings.cori.sh
+      sh test-all.sh --color-off validation_tests/hdf5 --print-logs --settings settings.cray.sh
 
   e4s_hypre:
     type: script
@@ -59,7 +59,7 @@ buildspecs:
       git clone https://github.com/E4S-Project/testsuite
       cd testsuite
       source ./setup.sh
-      sh test-all.sh --color-off validation_tests/hypre --print-logs --settings settings.cori.sh
+      sh test-all.sh --color-off validation_tests/hypre --print-logs --settings settings.cray.sh
 
   e4s_NPB3.1:
     type: script
@@ -73,7 +73,7 @@ buildspecs:
       module load e4s/20.10
       git clone https://github.com/E4S-Project/testsuite
       cd testsuite
-      sh test-all.sh --color-off validation_tests/NPB3.1 --print-logs --settings settings.cori.sh
+      sh test-all.sh --color-off validation_tests/NPB3.1 --print-logs --settings settings.cray.sh
 
 maintainers:
   - "shahzebsiddiqui"
