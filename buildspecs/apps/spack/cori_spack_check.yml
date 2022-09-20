@@ -39,7 +39,7 @@ buildspecs:
     status:
       regex:
         stream: stdout
-        exp: "^(0.16.1-2806-16370e1b16)$"
+        exp: "^(0.16.1)$"
 
   e4s_21_05_spack_mirror_check:
     type: script
