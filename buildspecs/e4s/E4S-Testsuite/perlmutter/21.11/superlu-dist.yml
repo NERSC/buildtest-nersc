@@ -1,7 +1,7 @@
 buildspecs:
   superlu-dist_e4s_testsuite_21.11:
     type: script
-    executor: perlmutter.slurm.regular
+    executor: '(perlmutter|muller).slurm.regular'
     description: Run E4S Testsuite superlu-dist test for e4s/21.11-tcl stack
     tags: [e4s]
     skip: true
