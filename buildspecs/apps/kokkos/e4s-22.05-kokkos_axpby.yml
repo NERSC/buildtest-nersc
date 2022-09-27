@@ -1,0 +1,11 @@
+buildspecs:
+  e4s-22.05_kokkos_OpenMP_axpby:
+    type: script
+    description: Run kokkos OpenMP axpby test with e4s/22.05
+    executor: '(perlmutter|muller).local.bash'
+    tags: ["e4s"]
+    run: bash e4s-22.05-kokkos-OpenMP-test.sh
+
+maintainers:
+  - rgayatri
+  - shahzebsiddiqui
