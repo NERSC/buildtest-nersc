@@ -38,5 +38,5 @@ buildspecs:
         stream: stdout
         exp: '^(0.18.0.dev0)'       
 maintainers:
-  - '@shahzebsiddiqui'
+  - 'shahzebsiddiqui'
 
