@@ -21,4 +21,4 @@ buildspecs:
       module use $HOME/spack-workspace/perlmutter/modules/tcl/cray-sles15-zen3
       ml -t av papi
 maintainers:
- - "@shahzebsiddiqui"
+ - "shahzebsiddiqui"

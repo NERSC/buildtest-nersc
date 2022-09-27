@@ -20,4 +20,4 @@ buildspecs:
       module use $HOME/spack-workspace/perlmutter/modules/$(spack arch)
       ml -t av papi
 maintainers:
- - "@shahzebsiddiqui"
+ - "shahzebsiddiqui"
