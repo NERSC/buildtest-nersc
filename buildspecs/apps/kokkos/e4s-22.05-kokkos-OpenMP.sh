@@ -7,6 +7,9 @@ module load PrgEnv-gnu
 
 export HOME_BASE=$(pwd)
 
+export OMP_PROC_BIND=spread
+export OMP_PLACES=threads
+
 # Load the e4s and kokkos modules
 module load e4s/22.05
 spack load --first cmake %gcc
@@ -22,7 +25,7 @@ rm -rf *
 # Build the test 
 cmake \
     -DCMAKE_CXX_EXTENSIONS=Off \
-    -DCMAKE_CXX_COMPILER=g++ \
+    -DCMAKE_CXX_COMPILER=CC \
     -DKokkos_ROOT=$KOKKOS_ROOT \
     ${HOME_BASE}
 make -j64
