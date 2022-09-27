@@ -1,0 +1,15 @@
+package:
+- adios2
+- butterflypack
+- dyninst
+- hpctoolkit
+- mfem
+- qthreads
+- vtk-m
+- trilinos
+- gasnet
+- hdf5  
+- kokkos  
+- strumpack
+- superlu-dist
+- superlu
