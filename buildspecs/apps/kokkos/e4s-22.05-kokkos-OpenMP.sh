@@ -9,13 +9,14 @@ export HOME_BASE=$(pwd)
 
 # Load the e4s and kokkos modules
 module load e4s/22.05
-
+spack load --first cmake %gcc
 spack load kokkos +openmp %gcc
 
-if [ ! -d build_OpenMP ]; then
-    mkdir build_OpenMP
+build_dir=$(pwd)/e4s_22.05_build_OpenMP
+if [ ! -d $build_dir ]; then
+    mkdir $build_dir
 fi
-cd build_OpenMP
+cd $build_dir
 rm -rf *
 
 # Build the test 
