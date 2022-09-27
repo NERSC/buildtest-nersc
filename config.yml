@@ -28,9 +28,7 @@ system:
       site: gerty
   perlmutter:
     description: Cray Shasta system with AMD CPU and NVIDIA A100 GPUs
-    hostnames:
-    - login10
-    - login27
+    hostnames: ['login[01-40]']
     moduletool: lmod
     executors:
       defaults:
