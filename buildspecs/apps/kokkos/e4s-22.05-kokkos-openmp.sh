@@ -15,7 +15,7 @@ module load e4s/22.05
 spack load --first cmake %gcc
 spack load kokkos +openmp %gcc
 
-build_dir=$(pwd)/e4s_22.05_build_OpenMP
+build_dir=$(pwd)/e4s_22.05_build_openmp
 if [ ! -d $build_dir ]; then
     mkdir $build_dir
 fi
@@ -28,7 +28,7 @@ cmake \
     -DCMAKE_CXX_COMPILER=CC \
     -DKokkos_ROOT=$KOKKOS_ROOT \
     ${HOME_BASE}
-make -j64
+make -j8
 
 # Run the test
 ./test
