@@ -1,0 +1,14 @@
+buildspecs:
+  spack_e4s_directory_checks:
+    type: script
+    description: Check for production directory paths for spack e4s stack
+    executor: '(perlmutter|cori|muller).local.bash'
+    run: |
+      ls -ld /global/common/software/spackecp/cori/e4s-22.02/{software,modules,spack}
+      ls -ld /global/common/software/spackecp/perlmutter/e4s-21.11/{software,modules,spack}
+      ls -ld /global/common/software/spackecp/perlmutter/e4s-22.05/default/
+      ls -l /global/common/software/spackecp/perlmutter/spack_settings/{compilers.yaml,packages.yaml}
+maintainers:
+  - shahzebsiddiqui
+
+
