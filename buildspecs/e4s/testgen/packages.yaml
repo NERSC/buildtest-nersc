@@ -1,15 +1,17 @@
 package:
 - adios2
 - butterflypack
+- darshan-runtime
+- darshan-util
 - dyninst
-- hpctoolkit
-- mfem
-- qthreads
-- vtk-m
-- trilinos
 - gasnet
 - hdf5  
+- hpctoolkit
 - kokkos  
+- mfem
+- qthreads
 - strumpack
-- superlu-dist
 - superlu
+- superlu-dist
+- trilinos
+- vtk-m
