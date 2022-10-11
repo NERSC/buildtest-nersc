@@ -78,7 +78,7 @@ buildspecs:
     status:
       regex:
         stream: stdout
-        exp: "^(0.17.1-1177-783615cacf)$"
+        exp: "^(0.17.1-1179-a260bf038d)$"
 
 maintainers:
   - "shahzebsiddiqui"
