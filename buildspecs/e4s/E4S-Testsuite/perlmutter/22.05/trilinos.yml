@@ -1,3 +1,4 @@
+#This buildtest was generated from e4s-template.yaml
 buildspecs:
   trilinos_e4s_testsuite_22.05:
     type: script
@@ -7,7 +8,7 @@ buildspecs:
     sbatch: ["-t 30", "-N 1", "-G 1", "-A m3503_g", "-C gpu"]
     run: |
       module load e4s/22.05
-      spack load --first cmake 
+      spack load --first cmake
       git clone https://github.com/E4S-Project/testsuite
       cd testsuite
 
