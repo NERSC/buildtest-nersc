@@ -3,17 +3,18 @@ buildspecs:
     type: script
     description: run the showquota utility
     executor: '(perlmutter|muller|cori|gerty).local.bash'
-    run: |
-      showquota
+    run: showquota
   showquota_check_m3503:
     type: script
     description: run the showquota check on m3503 project directory
     executor: '(perlmutter|muller|cori|gerty).local.bash'
+    tags: [e4s]
     run: showquota -N $CFS/m3503
   showquota_check_spackecp:
     type: script
     description: run showquota on /global/common/software/spackecp
     executor: '(perlmutter|muller|cori|gerty).local.bash'
+    tags: [e4s]
     run:  showquota -N /global/common/software/spackecp 
 maintainers:
   - shahzebsiddiqui
