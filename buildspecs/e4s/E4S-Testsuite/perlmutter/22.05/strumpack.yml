@@ -1,3 +1,4 @@
+#This buildtest was generated from e4s-template.yaml
 buildspecs:
   strumpack_e4s_testsuite_22.05:
     type: script
