@@ -83,7 +83,7 @@ perlmutter_scheduled_test:
   script:
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
     - buildtest build -t $TAGNAME --account m3503_g --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
-    - buildtest report --failure
+    - buildtest report --fail
     - buildtest cdash upload $TAGNAME
   after_script:
     - *cleanup-buildtest
@@ -101,7 +101,7 @@ muller_scheduled_test:
   script:
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
     - buildtest build -t $TAGNAME --account m3503_g --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
-    - buildtest report --failure
+    - buildtest report --fail
     - buildtest cdash upload $TAGNAME
   after_script:
     - *cleanup-buildtest
@@ -119,7 +119,7 @@ cori_scheduled_test:
   script:
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
     - buildtest build --tags $TAGNAME  --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
-    - buildtest report --failure 
+    - buildtest report --fail 
     - buildtest cdash upload $TAGNAME
   after_script:
     - *cleanup-buildtest 
@@ -137,7 +137,7 @@ gerty_scheduled_test:
   script:
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
     - buildtest build --tags $TAGNAME  --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
-    - buildtest report --failure
+    - buildtest report --fail
     - buildtest cdash upload $TAGNAME
   after_script:
     - *cleanup-buildtest       
