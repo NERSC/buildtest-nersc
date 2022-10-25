@@ -11,7 +11,7 @@
   - buildtest --help
   - rm -rf $HOME/.buildtest
   - export BUILDTEST_CONFIGFILE=$CI_PROJECT_DIR/config.yml
-  - buildtest config validate
+  - buildtest config validate    
   
 .cleanup-buildtest: &cleanup-buildtest
   - mkdir -p $CI_PROJECT_DIR/.artifacts
@@ -34,6 +34,7 @@ validate_cori:
     - *setup-buildtest
   script:
     - *buildspec_cache
+    - buildtest config compilers test
 
 validate_buildspecs_on_perlmutter:
   stage: build
@@ -44,6 +45,7 @@ validate_buildspecs_on_perlmutter:
     - *setup-buildtest
   script:
     - *buildspec_cache
+    - buildtest config compilers test
 
 validate_buildspecs_on_gerty:
   stage: build
@@ -54,6 +56,8 @@ validate_buildspecs_on_gerty:
     - *setup-buildtest
   script:
     - *buildspec_cache   
+    - buildtest config compilers test
+
 
 validate_buildspecs_on_muller:
   stage: build
@@ -64,6 +68,7 @@ validate_buildspecs_on_muller:
     - *setup-buildtest
   script:
     - *buildspec_cache   
+    - buildtest config compilers test
 
 perlmutter_scheduled_test:
   stage: test
