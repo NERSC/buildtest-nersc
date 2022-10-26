@@ -15,7 +15,7 @@ Adding Upstream Remote
 First you need to add the `upstream` repo, to do this by running the following:
 
 ```
-git remote add upstream https://software.nersc.gov/NERSC/buildtest-nersc.git
+git remote add upstream https://software.nersc.gov/NERSC/buildtest-nersc
 ```
 
 The `upstream` tag is used to sync your local fork with upstream repo. If your remotes are setup properly you should have something like this:
@@ -24,8 +24,8 @@ The `upstream` tag is used to sync your local fork with upstream repo. If your r
 siddiq90@cori01> git remote -v
 origin	https://software.nersc.gov/siddiq90/buildtest-nersc (fetch)
 origin	https://software.nersc.gov/siddiq90/buildtest-nersc (push)
-upstream	https://software.nersc.gov/NERSC/buildtest-nersc.git (fetch)
-upstream	https://software.nersc.gov/NERSC/buildtest-nersc.git (push)
+upstream	https://software.nersc.gov/NERSC/buildtest-nersc (fetch)
+upstream	https://software.nersc.gov/NERSC/buildtest-nersc (push)
 ```
 
 Make sure you set your user name and email set properly in git configuration.
@@ -94,7 +94,7 @@ Once you are ready to push to your fork repo do the following:
 git push origin featureX
 ```
 
-Once the branch is created in your fork, you can issue a Merge Request to `devel` branch for upstream repo(https://software.nersc.gov/NERSC/buildtest-nersc.git).
+Once the branch is created in your fork, you can issue a Merge Request to `devel` branch for upstream repo (https://software.nersc.gov/NERSC/buildtest-nersc).
 
 Default Branch
 ---------------

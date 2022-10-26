@@ -8,14 +8,14 @@ This repository contains tests for Cori and Perlmutter using [buildtest](https:/
 To get started, please [connect to NERSC system](https://docs.nersc.gov/connect/) and clone this repo and buildtest:
 
 ```
-git clone https://github.com/buildtesters/buildtest.git
-git clone https://software.nersc.gov/NERSC/buildtest-nersc.git
+git clone https://github.com/buildtesters/buildtest
+git clone https://software.nersc.gov/NERSC/buildtest-nersc
 ```
 
 Note if you don't have access to Gitlab server you may clone the mirror on Github:
 
 ```
-git clone https://github.com/buildtesters/buildtest-nersc.git
+git clone https://github.com/buildtesters/buildtest-nersc
 ```
 
 You will need python 3.7 or higher to [install buildtest](https://buildtest.readthedocs.io/en/devel/installing_buildtest.html), on Cori/Perlmutter this can be done by loading **python**
@@ -152,7 +152,7 @@ under **Mirroring Repositories**. If the push mirror is not setup, please add th
 
 ## CDASH
 
-buildtest will push test results to [CDASH](https://www.kitware.com/cdash/project/about.html) server
+buildtest will push test results to [CDASH](https://www.cdash.org/) server
 at https://my.cdash.org/index.php?project=buildtest-nersc using `buildtest cdash upload` command.
 
 ## Contributing Guide

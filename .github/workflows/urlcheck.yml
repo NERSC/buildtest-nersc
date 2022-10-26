@@ -7,15 +7,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: URLs-checker
-      uses: urlstechie/urlchecker-action@0.0.27
+      uses: urlstechie/urlchecker-action@0.0.33
       with:
 
         # clone devel
         branch: devel
         # A comma-separated list of file types to cover in the URL checks
-        file_types: .md,
+        file_types: .md
 
         # Choose whether to include file with no URLs in the prints.
         print_all: false
@@ -28,3 +28,5 @@ jobs:
         
         # A comma separated links to exclude during URL checks
         exclude_urls: https://github.com/buildtesters/buildtest-cori/settings/secrets/actions  
+
+        verbose: true
