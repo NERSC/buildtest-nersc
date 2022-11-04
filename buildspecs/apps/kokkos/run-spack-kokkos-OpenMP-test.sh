@@ -10,9 +10,9 @@ module load cudatoolkit
 export HOME_BASE=$(pwd)
 
 # Load the e4s and kokkos modules
-module load e4s/21.11-tcl
+module load e4s/22.05
 #module load kokkos-kernels/3.4.01-gcc-11.2.0-mpi-cuda
-spack load kokkos +openmp cuda_arch=80
+spack load kokkos@3.6.00%gcc@11.2.0 +openmp
 
 if [ ! -d build_OpenMP ]; then
     mkdir build_OpenMP
