@@ -4,29 +4,31 @@ set -e
 
 # Load the right modules
 module load PrgEnv-gnu
-module load cmake
-module load cudatoolkit
 
 export HOME_BASE=$(pwd)
 
+export OMP_PROC_BIND=spread
+export OMP_PLACES=threads
+
 # Load the e4s and kokkos modules
 module load e4s/22.05
-#module load kokkos-kernels/3.4.01-gcc-11.2.0-mpi-cuda
-spack load kokkos@3.6.00%gcc@11.2.0 +openmp
+spack load --first cmake %gcc
+spack load kokkos +cuda %gcc
 
-if [ ! -d build_OpenMP ]; then
-    mkdir build_OpenMP
+build_dir=$(pwd)/e4s_22.05_build_cuda
+if [ ! -d $build_dir ]; then
+    mkdir $build_dir
 fi
-cd build_OpenMP
+cd $build_dir
 rm -rf *
 
 # Build the test 
 cmake \
     -DCMAKE_CXX_EXTENSIONS=Off \
-    -DCMAKE_CXX_COMPILER=g++ \
+    -DCMAKE_CXX_COMPILER=CC \
     -DKokkos_ROOT=$KOKKOS_ROOT \
     ${HOME_BASE}
-make -j64
+make -j8
 
 # Run the test
 ./test
