@@ -26,115 +26,6 @@ system:
       url: https://my.cdash.org
       project: buildtest-nersc
       site: gerty
-  perlmutter:
-    description: Cray Shasta system with AMD CPU and NVIDIA A100 GPUs
-    hostnames:
-    - login[01-40]
-    moduletool: lmod
-    executors:
-      defaults:
-        pollinterval: 30
-        maxpendtime: 86400
-      local:
-        bash:
-          description: submit jobs on local machine using bash shell
-          shell: bash
-        sh:
-          description: submit jobs on local machine using sh shell
-          shell: sh
-        csh:
-          description: submit jobs on local machine using csh shell
-          shell: csh
-        zsh:
-          description: submit jobs on local machine using zsh shell
-          shell: zsh
-        python:
-          description: submit jobs on local machine using python shell
-          shell: python
-      slurm:
-        regular:
-          qos: regular
-        debug:
-          qos: debug
-        xfer:
-          qos: xfer
-        preempt:
-          qos: preempt
-    compilers:
-      find:
-        gcc: ^(gcc)
-        cray: ^(cce)
-        nvhpc: ^(nvhpc)
-      compiler:
-        gcc:
-          builtin_gcc:
-            cc: /usr/bin/gcc
-            cxx: /usr/bin/g++
-            fc: /usr/bin/gfortran
-          gcc/11.2.0:
-            cc: gcc
-            cxx: g++
-            fc: gfortran
-            module:
-              load:
-              - gcc/11.2.0
-              purge: false
-          gcc/10.3.0:
-            cc: gcc
-            cxx: g++
-            fc: gfortran
-            module:
-              load:
-              - gcc/10.3.0
-              purge: false
-        cray:
-          cce/13.0.2:
-            cc: cc
-            cxx: CC
-            fc: ftn
-            module:
-              load:
-              - PrgEnv-cray
-              - cce/13.0.2
-              purge: false
-          cce/13.0.1:
-            cc: cc
-            cxx: CC
-            fc: ftn
-            module:
-              load:
-              - PrgEnv-cray
-              - cce/13.0.1
-              purge: false
-        nvhpc:
-          nvhpc/22.5:
-            cc: nvc
-            cxx: nvcc
-            fc: nvfortran
-            module:
-              load:
-              - nvhpc/22.5
-              purge: false
-          nvhpc/21.11:
-            cc: nvc
-            cxx: nvcc
-            fc: nvfortran
-            module:
-              load:
-              - nvhpc/21.11
-              purge: false
-          nvhpc/21.3:
-            cc: nvc
-            cxx: nvcc
-            fc: nvfortran
-            module:
-              load:
-              - nvhpc/21.3
-              purge: false
-    cdash:
-      url: https://my.cdash.org
-      project: buildtest-nersc
-      site: perlmutter
   cori:
     hostnames:
     - cori*
@@ -559,3 +450,186 @@ system:
       url: https://my.cdash.org
       project: buildtest-nersc
       site: muller
+  perlmutter:
+    description: Cray Shasta system with AMD CPU and NVIDIA A100 GPUs
+    hostnames:
+    - login[01-40]
+    moduletool: lmod
+    executors:
+      defaults:
+        pollinterval: 30
+        maxpendtime: 86400
+      local:
+        bash:
+          description: submit jobs on local machine using bash shell
+          shell: bash
+        sh:
+          description: submit jobs on local machine using sh shell
+          shell: sh
+        csh:
+          description: submit jobs on local machine using csh shell
+          shell: csh
+        zsh:
+          description: submit jobs on local machine using zsh shell
+          shell: zsh
+        python:
+          description: submit jobs on local machine using python shell
+          shell: python
+      slurm:
+        regular:
+          qos: regular
+        debug:
+          qos: debug
+        xfer:
+          qos: xfer
+        preempt:
+          qos: preempt
+    compilers:
+      purge: false
+      enable_prgenv: true
+      prgenv_modules:
+        gcc: PrgEnv-gnu
+        cray: PrgEnv-cray
+        nvhpc: PrgEnv-nvidia
+      find:
+        gcc: ^(gcc)
+        cray: ^(cce)
+        nvhpc: ^(nvhpc)
+      compiler:
+        gcc:
+          builtin_gcc:
+            cc: /usr/bin/gcc
+            cxx: /usr/bin/g++
+            fc: /usr/bin/gfortran
+          gcc/11.2.0:
+            cc: cc
+            cxx: CC
+            fc: ftn
+            module:
+              load:
+              - PrgEnv-gnu
+              - gcc/11.2.0
+              purge: false
+          gcc/10.3.0:
+            cc: cc
+            cxx: CC
+            fc: ftn
+            module:
+              load:
+              - PrgEnv-gnu
+              - gcc/10.3.0
+              purge: false
+        cray:
+          cce/14.0.1:
+            cc: cc
+            cxx: CC
+            fc: ftn
+            module:
+              load:
+              - PrgEnv-cray
+              - cce/14.0.1
+              purge: false
+          cce/13.0.2:
+            cc: cc
+            cxx: CC
+            fc: ftn
+            module:
+              load:
+              - PrgEnv-cray
+              - cce/13.0.2
+              purge: false
+          cce-mixed/13.0.2:
+            cc: cc
+            cxx: CC
+            fc: ftn
+            module:
+              load:
+              - PrgEnv-cray
+              - cce-mixed/13.0.2
+              purge: false
+          cce-mixed/14.0.1:
+            cc: cc
+            cxx: CC
+            fc: ftn
+            module:
+              load:
+              - PrgEnv-cray
+              - cce-mixed/14.0.1
+              purge: false
+        nvhpc:
+          nvhpc/21.11:
+            cc: cc
+            cxx: CC
+            fc: ftn
+            module:
+              load:
+              - PrgEnv-nvidia
+              - nvhpc/21.11
+              purge: false
+          nvhpc/21.9:
+            cc: cc
+            cxx: CC
+            fc: ftn
+            module:
+              load:
+              - PrgEnv-nvidia
+              - nvhpc/21.9
+              purge: false
+          nvhpc/22.7:
+            cc: cc
+            cxx: CC
+            fc: ftn
+            module:
+              load:
+              - PrgEnv-nvidia
+              - nvhpc/22.7
+              purge: false
+          nvhpc/22.5:
+            cc: cc
+            cxx: CC
+            fc: ftn
+            module:
+              load:
+              - PrgEnv-nvidia
+              - nvhpc/22.5
+              purge: false
+          nvhpc-mixed/21.11:
+            cc: cc
+            cxx: CC
+            fc: ftn
+            module:
+              load:
+              - PrgEnv-nvidia
+              - nvhpc-mixed/21.11
+              purge: false
+          nvhpc-mixed/22.5:
+            cc: cc
+            cxx: CC
+            fc: ftn
+            module:
+              load:
+              - PrgEnv-nvidia
+              - nvhpc-mixed/22.5
+              purge: false
+          nvhpc-mixed/21.9:
+            cc: cc
+            cxx: CC
+            fc: ftn
+            module:
+              load:
+              - PrgEnv-nvidia
+              - nvhpc-mixed/21.9
+              purge: false
+          nvhpc-mixed/22.7:
+            cc: cc
+            cxx: CC
+            fc: ftn
+            module:
+              load:
+              - PrgEnv-nvidia
+              - nvhpc-mixed/22.7
+              purge: false
+    cdash:
+      url: https://my.cdash.org
+      project: buildtest-nersc
+      site: perlmutter
