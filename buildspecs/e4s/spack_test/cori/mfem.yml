@@ -1,19 +1,4 @@
 buildspecs: 
-  spack_test_mfem_e4s_21.05:
-    type: spack
-    executor: cori.local.sh
-    description: "Test mfem@4.2.0 for e4s/21.05 test via spack test"
-    tags: e4s
-    pre_cmds: module load e4s/21.05
-    spack:
-      root: /global/common/software/spackecp/e4s-21.05/spack/
-      verify_spack: false
-      test:
-        run:
-          specs: ['mfem@4.2.0%intel']
-        results:
-          option: '-l'
-          specs: ['mfem@4.2.0%intel']
   spack_test_mfem_e4s_22.02:
     type: spack
     executor: cori.local.sh
