@@ -7,12 +7,17 @@ buildspecs:
     summary: |
       This workflow will check the developer workflow for Perlmutter outlined in https://docs.nersc.gov/applications/e4s/perlmutter/22.05/
     run: |
+      rm -rf $HOME/spack-workspace/perlmutter/modules
+      rm -rf $HOME/spack-workspace/perlmutter/software
       module load e4s/22.05
+      spack find
       source $SPACK_ROOT/bin/spack-setup.sh
       despacktivate
       rm -rf $HOME/e4s-22.05-demo
       spack env create -d $HOME/e4s-22.05-demo spack.yaml
       spack env activate -d $HOME/e4s-22.05-demo
+      cat $SPACK_ROOT/etc/spack/config.yaml
+      cat $SPACK_ROOT/etc/spack/modules.yaml
       spack install
       spack location -i papi
       spack module tcl refresh --delete-tree -y
