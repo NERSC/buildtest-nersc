@@ -1,20 +1,4 @@
 buildspecs:
-  spack_test_hdf5_e4s_21.05:
-    type: spack
-    executor: cori.local.bash
-    description: Test hdf5 from e4s/21.05 using spack test
-    tags: e4s
-    pre_cmds: module load e4s/21.05
-    spack:
-      root: /global/common/software/spackecp/e4s-21.05/spack/
-      verify_spack: false
-      test:
-        run:
-          specs: ['hdf5']
-        results:
-          option: '-l'
-          specs: ['hdf5']
-
   spack_test_hdf5_e4s_22.02:
     type: spack
     executor: cori.local.bash
