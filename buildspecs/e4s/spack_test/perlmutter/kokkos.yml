@@ -5,7 +5,7 @@ buildspecs:
     description: "Test kokkos build for e4s/21.11 stack on Perlmutter"
     tags: e4s
     pre_cmds: |
-      module load e4s/21.11-tcl
+      module load e4s/21.11
     spack:
       root: /global/common/software/spackecp/perlmutter/e4s-21.11/spack/
       verify_spack: false

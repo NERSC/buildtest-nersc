@@ -5,7 +5,7 @@ buildspecs:
     description: "Test hdf5@1.12.1 for e4s/21.11 stack for Perlmutter via spack test"
     tags: e4s
     pre_cmds: |
-      module load e4s/21.11-tcl
+      module load e4s/21.11
       module swap PrgEnv-nvidia PrgEnv-gnu
     spack:
       root: /global/common/software/spackecp/perlmutter/e4s-21.11/spack/
