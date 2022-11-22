@@ -7,9 +7,8 @@ buildspecs:
     tags: e4s
     pre_cmds: |
       module load e4s/21.11
-      module swap PrgEnv-nvidia PrgEnv-gnu
     spack:
-      root: /global/common/software/spackecp/perlmutter/e4s-21.11/spack/
+      root: /global/common/software/spackecp/perlmutter/e4s-21.11/default/spack/
       verify_spack: false
       test:
         run:
