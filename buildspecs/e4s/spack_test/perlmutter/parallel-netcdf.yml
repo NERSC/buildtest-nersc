@@ -7,7 +7,7 @@ buildspecs:
     pre_cmds: |
       module load e4s/22.05
     spack:
-      root: /global/common/software/spackecp/perlmutter/e4s-22.05/spack/
+      root: /global/common/software/spackecp/perlmutter/e4s-22.05/default/spack/
       verify_spack: false
       test:
         run:
