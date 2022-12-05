@@ -4,11 +4,9 @@ package:
 - darshan-runtime
 - darshan-util
 - dyninst
-- gasnet
-- hdf5  
+- gasnet 
 - hpctoolkit
 - kokkos  
-- mfem
 - qthreads
 - strumpack
 - superlu
