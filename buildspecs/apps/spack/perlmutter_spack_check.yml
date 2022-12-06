@@ -2,10 +2,10 @@ buildspecs:
   spack_e4s_21.11:
     type: script
     executor: '(perlmutter|muller).local.(bash|sh|csh|zsh)'
-    description: Check version of spack for e4s/21.11 module
+    description: Check version of spack for spack/e4s-21.11 module
     tags: [system, e4s]
     run: |
-      ml e4s/21.11
+      ml spack/e4s-21.11
       spack --version
     status:
       regex:
@@ -15,10 +15,10 @@ buildspecs:
   spack_e4s_22.05:
     type: script
     executor: '(perlmutter|muller).local.(bash|sh|csh|zsh)'
-    description: Check version of spack for e4s/22.05 module
+    description: Check version of spack for spack/e4s-22.05 module
     tags: [system, e4s]
     run: |
-      ml e4s/22.05
+      ml spack/e4s-22.05
       spack --version
     status:
       regex:
