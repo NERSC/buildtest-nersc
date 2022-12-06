@@ -9,12 +9,12 @@ body:
     id: link
     attributes:
       label: CDASH Build 
-      description: Specify link to cdash build (https://my.cdash.org/index.php?project=buildtest-cori) or gitlab pipeline (https://software.nersc.gov/siddiq90/buildtest-cori/-/pipelines)
+      description: Specify link to cdash build (https://my.cdash.org/index.php?project=buildtest-nersc) or gitlab pipeline (https://software.nersc.gov/NERSC/buildtest-nersc/-/pipelines)
   - type: input
     id: buildspec
     attributes:
       label: Link to buildspec file 
-      description: Please provide link to buildspec file in https://github.com/buildtesters/buildtest-cori 
+      description: Please provide link to buildspec file in https://github.com/buildtesters/buildtest-nersc 
       
   - type: textarea
     id: description
