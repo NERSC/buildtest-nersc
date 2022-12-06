@@ -1,7 +1,21 @@
 # buildtest-nersc
 
-This repository contains tests for Cori and Perlmutter using [buildtest](https://buildtest.readthedocs.io/en/devel/) framework. A mirror of this repository is located on GitHub at https://github.com/buildtesters/buildtest-nersc that is public facing.
+This repository contains tests for Cori and Perlmutter using [buildtest](https://buildtest.readthedocs.io/en/devel/) framework. 
 
+## Useful Links
+
+- CDASH: https://my.cdash.org/index.php?project=buildtest-nersc
+- Upstream Repo: https://software.nersc.gov/NERSC/buildtest-nersc
+- Github Mirror Repo: https://github.com/buildtesters/buildtest-nersc 
+
+## Buildtest References
+
+- Documentation: https://buildtest.readthedocs.io/en/devel/
+- Schema Docs: https://buildtesters.github.io/buildtest/
+- Slack Channel: https://hpcbuildtest.slack.com
+- Getting Started: https://buildtest.readthedocs.io/en/devel/getting_started.html
+- Writing Buildspecs: https://buildtest.readthedocs.io/en/devel/buildspec_tutorial.html
+- Contributing Guide: https://buildtest.readthedocs.io/en/devel/contributing.html
 
 ## Setup
 
@@ -164,13 +178,15 @@ details on querying test please see https://buildtest.readthedocs.io/en/devel/ge
 
 If you want to contribute your tests, please see [CONTRIBUTING.md](https://software.nersc.gov/NERSC/buildtest-nersc/-/blob/devel/CONTRIBUTING.md)
 
+## Submitting an Issue
 
-## References
+Please submit all issues to https://github.com/buildtesters/buildtest-nersc/issues. When creating an issue, please see the [labels](https://github.com/buildtesters/buildtest-nersc/labels) 
+and try to select one or more labels to categorize issue. Please use the following labels depending on the type of issue you are reporting
 
-- buildtest documentation: https://buildtest.readthedocs.io/en/devel/
-- buildtest schema docs: https://buildtesters.github.io/buildtest/
-- Getting Started: https://buildtest.readthedocs.io/en/devel/getting_started.html
-- Writing Buildspecs: https://buildtest.readthedocs.io/en/devel/buildspec_tutorial.html
-- Contributing Guide: https://buildtest.readthedocs.io/en/devel/contributing.html
-
+- [Bug](https://github.com/buildtesters/buildtest-nersc/labels/bug): When creating an issue related to test bug
+- [new-test](https://github.com/buildtesters/buildtest-nersc/labels/new-test): An issue for adding new test
+- [E4S-Testsuite](https://github.com/buildtesters/buildtest-nersc/labels/E4S-Testsuite): Issue related to E4S-Testsuite repo - https://github.com/E4S-Project/testsuite 
+- [spack](https://github.com/buildtesters/buildtest-nersc/labels/spack): Issue related to spack test
+- [documentation](https://github.com/buildtesters/buildtest-nersc/labels/documentation): Issue with documentation such as README.md, CONTRIBUTING.md
+- [gitlab-ci](https://github.com/buildtesters/buildtest-nersc/labels/gitlab-ci): Issue with Gitlab CI/CD
 
