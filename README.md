@@ -185,8 +185,8 @@ and try to select one or more labels to categorize issue. Please use the followi
 
 - [Bug](https://github.com/buildtesters/buildtest-nersc/labels/bug): When creating an issue related to a test bug
 - [new-test](https://github.com/buildtesters/buildtest-nersc/labels/new-test): An issue for adding a new test
-- [E4S-Testsuite](https://github.com/buildtesters/buildtest-nersc/labels/E4S-Testsuite): Issues related to E4S-Testsuite repo - https://github.com/E4S-Project/testsuite 
-- [spack](https://github.com/buildtesters/buildtest-nersc/labels/spack): Issues related to spack tests'
+- [E4S-Testsuite](https://github.com/buildtesters/buildtest-nersc/labels/E4S-Testsuite): Issues related to [E4S testsuite project](https://github.com/E4S-Project/testsuite) 
+- [spack](https://github.com/buildtesters/buildtest-nersc/labels/spack): Issues related to `spack test`
 - [documentation](https://github.com/buildtesters/buildtest-nersc/labels/documentation): Issues with documentation such as README.md, CONTRIBUTING.md
 - [gitlab-ci](https://github.com/buildtesters/buildtest-nersc/labels/gitlab-ci): Issues with Gitlab CI/CD
 
