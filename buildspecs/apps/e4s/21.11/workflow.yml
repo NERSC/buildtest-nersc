@@ -7,9 +7,14 @@ buildspecs:
     summary: |
       This workflow will check the developer workflow for Perlmutter outlined in https://docs.nersc.gov/applications/e4s/perlmutter/21.11/
     run: |
-      module load e4s/21.11-tcl
+      module load e4s/21.11
+      spack env status
+      spack tags
+      spack find -t e4s --format "{name}" | uniq | wc -l
       source $SPACK_ROOT/bin/spack-setup.sh
       despactivate
+      spack env status
+      spack spec zlib
       rm -rf $HOME/e4s-21.11-spack-demo
       ls -l
       spack env create -d $HOME/e4s-21.11-spack-demo
