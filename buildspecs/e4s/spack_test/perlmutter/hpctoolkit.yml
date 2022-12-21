@@ -6,6 +6,7 @@ buildspecs:
     tags: e4s
     pre_cmds: |
       module load e4s/22.05
+      spack env activate -V e4s
     spack:
       root: /global/common/software/spackecp/perlmutter/e4s-22.05/default/spack/
       verify_spack: false

@@ -11,12 +11,12 @@ buildspecs:
       - "-C gpu"
       # Note: This test doesn't use GPUs.
     run: |
-      module load e4s/21.11-tcl
-
+      module load e4s/21.11
+      spack env activate -V e4s
       # Use the PrgEnv-gnu to avoid issues with NVHPC and Fortran
       module load PrgEnv-gnu
 
-      spack load cmake
+      spack load --first cmake
       spack load amrex
 
       # Store AMReX install location

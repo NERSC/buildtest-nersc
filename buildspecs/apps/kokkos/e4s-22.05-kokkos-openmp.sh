@@ -12,6 +12,7 @@ export OMP_PLACES=threads
 
 # Load the e4s and kokkos modules
 module load e4s/22.05
+spack env activate -V e4s
 spack load --first cmake %gcc
 spack load kokkos +openmp %gcc
 
