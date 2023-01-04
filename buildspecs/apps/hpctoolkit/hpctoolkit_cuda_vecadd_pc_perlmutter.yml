@@ -31,7 +31,10 @@ buildspecs:
       srun -n 1 -c 64 -G 0 \
         hpcprof -o ${OUT}.d ${OUT}.m
 
-    status:                     
+    status:
+      regex:
+        stream: stdout
+        exp: "^(OK)$"
 
 maintainers:
   - wyphan
