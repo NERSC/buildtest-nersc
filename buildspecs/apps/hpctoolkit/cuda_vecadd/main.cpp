@@ -12,7 +12,7 @@
   { \
     cudaError err = call; \
     if (err != cudaSuccess) { \
-      char* name; sprintf(name, "%s", call); \
+      char* name = NULL; sprintf(name, "%s", call); \
       std::cout << "ERROR: " << name << " returned " << err << ": " << std::endl; \
       std::cout << cudaGetErrorString(err) << std::endl; \
     } \
