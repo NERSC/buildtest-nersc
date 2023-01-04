@@ -1,0 +1,39 @@
+buildspecs:
+  hpctoolkit_cuda:
+    executor: '{perlmutter|muller}.slurm.regular'
+    type: script
+    description: "HPCToolkit vector add CUDA test"
+    tags: ["e4s"]
+    sbatch:
+      - "-A m3503"
+      - "-N 1"
+      - "-t 00:05:00"
+      - "-C gpu"
+    run: |
+      module load e4s/22.05
+      module load PrgEnv-nvidia
+      spack load hpctoolkit+cuda
+
+      cd cuda_vecadd
+      make clean
+      make NVCC_OPTS="-g -arch=sm_80"
+
+      OUT=hpctoolkit-vecadd
+      N=1048576
+
+      rm -rf ${OUT}.m ${OUT}.d
+      srun -n 1 -c 1 -G 1 \
+        hpcrun -e REALTIME -e gpu=nvidia -o ${OUT}.m \
+        ./a.out $N
+
+      srun -n 1 -c 64 -G 0 \
+        hpcstruct ${OUT}.m
+
+      srun -n 1 -c 64 -G 0 \
+        hpcprof -o ${OUT}.d ${OUT}.m
+
+    status:                     
+
+maintainers:
+  - wyphan
+  - blue42u
