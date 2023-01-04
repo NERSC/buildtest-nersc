@@ -7,17 +7,98 @@ buildspecs:
     summary: |
       This workflow will check the developer workflow for Perlmutter outlined in https://docs.nersc.gov/applications/e4s/perlmutter/22.05/
     run: |
+      rm -rf $HOME/spack-workspace/perlmutter/modules
+      rm -rf $HOME/spack-workspace/perlmutter/software
       module load e4s/22.05
       source $SPACK_ROOT/bin/spack-setup.sh
       despacktivate
+      spack env status
+      spack spec zlib
       rm -rf $HOME/e4s-22.05-demo
       spack env create -d $HOME/e4s-22.05-demo spack.yaml
       spack env activate -d $HOME/e4s-22.05-demo
+      ls -l $HOME/e4s-22.05-demo
+      cat $SPACK_ROOT/etc/spack/config.yaml
+      cat $SPACK_ROOT/etc/spack/modules.yaml
       spack install
       spack location -i papi
       spack module tcl refresh --delete-tree -y
       spack module tcl find --full-path papi
       module use $HOME/spack-workspace/perlmutter/modules/$(spack arch)
       ml -t av papi
+  e4s_22.05_configuration:
+    type: script
+    executor: '(perlmutter|muller).local.bash'
+    description: E4S/22.05 Spack Configuration Check
+    tags: [e4s]
+    summary: |
+      The following commands will check the spack configuration and list of all available packages in e4s-22.05 stack outlined in https://docs.nersc.gov/applications/e4s/perlmutter/22.05/
+    run: |
+      module load e4s/22.05
+      spack env status
+      spack cd -e e4s
+      pwd && ls -l
+      spack find
+  e4s_22.05_spack_load:
+    type: script
+    executor: '(perlmutter|muller).local.bash'
+    description: E4S/22.05 spack load check
+    tags: [e4s]
+    summary: |
+      The following commands will check the loading of the E4S packages in your user environment with example of HDF5 outlined in https://docs.nersc.gov/applications/e4s/perlmutter/22.05/
+    run: |
+      module load e4s/22.05
+      spack load --list
+      spack find hdf5
+      spack load hdf5@1.10.7%gcc@11.2.0
+      spack load --list
+      which h5cc
+      h5cc --version
+      export HDF5_DIR=$(spack location -i hdf5@1.10.7%gcc@11.2.0)
+  e4s_22.05_spack_unload:
+    type: script
+    executor: '(perlmutter|muller).local.bash'
+    description: E4S/22.05 spack unload check
+    tags: [e4s]
+    summary: |
+      The following commands will check the unloading of the E4S packages from your environment outlined in https://docs.nersc.gov/applications/e4s/perlmutter/22.05/
+    run: |
+      module load e4s/22.05
+      spack load hdf5@1.10.7%gcc@11.2.0
+      spack load --list
+      spack unload xz@5.2.5
+      spack load --list
+      spack unload --all
+      spack load --list
+  e4s_22.05_spack_load_without_dependencies:
+    type: script
+    executor: '(perlmutter|muller).local.bash'
+    description: E4S/22.05 spack load without dependencies check
+    tags: [e4s]
+    summary: |
+      The following commands will check the loading of a spack package without dependencies and using a hash for the package with mutliple versions outlined in https://docs.nersc.gov/applications/e4s/perlmutter/22.05/
+    run: |
+      module load e4s/22.05
+      spack load --list
+      spack load --only package /p23fzuo
+      spack load --list
+      spack unload -a
+      spack load --list
+      spack load /p23fzuo
+      spack load --list
+  e4s_22.05_spack_views:
+    type: script
+    executor: '(perlmutter|muller).local.bash'
+    description: E4S/22.05 spack views check
+    tags: [e4s]
+    summary: |
+      The following commands will check the functionality of spack views outlined in https://docs.nersc.gov/applications/e4s/perlmutter/22.05/
+    run: |
+      module load e4s/22.05
+      despacktivate
+      spack env activate --with-view e4s
+      spack load --list
+      which h5cc
+      which cmake
 maintainers:
  - "shahzebsiddiqui"

@@ -1,14 +1,20 @@
-
 buildspecs:
   os_release:
     type: script
     description: Check output of lsb_release -d
-    executor: cori.local.bash
+    executor: '(perlmutter|cori).local.bash'
     run: lsb_release -d
     tags: ["daily", "system"]
-    status:
-      regex:
-        exp: "SUSE Linux Enterprise Server 15"
-        stream: stdout
+    executors:
+      cori.local.bash:
+        status:
+          regex:
+            exp: "SUSE Linux Enterprise Server 15 SP2"
+            stream: stdout
+      perlmutter.local.bash:
+        status:
+          regex:
+            exp: "SUSE Linux Enterprise Server 15 SP3"
+            stream: stdout
 maintainers:
   - "shahzebsiddiqui"

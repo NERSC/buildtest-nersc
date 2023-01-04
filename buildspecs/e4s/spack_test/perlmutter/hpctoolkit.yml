@@ -1,8 +1,8 @@
 buildspecs:
-  spack_test_amrex_e4s_22.05:
+  spack_test_hpctoolkit_e4s_22.05:
     type: spack
     executor: '(perlmutter|muller).local.sh'
-    description: "Test AMReX for e4s/22.05 stack for Perlmutter via spack test"
+    description: "Test hpctoolkit build with for e4s/22.05 stack on Perlmutter via spack test"
     tags: e4s
     pre_cmds: |
       module load e4s/22.05
@@ -11,8 +11,10 @@ buildspecs:
       verify_spack: false
       test:
         run:
-          specs: ['amrex']
+          specs: ['hpctoolkit']
         results:
           option: '-l'
-          specs: ['amrex']
+          specs: ['hpctoolkit']
+maintainers:
+  - shahzebsiddiqui
 
