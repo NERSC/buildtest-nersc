@@ -36,7 +36,7 @@ buildspecs:
         stream: stdout
         exp: "OK"
       exists:
-        - hpctoolkit-vecadd-pc.d
+        - cuda_vecadd/hpctoolkit-vecadd-pc.d
 
 maintainers:
   - wyphan
