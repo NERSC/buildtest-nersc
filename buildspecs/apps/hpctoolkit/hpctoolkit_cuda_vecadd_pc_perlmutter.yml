@@ -31,14 +31,12 @@ buildspecs:
       srun -n 1 -c 64 -G 0 \
         hpcprof -o ${OUT}.d ${OUT}.m
 
-      if [ ! -d ${OUT}.d ]; then
-        exit 1
-      fi
-
     status:
       regex:
         stream: stdout
         exp: "OK"
+      exists:
+        - hpctoolkit-vecadd-pc.d
 
 maintainers:
   - wyphan
