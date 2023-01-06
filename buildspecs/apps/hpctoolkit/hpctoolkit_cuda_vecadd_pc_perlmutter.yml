@@ -20,16 +20,12 @@ buildspecs:
 
       rm -rf ${OUT}.m ${OUT}.d
       srun --ntasks-per-node=1 dcgmi profile --pause
-      srun -n 1 -c 1 -G 1 \
-        hpcrun -e gpu=nvidia,pc -o ${OUT}.m \
-        ./a.out $N
+      srun -n 1 -c 1 -G 1 hpcrun -e gpu=nvidia,pc -o ${OUT}.m ./a.out $N
       srun --ntasks-per-node=1 dcgmi profile --resume
 
-      srun -n 1 -c 64 -G 0 \
-        hpcstruct --gpucfg yes ${OUT}.m
+      srun -n 1 -c 64 -G 0 hpcstruct --gpucfg yes ${OUT}.m
 
-      srun -n 1 -c 64 -G 0 \
-        hpcprof -o ${OUT}.d ${OUT}.m
+      srun -n 1 -c 64 -G 0 hpcprof -o ${OUT}.d ${OUT}.m
 
     status:
       regex:
