@@ -1,6 +1,6 @@
 buildspecs:
   hpctoolkit_cuda:
-    executor: '(perlmutter|muller).slurm.debug'
+    executor: '(perlmutter|muller).slurm.regular'
     type: script
     description: "HPCToolkit vector add CUDA test"
     tags: ["e4s"]
