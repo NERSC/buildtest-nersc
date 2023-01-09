@@ -3,8 +3,6 @@
 #include <cstdlib>
 #include <cuda_runtime.h>
 
-#include "kernel.cu"
-
 #define DEFAULT_N 1024
 #define NBLOCKS(n, block_size) ((n + block_size - 1) / block_size)
 
@@ -12,11 +10,18 @@
   { \
     cudaError err = call; \
     if (err != cudaSuccess) { \
-      char* name = NULL; sprintf(name, "%s", call); \
-      std::cout << "ERROR: " << name << " returned " << err << ": " << std::endl; \
-      std::cout << cudaGetErrorString(err) << std::endl; \
+      std::cerr << __FILE__ << ":" << __LINE__ << ": CUDA call returned " \
+        << err << ": " << cudaGetErrorString(err) << "\n" \
+        "    From " #call "\n"; \
+      std::exit(1); \
     } \
   }
+
+__global__ void dadd (const long N, const double* a, const double* b, double* c)
+{
+  long i = blockIdx.x * blockDim.x + threadIdx.x;
+  if (i < N) c[i] = a[i] + b[i];
+}
 
 void usage (char* arg0)
 {
@@ -55,13 +60,13 @@ int main (int argc, char* argv[])
     }
     N = std::atol(arg1);
     if (N <= 0) {
-      std::cout << "ERROR: N must be positive" << std::endl;
+      std::cerr << "ERROR: N must be positive\n";
       usage(argv[0]);
-      return 0;
+      return 2;
     }
   } // argc
 
-  std::cout << "Using N = " << N << std::endl;
+  std::cout << "Using N = " << N << "\n";
 
   // Allocate host vectors
   double* h_A = (double*)malloc((size_t)N * sizeof(double));
@@ -83,6 +88,7 @@ int main (int argc, char* argv[])
 
   // Perform vector addition using CUDA kernel
   dadd<<<NBLOCKS(N, 1024), 1024>>>(N, d_A, d_B, d_C);
+  CUDA_CALL(cudaGetLastError());
   CUDA_CALL(cudaDeviceSynchronize());
 
   // Transfer result vector to host
@@ -91,9 +97,8 @@ int main (int argc, char* argv[])
   // Verify results
   long nerr = verify(N, h_A, h_B, h_C);
   if (nerr > 0) {
-    std::cout << "ERROR: " << nerr << " elements differ" << std::endl;
-  } else {
-    std::cout << "OK" << std::endl;
+    std::cerr << "ERROR: " << nerr << " elements differ\n";
+    return 1;
   }
 
   // Clean up device vectors
@@ -105,6 +110,6 @@ int main (int argc, char* argv[])
   free(h_A);
   free(h_B);
   free(h_C);
-  
+
   return 0;
 }

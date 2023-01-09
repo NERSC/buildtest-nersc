@@ -6,34 +6,49 @@ buildspecs:
     tags: ["e4s"]
     sbatch: ["-A m3503", "-C gpu", "-N 1", "-G 1", "-t 00:05:00"]
     run: |
-      module load e4s/22.05
-      module load PrgEnv-nvidia
-      spack env activate -V e4s
-      spack load hpctoolkit+cuda
+      module load e4s/22.05 || exit $?
+      module load PrgEnv-nvidia || exit $?
+      spack env activate -V e4s || exit $?
+      spack load hpctoolkit+cuda || exit $?
 
-      cd cuda_vecadd
-      make clean
-      make NVCC_OPTS="-g -arch=sm_80"
+      rm -f cuda_vecadd
+      nvcc -o cuda_vecadd -g -arch=sm_80 cuda_vecadd.cu || exit $?
 
-      OUT=hpctoolkit-vecadd-pc
-      N=1048576
+      out=hpctoolkit-vecadd-pc
+      n=1048576
 
-      rm -rf ${OUT}.m ${OUT}.d
-      srun --ntasks-per-node=1 dcgmi profile --pause
-      srun -n 1 -c 1 -G 1 hpcrun -e gpu=nvidia,pc -o ${OUT}.m ./a.out $N
-      srun --ntasks-per-node=1 dcgmi profile --resume
+      srun --ntasks-per-node=1 dcgmi profile --pause || exit $?
+      rm -rf $out.m
+      srun -n 1 -c 1 -G 1 hpcrun -e gpu=nvidia,pc -o $out.m ./cuda_vecadd $n || exit $?
+      srun --ntasks-per-node=1 dcgmi profile --resume || exit $?
 
-      srun -n 1 -c 64 -G 0 hpcstruct --gpucfg yes ${OUT}.m
+      # Expect 2 profiles, one for the CPU thread and one for the GPU
+      if [ "$(ls -1 $out.m/ | grep '\.hpcrun$' | wc -l)" -ne 2 ]; then
+        echo "FAIL: Wrong number of profiles recorded!"
+        exit 1
+      fi
+      # Expect at least 10 samples total
+      if [ "$(grep --only-matching '^SUMMARY: samples: [[:digit:]]\+' $out.m/*.log | awk '{print $3}')" -lt 10 ]; then
+        echo "FAIL: Not enough samples recorded!"
+        exit 1
+      fi
 
-      srun -n 1 -c 64 -G 0 hpcprof -o ${OUT}.d ${OUT}.m
+      srun -n 1 -c 64 -G 0 hpcstruct --gpucfg yes $out.m || exit $?
+
+      rm -rf $out.d
+      srun -n 1 -c 64 -G 0 hpcprof -o $out.d $out.m || exit $?
+
+      # Expect the usual database files (no trace.db)
+      for fn in meta.db profile.db cct.db; do
+        if ! test -e $out.d/$fn; then
+          echo "FAIL: Missing database file $fn"
+          exit 1
+        fi
+      done
 
     status:
-      regex:
-        stream: stdout
-        exp: "OK"
-      exists:
-        - cuda_vecadd/hpctoolkit-vecadd-pc.d
+      returncode: 0
 
 maintainers:
-  - wyphan
-  - blue42u
+  - '@wyphan'
+  - '@blue42u'
