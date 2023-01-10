@@ -37,7 +37,8 @@ buildspecs:
       srun -n 1 -c 64 -G 0 hpcprof -o $out.d $out.m || exit $?
 
       # Expect the usual database files (no trace.db)
-      for fn in meta.db profile.db cct.db; do
+      # TODO: experiment.xml was replaced by meta.db in HPCToolkit 2022.10
+      for fn in experiment.xml profile.db cct.db; do
         if ! test -e $out.d/$fn; then
           echo "FAIL: Missing database file $fn"
           exit 1
