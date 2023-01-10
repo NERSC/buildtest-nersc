@@ -49,5 +49,5 @@ buildspecs:
       returncode: 0
 
 maintainers:
-  - '@wyphan'
-  - '@blue42u'
+  - wyphan
+  - blue42u
