@@ -17,10 +17,12 @@
     } \
   }
 
-__global__ void dadd (const long N, const double* a, const double* b, double* c)
+__global__ void dadd (const long N, const int niter, const double* a, const double* b, double* c)
 {
   long i = blockIdx.x * blockDim.x + threadIdx.x;
-  if (i < N) c[i] = a[i] + b[i];
+  for (int n = 0; n < niter; n++) {
+    if (i < N) c[i] = a[i] + b[i];
+  }
 }
 
 void usage (char* arg0)
@@ -87,7 +89,8 @@ int main (int argc, char* argv[])
   CUDA_CALL(cudaMemcpy(d_B, h_B, (size_t)N * sizeof(double), cudaMemcpyHostToDevice));
 
   // Perform vector addition using CUDA kernel
-  dadd<<<NBLOCKS(N, 1024), 1024>>>(N, d_A, d_B, d_C);
+  int niter = 100;
+  dadd<<<NBLOCKS(N, 1024), 1024>>>(N, niter, d_A, d_B, d_C);
   CUDA_CALL(cudaGetLastError());
   CUDA_CALL(cudaDeviceSynchronize());
 
