@@ -8,7 +8,7 @@ buildspecs:
     run: |
       module load e4s/22.05 || exit $?
       module load PrgEnv-nvidia || exit $?
-      spack env activate -V e4s || exit $?
+      spack env activate -V cuda || exit $?
       spack load hpctoolkit+cuda || exit $?
 
       rm -f cuda_vecadd
