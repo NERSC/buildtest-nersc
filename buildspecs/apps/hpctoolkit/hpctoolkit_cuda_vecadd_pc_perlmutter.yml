@@ -1,5 +1,5 @@
 buildspecs:
-  hpctoolkit_cuda:
+  hpctoolkit_cuda_pc:
     executor: '(perlmutter|muller).slurm.regular'
     type: script
     description: "HPCToolkit vector add CUDA test with PC sampling"
