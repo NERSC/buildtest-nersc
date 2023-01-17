@@ -18,30 +18,42 @@ buildspecs:
       n=1048576
 
       rm -rf $out.m
-      srun -n 1 -c 1 -G 1 hpcrun -e REALTIME -e gpu=nvidia -o $out.m ./cuda_vecadd $n || exit $?
+      srun -n 1 -c 1 -G 1 hpcrun -e REALTIME -e gpu=nvidia -t -o $out.m ./cuda_vecadd $n || exit $?
 
-      # Expect 2 profiles, one for the CPU thread and one for the GPU
+      # Expect 2 profiles and traces, one for the CPU thread and one for the GPU
       if [ "$(ls -1 $out.m/ | grep '\.hpcrun$' | wc -l)" -ne 2 ]; then
         echo "FAIL: Wrong number of profiles recorded!"
         exit 1
       fi
-      # Expect at least 10 samples total
-      if [ "$(grep --only-matching '^SUMMARY: samples: [[:digit:]]\+' $out.m/*.log | awk '{print $3}')" -lt 10 ]; then
-        echo "FAIL: Not enough samples recorded!"
-        exit 1
+
+      if [ "$(ls -1 $out.m/ | grep '\.hpctrace$' | wc -l)" -ne 2 ]; then
+        echo "FAIL: Wrong number of trace files recorded!"
+        exit 2
+      fi
+
+      # Expect at least 100 GPU trace records total
+      if [ "$(grep 'accelerator trace records:' $out.m/*.log | grep --only-matching 'processed: [[:digit:]]\+' | awk '{print $2}')" -lt 100 ]; then
+        echo "FAIL: Not enough trace records!"
+        exit 3
       fi
 
       srun -n 1 -c 64 -G 0 hpcstruct $out.m || exit $?
 
+      # Expect a gpubin struct file
+      if ! test -e $out.m/structs/*.gpubin-gpucfg-no.hpcstruct; then
+        echo "FAIL: missing struct file"
+        exit 4
+      fi
+      
       rm -rf $out.d
       srun -n 1 -c 64 -G 0 hpcprof -o $out.d $out.m || exit $?
 
-      # Expect the usual database files (no trace.db)
-      # TODO: experiment.xml was replaced by meta.db in HPCToolkit 2022.10
-      for fn in experiment.xml profile.db cct.db; do
+      # Expect the old XML format database files
+      # TODO: update to new binary format for HPCToolkit >= 2022.10
+      for fn in experiment.dtd experiment.xml; do
         if ! test -e $out.d/$fn; then
           echo "FAIL: Missing database file $fn"
-          exit 1
+          exit 5
         fi
       done
 

@@ -22,28 +22,35 @@ buildspecs:
       srun -n 1 -c 1 -G 1 hpcrun -e gpu=nvidia,pc -o $out.m ./cuda_vecadd $n || exit $?
       srun --ntasks-per-node=1 dcgmi profile --resume || exit $?
 
-      # Expect 2 profiles, one for the CPU thread and one for the GPU
-      if [ "$(ls -1 $out.m/ | grep '\.hpcrun$' | wc -l)" -ne 2 ]; then
+      # Expect 1 combined profile
+      if [ "$(ls -1 $out.m/ | grep '\.hpcrun$' | wc -l)" -ne 1 ]; then
         echo "FAIL: Wrong number of profiles recorded!"
         exit 1
       fi
-      # Expect at least 10 samples total
-      if [ "$(grep --only-matching '^SUMMARY: samples: [[:digit:]]\+' $out.m/*.log | awk '{print $3}')" -lt 10 ]; then
+
+      # Expect at least 100 GPU samples total
+      if [ "$(grep 'accelerator samples:' $out.m/*.log | grep --only-matching 'recorded: [[:digit:]]\+' | awk '{print $2}')" -lt 100 ]; then
         echo "FAIL: Not enough samples recorded!"
-        exit 1
+        exit 3
       fi
 
       srun -n 1 -c 64 -G 0 hpcstruct --gpucfg yes $out.m || exit $?
 
+      # Expect a gpubin struct file
+      if ! test -e $out.m/structs/*.gpubin-gpucfg-yes.hpcstruct; then
+        echo "FAIL: missing struct file"
+        exit 4
+      fi
+      
       rm -rf $out.d
       srun -n 1 -c 64 -G 0 hpcprof -o $out.d $out.m || exit $?
 
-      # Expect the usual database files (no trace.db)
-      # TODO: experiment.xml was replaced by meta.db in HPCToolkit 2022.10
-      for fn in experiment.xml profile.db cct.db; do
+      # Expect the old XML format database files
+      # TODO: update to new binary format for HPCToolkit >= 2022.10
+      for fn in experiment.dtd experiment.xml; do
         if ! test -e $out.d/$fn; then
           echo "FAIL: Missing database file $fn"
-          exit 1
+          exit 5
         fi
       done
 
