@@ -1,0 +1,32 @@
+buildspecs:
+  test_libe_simple_inplace:
+    type: script
+    executor: perlmutter.slurm.regular
+    description: run libEnsemble simple script
+    tags: [python, ensembles, workflows, concurrent, xsdk, e4s]
+    env:
+      I_MPI_FABRICS: shm:ofi
+      PYTHONNOUSERSITE: 1
+      SLURM_EXACT: 1
+      SLURM_MEM_PER_NODE: 0
+    sbatch: ["-t 15", "-N 2", "-C cpu"]
+    run: bash ./run_1d_sampling_local_mpi.sh
+
+  test_libe_sbatch_forces_perlmutter:
+    type: script
+    executor: perlmutter.slurm.regular
+    description: run libEnsemble forces-gpu script on Perlmutter
+    tags: [python, ensembles, workflows, concurrent, xsdk, e4s]
+    env:
+      I_MPI_FABRICS: shm:ofi
+      PYTHONNOUSERSITE: 1
+      SLURM_EXACT: 1
+      SLURM_MEM_PER_NODE: 0
+      MPICH_GPU_SUPPORT_ENABLED: "1"
+      MPICH: "cc -target-accel=nvidia80 -shared"
+    sbatch: ["-t 15", "-N 2", "-C gpu"]
+    run: bash ./run_forces_gpu_perlmutter.sh
+
+maintainers:
+  - shudson
+  - jnavarro
