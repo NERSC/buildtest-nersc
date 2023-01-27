@@ -3,7 +3,7 @@
 module load python
 module load spack/e4s-22.05
 
-spack env activate -V e4s
+spack env activate -V gcc
 spack load py-libensemble
 spack load py-mpi4py@3.1.2
 
