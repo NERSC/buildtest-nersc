@@ -1,8 +1,8 @@
 package:
 - adios2
 - butterflypack
-- darshan-runtime
-- darshan-util
+#- darshan-runtime
+#- darshan-util
 - dyninst
 - gasnet 
 - hpctoolkit
