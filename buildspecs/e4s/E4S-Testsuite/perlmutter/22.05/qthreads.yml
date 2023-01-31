@@ -10,7 +10,7 @@ buildspecs:
       state: FAIL
     run: |
       module load e4s/22.05
-      spack env activate -V e4s
+      spack env activate -V gcc
       spack load --first cmake
       git clone https://github.com/E4S-Project/testsuite
       cd testsuite
