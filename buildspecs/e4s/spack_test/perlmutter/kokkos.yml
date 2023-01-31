@@ -17,8 +17,6 @@ buildspecs:
         results:
           option: '-l'
           specs: ['kokkos']
-    status:
-      state: FAIL
 
   spack_test_kokkos_e4s_22.05:
     type: spack
