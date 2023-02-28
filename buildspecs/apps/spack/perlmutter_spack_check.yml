@@ -10,7 +10,7 @@ buildspecs:
     status:
       regex:
         stream: stdout
-        exp: '^(0.17.0-3-b6d63a83d9)$'        
+        exp: '^(0.17.0-2-80412b23ae)$'        
 
   spack_e4s_22.05:
     type: script
