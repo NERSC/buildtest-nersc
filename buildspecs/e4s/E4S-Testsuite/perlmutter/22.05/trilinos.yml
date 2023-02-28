@@ -4,15 +4,20 @@ buildspecs:
     type: script
     executor: perlmutter.slurm.regular
     description: Run E4S Testsuite trilinos test for e4s/22.05 stack
+    summary: |
+      Trilinos test running via E4S Testsuite. We encountered issue where test was unable to link to GTL library
+      see https://github.com/buildtesters/buildtest-nersc/issues/145. To mitigate this issue we need to load 'cpu' module
+      which unloads the 'cudatoolkit'.
     tags: [e4s]
-    sbatch: ["-t 30", "-N 1", "-G 1", "-A m3503_g", "-C gpu"]
+    sbatch: ["-t 30", "-N 1", "-C cpu"]
     run: |
+      # need to load cpu module since trilinos test will run a non-cuda test. 
+      module load cpu
       module load e4s/22.05
       spack env activate -V gcc
       spack load --first cmake
       git clone https://github.com/E4S-Project/testsuite
       cd testsuite
-
       sh test-all.sh --color-off validation_tests/trilinos --print-logs --settings settings.cray.sh
 maintainers:
   - shahzebsiddiqui
