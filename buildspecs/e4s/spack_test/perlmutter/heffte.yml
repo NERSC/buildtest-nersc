@@ -1,21 +1,25 @@
 buildspecs:
-  spack_test_hpctoolkit_e4s_22.05:
+  spack_test_heffte_e4s_21.11:
     type: spack
     executor: '(perlmutter|muller).local.sh'
-    description: "Test hpctoolkit build with for e4s/22.05 stack on Perlmutter via spack test"
+    description: "Test heffte build with for e4s/22.05 stack on Perlmutter via spack test"
+    summary: | 
+      This test fails see https://github.com/E4S-Project/e4s/issues/112
     tags: e4s
     pre_cmds: |
       module load e4s/22.05
       spack env activate -V gcc
-      spack load --first hpctoolkit ~cuda
+      spack load --first heffte
     spack:
       root: /global/common/software/spackecp/perlmutter/e4s-22.05/default/spack/
       verify_spack: false
       test:
         run:
-          specs: ['hpctoolkit']
+          specs: ['heffte']
         results:
           option: '-l'
-          specs: ['hpctoolkit']
-maintainers:
-  - shahzebsiddiqui
+          specs: ['heffte']
+    status:
+      state: FAIL
+
+
