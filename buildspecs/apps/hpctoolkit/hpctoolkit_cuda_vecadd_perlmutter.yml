@@ -21,15 +21,15 @@ buildspecs:
       srun -n 1 -c 1 -G 1 hpcrun -e REALTIME -e gpu=nvidia -t -o $out.m ./cuda_vecadd $n || exit $?
 
       # Expect 2 profiles and traces, one for the CPU thread and one for the GPU
-      if [ "$(ls -1 $out.m/ | grep '\.hpcrun$' | wc -l)" -ne 2 ]; then
-        echo "FAIL: Wrong number of profiles recorded!"
-        exit 1
-      fi
+ #     if [ "$(ls -1 $out.m/ | grep '\.hpcrun$' | wc -l)" -ne 2 ]; then
+ #       echo "FAIL: Wrong number of profiles recorded!"
+ #       exit 1
+ #     fi
 
-      if [ "$(ls -1 $out.m/ | grep '\.hpctrace$' | wc -l)" -ne 2 ]; then
-        echo "FAIL: Wrong number of trace files recorded!"
-        exit 2
-      fi
+ #     if [ "$(ls -1 $out.m/ | grep '\.hpctrace$' | wc -l)" -ne 2 ]; then
+ #       echo "FAIL: Wrong number of trace files recorded!"
+ #       exit 2
+ #     fi
 
       # Expect at least 100 GPU trace records total
       if [ "$(grep 'accelerator trace records:' $out.m/*.log | grep --only-matching 'processed: [[:digit:]]\+' | awk '{print $2}')" -lt 100 ]; then
@@ -40,10 +40,10 @@ buildspecs:
       srun -n 1 -c 64 -G 0 hpcstruct $out.m || exit $?
 
       # Expect a gpubin struct file
-      if ! test -e $out.m/structs/*.gpubin-gpucfg-no.hpcstruct; then
-        echo "FAIL: missing struct file"
-        exit 4
-      fi
+#      if ! test -e $out.m/structs/*.gpubin-gpucfg-no.hpcstruct; then
+#        echo "FAIL: missing struct file"
+#        exit 4
+#      fi
       
       rm -rf $out.d
       srun -n 1 -c 64 -G 0 hpcprof -o $out.d $out.m || exit $?
@@ -59,6 +59,25 @@ buildspecs:
 
     status:
       returncode: 0
+      file_count:
+      - dir: "${out}.m"
+        ext: '.hpcrun'
+        depth: 1
+        count: 2
+      - dir: "${out}.m"
+        ext: '.hpctrace'
+        depth: 1
+        count: 2
+      - dir: "${out}.m/structs"
+        filepattern: '\.gpubin-gpucfg-no\.hpcstruct$'
+        depth: 1
+        count: 1
+      exists:
+      - "${out}.d/experiment.dtd"
+      - "${out}.d/experiment.xml"
+#      file_regex:
+#      - file: "${out}.m/*.log"
+#        exp: '.processed: [[:digit:]]\+'
 
 maintainers:
   - wyphan
