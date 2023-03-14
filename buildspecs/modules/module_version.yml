@@ -1,14 +1,21 @@
 buildspecs:
   module_version:
     type: script
-    executor: cori.local.bash
-    description: check module version of startup module
+    executor: '(perlmutter|cori).local.bash'
+    description: check module version
     tags: [daily, system, module]
     run: module --version
-    status:
-      regex:
-        stream: stderr
-        exp: "^(VERSION=3.2.11.4)"
+    executors:  
+      cori.local.bash:
+        status:
+          regex:
+            stream: stderr
+            exp: "^(VERSION=3.2.11.4)"
+      perlmutter.local.bash:
+        status:
+          regex:
+            stream: stderr
+            exp: 'Modules based on Lua: Version 8\.7\.15'
 
 maintainers:
   - "shahzebsiddiqui"
