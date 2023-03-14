@@ -14,7 +14,7 @@ buildspecs:
       perlmutter.local.bash:
         status:
           regex:
-            exp: "SUSE Linux Enterprise Server 15 SP3"
+            exp: "SUSE Linux Enterprise Server 15 SP4"
             stream: stdout
 maintainers:
   - "shahzebsiddiqui"
