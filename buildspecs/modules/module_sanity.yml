@@ -54,3 +54,14 @@ buildspecs:
     run: |
       ml gcc/11.2.0
       ml gcc/10.3.0
+
+  module_tree_syntax:
+    type: script
+    executor: '(perlmutter|muller).local.bash'
+    description: Run check_module_tree_syntax command from Lmod to verify any errors
+    tags: [module]
+    run: $LMOD_DIR/check_module_tree_syntax $MODULEPATH  
+
+maintainers:
+  - "shahzebsiddiqui"
+
