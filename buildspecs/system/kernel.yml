@@ -15,7 +15,7 @@ buildspecs:
         status:
           regex:
             stream: stdout
-            exp: "^5.3.18-150300.59.87_11.0.78-cray_shasta_c$"
+            exp: "^5.14.21-150400.24.11_12.0.57-cray_shasta_c$"
 
 maintainers:
   - "shahzebsiddiqui"
