@@ -2,7 +2,7 @@ buildspecs:
   module_version:
     type: script
     executor: '(perlmutter|cori).local.bash'
-    description: check module version of startup module
+    description: check module version
     tags: [daily, system, module]
     run: module --version
     executors:  
