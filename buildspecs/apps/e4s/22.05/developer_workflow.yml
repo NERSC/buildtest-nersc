@@ -98,8 +98,7 @@ buildspecs:
       The following commands will check the functionality of spack views outlined in https://docs.nersc.gov/applications/e4s/perlmutter/22.05/
     run: |
       module load e4s/22.05
-      despacktivate
-      spack env activate --with-view e4s
+      spack env activate --with-view gcc
       spack load --list
       which h5cc
       which cmake
