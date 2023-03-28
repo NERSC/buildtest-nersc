@@ -67,6 +67,7 @@ buildspecs:
       The following commands will check the unloading of the E4S packages from your environment outlined in https://docs.nersc.gov/applications/e4s/perlmutter/22.05/
     run: |
       module load e4s/22.05
+      spack env activate -V gcc
       spack load hdf5@1.10.7%gcc@11.2.0
       spack load --list
       spack unload xz@5.2.5
