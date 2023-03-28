@@ -95,11 +95,10 @@ buildspecs:
     description: E4S/22.05 spack views check
     tags: [e4s]
     summary: |
-      The following commands will check the functionality of spack views outlined in https://docs.nersc.gov/applications/e4s/perlmutter/22.05/
+      The following commands will check the functionality of spack views outlined in https://docs.nersc.gov/applications/e4s/spack
     run: |
       module load e4s/22.05
-      despacktivate
-      spack env activate --with-view e4s
+      spack env activate --with-view nvhpc
       spack load --list
       which h5cc
       which cmake
