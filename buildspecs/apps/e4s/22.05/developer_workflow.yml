@@ -64,7 +64,7 @@ buildspecs:
     description: E4S/22.05 spack unload check
     tags: [e4s]
     summary: |
-      The following commands will check the unloading of the E4S packages from your environment outlined in https://docs.nersc.gov/applications/e4s/perlmutter/22.05/
+      The following commands will check the unloading of the E4S packages from your environment outlined in https://docs.nersc.gov/applications/e4s/spack/#loading-spack-packages-into-your-user-environment
     run: |
       module load e4s/22.05
       spack env activate -V gcc
