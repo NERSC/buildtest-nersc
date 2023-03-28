@@ -13,3 +13,5 @@ package:
 - superlu-dist
 - trilinos
 - vtk-m
+- tau
+#- tau-cuda
