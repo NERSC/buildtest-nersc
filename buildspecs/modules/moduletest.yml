@@ -57,10 +57,10 @@ buildspecs:
         stream: stdout
         exp: "PASS RATE: 100.000"
 
-  moduletest_perlmutter:
+  moduletest_e4s_perlmutter:
     type: script
     executor: perlmutter.local.bash
-    tags: [modules] 
+    tags: [modules, e4s] 
     description: Run module load test for Perlmutter
     run: python moduletest_perlmutter.py
        
