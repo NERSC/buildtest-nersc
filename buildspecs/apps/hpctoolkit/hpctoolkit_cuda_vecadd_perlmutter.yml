@@ -19,65 +19,40 @@ buildspecs:
 
       rm -rf $out.m
       srun -n 1 -c 1 -G 1 hpcrun -e REALTIME -e gpu=nvidia -t -o $out.m ./cuda_vecadd $n || exit $?
-
-      # Expect 2 profiles and traces, one for the CPU thread and one for the GPU
- #     if [ "$(ls -1 $out.m/ | grep '\.hpcrun$' | wc -l)" -ne 2 ]; then
- #       echo "FAIL: Wrong number of profiles recorded!"
- #       exit 1
- #     fi
-
- #     if [ "$(ls -1 $out.m/ | grep '\.hpctrace$' | wc -l)" -ne 2 ]; then
- #       echo "FAIL: Wrong number of trace files recorded!"
- #       exit 2
- #     fi
-
-      # Expect at least 100 GPU trace records total
-      if [ "$(grep 'accelerator trace records:' $out.m/*.log | grep --only-matching 'processed: [[:digit:]]\+' | awk '{print $2}')" -lt 100 ]; then
-        echo "FAIL: Not enough trace records!"
-        exit 3
-      fi
-
-      srun -n 1 -c 64 -G 0 hpcstruct $out.m || exit $?
-
-      # Expect a gpubin struct file
-#      if ! test -e $out.m/structs/*.gpubin-gpucfg-no.hpcstruct; then
-#        echo "FAIL: missing struct file"
-#        exit 4
-#      fi
-      
+      srun -n 1 -c 64 -G 0 hpcstruct $out.m || exit $?      
       rm -rf $out.d
       srun -n 1 -c 64 -G 0 hpcprof -o $out.d $out.m || exit $?
 
-      # Expect the old XML format database files
-      # TODO: update to new binary format for HPCToolkit >= 2022.10
-      for fn in experiment.dtd experiment.xml; do
-        if ! test -e $out.d/$fn; then
-          echo "FAIL: Missing database file $fn"
-          exit 5
-        fi
-      done
+    metrics:
+      accelerator_samples:
+        type: int
+        file_regex:
+          file: "hpctoolkit-vecadd.m/*.log"
+          exp: '.processed: [[:digit:]]\+'
+          item: 1
 
     status:
+      mode: "all"
       returncode: 0
+      assert_ge:
+      - name: accelerator_samples
+        ref: 100
       file_count:
-      - dir: "${out}.m"
-        ext: '.hpcrun'
+      - dir: "hpctoolkit-vecadd.m"
+        ext: ".hpcrun"
         depth: 1
         count: 2
-      - dir: "${out}.m"
-        ext: '.hpctrace'
+      - dir: "hpctoolkit-vecadd.m"
+        ext: ".hpctrace"
         depth: 1
         count: 2
-      - dir: "${out}.m/structs"
+      - dir: "hpctoolkit-vecadd.m/structs"
         filepattern: '\.gpubin-gpucfg-no\.hpcstruct$'
         depth: 1
         count: 1
       exists:
-      - "${out}.d/experiment.dtd"
-      - "${out}.d/experiment.xml"
-#      file_regex:
-#      - file: "${out}.m/*.log"
-#        exp: '.processed: [[:digit:]]\+'
+      - "hpctoolkit-vecadd.d/experiment.dtd"
+      - "hpctoolkit-vecadd.d/experiment.xml"
 
 maintainers:
   - wyphan
