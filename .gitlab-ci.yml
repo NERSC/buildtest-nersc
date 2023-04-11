@@ -25,17 +25,6 @@ stages:
   - build
   - test
 
-validate_cori:
-  stage: build
-  tags: [cori-e4s]
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-  before_script:
-    - *setup-buildtest
-  script:
-    - *buildspec_cache
-    - buildtest config compilers test
-
 validate_buildspecs_on_perlmutter:
   stage: build
   tags: [perlmutter-e4s]
@@ -46,18 +35,6 @@ validate_buildspecs_on_perlmutter:
   script:
     - *buildspec_cache
     - buildtest config compilers test
-
-validate_buildspecs_on_gerty:
-  stage: build
-  tags: [gerty-e4s]
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-  before_script:
-    - *setup-buildtest
-  script:
-    - *buildspec_cache   
-    - buildtest config compilers test
-
 
 validate_buildspecs_on_muller:
   stage: build
@@ -105,39 +82,3 @@ muller_scheduled_test:
     - buildtest cdash upload $CDASH_BUILD_NAME
   after_script:
     - *cleanup-buildtest
-
-cori_scheduled_test:
-  stage: test
-  only:
-    refs:
-      - schedules
-    variables:
-      - $SYSTEM == "cori"
-  tags: [cori-e4s]
-  before_script:
-    - *setup-buildtest
-  script:
-    - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
-    - buildtest build --tags $TAGNAME  --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
-    - buildtest report --fail 
-    - buildtest cdash upload $CDASH_BUILD_NAME
-  after_script:
-    - *cleanup-buildtest 
-
-gerty_scheduled_test:
-  stage: test
-  only:
-    refs:
-      - schedules
-    variables:
-      - $SYSTEM == "gerty"
-  tags: [gerty-e4s]
-  before_script:
-    - *setup-buildtest
-  script:
-    - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
-    - buildtest build --tags $TAGNAME  --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
-    - buildtest report --fail
-    - buildtest cdash upload $CDASH_BUILD_NAME
-  after_script:
-    - *cleanup-buildtest       
