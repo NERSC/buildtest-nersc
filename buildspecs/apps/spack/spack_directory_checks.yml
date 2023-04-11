@@ -8,6 +8,7 @@ buildspecs:
       ls -ld /global/common/software/spackecp/cori/e4s-22.02/{software,modules,spack}
       ls -ld /global/common/software/spackecp/perlmutter/e4s-21.11/default/spack
       ls -ld /global/common/software/spackecp/perlmutter/e4s-22.05/default/spack
+      ls -ld /global/common/software/spackecp/perlmutter/e4s-22.11/default/spack
       ls -l /global/common/software/spackecp/perlmutter/spack_settings/{compilers.yaml,packages.yaml}
   e4s_spack_settings:
     type: script
@@ -17,7 +18,18 @@ buildspecs:
     run: | 
       ls /global/common/software/spackecp/perlmutter/e4s-22.05/default/spack/etc/spack/{config,mirrors,modules}.yaml
       ls /global/common/software/spackecp/perlmutter/e4s-21.11/default/spack/etc/spack/{config,mirrors,modules}.yaml
+      ls /global/common/software/spackecp/perlmutter/e4s-21.11/default/spack/etc/spack/{config,modules}.yaml
 
+  buildcache_directory_check:
+    type: script
+    description: Check for directory existence for spack buildcache directory
+    executor: '(perlmutter|muller).local.bash'
+    tags: [e4s]  
+    run: ls -ld /global/common/software/spackecp/mirrors/perlmutter-e4s-{22.05,22.11}/build_cache
+    status:
+      is_dir:
+        - /global/common/software/spackecp/mirrors/perlmutter-e4s-22.05/build_cache
+        - /global/common/software/spackecp/mirrors/perlmutter-e4s-22.11/build_cache
 maintainers:
   - shahzebsiddiqui
 

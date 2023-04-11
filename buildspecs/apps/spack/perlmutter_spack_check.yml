@@ -6,6 +6,7 @@ buildspecs:
     tags: [system, e4s]
     run: |
       ml spack/e4s-21.11
+      which spack
       spack --version
     status:
       regex:
@@ -19,11 +20,26 @@ buildspecs:
     tags: [system, e4s]
     run: |
       ml spack/e4s-22.05
+      which spack
       spack --version
     status:
       regex:
         stream: stdout
         exp: '^(0.18.0.dev0)'       
+
+  spack_e4s_22.11:
+    type: script
+    executor: '(perlmutter|muller).local.(bash|sh|csh|zsh)'
+    description: Check version of spack for spack/e4s-22.11 module
+    tags: [system, e4s]
+    run: |
+      ml spack/e4s-22.11
+      which spack
+      spack --version
+    status:
+      regex:
+        stream: stdout
+        exp: '^(0.19.0.dev0)'       
 maintainers:
   - 'shahzebsiddiqui'
 
