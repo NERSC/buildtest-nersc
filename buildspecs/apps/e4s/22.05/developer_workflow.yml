@@ -48,9 +48,10 @@ buildspecs:
     description: E4S/22.05 spack load check
     tags: [e4s]
     summary: |
-      The following commands will check the loading of the E4S packages in your user environment with example of HDF5 outlined in https://docs.nersc.gov/applications/e4s/perlmutter/22.05/
+      The following commands will check the loading of the E4S packages in your user environment with example of HDF5 outlined in https://docs.nersc.gov/applications/e4s/spack/#loading-spack-packages-into-your-user-environment
     run: |
       module load e4s/22.05
+      spack env activate -V gcc
       spack load --list
       spack find hdf5
       spack load hdf5@1.10.7%gcc@11.2.0
