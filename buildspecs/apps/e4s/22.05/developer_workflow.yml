@@ -80,9 +80,10 @@ buildspecs:
     description: E4S/22.05 spack load without dependencies check
     tags: [e4s]
     summary: |
-      The following commands will check the loading of a spack package without dependencies and using a hash for the package with mutliple versions outlined in https://docs.nersc.gov/applications/e4s/perlmutter/22.05/
+      The following commands will check the loading of a spack package without dependencies and using a hash for the package with mutliple versions outlined in https://docs.nersc.gov/applications/e4s/spack/
     run: |
       module load e4s/22.05
+      spack env activate -V gcc
       spack load --list
       spack load --only package /p23fzuo
       spack load --list
