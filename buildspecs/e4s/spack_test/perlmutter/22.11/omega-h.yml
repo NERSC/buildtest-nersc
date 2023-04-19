@@ -1,0 +1,26 @@
+#This buildtest was generated from spack-test-22.11-template.yaml
+buildspecs:
+  omega-h_spack-test_22.11:
+    type: script
+    executor: perlmutter.slurm.regular
+    description: Run spack test for omega-h from e4s/22.11 gcc stack
+    tags: [e4s]
+    sbatch: ["-t 30", "-N 1", "-G 1", "-A m3503_g", "-C gpu"]
+    tags: e4s
+    pre_cmds: |
+      module load e4s/22.11
+      spack env activate  gcc
+      spack load --first cmake
+      spack load --first omega-h
+    spack:
+      root: /global/common/software/spackecp/perlmutter/e4s-22.11/default/spack
+      verify_spack: false
+      test:
+        run:
+          specs: ['omega-h']
+        results:
+          option: '-l'
+          specs: ['omega-h']
+maintainers:
+  - shahzebsiddiqui
+  - wspear
