@@ -20,16 +20,18 @@ buildspecs:
       rm -rf $out.m
       srun -n 1 -c 1 -G 1 hpcrun -e REALTIME -e gpu=nvidia -t -o $out.m ./cuda_vecadd $n || exit $?
 
-      # Expect at least 100 GPU trace records total
-      if [ "$(grep 'accelerator trace records:' $out.m/*.log | grep --only-matching 'processed: [[:digit:]]\+' | awk '{print $2}')" -lt 100 ]; then
-        echo "FAIL: Not enough trace records!"
-        exit 3
-      fi
+      grep 'accelerator trace records:' $out.m/*.log | grep --only-matching 'processed: [[:digit:]]\+' | awk '{print $2}' > numrecords.txt
 
       srun -n 1 -c 64 -G 0 hpcstruct $out.m || exit $?      
       rm -rf $out.d
       srun -n 1 -c 64 -G 0 hpcprof -o $out.d $out.m || exit $?
 
+    metrics:
+      accelerator_samples:
+        type: int
+        file_regex:
+          file: "numrecords.txt"
+          exp: '\d+'
     status:
       mode: "all"
       returncode: 0
@@ -46,6 +48,9 @@ buildspecs:
         filepattern: '\.gpubin-gpucfg-no\.hpcstruct$'
         depth: 1
         count: 1
+      assert_ge:
+      - name: accelerator_samples
+        ref: 100
       exists:
       - "hpctoolkit-vecadd.d/experiment.dtd"
       - "hpctoolkit-vecadd.d/experiment.xml"
