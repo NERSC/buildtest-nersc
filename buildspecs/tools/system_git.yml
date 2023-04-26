@@ -1,20 +1,13 @@
 buildspecs:
   git_version:
     type: script
-    executor: '(cori|perlmutter).local.bash'
+    executor: 'perlmutter.local.bash'
     tags: [tool, daily]
     description: "Check version of /usr/bin/git"
-    run: /usr/bin/git --version
-    executors:
-      cori.local.bash:
-        status:
-          regex:
-            stream: stdout
-            exp: 'git version (2.26.2)'
-      perlmutter.local.bash:            
-        status:
-          regex:
-            stream: stdout
-            exp: 'git version (2.34.1)'
+    run: /usr/bin/git --version    
+    status:
+      regex:
+        stream: stdout
+        exp: 'git version (2.35.3)'
 maintainers:
   - "shahzebsiddiqui"
