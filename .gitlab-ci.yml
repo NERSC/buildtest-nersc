@@ -27,7 +27,7 @@ stages:
 
 validate_buildspecs_on_perlmutter:
   stage: build
-  tags: [perlmutter-e4s]
+  tags: [bdtest-perlmutter]
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
   before_script:
@@ -38,7 +38,7 @@ validate_buildspecs_on_perlmutter:
 
 validate_buildspecs_on_muller:
   stage: build
-  tags: [muller-e4s]
+  tags: [bdtest-muller]
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
   before_script:
@@ -49,7 +49,7 @@ validate_buildspecs_on_muller:
 
 perlmutter_scheduled_test:
   stage: test
-  tags: [perlmutter-e4s]
+  tags: [bdtest-perlmutter]
   only:
     refs:
       - schedules
@@ -67,7 +67,7 @@ perlmutter_scheduled_test:
 
 muller_scheduled_test:
   stage: test
-  tags: [muller-e4s]
+  tags: [bdtest-muller]
   only:
     refs:
       - schedules
