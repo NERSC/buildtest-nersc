@@ -52,8 +52,10 @@ buildspecs:
       - name: accelerator_samples
         ref: 100
       exists:
-      - "hpctoolkit-vecadd.d/experiment.dtd"
-      - "hpctoolkit-vecadd.d/experiment.xml"
+      - "hpctoolkit-vecadd.d/meta.db"
+      - "hpctoolkit-vecadd.d/profile.db"
+      - "hpctoolkit-vecadd.d/trace.db"
+      - "hpctoolkit-vecadd.d/cct.db"
 
 maintainers:
   - wyphan
