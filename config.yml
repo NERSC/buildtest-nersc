@@ -4,6 +4,17 @@ system:
     hostnames:
     - gert01.nersc.gov
     moduletool: environment-modules
+    buildspecs:
+      rebuild: False
+      count: 15
+      format: "name,description"
+      terse: False
+    report:
+      count: 25
+      terse: False
+      format: "name,id,state,runtime,returncode"
+      latest: True
+      oldest: False
     executors:
       local:
         bash:
@@ -31,6 +42,17 @@ system:
     - cori*
     description: Cray XC system based on Intel Haswell and KNL nodes
     moduletool: environment-modules
+    buildspecs:
+      rebuild: False
+      count: 15
+      format: "name,description"
+      terse: False
+    report:
+      count: 25
+      terse: False
+      format: "name,id,state,runtime,returncode"
+      latest: True
+      oldest: False
     cdash:
       url: https://my.cdash.org
       project: buildtest-nersc
@@ -326,6 +348,17 @@ system:
     - login01
     - login02
     moduletool: lmod
+    buildspecs:
+      rebuild: False
+      count: 15
+      format: "name,description"
+      terse: False
+    report:
+      count: 25
+      terse: False
+      format: "name,id,state,runtime,returncode"
+      latest: True
+      oldest: False
     executors:
       defaults:
         pollinterval: 30
@@ -455,6 +488,17 @@ system:
     hostnames:
     - login[01-40]
     moduletool: lmod
+    buildspecs:
+      rebuild: False
+      count: 15
+      format: "name,description"
+      terse: False
+    report:
+      count: 25
+      terse: False
+      format: "name,id,state,runtime,returncode"
+      latest: True
+      oldest: False
     executors:
       defaults:
         pollinterval: 30

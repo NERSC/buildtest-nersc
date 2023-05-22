@@ -33,7 +33,7 @@ buildspecs:
         type: int
         file_regex:
           file: "numrecords.txt"
-          exp: '\d+
+          exp: '\d+'
     status:
       mode: "all"
       returncode: 0
