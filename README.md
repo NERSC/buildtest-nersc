@@ -156,6 +156,48 @@ will run jobs based on tags, alternately some tests may be defined by running al
 scheduled job, please define a [new schedule](https://software.nersc.gov/NERSC/buildtest-nersc/-/pipeline_schedules/new) with an appropriate time. The
 `target branch` should be `devel` and define a unique variable used to distinguish scheduled jobs. Next, create a job in `.gitlab-ci.yml` that references the scheduled job and define variable ``TESTNAME`` in the scheduled pipeline.
 
+## Gitlab Runner
+
+This project will run CI jobs using [collaboration account](https://docs.nersc.gov/accounts/collaboration_accounts/) `bdtest`. You can login to this user via laptop. We recommend using `sshproxy` so you can avoid typing password 
+for every ssh connection.
+
+Once you are logged in, you can check status of the gitlab runner using **systemctl**. For instance to check status of runner on Muller you can run
+
+```console
+e4s:login02> systemctl --user status muller-e4s
+● muller-e4s.service - Gitlab runner for e4s runner on muller
+     Loaded: loaded (/global/homes/e/e4s/.config/systemd/user/muller-e4s.service; enabled; vendor preset: disabled)
+     Active: active (running) since Mon 2023-05-22 11:49:40 PDT; 33s ago
+   Main PID: 128858 (gitlab-runner)
+      Tasks: 25 (limit: 39321)
+     Memory: 22.5M
+        CPU: 248ms
+     CGroup: /user.slice/user-93315.slice/user@93315.service/app.slice/muller-e4s.service
+             └─ 128858 /global/homes/e/e4s/jacamar/gitlab-runner run -c /global/homes/e/e4s/.gitlab-runner/muller.config.toml
+```
+
+The systemd service configuration are located in ``$HOME/.config/systemd/user``, shown below are the configuration files.
+
+```console
+e4s:login02> ls $HOME/.config/systemd/user/*.service
+/global/homes/e/e4s/.config/systemd/user/muller-e4s.service  /global/homes/e/e4s/.config/systemd/user/perlmutter-e4s.service
+```
+
+If you want to stop or restart the service you can do the following
+
+```
+# restart service
+systemctl --user restart muller-e4s
+
+# stop service
+systemctl --user stop muller-e4s
+
+# start service 
+systemctl --user start muller-e4s
+```
+
+The gitlab runner configuration is stored in `$HOME/.gitglab-runner` including the jacamar configuration (`jacamar.toml`).
+
 ## Integrations
 
 This project has integration with Slack to notify CI builds to [buildtest Slack](https://hpcbuildtest.slack.com) at **#buildtest-nersc** workspace. The integrations can be
