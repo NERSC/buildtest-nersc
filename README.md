@@ -161,42 +161,41 @@ scheduled job, please define a [new schedule](https://software.nersc.gov/NERSC/b
 This project will run CI jobs using [collaboration account](https://docs.nersc.gov/accounts/collaboration_accounts/) `bdtest`. You can login to this user via laptop. We recommend using `sshproxy` so you can avoid typing password 
 for every ssh connection.
 
-Once you are logged in, you can check status of the gitlab runner using **systemctl**. For instance to check status of runner on Muller you can run
+Once you are logged in, you can check status of the gitlab runner using **systemctl**. For instance to check status of runner on Perlmutter you can run
 
 ```console
-e4s:login02> systemctl --user status muller-e4s
-● muller-e4s.service - Gitlab runner for e4s runner on muller
-     Loaded: loaded (/global/homes/e/e4s/.config/systemd/user/muller-e4s.service; enabled; vendor preset: disabled)
-     Active: active (running) since Mon 2023-05-22 11:49:40 PDT; 33s ago
-   Main PID: 128858 (gitlab-runner)
-      Tasks: 25 (limit: 39321)
-     Memory: 22.5M
-        CPU: 248ms
-     CGroup: /user.slice/user-93315.slice/user@93315.service/app.slice/muller-e4s.service
-             └─ 128858 /global/homes/e/e4s/jacamar/gitlab-runner run -c /global/homes/e/e4s/.gitlab-runner/muller.config.toml
+bdtest@perlmutter:login40:~> systemctl --user status perlmutter-bdtest
+● perlmutter-bdtest.service - Gitlab runner for bdtest on perlmutter
+     Loaded: loaded (/global/homes/b/bdtest/.config/systemd/user/perlmutter-bdtest.service; enabled; vendor preset: disabled)
+     Active: active (running) since Tue 2023-05-23 09:20:18 PDT; 34min ago
+   Main PID: 60983 (gitlab-runner)
+      Tasks: 1231 (limit: 39321)
+     Memory: 3.2G
+        CPU: 1d 11h 23min 24.701s
+     CGroup: /user.slice/user-99914.slice/user@99914.service/app.slice/perlmutter-bdtest.service
 ```
 
-The systemd service configuration are located in ``$HOME/.config/systemd/user``, shown below are the configuration files.
+The systemd service configuration are located in directory ``$HOME/.config/systemd/user``, shown below are the systemd service files (*.service).
 
 ```console
-e4s:login02> ls $HOME/.config/systemd/user/*.service
-/global/homes/e/e4s/.config/systemd/user/muller-e4s.service  /global/homes/e/e4s/.config/systemd/user/perlmutter-e4s.service
+bdtest@perlmutter:login40:~> ls $HOME/.config/systemd/user/*.service
+/global/homes/b/bdtest/.config/systemd/user/muller-bdtest.service  /global/homes/b/bdtest/.config/systemd/user/perlmutter-bdtest.service
 ```
 
-If you want to stop or restart the service you can do the following
+If you want to start/stop/restart the service you can do the following:
 
 ```
 # restart service
-systemctl --user restart muller-e4s
+systemctl --user restart perlmutter-bdtest
 
 # stop service
-systemctl --user stop muller-e4s
+systemctl --user stop perlmutter-bdtest
 
 # start service 
-systemctl --user start muller-e4s
+systemctl --user start perlmutter-bdtest
 ```
 
-The gitlab runner configuration is stored in `$HOME/.gitglab-runner` including the jacamar configuration (`jacamar.toml`).
+The gitlab runner configuration is stored in `$HOME/.gitlab-runner` including the jacamar configuration (`jacamar.toml`).
 
 ## Integrations
 
