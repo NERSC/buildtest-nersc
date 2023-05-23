@@ -1,18 +1,4 @@
 buildspecs:
-  spack_e4s_21.11:
-    type: script
-    executor: '(perlmutter|muller).local.(bash|sh|csh|zsh)'
-    description: Check version of spack for spack/e4s-21.11 module
-    tags: [system, e4s]
-    run: |
-      ml spack/e4s-21.11
-      which spack
-      spack --version
-    status:
-      regex:
-        stream: stdout
-        exp: '^(0.17.0-2-80412b23ae)$'        
-
   spack_e4s_22.05:
     type: script
     executor: '(perlmutter|muller).local.(bash|sh|csh|zsh)'
