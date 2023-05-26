@@ -1,25 +1,4 @@
 buildspecs:
-  laplace_mpi_cori:
-    type: compiler
-    description: Laplace MPI code in C on Cori
-    executor: cori.slurm.knl_debug
-    tags: [mpi, compile]
-    source: src/laplace_mpi.c
-    compilers:
-      name: ["^(intel/19.1.2.254)$"]
-      default:
-        all:
-          sbatch: ["-N 1", "-n 4"]
-          run: srun -n 4 $_EXEC
-        intel:
-          cc: mpiicc
-          cflags: -O3
-      config:
-        intel/19.1.2.254:
-          module:
-            load: [impi/2020]
-            swap: [intel, intel/19.1.2.254]
-
   laplace_mpi_perlmutter:
     type: compiler
     description: Laplace MPI code in C on Perlmutter

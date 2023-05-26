@@ -1,8 +1,0 @@
-
-buildspecs:
-  libxml_library_missing:
-    type: script
-    executor: cori.local.bash
-    tags: [daily]
-    description: Missing XML/LibXML.pm library. See INC0167986
-    run: perl xml-switch.pl 

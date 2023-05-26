@@ -1,20 +1,17 @@
-
 buildspecs:
   reduction:
     type: compiler
-    executor: cori.local.bash
+    executor: perlmutter.local.bash
     source: src/reduction.c
-    description: OpenMP reduction example using gcc, intel, PrgEnv-cray compiler
+    description: OpenMP reduction example using gcc and cray compiler
     tags: [openmp]
     compilers:
-      name: ["^(gcc|intel|PrgEnv-cray)"]
+      name: ["^(gcc|cce)"]
       default:
         all:
           env:
             OMP_NUM_THREADS: 4
         gcc:
           cflags: -fopenmp
-        intel:
-          cflags: -qopenmp
         cray:
           cflags: -h omp      

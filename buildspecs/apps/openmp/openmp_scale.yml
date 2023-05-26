@@ -1,16 +1,15 @@
-
 buildspecs:
-  hello_world_openmp:
+  openmp_scale:
     type: compiler
-    executor: cori.slurm.knl_debug
+    executor: perlmutter.slurm.debug
     source: src/hello.c
     description: Hello World OpenMP scaling example with processor count
     tags: [openmp]
     compilers:
-      name: ["^PrgEnv-intel/6.0.5"]
+      name: ["^(gcc)"]
       default:
-        intel:
+        gcc:
           env:
             OMP_NUM_THREADS: "$BUILDTEST_NUMPROCS"
-          cflags: -qopenmp
-          sbatch: ["-t 10"]
+          cflags: -fopenmp
+          sbatch: ['-t 5', '-C cpu']  
