@@ -5,8 +5,8 @@ This repository contains tests for Cori and Perlmutter using the [buildtest](htt
 ## Useful Links
 
 - CDASH: https://my.cdash.org/index.php?project=buildtest-nersc
-- Upstream Repo: https://software.nersc.gov/NERSC/buildtest-nersc
-- Github Mirror Repo: https://github.com/buildtesters/buildtest-nersc 
+- Upstream Repo: https://github.com/buildtesters/buildtest-nersc  
+- Github Mirror Repo: https://software.nersc.gov/NERSC/buildtest-nersc
 
 ## Buildtest References
 
@@ -23,12 +23,6 @@ To get started, please [connect to NERSC system](https://docs.nersc.gov/connect/
 
 ```
 git clone https://github.com/buildtesters/buildtest
-git clone https://software.nersc.gov/NERSC/buildtest-nersc
-```
-
-Note if you don't have access to Gitlab server you may clone the mirror on Github:
-
-```
 git clone https://github.com/buildtesters/buildtest-nersc
 ```
 
@@ -50,7 +44,7 @@ source ~/buildtest/setup.sh
 source ~/buildtest/setup.csh
 ```
 
-Next, navigate to `buildtest-nersc` directory and set environment `BUILDTEST_CONFIGFILE` to point to [config.yml](https://software.nersc.gov/NERSC/buildtest-nersc/-/blob/devel/config.yml) which is the configuration file for NERSC system.
+Next, navigate to `buildtest-nersc` directory and set environment `BUILDTEST_CONFIGFILE` to point to [config.yml](https://github.com/buildtesters/buildtest-nersc/blob/devel/config.yml) which is the configuration file for NERSC system.
 
 ```
 cd buildtest-nersc
@@ -113,7 +107,7 @@ For instance if you want to run all ``lustre`` tests you can run the following:
 buildtest build --tags lustre
 ```
 
-For more details on buildtest test please see the [buildtest tutorial](https://buildtest.readthedocs.io/en/devel/getting_started.html)
+For more details on buildtest test please see the [buildtest tutorial](https://buildtest.readthedocs.io/en/devel/command_line_tutorial.html)
 
 ## Tags Breakdown
 
@@ -147,7 +141,7 @@ For more details on querying tests see https://buildtest.readthedocs.io/en/devel
 ## CI Setup
 
 
-Tests are run on schedule basis with one schedule corresponding to one gitlab job in [.gitlab-ci.yml](https://software.nersc.gov/NERSC/buildtest-nersc/-/blob/devel/.gitlab-ci.yml). The scheduled pipelines are configured in
+Tests are run on schedule basis with one schedule corresponding to one gitlab job in [.gitlab-ci.yml](https://github.com/buildtesters/buildtest-nersc/blob/devel/.gitlab-ci.yml). The scheduled pipelines are configured in
 https://software.nersc.gov/NERSC/buildtest-nersc/-/pipeline_schedules. Each schedule has a variable ``TESTNAME`` defined to control which pipeline
 is run since we have multiple gitlab jobs. In the `.gitlab-ci.yml` we make use of conditional rules using [only](https://docs.gitlab.com/ee/ci/yaml/#onlyexcept-basic).
 
@@ -202,8 +196,9 @@ The gitlab runner configuration is stored in `$HOME/.gitlab-runner` including th
 This project has integration with Slack to notify CI builds to [buildtest Slack](https://hpcbuildtest.slack.com) at **#buildtest-nersc** workspace. The integrations can be
 found at https://software.nersc.gov/NERSC/buildtest-nersc/-/settings/integrations.
 
-This project has setup a push mirror to https://github.com/buildtesters/buildtest-nersc which can be seen at https://software.nersc.gov/NERSC/buildtest-nersc/-/settings/repository
-under **Mirroring Repositories**. If the push mirror is not setup, please add the mirror.
+The gitlab project https://software.nersc.gov/NERSC/buildtest-nersc has setup Github Integration in https://software.nersc.gov/NERSC/buildtest-nersc/-/settings/repository which
+is used for pull-mirroring and running CI/CD jobs. The pull-mirroring is configured in https://software.nersc.gov/NERSC/buildtest-nersc/-/settings/repository 
+under **Mirroring Repositories**. 
 
 ## CDASH
 
@@ -217,7 +212,7 @@ done by running test manually `buildtest build` or see if buildspec is valid via
 would be good to run your test and make sure it is working as expected, you can view test detail using `buildtest inspect name <testname>` or `buildtest inspect query <testname>`. For more
 details on querying test please see https://buildtest.readthedocs.io/en/devel/gettingstarted/query_test_report.html.
 
-If you want to contribute your tests, please see [CONTRIBUTING.md](https://software.nersc.gov/NERSC/buildtest-nersc/-/blob/devel/CONTRIBUTING.md)
+If you want to contribute your tests, please see [CONTRIBUTING.md](https://github.com/buildtesters/buildtest-nersc/blob/devel/CONTRIBUTING.md)
 
 ## Submitting an Issue
 
