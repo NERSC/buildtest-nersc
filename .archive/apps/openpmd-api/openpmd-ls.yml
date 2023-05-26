@@ -1,4 +1,3 @@
-
 buildspecs:
   openpmd_ls_version_e4s_22.02:
     type: script
