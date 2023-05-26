@@ -29,7 +29,7 @@ validate_buildspecs_on_perlmutter:
   stage: build
   tags: [bdtest-perlmutter]
   rules:
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_PIPELINE_SOURCE == "external_pull_request_event" && $CI_EXTERNAL_PULL_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH'
   before_script:
     - *setup-buildtest
   script:
@@ -40,7 +40,7 @@ validate_buildspecs_on_muller:
   stage: build
   tags: [bdtest-muller]
   rules:
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_PIPELINE_SOURCE == "external_pull_request_event" && $CI_EXTERNAL_PULL_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH'
   before_script:
     - *setup-buildtest
   script:
@@ -60,10 +60,14 @@ perlmutter_scheduled_test:
   script:
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
     - buildtest build -t $TAGNAME --account m3503_g --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
-    - buildtest report --fail
+    - buildtest report --fail | tee $CI_PROJECT_DIR/.artifacts/report.txt
     - buildtest cdash upload $CDASH_BUILD_NAME
   after_script:
     - *cleanup-buildtest
+  artifacts:
+    paths:
+      - $CI_PROJECT_DIR/.artifacts
+    expire_in: 1 week
 
 muller_scheduled_test:
   stage: test
@@ -78,7 +82,11 @@ muller_scheduled_test:
   script:
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
     - buildtest build -t $TAGNAME --account m3503_g --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
-    - buildtest report --fail
+    - buildtest report --fail | tee $CI_PROJECT_DIR/.artifacts/report.txt
     - buildtest cdash upload $CDASH_BUILD_NAME
   after_script:
     - *cleanup-buildtest
+  artifacts:
+    paths:
+      - $CI_PROJECT_DIR/.artifacts
+    expire_in: 1 week
