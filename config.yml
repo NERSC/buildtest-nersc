@@ -5,16 +5,16 @@ system:
     - gert01.nersc.gov
     moduletool: environment-modules
     buildspecs:
-      rebuild: False
+      rebuild: false
       count: 15
-      format: "name,description"
-      terse: False
+      format: name,description
+      terse: false
     report:
       count: 25
-      terse: False
-      format: "name,id,state,runtime,returncode"
-      latest: True
-      oldest: False
+      terse: false
+      format: name,id,state,runtime,returncode
+      latest: true
+      oldest: false
     executors:
       local:
         bash:
@@ -43,16 +43,16 @@ system:
     description: Cray XC system based on Intel Haswell and KNL nodes
     moduletool: environment-modules
     buildspecs:
-      rebuild: False
+      rebuild: false
       count: 15
-      format: "name,description"
-      terse: False
+      format: name,description
+      terse: false
     report:
       count: 25
-      terse: False
-      format: "name,id,state,runtime,returncode"
-      latest: True
-      oldest: False
+      terse: false
+      format: name,id,state,runtime,returncode
+      latest: true
+      oldest: false
     cdash:
       url: https://my.cdash.org
       project: buildtest-nersc
@@ -349,16 +349,16 @@ system:
     - login02
     moduletool: lmod
     buildspecs:
-      rebuild: False
+      rebuild: false
       count: 15
-      format: "name,description"
-      terse: False
+      format: name,description
+      terse: false
     report:
       count: 25
-      terse: False
-      format: "name,id,state,runtime,returncode"
-      latest: True
-      oldest: False
+      terse: false
+      format: name,id,state,runtime,returncode
+      latest: true
+      oldest: false
     executors:
       defaults:
         pollinterval: 30
@@ -489,16 +489,16 @@ system:
     - login[01-40]
     moduletool: lmod
     buildspecs:
-      rebuild: False
+      rebuild: false
       count: 15
-      format: "name,description"
-      terse: False
+      format: name,description
+      terse: false
     report:
       count: 25
-      terse: False
-      format: "name,id,state,runtime,returncode"
-      latest: True
-      oldest: False
+      terse: false
+      format: name,id,state,runtime,returncode
+      latest: true
+      oldest: false
     executors:
       defaults:
         pollinterval: 30
@@ -563,42 +563,60 @@ system:
               - PrgEnv-gnu
               - gcc/10.3.0
               purge: false
+          gcc/12.2.0:
+            cc: cc
+            cxx: CC
+            fc: ftn
+            module:
+              load:
+              - PrgEnv-gnu
+              - gcc/12.2.0
+              purge: false
+          gcc/12.1.0:
+            cc: cc
+            cxx: CC
+            fc: ftn
+            module:
+              load:
+              - PrgEnv-gnu
+              - gcc/12.1.0
+              purge: false
         cray:
-          cce/14.0.1:
+          cce/15.0.1:
             cc: cc
             cxx: CC
             fc: ftn
             module:
               load:
               - PrgEnv-cray
-              - cce/14.0.1
+              - cce/15.0.1
               purge: false
-          cce/13.0.2:
+          cce/15.0.0:
             cc: cc
             cxx: CC
             fc: ftn
             module:
               load:
               - PrgEnv-cray
-              - cce/13.0.2
+              - cce/15.0.0
               purge: false
-          cce-mixed/13.0.2:
+          cce-mixed/15.0.1:
             cc: cc
             cxx: CC
             fc: ftn
             module:
               load:
               - PrgEnv-cray
-              - cce-mixed/13.0.2
+              - cce-mixed/15.0.1
               purge: false
-          cce-mixed/14.0.1:
+          cce-mixed/15.0.0:
             cc: cc
             cxx: CC
             fc: ftn
             module:
               load:
               - PrgEnv-cray
-              - cce-mixed/14.0.1
+              - cce-mixed/15.0.0
               purge: false
         nvhpc:
           nvhpc/21.11:
@@ -628,15 +646,6 @@ system:
               - PrgEnv-nvidia
               - nvhpc/22.7
               purge: false
-          nvhpc/22.5:
-            cc: cc
-            cxx: CC
-            fc: ftn
-            module:
-              load:
-              - PrgEnv-nvidia
-              - nvhpc/22.5
-              purge: false
           nvhpc-mixed/21.11:
             cc: cc
             cxx: CC
@@ -645,15 +654,6 @@ system:
               load:
               - PrgEnv-nvidia
               - nvhpc-mixed/21.11
-              purge: false
-          nvhpc-mixed/22.5:
-            cc: cc
-            cxx: CC
-            fc: ftn
-            module:
-              load:
-              - PrgEnv-nvidia
-              - nvhpc-mixed/22.5
               purge: false
           nvhpc-mixed/21.9:
             cc: cc
@@ -672,6 +672,24 @@ system:
               load:
               - PrgEnv-nvidia
               - nvhpc-mixed/22.7
+              purge: false
+          nvhpc/23.1:
+            cc: cc
+            cxx: CC
+            fc: ftn
+            module:
+              load:
+              - PrgEnv-nvidia
+              - nvhpc/23.1
+              purge: false
+          nvhpc-mixed/23.1:
+            cc: cc
+            cxx: CC
+            fc: ftn
+            module:
+              load:
+              - PrgEnv-nvidia
+              - nvhpc-mixed/23.1
               purge: false
     cdash:
       url: https://my.cdash.org
