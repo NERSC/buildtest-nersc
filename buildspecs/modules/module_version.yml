@@ -1,16 +1,11 @@
 buildspecs:
   module_version:
     type: script
-    executor: perlmutter|cori.local.bash
+    executor: perlmutter.local.bash
     description: check module version
     tags: [daily, system, module]
     run: module --version
-    executors:  
-      cori.local.bash:
-        status:
-          regex:
-            stream: stderr
-            exp: "^(VERSION=3.2.11.4)"
+    executors:
       perlmutter.local.bash:
         status:
           regex:
