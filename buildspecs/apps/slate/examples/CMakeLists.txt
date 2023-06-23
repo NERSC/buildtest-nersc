@@ -36,12 +36,12 @@ set(
     ex01_matrix.cc
     ex02_conversion.cc
     ex03_submatrix.cc
-    ex04_norm.cc
+    # ex04_norm.cc                          # needs newer SLATE
     ex05_blas.cc
     ex06_linear_system_lu.cc
     ex07_linear_system_cholesky.cc
     # ex08_linear_system_indefinite.cc      # failing
-    ex09_least_squares.cc
+    # ex09_least_squares.cc                 # needs newer SLATE
     ex10_svd.cc
     # ex11_hermitian_eig.cc                 # failing
     # ex12_generalized_hermitian_eig.cc     # failing
