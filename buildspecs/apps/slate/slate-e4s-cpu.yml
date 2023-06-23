@@ -4,7 +4,7 @@ buildspecs:
     description: "SLATE build and run"
     executor: '(perlmutter|muller).slurm.regular'
     tags: ["e4s"]
-    sbatch: ["-N 1", "-n 4", "-t 10:00", "-C cpu"]
+    sbatch: ["-N 1", "-n 4", "-t 60:00", "-C cpu"]
     run: bash slate-e4s-build-and-run.sh
     status:
       regex:
