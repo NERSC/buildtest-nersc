@@ -8,6 +8,7 @@ buildspecs:
     sbatch: ["-t 30", "-N 1", "-G 1", "-A m3503_g", "-C gpu"]
     run: |
       module load e4s/22.11
+      module load cpu
       spack env activate gcc
       spack load --first cmake
       git clone https://github.com/E4S-Project/testsuite
