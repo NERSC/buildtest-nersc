@@ -1,0 +1,14 @@
+buildspecs:
+  slate_cpu:
+    type: script
+    description: "SLATE build and run"
+    executor: '(perlmutter|muller).slurm.regular'
+    tags: ["e4s"]
+    sbatch: ["-N 1", "-n 4", "-t 60:00", "-C cpu"]
+    run: bash slate-e4s-build-and-run.sh
+    status:
+      regex:
+        stream: stdout
+        exp: "100% tests passed"
+maintainers:
+  - Asim.YarKhan
