@@ -27,7 +27,7 @@ stages:
 
 validate_buildspecs_on_perlmutter:
   stage: build
-  tags: [bdtest-perlmutter]
+  tags: [perlmutter-bdtest]
   rules:
     - if: '$CI_PIPELINE_SOURCE == "external_pull_request_event" && $CI_EXTERNAL_PULL_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH'
   before_script:
@@ -38,7 +38,7 @@ validate_buildspecs_on_perlmutter:
 
 validate_buildspecs_on_muller:
   stage: build
-  tags: [bdtest-muller]
+  tags: [muller-bdtest]
   rules:
     - if: '$CI_PIPELINE_SOURCE == "external_pull_request_event" && $CI_EXTERNAL_PULL_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH'
   before_script:
@@ -49,7 +49,7 @@ validate_buildspecs_on_muller:
 
 perlmutter_scheduled_test:
   stage: test
-  tags: [bdtest-perlmutter]
+  tags: [perlmutter-bdtest]
   only:
     refs:
       - schedules
@@ -71,7 +71,7 @@ perlmutter_scheduled_test:
 
 muller_scheduled_test:
   stage: test
-  tags: [bdtest-muller]
+  tags: [muller-bdtest]
   only:
     refs:
       - schedules
