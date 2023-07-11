@@ -5,6 +5,7 @@ system:
     - login01
     - login02
     moduletool: lmod
+    poolsize: 8
     buildspecs:
       rebuild: false
       count: 15
@@ -145,6 +146,7 @@ system:
     hostnames:
     - login[01-40]
     moduletool: lmod
+    poolsize: 8
     buildspecs:
       rebuild: false
       count: 15
