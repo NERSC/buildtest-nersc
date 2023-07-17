@@ -26,10 +26,10 @@ git clone https://github.com/buildtesters/buildtest
 git clone https://github.com/buildtesters/buildtest-nersc
 ```
 
-You will need python 3.7 or higher to [install buildtest](https://buildtest.readthedocs.io/en/devel/installing_buildtest.html), on Cori/Perlmutter this can be done by loading **python**
+You will need python 3.8 or higher to [install buildtest](https://buildtest.readthedocs.io/en/devel/installing_buildtest.html), on Cori/Perlmutter this can be done by loading **python**
 module and create a conda environment as shown below.
 
-```
+```console
 module load python
 conda create -n buildtest
 conda activate buildtest
@@ -51,18 +51,21 @@ cd buildtest-nersc
 export BUILDTEST_CONFIGFILE=$(pwd)/config.yml
 ```
 
-Make sure the configuration is valid, this can be done by running the following. buildtest will validate the configuration file with the JSON schema :
+Make sure the configuration is valid, this can be done by running the following. 
 
 ```
 buildtest config validate
 ```
+
+buildtest will validate the configuration file with the JSON schema and report if configuration is valid. If you see an error during validation, please report an issue and 
+try to fix the issue if you can.  
 
 Please make sure you are using tip of [devel](https://github.com/buildtesters/buildtest/tree/devel) branch of buildtest when writing tests. You should sync your local devel branch with upstream
 fork, for more details see [contributing guide](https://buildtest.readthedocs.io/en/devel/contributing/code_contribution_guide.html).
 
 First time around you should discover all buildspecs this can be done via ``buildtest buildspec find``.  The command below will find
 and validate all buildspecs in the **buildtest-nersc** repo and load them in buildspec cache. Note that one needs to specify `--root` to specify location where
-all buildspecs are located, we have not configured [buildspec_root](https://buildtest.readthedocs.io/en/devel/configuring_buildtest/overview.html#buildspec-roots) in the configuration file since we don't have a central location where this repo will reside.
+all buildspecs are located. For more details see https://buildtest.readthedocs.io/en/devel/configuring_buildtest/overview.html#buildspec-roots 
 
 ```
 cd buildtest-nersc
@@ -70,7 +73,7 @@ buildtest buildspec find --root buildspecs --rebuild -q
 ```
 
 The buildspecs are loaded in buildspec cache file (JSON) that is used by `buildtest buildspec find` for querying cache. Subsequent runs will
-read from cache.  For more details see [buildspec interface](https://buildtest.readthedocs.io/en/devel/gettingstarted/buildspecs_interface.html).
+read from cache. For more details see [buildspec interface](https://buildtest.readthedocs.io/en/devel/gettingstarted/buildspecs_interface.html).
 
 
 ## Building Tests
@@ -150,45 +153,6 @@ will run jobs based on tags, alternately some tests may be defined by running al
 scheduled job, please define a [new schedule](https://software.nersc.gov/NERSC/buildtest-nersc/-/pipeline_schedules/new) with an appropriate time. The
 `target branch` should be `devel` and define a unique variable used to distinguish scheduled jobs. Next, create a job in `.gitlab-ci.yml` that references the scheduled job and define variable ``TESTNAME`` in the scheduled pipeline.
 
-## Gitlab Runner
-
-This project will run CI jobs using [collaboration account](https://docs.nersc.gov/accounts/collaboration_accounts/) `bdtest`. You can login to this user via laptop. We recommend using `sshproxy` so you can avoid typing password 
-for every ssh connection.
-
-Once you are logged in, you can check status of the gitlab runner using **systemctl**. For instance to check status of runner on Perlmutter you can run
-
-```console
-bdtest@perlmutter:login40:~> systemctl --user status perlmutter-bdtest
-● perlmutter-bdtest.service - Gitlab runner for bdtest on perlmutter
-     Loaded: loaded (/global/homes/b/bdtest/.config/systemd/user/perlmutter-bdtest.service; enabled; vendor preset: disabled)
-     Active: active (running) since Tue 2023-05-23 09:20:18 PDT; 34min ago
-   Main PID: 60983 (gitlab-runner)
-      Tasks: 1231 (limit: 39321)
-     Memory: 3.2G
-        CPU: 1d 11h 23min 24.701s
-     CGroup: /user.slice/user-99914.slice/user@99914.service/app.slice/perlmutter-bdtest.service
-```
-
-The systemd service configuration are located in directory ``$HOME/.config/systemd/user``, shown below are the systemd service files (*.service).
-
-```console
-bdtest@perlmutter:login40:~> ls $HOME/.config/systemd/user/*.service
-/global/homes/b/bdtest/.config/systemd/user/muller-bdtest.service  /global/homes/b/bdtest/.config/systemd/user/perlmutter-bdtest.service
-```
-
-If you want to start/stop/restart the service you can do the following:
-
-```
-# restart service
-systemctl --user restart perlmutter-bdtest
-
-# stop service
-systemctl --user stop perlmutter-bdtest
-
-# start service 
-systemctl --user start perlmutter-bdtest
-```
-
 The gitlab runner configuration is stored in `$HOME/.gitlab-runner` including the jacamar configuration (`jacamar.toml`).
 
 ## Integrations
@@ -209,8 +173,7 @@ at https://my.cdash.org/index.php?project=buildtest-nersc using `buildtest cdash
 
 To contribute back you will want to make sure your buildspec is validated before you contribute back, this could be
 done by running test manually `buildtest build` or see if buildspec is valid via `buildtest buildspec find`. It
-would be good to run your test and make sure it is working as expected, you can view test detail using `buildtest inspect name <testname>` or `buildtest inspect query <testname>`. For more
-details on querying test please see https://buildtest.readthedocs.io/en/devel/gettingstarted/query_test_report.html.
+would be good to run your test and make sure it is working as expected, you can view test detail using `buildtest inspect name <testname>` or `buildtest inspect query <testname>`. 
 
 If you want to contribute your tests, please see [CONTRIBUTING.md](https://github.com/buildtesters/buildtest-nersc/blob/devel/CONTRIBUTING.md)
 
