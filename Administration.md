@@ -97,3 +97,26 @@ the token when prompted and paste it in the terminal.
 This script will create a gitlab runner configuration for Perlmutter in `$HOME/.gitlab-runner` directory. Once you 
 have registered the runner, you can create a new systemd service file in `$HOME/.config/systemd/user` directory. 
 Please copy one of the service file and make the necessary change. 
+
+## Jacamar
+
+[Jacamar CI](https://gitlab.com/ecp-ci/jacamar-ci) is a HPC focused CI/CD driver for gitlab custom executor that allows us to run jobs on NERSC systems easily. The jacamar 
+binaries are available in `$HOME/jacamar` denoted by each version to allow us to switch between versions easily. The binaries are symlinked to `$HOME/jacamar/binaries` to allow 
+a single place to reference the binary for gitlab runner configuration.
+
+```console
+bdtest@perlmutter:login07:~> ls -l ~/jacamar/
+total 2
+drwxrwx--- 2 bdtest bdtest 512 Jul 11 07:43 binaries
+drwxrwx--- 2 bdtest bdtest 512 Jul 11 07:42 v0.15.0
+
+bdtest@perlmutter:login07:~> ls -l ~/jacamar/binaries/
+total 2
+lrwxrwxrwx 1 bdtest bdtest 18 Jul 11 07:43 jacamar -> ../v0.15.0/jacamar
+lrwxrwxrwx 1 bdtest bdtest 23 Jul 11 07:43 jacamar-auth -> ../v0.15.0/jacamar-auth
+```
+
+If you want to change the jacamar version, please install the latest version and create a directory naming the version and store the files in their. Next, update the symbolic link
+to the latest version.
+
+The jacamar configuration can be found at `~/.gitlab-runner/jacamar.toml`
