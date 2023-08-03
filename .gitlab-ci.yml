@@ -17,22 +17,22 @@
   - buildtest buildspec summary
   - buildtest buildspec find invalid
 stages:
-  - build
+  - check
   - test
 
 .validate_buildspecs:
-  stage: build
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "external_pull_request_event" && $CI_EXTERNAL_PULL_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH'
+  stage: check
+  #rules:
+  #  - if: '$CI_PIPELINE_SOURCE == "external_pull_request_event" && $CI_EXTERNAL_PULL_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH'
   before_script:
     - *setup-buildtest
   script:
     - *buildspec_cache
 
 .test_compilers:
-  stage: build
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "external_pull_request_event" && $CI_EXTERNAL_PULL_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH'
+  stage: check
+  #rules:
+  #  - if: '$CI_PIPELINE_SOURCE == "external_pull_request_event" && $CI_EXTERNAL_PULL_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH'
   before_script:
     - *setup-buildtest
   script:
@@ -44,7 +44,7 @@ stages:
     - *setup-buildtest
   script:
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
-    - buildtest build -t $TAGNAME --limit 25 --account m3503_g --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
+    - buildtest build -t $TAGNAME --limit 25 --account m3503_g --timeout 3600 --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
     - buildtest report --fail | tee $CI_PROJECT_DIR/.artifacts/report.txt
     - buildtest cdash upload $CDASH_BUILD_NAME
     - mkdir -p $CI_PROJECT_DIR/.artifacts
