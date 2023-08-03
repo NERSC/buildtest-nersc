@@ -1,7 +1,7 @@
 #This buildtest was generated from spack-test-22.11-template.yaml
 buildspecs:
   slate_spack-test_22.11:
-    type: script
+    type: spack
     executor: perlmutter.slurm.regular
     description: Run spack test for slate from e4s/22.11 gcc stack
     tags: [e4s]
