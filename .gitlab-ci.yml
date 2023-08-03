@@ -9,13 +9,8 @@
   - . setup.sh
   - git log --oneline -1
   - buildtest --help
-  - rm -rf $HOME/.buildtest
   - export BUILDTEST_CONFIGFILE=$CI_PROJECT_DIR/config.yml
   - buildtest config validate    
-  
-.cleanup-buildtest: &cleanup-buildtest
-  - mkdir -p $CI_PROJECT_DIR/.artifacts
-  - cp $CI_PROJECT_DIR/buildtest/var/buildtest.log $CI_PROJECT_DIR/.artifacts
 
 .buildspec_cache: &buildspec_cache
   - buildtest buildspec find --quiet --rebuild --root $CI_PROJECT_DIR/buildspecs
@@ -25,36 +20,26 @@ stages:
   - build
   - test
 
-validate_buildspecs_on_perlmutter:
+.validate_buildspecs:
   stage: build
-  tags: [perlmutter-bdtest]
   rules:
     - if: '$CI_PIPELINE_SOURCE == "external_pull_request_event" && $CI_EXTERNAL_PULL_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH'
   before_script:
     - *setup-buildtest
   script:
     - *buildspec_cache
-    - buildtest config compilers test
 
-validate_buildspecs_on_muller:
+.test_compilers:
   stage: build
-  tags: [muller-bdtest]
   rules:
     - if: '$CI_PIPELINE_SOURCE == "external_pull_request_event" && $CI_EXTERNAL_PULL_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH'
   before_script:
     - *setup-buildtest
   script:
-    - *buildspec_cache   
     - buildtest config compilers test
 
-perlmutter_scheduled_test:
+.scheduled_test:
   stage: test
-  tags: [perlmutter-bdtest]
-  only:
-    refs:
-      - schedules
-    variables:
-      - $SYSTEM == "perlmutter"
   before_script:
     - *setup-buildtest
   script:
@@ -62,31 +47,43 @@ perlmutter_scheduled_test:
     - buildtest build -t $TAGNAME --limit 25 --account m3503_g --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
     - buildtest report --fail | tee $CI_PROJECT_DIR/.artifacts/report.txt
     - buildtest cdash upload $CDASH_BUILD_NAME
-  after_script:
-    - *cleanup-buildtest
+    - mkdir -p $CI_PROJECT_DIR/.artifacts
+    - cp $CI_PROJECT_DIR/buildtest/var/buildtest.log $CI_PROJECT_DIR/.artifacts
   artifacts:
     paths:
       - $CI_PROJECT_DIR/.artifacts
     expire_in: 1 week
 
+validate_buildspecs_on_perlmutter:
+  extends: .validate_buildspecs
+  tags: [perlmutter-bdtest]
+
+validate_buildspecs_on_muller:
+  extends: .validate_buildspecs
+  tags: [muller-bdtest]
+
+test_compilers_perlmutter:
+  extends: .test_compilers
+  tags: [ perlmutter-bdtest ]
+
+test_compilers_muller:
+  extends: .test_compilers
+  tags: [ muller-bdtest ]
+
+perlmutter_scheduled_test:
+  extends: .scheduled_test
+  tags: [ perlmutter-bdtest ]
+  only:
+    refs:
+      - schedules
+    variables:
+      - $SYSTEM == "perlmutter"
+
 muller_scheduled_test:
-  stage: test
+  extends: .scheduled_test
   tags: [muller-bdtest]
   only:
     refs:
       - schedules
     variables:
       - $SYSTEM == "muller"
-  before_script:
-    - *setup-buildtest
-  script:
-    - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
-    - buildtest build -t $TAGNAME --limit 25 --account m3503_g --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
-    - buildtest report --fail | tee $CI_PROJECT_DIR/.artifacts/report.txt
-    - buildtest cdash upload $CDASH_BUILD_NAME
-  after_script:
-    - *cleanup-buildtest
-  artifacts:
-    paths:
-      - $CI_PROJECT_DIR/.artifacts
-    expire_in: 1 week
