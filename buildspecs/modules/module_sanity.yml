@@ -19,7 +19,7 @@ buildspecs:
 
   module_and_ml_check:
     type: script
-    executor: '(perlmutter|muller.local.bash)'
+    executor: '(perlmutter|muller).local.bash'
     description: test module and ml command
     tags: [module]
     shell: bash -e
