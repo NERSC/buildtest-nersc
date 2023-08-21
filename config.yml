@@ -259,24 +259,6 @@ system:
               - PrgEnv-cray
               - cce/15.0.0
               purge: false
-          cce-mixed/15.0.1:
-            cc: cc
-            cxx: CC
-            fc: ftn
-            module:
-              load:
-              - PrgEnv-cray
-              - cce-mixed/15.0.1
-              purge: false
-          cce-mixed/15.0.0:
-            cc: cc
-            cxx: CC
-            fc: ftn
-            module:
-              load:
-              - PrgEnv-cray
-              - cce-mixed/15.0.0
-              purge: false
         nvhpc:
           nvhpc/21.11:
             cc: cc
