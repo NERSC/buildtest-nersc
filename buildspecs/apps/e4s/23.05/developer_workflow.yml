@@ -1,0 +1,77 @@
+buildspecs:
+  e4s_23.05_dev_workflow:
+    type: script
+    executor: '(perlmutter|muller).local.bash'
+    description: E4S/23.05 Developer Workflow Check
+    tags: [e4s]
+    summary: |
+      This workflow will check the developer workflow for Perlmutter outlined in https://docs.nersc.gov/applications/e4s/spack/#developer-workflow
+    run: bash workflow.sh
+  e4s_23.05_configuration:
+    type: script
+    executor: '(perlmutter|muller).local.bash'
+    description: E4S/23.05 Spack Configuration Check
+    tags: [e4s]
+    summary: |
+      The following commands will check the spack configuration for nvhpc environment and list of all available packages for the environment in e4s-23.05 stack outlined in https://docs.nersc.gov/applications/e4s/perlmutter/23.05/
+    run: |
+      module load e4s/23.05
+      spack env list
+      spack env status
+      spack env activate -V nvhpc
+      spack env status
+      spack cd -e nvhpc
+      pwd && ls -l
+      spack find
+  e4s_23.05_spack_load:
+    type: script
+    executor: '(perlmutter|muller).local.bash'
+    description: E4S/23.05 spack load check
+    tags: [e4s]
+    summary: |
+      The following commands will check the loading of the E4S packages in your user environment with example of HDF5 outlined in https://docs.nersc.gov/applications/e4s/spack/#loading-spack-packages-into-your-user-environment
+    run: |
+      module load e4s/23.05
+      spack env activate -V gcc
+      spack load --list
+      spack find papi
+      spack load papi%gcc@11.2.0 
+      spack load --list
+      which papi_version
+      papi_version
+      export PAPI_DIR=$(spack location -i papi%gcc@11.2.0)
+  e4s_23.05_spack_unload:
+    type: script
+    executor: '(perlmutter|muller).local.bash'
+    description: E4S/23.05 spack unload check
+    tags: [e4s]
+    summary: |
+      The following commands will check the unloading of the E4S packages from your environment outlined in https://docs.nersc.gov/applications/e4s/spack/#loading-spack-packages-into-your-user-environment
+    run: |
+      module load e4s/23.05
+      spack env activate -V gcc
+      spack load cmake%gcc@11.2.0
+      spack load --list
+      spack unload xz
+      spack load --list
+      spack unload --all
+      spack load --list
+  e4s_22.05_spack_load_without_dependencies:
+    type: script
+    executor: '(perlmutter|muller).local.bash'
+    description: E4S/22.05 spack load without dependencies check
+    tags: [e4s]
+    summary: |
+      The following commands will check the loading of a spack package without dependencies and using a hash for the package with mutliple versions outlined in https://docs.nersc.gov/applications/e4s/spack/
+    run: |
+      module load e4s/23.05
+      spack env activate -V gcc
+      spack load --list
+      spack load --only package /poditdt
+      spack load --list
+      spack unload -a
+      spack load --list
+      spack load /poditdt
+      spack load --list
+maintainers:
+ - "shahzebsiddiqui"
