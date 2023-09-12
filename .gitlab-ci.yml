@@ -44,9 +44,11 @@ stages:
   stage: test
   before_script:
     - *setup-buildtest
+  variables:
+    TESTLIMIT: ${TESTLIMIT:-50} # Set LIMIT to 50 if it's not defined
   script:
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
-    - buildtest build -t $TAGNAME --limit 25 --account m3503_g --timeout 3600 --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
+    - buildtest build -t $TAGNAME --limit $TESTLIMIT --account m3503_g --timeout 3600 --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
     - buildtest report --fail | tee $CI_PROJECT_DIR/.artifacts/report.txt
     - buildtest cdash upload $CDASH_BUILD_NAME
     - mkdir -p $CI_PROJECT_DIR/.artifacts
