@@ -2,7 +2,7 @@
 buildspecs:
   superlu-dist_e4s_testsuite_22.11:
     type: script
-    executor: perlmutter.slurm.regular
+    executor: '(perlmutter|muller).slurm.regular'
     description: Run E4S Testsuite superlu-dist test for e4s/22.11 stack
     tags: [e4s-22.11]
     sbatch: ["-t 120", "-N 1", "-G 1", "-A m3503_g", "-C gpu"]
