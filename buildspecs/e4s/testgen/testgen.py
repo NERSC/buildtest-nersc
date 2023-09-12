@@ -10,7 +10,12 @@ if len(sys.argv) < 3:
  
 file_path = sys.argv[1]
 package_path = sys.argv[2]
- 
+dest_path = sys.argv[3]
+dest_path = os.path.abspath(dest_path)
+
+if not os.path.isdir(dest_path):
+    exit("ERROR: Provide a valid destination directory. "+dest_path+" not found.")
+
 #check if file is present
 if not os.path.isfile(file_path):
     exit("ERROR: Provide a valid template file. "+file_path+" not found.")
@@ -33,5 +38,6 @@ if template is None or not template.strip():
     exit("ERROR: Empty template file. "+file_path)
 
 for pname in packages["package"]:
-    with open(pname+".yml", "w") as ymlOut:
+    fname = os.path.join(dest_path, pname+".yml")
+    with open(fname, "w") as ymlOut:
         ymlOut.write(template.format(package=pname))
