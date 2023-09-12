@@ -1,3 +1,5 @@
+variables:
+  TESTLIMIT: 50 # Set default test limit to 50 
 .setup-buildtest: &setup-buildtest
   - export COLUMNS=160
   - export NERSC_HOST=$(cat /etc/clustername)
@@ -44,8 +46,6 @@ stages:
   stage: test
   before_script:
     - *setup-buildtest
-  variables:
-    TESTLIMIT: ${TESTLIMIT:-50} # Set LIMIT to 50 if it's not defined
   script:
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
     - buildtest build -t $TAGNAME --limit $TESTLIMIT --account m3503_g --timeout 3600 --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
