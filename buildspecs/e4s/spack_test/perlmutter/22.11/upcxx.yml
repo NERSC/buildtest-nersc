@@ -2,7 +2,7 @@
 buildspecs:
   upcxx_spack-test_22.11:
     type: spack
-    executor: '(perlmutter|muller).slurm.regular'
+    executor: '(perlmutter|muller).(slurm.regular|local.bash)'
     description: Run spack test for upcxx from e4s/22.11 gcc stack
     tags: [e4s-22.11]
     sbatch: ["-t 120", "-N 1", "-G 1", "-A m3503_g", "-C gpu"]
