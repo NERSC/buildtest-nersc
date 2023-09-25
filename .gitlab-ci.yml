@@ -52,7 +52,14 @@ stages:
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
     - TESTDIR=$CI_PROJECT_DIR/buildtest/runs/$CI_JOB_NAME/$(date +%F)
     - SCRATCHDIR=$PSCRATCH/buildtest/runs/$CI_JOB_NAME/$(date +%F)
-    - buildtest build -t $TAGNAME --limit $TESTLIMIT --account m3503_g --timeout $TIMEOUT --testdir $SCRATCHDIR
+    - |
+      if [ -z "$MODE" ]; then
+          buildtest build -t $TAGNAME --limit $TESTLIMIT --account m3503_g --timeout $TIMEOUT --testdir $SCRATCHDIR
+      else
+          buildtest build -t $TAGNAME --limit $TESTLIMIT --account m3503_g --timeout $TIMEOUT --testdir $SCRATCHDIR --executor-type $MODE
+      fi
+    #- if [ -z "$MODE" ]; then buildtest build -t $TAGNAME --limit $TESTLIMIT --account m3503_g --timeout $TIMEOUT --testdir $SCRATCHDIR; else buildtest build -t $TAGNAME --limit $TESTLIMIT --account m3503_g --timeout $TIMEOUT --testdir $SCRATCHDIR --executor-type $MODE; fi
+    #- buildtest build -t $TAGNAME --limit $TESTLIMIT --account m3503_g --timeout $TIMEOUT --testdir $SCRATCHDIR
     - buildtest report --fail | tee $CI_PROJECT_DIR/.artifacts/report.txt
     - buildtest cdash upload $CDASH_BUILD_NAME
     - mkdir -p $CI_PROJECT_DIR/.artifacts
