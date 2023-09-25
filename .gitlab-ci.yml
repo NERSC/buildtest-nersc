@@ -1,5 +1,7 @@
 variables:
-  TESTLIMIT: 50 # Set default test limit to 50 
+  TESTLIMIT: 50 # Set default test limit to 50
+  TIMEOUT: 3600 # Set default timeout to 3600 seconds
+
 .setup-buildtest: &setup-buildtest
   - export COLUMNS=160
   - export NERSC_HOST=$(cat /etc/clustername)
@@ -48,7 +50,9 @@ stages:
     - *setup-buildtest
   script:
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
-    - buildtest build -t $TAGNAME --limit $TESTLIMIT --account m3503_g --timeout 3600 --testdir $CFS/m3503/buildtest/runs/$CI_JOB_NAME/$(date +%F)
+    - TESTDIR=$CI_PROJECT_DIR/buildtest/runs/$CI_JOB_NAME/$(date +%F)
+    - SCRATCHDIR=$PSCRATCH/buildtest/runs/$CI_JOB_NAME/$(date +%F)
+    - buildtest build -t $TAGNAME --limit $TESTLIMIT --account m3503_g --timeout $TIMEOUT --testdir $SCRATCHDIR
     - buildtest report --fail | tee $CI_PROJECT_DIR/.artifacts/report.txt
     - buildtest cdash upload $CDASH_BUILD_NAME
     - mkdir -p $CI_PROJECT_DIR/.artifacts
