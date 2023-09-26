@@ -60,10 +60,10 @@ stages:
       fi
     #- if [ -z "$MODE" ]; then buildtest build -t $TAGNAME --limit $TESTLIMIT --account m3503_g --timeout $TIMEOUT --testdir $SCRATCHDIR; else buildtest build -t $TAGNAME --limit $TESTLIMIT --account m3503_g --timeout $TIMEOUT --testdir $SCRATCHDIR --executor-type $MODE; fi
     #- buildtest build -t $TAGNAME --limit $TESTLIMIT --account m3503_g --timeout $TIMEOUT --testdir $SCRATCHDIR
+    - mkdir -p $CI_PROJECT_DIR/.artifacts
     - buildtest report --fail | tee $CI_PROJECT_DIR/.artifacts/report.txt
     - buildtest cdash upload $CDASH_BUILD_NAME
-    - mkdir -p $CI_PROJECT_DIR/.artifacts
-    - cp $CI_PROJECT_DIR/buildtest/var/buildtest.log $CI_PROJECT_DIR/.artifacts
+    - cp $(buildtest --logpath) $CI_PROJECT_DIR/.artifacts/
   artifacts:
     paths:
       - $CI_PROJECT_DIR/.artifacts
