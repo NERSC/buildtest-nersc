@@ -231,15 +231,6 @@ system:
               - PrgEnv-gnu
               - gcc/12.2.0
               purge: false
-          gcc/12.1.0:
-            cc: cc
-            cxx: CC
-            fc: ftn
-            module:
-              load:
-              - PrgEnv-gnu
-              - gcc/12.1.0
-              purge: false
         cray:
           cce/15.0.1:
             cc: cc
@@ -249,15 +240,6 @@ system:
               load:
               - PrgEnv-cray
               - cce/15.0.1
-              purge: false
-          cce/15.0.0:
-            cc: cc
-            cxx: CC
-            fc: ftn
-            module:
-              load:
-              - PrgEnv-cray
-              - cce/15.0.0
               purge: false
         nvhpc:
           nvhpc/21.11:
