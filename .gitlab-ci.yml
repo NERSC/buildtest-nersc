@@ -5,7 +5,7 @@ variables:
 .setup-buildtest: &setup-buildtest
   - export COLUMNS=160
   - export NERSC_HOST=$(cat /etc/clustername)
-  - module load python
+  - module load python/3.9-anaconda-2021.11
   - python -m venv $CI_PROJECT_DIR/pyenv
   - source $CI_PROJECT_DIR/pyenv/bin/activate
   - git clone -b devel https://github.com/buildtesters/buildtest    
@@ -88,6 +88,7 @@ test_compilers_muller:
 perlmutter_scheduled_test:
   extends: .scheduled_test
   tags: [ perlmutter-bdtest ]
+  needs: [validate_buildspecs_on_perlmutter, test_compilers_perlmutter]
   only:
     refs:
       - schedules
@@ -97,6 +98,7 @@ perlmutter_scheduled_test:
 muller_scheduled_test:
   extends: .scheduled_test
   tags: [muller-bdtest]
+  needs: [validate_buildspecs_on_muller, test_compilers_muller]
   only:
     refs:
       - schedules
