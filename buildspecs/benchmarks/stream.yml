@@ -1,0 +1,70 @@
+buildspecs:
+  stream_uniprocess_c:
+    executor: '(perlmutter|muller).local.bash'
+    type: script
+    description: "STREAM Microbenchmark C test on uniprocessor"
+    tags: ["benchmark"]
+    run: |
+      wget https://www.cs.virginia.edu/stream/FTP/Code/stream.c
+      module load gcc
+      gcc -O2 stream.c -o stream
+      ./stream
+
+    metrics:
+      copy:
+        type: float
+        regex:
+          stream: stdout
+          exp: 'Copy:\s+(\S+)\s+.*'
+          item: 1
+
+    status:
+      assert_ge:
+        - name: copy
+          ref: 30000
+
+  stream_openmp_c:
+    executor: '(perlmutter|muller).local.bash'
+    type: script
+    description: "STREAM Microbenchmark C Test with OpenMP"
+    tags: ["benchmark"]
+    run: |
+      wget https://www.cs.virginia.edu/stream/FTP/Code/stream.c
+      module load gcc
+      gcc -fopenmp -D_OPENMP -O2 stream.c -o stream
+      OMP_NUM_THREADS=2  ./stream | tee stream2.txt
+      OMP_NUM_THREADS=8   ./stream | tee stream8.txt
+      OMP_NUM_THREADS=64  ./stream | tee stream64.txt
+
+    metrics:
+      copy2:
+        type: float
+        file_regex:
+          file: stream2.txt
+          exp: 'Copy:\s+(\S+)\s+.*'
+          item: 1
+
+      copy8:
+        type: float
+        file_regex:
+          file: stream8.txt
+          exp: 'Copy:\s+(\S+)\s+.*'
+          item: 1
+
+      copy64:
+        type: float
+        file_regex:
+          file: stream64.txt
+          exp: 'Copy:\s+(\S+)\s+.*'
+          item: 1
+
+    status:
+      assert_ge:
+        - name: copy2
+          ref: 30000
+            
+        - name: copy8
+          ref: 50000
+
+        - name: copy64
+          ref: 500000
