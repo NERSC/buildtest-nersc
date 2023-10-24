@@ -1,0 +1,25 @@
+#This buildtest was generated from spack-test-23.05-template.yaml
+buildspecs:
+  sundials_spack-test_23.05:
+    type: spack
+    executor: '(perlmutter|muller).slurm.regular'
+    description: Run spack test for sundials from e4s/23.05 gcc stack
+    tags: [e4s-23.05]
+    sbatch: ["-t 120", "-N 1", "-G 1", "-A m3503_g", "-C gpu"]
+    pre_cmds: |
+      module load e4s/23.05
+      spack env activate gcc
+      spack load --first cmake
+      spack load --first sundials
+    spack:
+      root: /global/common/software/spackecp/perlmutter/e4s-23.05/default/spack
+      verify_spack: false
+      test:
+        run:
+          specs: ['sundials']
+        results:
+          option: '-l'
+          specs: ['sundials']
+maintainers:
+  - shahzebsiddiqui
+  - wspear
