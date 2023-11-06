@@ -249,15 +249,6 @@ system:
               - PrgEnv-nvidia
               - nvhpc/21.11
               purge: false
-          nvhpc/21.9:
-            cc: cc
-            cxx: CC
-            fc: ftn
-            module:
-              load:
-              - PrgEnv-nvidia
-              - nvhpc/21.9
-              purge: false
           nvhpc/22.7:
             cc: cc
             cxx: CC
@@ -275,15 +266,6 @@ system:
               load:
               - PrgEnv-nvidia
               - nvhpc-mixed/21.11
-              purge: false
-          nvhpc-mixed/21.9:
-            cc: cc
-            cxx: CC
-            fc: ftn
-            module:
-              load:
-              - PrgEnv-nvidia
-              - nvhpc-mixed/21.9
               purge: false
           nvhpc-mixed/22.7:
             cc: cc
