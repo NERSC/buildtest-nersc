@@ -1,7 +1,7 @@
 buildspecs:
   openmp_scale:
     type: compiler
-    executor: perlmutter.slurm.debug
+    executor: '(perlmutter|muller).local.bash'
     source: src/hello.c
     description: Hello World OpenMP scaling example with processor count
     tags: [openmp]

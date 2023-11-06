@@ -1,8 +1,7 @@
-
 buildspecs:
   gcc_nvhpc_compilation:
     type: script
-    executor: perlmutter.slurm.regular
+    executor: '(perlmutter|muller).slurm.regular'
     description: gcc and nvhpc compilation example
     sbatch: ["-N 1", "-C  gpu", "-G 1", "-t 5", "-A m3503_g"]
     tags: [gpu]

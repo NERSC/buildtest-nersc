@@ -1,7 +1,7 @@
 buildspecs:
   reduction:
     type: compiler
-    executor: perlmutter.local.bash
+    executor: '(perlmutter|muller).local.bash'
     source: src/reduction.c
     description: OpenMP reduction example using gcc and cray compiler
     tags: [openmp]

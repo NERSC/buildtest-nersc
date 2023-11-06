@@ -1,8 +1,7 @@
-
 buildspecs:
   srun_gpu_binding:
     type: script
-    executor: perlmutter.slurm.regular
+    executor: '(perlmutter|muller).slurm.regular'
     description: GPU binding example with srun
     sbatch: ["-N 1", "-C gpu", "-G 4", "-t 5", "--ntasks-per-node=8", "--cpus-per-task=2", "-A m3503_g"]
     tags: [gpu]

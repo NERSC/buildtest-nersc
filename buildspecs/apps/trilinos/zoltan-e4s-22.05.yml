@@ -1,7 +1,7 @@
 buildspecs:
   trilinos_zoltan_cuda-e4s-22.05:
     type: script
-    executor: perlmutter.slurm.regular
+    executor: '(perlmutter|muller).slurm.regular'
     sbatch: ["-N 2", "-t 5", "-G 4", "-C gpu", "-A m3503_g", "--image=ecpe4s/e4s-cuda:22.05"]
     tags: [e4s]
     description: Run trilinos zoltan test from e4s 22.05 shifter container

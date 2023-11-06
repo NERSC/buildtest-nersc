@@ -2,7 +2,7 @@ buildspecs:
   laplace_mpi_perlmutter:
     type: compiler
     description: Laplace MPI code in C on Perlmutter
-    executor: perlmutter.slurm.debug
+    executor: '(perlmutter|muller).slurm.debug'
     tags: [mpi, compile]
     source: src/laplace_mpi.c
     compilers:

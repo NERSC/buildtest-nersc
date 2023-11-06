@@ -1,8 +1,7 @@
-
 buildspecs:
   moduletest_e4s_perlmutter:
     type: script
-    executor: perlmutter.local.bash
+    executor: '(perlmutter|muller).local.bash'
     tags: [modules, e4s] 
     description: Run module load test for Perlmutter
     run: python moduletest_perlmutter.py

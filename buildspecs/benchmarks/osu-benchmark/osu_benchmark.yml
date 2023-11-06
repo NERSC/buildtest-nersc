@@ -1,7 +1,7 @@
 buildspecs:
   install_osu_benchmark:
     type: script
-    executor: perlmutter.local.bash
+    executor: '(perlmutter|muller).local.bash'
     description: Install OSU benchmark
     run: |
       module load PrgEnv-gnu
@@ -14,7 +14,7 @@ buildspecs:
   osu_bandwidth_test:
     type: script
     needs: [install_osu_benchmark]
-    executor: perlmutter.slurm.regular
+    executor: '(perlmutter|muller).slurm.regular'
     sbatch: ["-A nstaff_g", "-t 5", "-n 2", "-N 2", "-C gpu"]
     description: Run osu bandwidth test (osu_bw, osu_bibw) on 2 nodes with 2 MPI processes
     run: |
