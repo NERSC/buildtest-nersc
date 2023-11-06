@@ -1,9 +1,7 @@
 system:
   muller:
     description: Muller is TDS system for Perlmutter
-    hostnames:
-    - login01
-    - login02
+    hostnames: ['login01.chn', 'login02.chn']
     moduletool: lmod
     poolsize: 8
     buildspecs:
@@ -144,7 +142,7 @@ system:
   perlmutter:
     description: Cray Shasta system with AMD CPU and NVIDIA A100 GPUs
     hostnames:
-    - login[01-40]
+    - 'login[01-40]'
     moduletool: lmod
     poolsize: 8
     buildspecs:
