@@ -20,6 +20,7 @@ buildspecs:
 
     status:
       assert_ge:
+        comparisons:
         - name: copy
           ref: 30000
 
@@ -60,6 +61,7 @@ buildspecs:
 
     status:
       assert_ge:
+        comparisons:
         - name: copy2
           ref: 30000
             
