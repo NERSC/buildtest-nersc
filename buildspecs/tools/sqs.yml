@@ -1,19 +1,19 @@
 buildspecs:
   sqs_help:
     type: script
-    executor: 'perlmutter.local.bash'
+    executor: '(perlmutter|muller).local.bash'
     tags: ["daily", "system", "tool", "slurm"]
     run: sqs --help
 
   show_running_jobs:
     type: script
-    executor: 'perlmutter.local.bash'
+    executor: '(perlmutter|muller).local.bash'
     tags: ["daily", "system", "tool", "slurm"]
     run: sqs -r -a
 
   show_jobs_qos:
     type: script
-    executor: 'perlmutter.local.bash'
+    executor: '(perlmutter|muller).local.bash'
     tags: ["daily", "system", "tool", "slurm"]
     run: sqs -a -q regular,premium
 

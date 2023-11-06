@@ -1,7 +1,7 @@
 buildspecs:
   trilinos_zoltan_cuda-21.11:
     type: script
-    executor: perlmutter.slurm.regular
+    executor: '(perlmutter|muller).slurm.regular'
     sbatch: ["-N 2", "-t 5", "-G 4", "-C gpu", "-A m3503_g", "--image=ecpe4s/ubuntu20.04-gpu-x86_64:21.11"]
     tags: [e4s]
     description: Run trilinos zoltan test from e4s 21.11 shifter container

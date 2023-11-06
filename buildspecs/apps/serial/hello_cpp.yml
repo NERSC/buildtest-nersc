@@ -1,6 +1,6 @@
 buildspecs:
   cplusplus_hello:
-    executor: perlmutter.local.bash
+    executor: '(perlmutter|muller).local.bash'
     type: compiler
     description: hello world program in C++ compiled with gnu, nvhpc and cray compiler
     tags: [compile]

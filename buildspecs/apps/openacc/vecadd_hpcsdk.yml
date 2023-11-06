@@ -2,7 +2,7 @@ buildspecs:
   vecadd_hpcsdk_gnu:
     type: compiler
     description: Vector Addition example with hpcsdk (pgi) compiler
-    executor: perlmutter.slurm.regular
+    executor: '(perlmutter|muller).slurm.regular'
     tags: ["gpu", "openacc"]
     source: src/vecAdd.c
     compilers:

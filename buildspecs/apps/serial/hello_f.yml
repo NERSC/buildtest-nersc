@@ -1,7 +1,7 @@
 buildspecs:
   hello_fortran:
     type: compiler
-    executor: perlmutter.local.bash
+    executor: '(perlmutter|muller).local.bash'
     description: hello world program in Fortran compiled with gnu, nvhpc and cray compiler
     tags: [compile]
     source: src/hello.f90

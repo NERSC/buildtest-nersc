@@ -1,7 +1,7 @@
 buildspecs:
   hybrid_mpi_hello_fortran_perlmutter:
     type: compiler
-    executor: perlmutter.slurm.debug
+    executor: '(perlmutter|muller).slurm.debug'
     description: Hybrid MPI+OpenMP Hello World in Fortran on Perlmutter
     tags: [mpi, compile]
     source: src/hybrid-hello.f90

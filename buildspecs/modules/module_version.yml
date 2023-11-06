@@ -1,7 +1,7 @@
 buildspecs:
   module_version:
     type: script
-    executor: perlmutter.local.bash
+    executor: '(perlmutter|muller).local.bash'
     description: check module version
     tags: [daily, system, module]
     run: module --version
