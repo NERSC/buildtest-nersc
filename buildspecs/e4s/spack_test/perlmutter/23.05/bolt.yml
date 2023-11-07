@@ -7,6 +7,7 @@ buildspecs:
     tags: [e4s-23.05]
     sbatch: ["-t 120", "-N 1", "-G 1", "-A m3503_g", "-C gpu"]
     pre_cmds: |
+      module load cpu
       module load e4s/23.05
       spack env activate gcc
       spack load --first cmake
