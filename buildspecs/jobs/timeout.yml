@@ -1,0 +1,10 @@
+buildspecs:
+  wall_timeout:
+    type: script
+    executor: '(perlmutter|muller).slurm.debug'
+    sbatch: [ "-t '00:00:10'", "-n 1", "-C cpu"]
+    description: "This job simulates job timeout by sleeping for 60sec while requesting 10sec"
+    tags: ["jobs", "fail"]
+    run: sleep 60
+    status:
+      slurm_job_state: "TIMEOUT"  
