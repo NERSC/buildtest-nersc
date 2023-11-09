@@ -1,0 +1,10 @@
+buildspecs:
+  fail_job_state:
+    type: script
+    executor: '(perlmutter|muller).slurm.debug'
+    sbatch: [ "-t '00:00:10'", "-n 1", "-C cpu"]
+    description: "This job run an invalid command and match job with FAILED job state"
+    tags: ["jobs", "fail"]
+    run: xyz
+    status:
+      slurm_job_state: "FAILED"  
