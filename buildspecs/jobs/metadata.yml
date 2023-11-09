@@ -4,10 +4,7 @@ buildspecs:
     type: script
     executor: '(perlmutter|muller).slurm.debug'
     tags: [jobs]
-    sbatch:
-      - "-t 00:05"
-      - "-N 1"
-      - "-C cpu"
+    sbatch: ["-t 00:05", "-N 1", "-C cpu" ]
     run: |
       export SLURM_JOB_NAME="firstjob"
       echo "jobname:" $SLURM_JOB_NAME
