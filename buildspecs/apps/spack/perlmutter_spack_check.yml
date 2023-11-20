@@ -12,6 +12,21 @@ buildspecs:
       regex:
         stream: stdout
         exp: '^(0.19.0.dev0)'       
+  spack_sanity_e4s_23.05:
+    type: script
+    executor: '(perlmutter|muller).local.(bash|csh)'
+    tags: [e4s]
+    run: |
+      module load e4s/23.05
+      spack env list
+      spack -e gcc find | wc -l 
+      spack -e nvhpc find | wc -l 
+      spack -e cuda find | wc -l
+      spack -e cce find | wc -l
+      spack -e data find | wc -l
+      spack -e math-libs find | wc -l
+      spack -e tools find | wc -l
+
 maintainers:
   - 'shahzebsiddiqui'
 
