@@ -35,7 +35,7 @@ buildspecs:
           file: "numrecords.txt"
           exp: '\d+'
     status:
-      mode: "all"
+      mode: "and"
       returncode: 0
       file_count:
       - dir: "hpctoolkit-vecadd.m"
