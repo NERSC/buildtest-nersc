@@ -104,3 +104,11 @@ muller_scheduled_test:
       - schedules
     variables:
       - $SYSTEM == "muller"
+
+perlmutter_system_check:
+  extends: .scheduled_test
+  tags: [perlmutter-bdtest]
+  variables:
+    TAGNAME: "system"
+
+  
