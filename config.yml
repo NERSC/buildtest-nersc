@@ -13,8 +13,6 @@ system:
       count: 25
       terse: false
       format: name,id,state,runtime,returncode
-      latest: true
-      oldest: false
     executors:
       defaults:
         pollinterval: 30
@@ -154,8 +152,6 @@ system:
       count: 25
       terse: false
       format: name,id,state,runtime,returncode
-      latest: true
-      oldest: false
     executors:
       defaults:
         pollinterval: 30
