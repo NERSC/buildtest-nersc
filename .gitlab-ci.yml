@@ -124,6 +124,6 @@ test_file_changes:
   tags: [perlmutter-bdtest]
   stage: check
   script: 
-    - echo ${CI_MERGE_REQUEST_DIFF_BASE_SHA} ${CI_COMIT_SHA
+    - echo ${CI_MERGE_REQUEST_DIFF_BASE_SHA} ${CI_COMIT_SHA}
     - files=$(git diff-tree -r --diff-filter=d --name-only --no-commit-id ${CI_MERGE_REQUEST_DIFF_BASE_SHA}..${CI_COMIT_SHA} | grep '^buildspecs/' || true)
     - echo $files  
