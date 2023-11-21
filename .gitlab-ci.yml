@@ -125,7 +125,10 @@ test_file_changes:
   stage: check
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"    
+  before_script:
+    *setup-buildtest
   script: 
     - echo ${CI_MERGE_REQUEST_DIFF_BASE_SHA} ${CI_COMIT_SHA}
     - files=$(git diff-tree -r --diff-filter=d --name-only --no-commit-id ${CI_MERGE_REQUEST_DIFF_BASE_SHA}..${CI_COMIT_SHA} | grep '^buildspecs/' || true)
     - echo $files  
+    - if [ -n $files ]; then buildtest buildspec validate -b $files; fi
