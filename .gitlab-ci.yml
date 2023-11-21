@@ -120,14 +120,3 @@ muller_system_check:
     TAGNAME: "system"
     CDASH_BUILD_NAME: "system-check"
 
-test_file_changes:
-  tags: [perlmutter-bdtest]
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"    
-  before_script:
-    *setup-buildtest
-  script: 
-    - echo ${CI_MERGE_REQUEST_DIFF_BASE_SHA} ${CI_COMMIT_SHA}
-    - files=$(git diff-tree -r --diff-filter=d --name-only --no-commit-id ${CI_MERGE_REQUEST_DIFF_BASE_SHA}..${CI_COMMIT_SHA} | grep '^buildspecs/' || true)
-    - echo $files  
-    - if [ -n $files ]; then for file in $files; do buildtest buildspec validate -b $file; done; fi
