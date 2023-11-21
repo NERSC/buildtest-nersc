@@ -113,3 +113,9 @@ perlmutter_system_check:
     CDASH_BUILD_NAME: "system-check"
 
   
+muller_system_check:
+  extends: .scheduled_test
+  tags: [muller-bdtest]
+  variables:
+    TAGNAME: "system"
+    CDASH_BUILD_NAME: "system-check"
