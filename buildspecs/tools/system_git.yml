@@ -2,7 +2,7 @@ buildspecs:
   git_version:
     type: script
     executor: '(perlmutter|muller).local.bash'
-    tags: [tool, daily]
+    tags: [tool, system]
     description: "Check version of /usr/bin/git"
     run: /usr/bin/git --version    
     status:
