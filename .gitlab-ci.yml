@@ -128,6 +128,6 @@ test_file_changes:
     *setup-buildtest
   script: 
     - echo ${CI_MERGE_REQUEST_DIFF_BASE_SHA} ${CI_COMMIT_SHA}
-    - files=$(git diff-tree -r --diff-filter=d --name-only --no-commit-id ${CI_MERGE_REQUEST_DIFF_BASE_SHA}..${CI_COMMIT_SHA} | grep '^buildspecs/*.yml' || true)
+    - files=$(git diff-tree -r --diff-filter=d --name-only --no-commit-id ${CI_MERGE_REQUEST_DIFF_BASE_SHA}..${CI_COMMIT_SHA} | grep '^buildspecs/' || true)
     - echo $files  
-    - if [ -n $files ]; then for file in $files; do buildtest build -b $file --maxpendtime=120 --timeout=300; done; fi
+    - if [ -n $files ]; then for file in $files; do buildtest buildspec validate -b $file; done; fi
