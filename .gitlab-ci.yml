@@ -110,5 +110,6 @@ perlmutter_system_check:
   tags: [perlmutter-bdtest]
   variables:
     TAGNAME: "system"
+    CDASH_BUILD_NAME: "system-check"
 
   
