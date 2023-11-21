@@ -119,3 +119,9 @@ muller_system_check:
   variables:
     TAGNAME: "system"
     CDASH_BUILD_NAME: "system-check"
+
+test_file_changes:
+  tags: [perlmutter-bdtest]
+  script: 
+    - files=$(git diff-tree -r --diff-filter=d --name-only --no-commit-id ${CI_MERGE_REQUEST_DIFF_BASE_SHA}..${CI_COMIT_SHA} | grep '^buildspecs/')
+    - echo $files  
