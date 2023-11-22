@@ -144,7 +144,7 @@ muller_system_check:
     CDASH_BUILD_NAME: "apps-large"
 
 .apps_mini_test_perlmutter:
-  extends: .apps_min
+  extends: .apps_mini
   tags: [perlmutter-bdtest]
 
 .apps_mini_test_muller:
