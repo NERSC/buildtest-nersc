@@ -53,9 +53,9 @@ stages:
     - SCRATCHDIR=$PSCRATCH/buildtest/runs/$CI_JOB_NAME/$(date +%F)
     - |
       if [ -z "$MODE" ]; then
-          buildtest build -t $TAGNAME --limit $TESTLIMIT --account m3503_g --timeout $TIMEOUT --testdir $SCRATCHDIR
+          buildtest build -t $TAGNAME --limit $LIMIT --account m3503_g --timeout $TIMEOUT --testdir $SCRATCHDIR
       else
-          buildtest build -t $TAGNAME --limit $TESTLIMIT --account m3503_g --timeout $TIMEOUT --testdir $SCRATCHDIR --executor-type $MODE
+          buildtest build -t $TAGNAME --limit $LIMIT --account m3503_g --timeout $TIMEOUT --testdir $SCRATCHDIR --executor-type $MODE
       fi
     #- if [ -z "$MODE" ]; then buildtest build -t $TAGNAME --limit $TESTLIMIT --account m3503_g --timeout $TIMEOUT --testdir $SCRATCHDIR; else buildtest build -t $TAGNAME --limit $TESTLIMIT --account m3503_g --timeout $TIMEOUT --testdir $SCRATCHDIR --executor-type $MODE; fi
     #- buildtest build -t $TAGNAME --limit $TESTLIMIT --account m3503_g --timeout $TIMEOUT --testdir $SCRATCHDIR
