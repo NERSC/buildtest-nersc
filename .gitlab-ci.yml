@@ -75,13 +75,19 @@ test_compilers_muller:
   extends: .test_compilers
   tags: [ muller-bdtest ]
 
+.mini_runs:
+  variables:
+    LIMIT: 10
+
+.large_runs:
+  variables:
+    LIMIT: 75
 
 .system_check:
-  extends: .scheduled_test
+  extends: [.scheduled_test, .mini_runs]
   variables:
     TAGNAME: "system"
     CDASH_BUILD_NAME: "system-check"
-    LIMIT: 25
       
 perlmutter_system_check:
   extends: .system_check
@@ -100,25 +106,23 @@ muller_system_check:
     TAGNAME: "e4s,e4s-22.11,e4s-23.05"
 
 .e4s_mini_test:
-  extends: .e4s_test
+  extends: [.e4s_test, .mini_runs]
   only:
     refs:
       - schedules
     variables:
       - $SCHEDULE_TYPE == "e4s-mini"
   variables:
-    LIMIT: 25
     CDASH_BUILD_NAME: "e4s-mini"
 
 .e4s_large_test:
-  extends: .e4s_test
+  extends: [.e4s_test, .large_runs]
   only:
     refs:
       - schedules
     variables:
       - $SCHEDULE_TYPE == "large"
   variables:
-    LIMIT: 75
     CDASH_BUILD_NAME: "e4s-large"
 
 e4s_mini_test_perlmutter:
@@ -143,28 +147,25 @@ e4s_large_test_muller:
   extends: .scheduled_test
   variables:
     TAGNAME: "compile,gpu,mpi,openmp"
-    LIMIT: 25
 
 .apps_mini:
-  extends: .apps_test
+  extends: [.apps_test, .mini_runs]
   only:
     refs:
       - schedules
     variables:
       - $SCHEDULE_TYPE == "apps-mini"
   variables:
-    LIMIT: 25
     CDASH_BUILD_NAME: "apps-mini"
 
 .apps_large:
-  extends: .apps_test
+  extends: [.apps_test, .large_runs]
   only:
     refs:
       - schedules
     variables:
       - $SCHEDULE_TYPE == "large"
   variables:
-    LIMIT: 75
     CDASH_BUILD_NAME: "apps-large"
 
 apps_mini_test_perlmutter:
@@ -178,7 +179,6 @@ apps_mini_test_muller:
 #### FULL TESTSUITE RUN JOBS #####
 
 .full_testsuite:
-  stage: test
   before_script:
     - *setup-buildtest
   script:
@@ -193,26 +193,24 @@ apps_mini_test_muller:
     expire_in: 1 week
 
 .mini_fullsuite:
-  extends: .full_testsuite
+  extends: [.full_testsuite, .mini_runs]
   only:
     refs:
       - schedules
     variables:
       - $SCHEDULE_TYPE == "mini-fullsuite"
   variables:
-    LIMIT: 25
     CDASH_BUILD_NAME: "mini-fullsuite"
 
 
 .large_fullsuite:
-  extends: .full_testsuite
+  extends: [.full_testsuite, .large_runs]
   only:
     refs:
       - schedules
     variables:
       - $SCHEDULE_TYPE == "large"
   variables:
-    LIMIT: 75
     CDASH_BUILD_NAME: "large-fullsuite"
 
 
