@@ -1,5 +1,4 @@
 variables:
-  TESTLIMIT: 50 # Set default test limit to 50
   TIMEOUT: 3600 # Set default timeout to 3600 seconds
 
 .setup-buildtest: &setup-buildtest
@@ -120,6 +119,49 @@ muller_system_check:
     TAGNAME: "system"
     CDASH_BUILD_NAME: "system-check"
 
+.e4s_test:
+  extends: .scheduled_test
+  variables:
+    TAGNAME: "e4s"
+
+.e4s_mini_test:
+  extends: .e4s_test
+  only:
+    refs:
+      - schedules
+    variables:
+      - $SCHEDULE_TYPE == "e4s-mini"
+  variables:
+    LIMIT: 25
+    CDASH_BUILD_NAME: "e4s-mini"
+
+.e4s_large_test:
+  extends: .e4s_test
+  only:
+    refs:
+      - schedules
+    variables:
+      - $SCHEDULE_TYPE == "e4s-large"
+  variables:
+    LIMIT: 75
+    CDASH_BUILD_NAME: "e4s-large"
+
+e4s_mini_test_perlmutter:
+  extends: .e4s_mini_test
+  tags: [perlmutter-bdtest]
+
+e4s_large_test_perlmutter:
+  extends: .e4s_large_test
+  tags: [perlmutter-bdtest]
+
+e4s_mini_test_muller:
+  extends: .e4s_mini_test
+  tags: [muller-bdtest]
+
+e4s_large_test_muller:
+  extends: .e4s_large_test
+  tags: [muller-bdtest]
+    
 .apps_test:
   extends: .scheduled_test
   only:
