@@ -26,12 +26,7 @@ variables:
   - buildtest cdash upload $CDASH_BUILD_NAME
   - cp $(buildtest --logpath) $CI_PROJECT_DIR/.artifacts/
 
-stages:
-  - check
-  - test
-
 .validate_buildspecs:
-  stage: check
   allow_failure: true
   #rules:
   #  - if: '$CI_PIPELINE_SOURCE == "external_pull_request_event" && $CI_EXTERNAL_PULL_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH'
@@ -41,7 +36,6 @@ stages:
     - *buildspec_cache
 
 .test_compilers:
-  stage: check
   allow_failure: true
   #rules:
   #  - if: '$CI_PIPELINE_SOURCE == "external_pull_request_event" && $CI_EXTERNAL_PULL_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH'
@@ -51,19 +45,13 @@ stages:
     - buildtest config compilers test
 
 .scheduled_test:
-  stage: test
   before_script:
     - *setup-buildtest
   script:
     - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
     - TESTDIR=$CI_PROJECT_DIR/buildtest/runs/$CI_JOB_NAME/$(date +%F)
     - SCRATCHDIR=$PSCRATCH/buildtest/runs/$CI_JOB_NAME/$(date +%F)
-    - |
-      if [ -z "$MODE" ]; then
-          buildtest build -t $TAGNAME --limit $LIMIT --account m3503_g --timeout $TIMEOUT --testdir $SCRATCHDIR
-      else
-          buildtest build -t $TAGNAME --limit $LIMIT --account m3503_g --timeout $TIMEOUT --testdir $SCRATCHDIR --executor-type $MODE
-      fi
+    - buildtest build -t $TAGNAME --limit $LIMIT --account m3503_g --timeout $TIMEOUT --testdir $SCRATCHDIR
   after_script:
     - *post_run
   artifacts:
@@ -93,7 +81,8 @@ test_compilers_muller:
   variables:
     TAGNAME: "system"
     CDASH_BUILD_NAME: "system-check"
-
+    LIMIT: 25
+      
 perlmutter_system_check:
   extends: .system_check
   tags: [perlmutter-bdtest]
@@ -102,6 +91,8 @@ perlmutter_system_check:
 muller_system_check:
   extends: .system_check
   tags: [muller-bdtest]
+
+#### E4S Jobs #####
 
 .e4s_test:
   extends: .scheduled_test
@@ -146,6 +137,8 @@ e4s_large_test_muller:
   extends: .e4s_large_test
   tags: [muller-bdtest]
 
+#### APPLICATION JOBS ####
+
 .apps_test:
   extends: .scheduled_test
   variables:
@@ -181,6 +174,8 @@ apps_mini_test_perlmutter:
 apps_mini_test_muller:
   extends: .apps_mini
   tags: [muller-bdtest]
+
+#### FULL TESTSUITE RUN JOBS #####
 
 .full_testsuite:
   stage: test
