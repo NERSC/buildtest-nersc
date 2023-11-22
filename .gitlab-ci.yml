@@ -7,18 +7,25 @@ variables:
   - module load python/3.9-anaconda-2021.11
   - python -m venv $CI_PROJECT_DIR/pyenv
   - source $CI_PROJECT_DIR/pyenv/bin/activate
-  - git clone -b devel https://github.com/buildtesters/buildtest    
-  - cd buildtest 
+  - git clone -b devel https://github.com/buildtesters/buildtest
+  - cd buildtest
   - . setup.sh
   - git log --oneline -1
   - buildtest --help
   - export BUILDTEST_CONFIGFILE=$CI_PROJECT_DIR/config.yml
-  - buildtest config validate    
+  - buildtest config validate
 
 .buildspec_cache: &buildspec_cache
   - buildtest buildspec find --quiet --rebuild --root $CI_PROJECT_DIR/buildspecs
   - buildtest buildspec summary
   - buildtest buildspec find invalid
+
+.post_run: &post_run
+  - mkdir -p $CI_PROJECT_DIR/.artifacts
+  - buildtest report --fail | tee $CI_PROJECT_DIR/.artifacts/report.txt
+  - buildtest cdash upload $CDASH_BUILD_NAME
+  - cp $(buildtest --logpath) $CI_PROJECT_DIR/.artifacts/
+
 stages:
   - check
   - test
@@ -57,12 +64,8 @@ stages:
       else
           buildtest build -t $TAGNAME --limit $LIMIT --account m3503_g --timeout $TIMEOUT --testdir $SCRATCHDIR --executor-type $MODE
       fi
-    #- if [ -z "$MODE" ]; then buildtest build -t $TAGNAME --limit $TESTLIMIT --account m3503_g --timeout $TIMEOUT --testdir $SCRATCHDIR; else buildtest build -t $TAGNAME --limit $TESTLIMIT --account m3503_g --timeout $TIMEOUT --testdir $SCRATCHDIR --executor-type $MODE; fi
-    #- buildtest build -t $TAGNAME --limit $TESTLIMIT --account m3503_g --timeout $TIMEOUT --testdir $SCRATCHDIR
-    - mkdir -p $CI_PROJECT_DIR/.artifacts
-    - buildtest report --fail | tee $CI_PROJECT_DIR/.artifacts/report.txt
-    - buildtest cdash upload $CDASH_BUILD_NAME
-    - cp $(buildtest --logpath) $CI_PROJECT_DIR/.artifacts/
+  after_script:
+    - *post_run
   artifacts:
     paths:
       - $CI_PROJECT_DIR/.artifacts
@@ -84,45 +87,26 @@ test_compilers_muller:
   extends: .test_compilers
   tags: [ muller-bdtest ]
 
-perlmutter_scheduled_test:
-  extends: .scheduled_test
-  tags: [ perlmutter-bdtest ]
-  needs: [validate_buildspecs_on_perlmutter, test_compilers_perlmutter]
-  only:
-    refs:
-      - schedules
-    variables:
-      - $SYSTEM == "perlmutter"
 
-muller_scheduled_test:
+.system_check:
   extends: .scheduled_test
-  tags: [muller-bdtest]
-  needs: [validate_buildspecs_on_muller, test_compilers_muller]
-  only:
-    refs:
-      - schedules
-    variables:
-      - $SYSTEM == "muller"
+  variables:
+    TAGNAME: "system"
+    CDASH_BUILD_NAME: "system-check"
 
 perlmutter_system_check:
-  extends: .scheduled_test
+  extends: .system_check
   tags: [perlmutter-bdtest]
-  variables:
-    TAGNAME: "system"
-    CDASH_BUILD_NAME: "system-check"
 
-  
+
 muller_system_check:
-  extends: .scheduled_test
+  extends: .system_check
   tags: [muller-bdtest]
-  variables:
-    TAGNAME: "system"
-    CDASH_BUILD_NAME: "system-check"
 
 .e4s_test:
   extends: .scheduled_test
   variables:
-    TAGNAME: "e4s"
+    TAGNAME: "e4s,e4s-22.11,e4s-23.05"
 
 .e4s_mini_test:
   extends: .e4s_test
@@ -161,7 +145,7 @@ e4s_mini_test_muller:
 e4s_large_test_muller:
   extends: .e4s_large_test
   tags: [muller-bdtest]
-    
+
 .apps_test:
   extends: .scheduled_test
   only:
@@ -193,3 +177,59 @@ apps_mini_test_muller:
   extends: .apps_mini
   tags: [muller-bdtest]
 
+.full_testsuite:
+  stage: test
+  before_script:
+    - *setup-buildtest
+  script:
+    - buildtest buildspec find --rebuild --root $CI_PROJECT_DIR/buildspecs
+    - TESTDIR=$CI_PROJECT_DIR/buildtest/runs/$CI_JOB_NAME/$(date +%F)
+    - SCRATCHDIR=$PSCRATCH/buildtest/runs/$CI_JOB_NAME/$(date +%F)
+      buildtest build -b buildspecs/ --limit $LIMIT --account m3503_g --timeout $TIMEOUT --testdir $SCRATCHDIR
+  after_script:
+    - *post_run
+  artifacts:
+    paths:
+      - $CI_PROJECT_DIR/.artifacts
+    expire_in: 1 week
+
+.mini_fullsuite:
+  extends: .full_testsuite
+  only:
+    refs:
+      - schedules
+    variables:
+      - $SCHEDULE_TYPE == "mini-fullsuite"
+  variables:
+    LIMIT: 25
+    CDASH_BUILD_NAME: "mini-fullsuite"
+
+
+.large_fullsuite:
+  extends: .full_testsuite
+  only:
+    refs:
+      - schedules
+    variables:
+      - $SCHEDULE_TYPE == "large-fullsuite"
+  variables:
+    LIMIT: 75
+    CDASH_BUILD_NAME: "large-fullsuite"
+
+
+mini-fullsuite-perlmutter:
+  extends: .mini_fullsuite
+  tags: [perlmutter-bdtest]
+
+mini-fullsuite-muller:
+  extends: .mini_fullsuite
+  tags: [muller-bdtest]
+
+
+large-fullsuite-perlmutter:
+  extends: .large_fullsuite
+  tags: [perlmutter-bdtest]
+
+large-fullsuite-muller:
+  extends: .large_fullsuite
+  tags: [muller-bdtest]
