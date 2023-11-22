@@ -143,11 +143,11 @@ muller_system_check:
     LIMIT: 50
     CDASH_BUILD_NAME: "apps-large"
 
-.apps_mini_test_perlmutter:
+apps_mini_test_perlmutter:
   extends: .apps_mini
   tags: [perlmutter-bdtest]
 
-.apps_mini_test_muller:
+apps_mini_test_muller:
   extends: .apps_mini
   tags: [muller-bdtest]
 
