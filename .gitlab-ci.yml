@@ -52,7 +52,6 @@ variables:
     - TESTDIR=$CI_PROJECT_DIR/buildtest/runs/$CI_JOB_NAME/$(date +%F)
     - SCRATCHDIR=$PSCRATCH/buildtest/runs/$CI_JOB_NAME/$(date +%F)
     - buildtest build -t $TAGNAME --limit $LIMIT --account m3503_g --timeout $TIMEOUT --testdir $SCRATCHDIR
-  after_script:
     - *post_run
   artifacts:
     paths:
@@ -185,7 +184,6 @@ apps_mini_test_muller:
     - TESTDIR=$CI_PROJECT_DIR/buildtest/runs/$CI_JOB_NAME/$(date +%F)
     - SCRATCHDIR=$PSCRATCH/buildtest/runs/$CI_JOB_NAME/$(date +%F)
     - buildtest build -b $CI_PROJECT_DIR/buildspecs/ --limit $LIMIT --account m3503_g --timeout $TIMEOUT --testdir $SCRATCHDIR
-  after_script:
     - *post_run
   artifacts:
     paths:
