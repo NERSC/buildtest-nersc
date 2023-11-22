@@ -125,7 +125,7 @@ muller_system_check:
     refs:
       - schedules
     variables:
-      - $SCHEDULE_TYPE == "e4s-large"
+      - $SCHEDULE_TYPE == "large"
   variables:
     LIMIT: 75
     CDASH_BUILD_NAME: "e4s-large"
@@ -167,7 +167,7 @@ e4s_large_test_muller:
   extends: .apps_test
   variables:
     LIMIT: 50
-    CDASH_BUILD_NAME: "apps-large"
+    CDASH_BUILD_NAME: "large"
 
 apps_mini_test_perlmutter:
   extends: .apps_mini
@@ -210,7 +210,7 @@ apps_mini_test_muller:
     refs:
       - schedules
     variables:
-      - $SCHEDULE_TYPE == "large-fullsuite"
+      - $SCHEDULE_TYPE == "large"
   variables:
     LIMIT: 75
     CDASH_BUILD_NAME: "large-fullsuite"
