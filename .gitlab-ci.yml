@@ -120,3 +120,34 @@ muller_system_check:
     TAGNAME: "system"
     CDASH_BUILD_NAME: "system-check"
 
+.apps_test:
+  extends: .scheduled_test
+  only:
+    refs:
+      - schedules
+    variables:
+      - $SCHEDULE_TYPE == "apps-mini"
+  variables:
+    TAGNAME: "compile,gpu,mpi,openmp"
+    LIMIT: 25
+
+.apps_mini:
+  extends: .apps_test
+  variables:
+    LIMIT: 25
+    CDASH_BUILD_NAME: "apps-mini"
+
+.apps_large:
+  extends: .apps_test
+  variables:
+    LIMIT: 50
+    CDASH_BUILD_NAME: "apps-large"
+
+.apps_mini_test_perlmutter:
+  extends: .apps_min
+  tags: [perlmutter-bdtest]
+
+.apps_mini_test_muller:
+  extends: .apps_mini
+  tags: [muller-bdtest]
+
