@@ -1,0 +1,10 @@
+buildspecs:
+  spack_dependencies:
+    type: script
+    executor: '(perlmutter|muller).local.bash'
+    description: Run spack dependency script available in Spack-Infrastructure Project
+    tags: [e4s]
+    run: |
+      wget https://raw.githubusercontent.com/NERSC/spack-infrastructure/main/check_spack_dependencies.sh
+      chmod +x check_spack_dependencies.sh
+      bash check_spack_dependencies.sh
