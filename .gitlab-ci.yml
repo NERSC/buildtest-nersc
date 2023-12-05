@@ -175,6 +175,16 @@ apps_mini_test_muller:
   extends: .apps_mini
   tags: [muller-bdtest]
 
+    
+apps_large_test_perlmutter:
+  extends: .apps_large
+  tags: [perlmutter-bdtest]
+
+apps_large_test_muller:
+  extends: .apps_large
+  tags: [muller-bdtest]
+
+
 #### FULL TESTSUITE RUN JOBS #####
 
 .full_testsuite:
