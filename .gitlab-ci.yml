@@ -102,7 +102,7 @@ muller_system_check:
 .e4s_test:
   extends: .scheduled_test
   variables:
-    TAGNAME: "e4s,e4s-22.11,e4s-23.05"
+    TAGNAME: "e4s,e4s-22.11,e4s-23.05,e4s-23.08"
 
 .e4s_mini_test:
   extends: [.e4s_test, .mini_runs]
