@@ -11,12 +11,12 @@ export OMP_PROC_BIND=spread
 export OMP_PLACES=threads
 
 # Load the e4s and kokkos modules
-module load e4s/22.05
-spack env activate -V cuda
+module load e4s/23.05
+spack env activate -V gcc
 spack load --first cmake %gcc
-spack load kokkos +cuda %gcc
+spack load --first kokkos +openmp %gcc
 
-build_dir=$(pwd)/e4s_22.05_build_cuda
+build_dir=$(pwd)/e4s_23.05_build_openmp
 if [ ! -d $build_dir ]; then
     mkdir $build_dir
 fi
