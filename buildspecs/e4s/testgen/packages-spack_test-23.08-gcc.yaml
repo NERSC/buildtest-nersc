@@ -1,22 +1,22 @@
 package:
-- amrex
+  #- amrex
 - arborx
 - bolt
 - caliper
 - dyninst
 - fortrilinos
 - ginkgo
-- hdf5
-- heffte
+  #- hdf5
+  #- heffte
 - hpctoolkit
 - kokkos
 - legion
 - omega-h
-- openpmd-api
+  #- openpmd-api
 - papi
 - papyrus
 - parsec
-- pumi
+  #- pumi
 - py-h5py
 - py-libensemble
 - py-petsc4py
@@ -24,7 +24,7 @@ package:
 - slate
 - slepc
 - strumpack
-- sundials
+  #- sundials
 - superlu
-- tasmanian
+  #- tasmanian
 - tau

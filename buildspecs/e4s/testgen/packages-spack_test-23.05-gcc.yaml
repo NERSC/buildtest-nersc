@@ -1,21 +1,21 @@
 package:
 - aml
-- amrex
+  #- amrex
 - arborx
 - bolt
 - caliper
 - fortrilinos
 - ginkgo
-- heffte
+  #- heffte
 - hpctoolkit
 - kokkos
 - legion
 - mfem
 - omega-h
-- openpmd-api
+  #- openpmd-api
 - papyrus
 - parsec
-- pumi
+  #- pumi
 - py-h5py
 - py-libensemble
 - py-petsc4py
@@ -23,7 +23,7 @@ package:
 - qthreads
 - slate
 - slepc
-- sundials
+  #- sundials
 - superlu
-- tasmanian
+  #- tasmanian
 - tau
