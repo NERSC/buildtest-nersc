@@ -4,8 +4,8 @@ import os
 import sys
 import yaml
 
-if len(sys.argv) < 3:
-    print("Provide a template file followed by a package-list.yml file.")
+if len(sys.argv) < 4:
+    print("Provide a template file followed by a package-list.yml file followed by an output directory.")
     exit()
  
 file_path = sys.argv[1]

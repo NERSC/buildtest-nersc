@@ -1,0 +1,26 @@
+#This buildtest was generated from spack-test-23.08-template.yaml
+buildspecs:
+  heffte_spack-test_23.08:
+    type: spack
+    executor: '(perlmutter|muller).slurm.regular'
+    description: Run spack test for heffte from e4s/23.08 gcc stack
+    tags: [e4s, e4s-23.08]
+    sbatch: ["-t 120", "-N 1", "-G 1", "-A m3503_g", "-C gpu"]
+    pre_cmds: |
+      module load cpu
+      module load e4s/23.08
+      spack env activate gcc
+      spack load --first cmake
+      spack load --first heffte
+    spack:
+      root: /global/common/software/spackecp/perlmutter/e4s-23.08/default/spack
+      verify_spack: false
+      test:
+        run:
+          specs: ['heffte']
+        results:
+          option: '-l'
+          specs: ['heffte']
+maintainers:
+  - shahzebsiddiqui
+  - wspear
