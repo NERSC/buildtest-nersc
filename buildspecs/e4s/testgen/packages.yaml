@@ -1,17 +1,10 @@
 package:
-- adios2
 - butterflypack
-#- darshan-runtime
-#- darshan-util
 - dyninst
-- gasnet 
 - hpctoolkit
 - kokkos  
 - qthreads
 - strumpack
 - superlu
-- superlu-dist
 - trilinos
-- vtk-m
 - tau
-#- tau-cuda
