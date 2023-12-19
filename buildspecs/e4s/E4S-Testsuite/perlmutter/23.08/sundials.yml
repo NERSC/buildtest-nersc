@@ -1,9 +1,9 @@
 #This buildtest was generated from spack-test-23.08-template.yaml
 buildspecs:
-  sundials_spack-test_23.08:
+  sundials_e4s-testsuite_23.08:
     type: spack
     executor: '(perlmutter|muller).slurm.regular'
-    description: Run spack test for sundials from e4s/23.08 gcc stack
+    description: Run e4s-testsuite test for sundials from e4s/23.08 gcc stack
     tags: [e4s, e4s-23.08]
     sbatch: ["-t 120", "-N 1", "-G 1", "-A m3503_g", "-C gpu"]
     pre_cmds: |
@@ -12,15 +12,11 @@ buildspecs:
       spack env activate gcc
       spack load --first cmake
       spack load --first sundials
-    spack:
-      root: /global/common/software/spackecp/perlmutter/e4s-23.08/default/spack
-      verify_spack: false
-      test:
-        run:
-          specs: ['sundials']
-        results:
-          option: '-l'
-          specs: ['sundials']
+   run: |
+      git clone https://github.com/E4S-Project/testsuite
+      cd testsuite
+      sh test-all.sh --color-off validation_tests/sundials --print-logs --settings settings.cray.sh
+
 maintainers:
   - shahzebsiddiqui
   - wspear

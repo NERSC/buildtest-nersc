@@ -1,10 +1,10 @@
 #This buildtest was generated from spack-test-23.05-template.yaml
 buildspecs:
-  py-libensemble_spack-test_23.05:
+  py-libensemble_e4s-testsuite_23.05:
     type: spack
     executor: '(perlmutter|muller).slurm.regular'
-    description: Run spack test for py-libensemble from e4s/23.05 gcc stack
-    tags: [e4s-23.05]
+    description: Run e4s-testsuite test for py-libensemble from e4s/23.05 gcc stack
+    tags: [e4s, e4s-23.05]
     sbatch: ["-t 120", "-N 1", "-G 1", "-A m3503_g", "-C gpu"]
     pre_cmds: |
       module load cpu
@@ -12,15 +12,11 @@ buildspecs:
       spack env activate gcc
       spack load --first cmake
       spack load --first py-libensemble
-    spack:
-      root: /global/common/software/spackecp/perlmutter/e4s-23.05/default/spack
-      verify_spack: false
-      test:
-        run:
-          specs: ['py-libensemble']
-        results:
-          option: '-l'
-          specs: ['py-libensemble']
+   run: |
+      git clone https://github.com/E4S-Project/testsuite
+      cd testsuite
+      sh test-all.sh --color-off validation_tests/py-libensemble --print-logs --settings settings.cray.sh
+
 maintainers:
   - shahzebsiddiqui
   - wspear
