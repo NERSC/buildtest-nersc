@@ -1,0 +1,20 @@
+#This buildtest was generated from spack-test-23.08-template.yaml
+buildspecs:
+  papyrus_e4s-testsuite_23.08:
+    type: script
+    executor: '(perlmutter|muller).slurm.regular'
+    description: Run e4s-testsuite test for papyrus from e4s/23.08 gcc stack
+    tags: [e4s, e4s-23.08]
+    sbatch: ["-t 120", "-N 1", "-G 1", "-A m3503_g", "-C gpu"]
+    run: |
+      module load cpu
+      module load e4s/23.08
+      spack env activate gcc
+      spack load --first cmake
+      git clone https://github.com/E4S-Project/testsuite
+      cd testsuite
+      sh test-all.sh --color-off validation_tests/papyrus --print-logs --settings settings.cray.sh
+
+maintainers:
+  - shahzebsiddiqui
+  - wspear

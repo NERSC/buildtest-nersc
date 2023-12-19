@@ -15,7 +15,6 @@ package:
 - py-h5py
 - py-libensemble
 - py-petsc4py
-- py-warpx
 - qthreads
 - slate
 - slepc
