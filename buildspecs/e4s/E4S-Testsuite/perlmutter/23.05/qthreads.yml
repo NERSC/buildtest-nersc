@@ -1,18 +1,16 @@
 #This buildtest was generated from spack-test-23.05-template.yaml
 buildspecs:
   qthreads_e4s-testsuite_23.05:
-    type: spack
+    type: script 
     executor: '(perlmutter|muller).slurm.regular'
     description: Run e4s-testsuite test for qthreads from e4s/23.05 gcc stack
     tags: [e4s, e4s-23.05]
     sbatch: ["-t 120", "-N 1", "-G 1", "-A m3503_g", "-C gpu"]
-    pre_cmds: |
+    run: |
       module load cpu
       module load e4s/23.05
       spack env activate gcc
       spack load --first cmake
-      spack load --first qthreads
-   run: |
       git clone https://github.com/E4S-Project/testsuite
       cd testsuite
       sh test-all.sh --color-off validation_tests/qthreads --print-logs --settings settings.cray.sh
