@@ -263,16 +263,16 @@ system:
               - PrgEnv-cray
               - cce/16.0.1
               purge: false
-        nvhpc:
-          nvhpc/21.11:
+          cce/17.0.0:
             cc: cc
             cxx: CC
             fc: ftn
             module:
               load:
-              - PrgEnv-nvidia
-              - nvhpc/21.11
+              - PrgEnv-cray
+              - cce/17.0.0
               purge: false
+        nvhpc:
           nvhpc/22.7:
             cc: cc
             cxx: CC
@@ -291,14 +291,14 @@ system:
               - PrgEnv-nvidia
               - nvhpc/23.1
               purge: false
-          nvhpc/21.9:
+          nvhpc/23.9:
             cc: cc
             cxx: CC
             fc: ftn
             module:
               load:
               - PrgEnv-nvidia
-              - nvhpc/21.9
+              - nvhpc/23.9
               purge: false
     cdash:
       url: https://my.cdash.org

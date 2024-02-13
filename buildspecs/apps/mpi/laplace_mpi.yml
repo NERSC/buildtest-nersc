@@ -1,15 +1,14 @@
 buildspecs:
   laplace_mpi_perlmutter:
-    type: compiler
+    type: script
     description: Laplace MPI code in C on Perlmutter
     executor: '(perlmutter|muller).slurm.debug'
     tags: [mpi, compile]
-    source: src/laplace_mpi.c
+    sbatch: ["-N 1", "-n 4", "-A m3503", "-t 5", "-C cpu"]
     compilers:
       name: ["(cce)"]
-      default:
-        all:
-          sbatch: ["-N 1", "-n 4", "-A m3503", "-t 5", "-C cpu"]
-          run: srun -n 4 $_EXEC           
+    run: |
+      $BUILDTEST_CC -o laplace_mpi src/laplace_mpi.c
+      srun -n 4 laplace_mpi
 maintainers:
   - shahzebsiddiqui

@@ -1,17 +1,18 @@
 buildspecs:
   vecadd_hpcsdk_gnu:
-    type: compiler
-    description: Vector Addition example with hpcsdk (pgi) compiler
-    executor: '(perlmutter|muller).slurm.regular'
+    type: script
+    description: Vector Addition example with nvhpc compiler
+    executor: '(perlmutter|muller).slurm.debug'
     tags: ["gpu", "openacc"]
-    source: src/vecAdd.c
+    sbatch: ["-G 1", "-t 5", "-N 1", "-C gpu", "-A m3503_g"]
     compilers:
-      name: ['nvhpc/22.5']
+      name: ['nvhpc']
       default:
         nvhpc:
-          sbatch: ["-G 1", "-t 5", "-N 1", "-A m3503_g"]
           cflags: -acc
           ldflags: -lm
-          run: srun $_EXEC
+    run: |
+      $BUILDTEST_CC $BUILDTEST_CFLAGS -o vecadd src/vecAdd.c $BUILDTEST_LDFLAGS
+      srun ./vecadd
 maintainers:
   - "shahzebsiddiqui"
