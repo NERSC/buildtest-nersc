@@ -1,8 +1,7 @@
 buildspecs:
   openmp_scale:
-    type: compiler
+    type: script
     executor: '(perlmutter|muller).local.bash'
-    source: src/hello.c
     description: Hello World OpenMP scaling example with processor count
     tags: [openmp]
     compilers:
@@ -12,4 +11,6 @@ buildspecs:
           env:
             OMP_NUM_THREADS: "$BUILDTEST_NUMPROCS"
           cflags: -fopenmp
-          sbatch: ['-t 5', '-C cpu']  
+    run: |
+      $BUILDTEST_CC $BUILDTEST_CFLAGS -o hello src/hello.c
+      ./hello

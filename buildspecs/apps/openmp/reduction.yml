@@ -1,17 +1,19 @@
 buildspecs:
   reduction:
-    type: compiler
+    type: script
     executor: '(perlmutter|muller).local.bash'
-    source: src/reduction.c
     description: OpenMP reduction example using gcc and cray compiler
     tags: [openmp]
+    env:
+      OMP_NUM_THREADS: 4
     compilers:
       name: ["^(gcc|cce)"]
-      default:
-        all:
-          env:
-            OMP_NUM_THREADS: 4
+      default:  
         gcc:
+          cc: gcc
           cflags: -fopenmp
         cray:
-          cflags: -h omp      
+          cflags: -fopenmp      
+    run: |
+      $BUILDTEST_CC $BUILDTEST_CFLAGS -o reduction src/reduction.c
+      ./reduction
