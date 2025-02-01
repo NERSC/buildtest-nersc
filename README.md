@@ -1,3 +1,5 @@
+This project is no longer actively maintained.
+
 # buildtest-nersc
 
 This repository contains tests for Cori and Perlmutter using the [buildtest](https://buildtest.readthedocs.io/en/devel/) framework. 
